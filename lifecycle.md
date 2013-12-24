@@ -1,25 +1,25 @@
-# Request Lifecycle
+# Request 生命週期
 
-- [Overview](#overview)
-- [Request Lifecycle](#request-lifecycle)
-- [Start Files](#start-files)
-- [Application Events](#application-events)
+- [概覽](#overview)
+- [Request 生命週期](#request-lifecycle)
+- [啟動文件](#start-files)
+- [應用程式事件](#application-events)
 
 <a name="overview"></a>
-## Overview
+## 概覽
 
-When using any tool in the "real world", you feel more confidence if you understand how that tool works. Application development is no different. When you understand how your development tools function, you feel more comfortable and confident using them. The goal of this document is to give you a good, high-level overview of how the Laravel framework "works". By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications. In addition to a high-level overview of the request lifecycle, we'll cover "start" files and application events.
+在“真實世界”裡使用任何工具，只要你了解該工具的運作原理，你將會很順手。應用程式開發上也是相同的。當你了解開發工具的功能，你使用上會更得心應手。而這份文件的目的就是要給予你一個優良、高層次的Laravel 框架運作概覽。隨著了解整個框架越多，你就不會覺得很"奇妙"且更容易去建構你的應用程式。除了關於 request 生命週期的高層次概覽外，我們也會介紹”啟動“檔案和應用程式事件。
 
-If you don't understand all of the terms right away, don't lose heart! Just try to get a basic grasp of what is going on, and your knowledge will grow as you explore other sections of the documentation.
+如果你對許多東西不明白，不用擔心。只要了解個基本的原理，隨著探索其他文件，你將會得到更多的知識。 
 
 <a name="request-lifecycle"></a>
-## Request Lifecycle
+## Request 生命週期
 
-All requests into your application are directed through the `public/index.php` script. When using Apache, the `.htaccess` file that ships with Laravel handles the passing of all requests to `index.php`. From here, Laravel begins the process of handling the requests and returning a response to the client. Getting a general idea for the Laravel bootstrap process will be useful, so we'll cover that now!
+在你的應用程式中，所有的 Request 都會被指向到 `public/index.php` 上。如果是使用 Apache，`.htsccess` 檔案會將所有的 requests 都指向 `index.php` 來去處理。從這開始，Laravel 開始處理 requests 且返回回應給客戶端。了解 Laravel 的引導過程的總體思路是有益的。
 
-By far, the most important concept to grasp when learning about Laravel's bootstrap process is **Service Providers**. You can find a list of service providers by opening your `app/config/app.php` configuration file and finding the `providers` array. These providers serve as the primary bootstrapping mechanism for Laravel. But, before we dig into service providers, let's go back to `index.php`. After a request enters your `index.php` file, the `bootstrap/start.php` file will be loaded. This file creates the new Laravel `Application` object, which also serves as an [IoC container](/docs/ioc).
+到目前為止，在學習 laravel 的引導過程的最重要概念是 **服務提供商（Service Providers)）**。你可在 `app/config/app.php` 設定檔裡找到 `providers` 陣列，裡面條列了服務提供商的列表。這些服務提供商是 Laravel 的主要引導機制。但在我們深入這些服務提供商前，讓我們先回到 `index.php`。在 request 進入 `index.php` 後，`bootstrap/start.php` 將接著被引入。這個檔案將會建立一個新的 Laravel `Application` 物件，也作為一個 [IoC 容器](/docs/ioc)。
 
-After creating the `Application` object, a few project paths will be set and [environment detection](/docs/configuration#environment-configuration) will be performed. Then, an internal Laravel bootstrap script will be called. This file lives deep within the Laravel source, and sets a few more settings based on your configuration files, such as timezone, error reporting, etc. But, in addition to setting these rather trivial configuration options, it also does something very important: registers all of the service providers configured for your application.
+在 `Application` 物件建立之後，一些物件路徑將被設定，而且進行 [環境偵測](/docs/configuration#environment-configuration)。然後，一個內部的 Laravel 引導腳本將會被呼叫。這個檔案深藏在 Laravel 的原始碼中，而且基於你的設定檔，設定了一些選項，例如：時區（timezone）、錯誤回報（error reporting）等等。但是，除了設定這些瑣碎的選項外，它還做了一件非常重要的事情：註冊所有設定在你應用程式中的服務提供商。
 
 Simple service providers only have one method: `register`. This `register` method is called when the service provider is registered with the application object via the application's own `register` method. Within this method, service providers register things with the [IoC container](/docs/ioc). Essentially, each service provider binds one or more [closures](http://us3.php.net/manual/en/functions.anonymous.php) into the container, which allows you to access those bound services within your application. So, for example, the `QueueServiceProvider` registers closures that resolve the various [Queue](/docs/queues) related classes. Of course, service providers may be used for any bootstrapping task, not just registering things with the IoC container. A service provider may register event listeners, view composers, Artisan commands, and more.
 
