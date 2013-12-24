@@ -1,24 +1,24 @@
-# Introduction
+# 簡介
 
-- [Laravel Philosophy](#laravel-philosophy)
-- [Learning Laravel](#learning-laravel)
-- [Development Team](#development-team)
+- [Laravel 哲學](#laravel-philosophy)
+- [學習 Laravel](#learning-laravel)
+- [開發團隊](#development-team)
 
 <a name="laravel-philosophy"></a>
-## Laravel Philosophy
+## Laravel 哲學
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Laravel 是一套富有表達性且具有簡潔語法的網頁應用程式框架。我們認為開發過程應該是愉悅且有創造性的體驗。Laravel 努力減少開發過程中的不便，因此我們提供了驗證(authentication)、路由(routing)、sessions、快取(caching)等開發過程中經常用到的工具或功能。
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+Laravel 目標是給開發者創造一個愉快的開發過程，並且不犧牲應用程式的功能性。快樂的開發者才能創造最棒的原始碼。為了這個目的，我們竭取了各框架的優點集中到 Laravel 中，這些框架甚至是基於 Ruby on Rails、ASP.NET MVC 和 Sinatra 等開發語言或工具。
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Laravel 是易於理解且強大的，它提供了強大的工具來開發大型、穩健的應用程式。傑出的 IoC、資料庫遷移工具和緊密集成的單元測試，這些工具賦予你構建任何應用程式的能力。
 
 <a name="learning-laravel"></a>
-## Learning Laravel
+## 學習 Laravel
 
-One of the best ways to learn Laravel is to read through the entirety of its documentation. This guide details all aspects of the framework and how to apply them to your application.
+一個最好學習 Laravel 的途徑就是讀完整份文件。這個文件詳細的描述了框架的所有面向，還告訴你如何應用在你的應用程式中。
 
-In addition to this guide, you may wish to check out some [Laravel books](http://wiki.laravel.io/Books). These community written books serve as a good supplemental resource for learning about the framework:
+除了這份文件，也許你可以看一看[關於 Laravel 的書籍](http://wiki.laravel.io/Books)。下面列出了一些社群貢獻的書籍，對於學習 Laravel 框架也是非常好的補充資源：
 
 - [Code Bright](https://leanpub.com/codebright) by Dayle Rees
 - [Laravel Testing Decoded](https://leanpub.com/laravel-testing-decoded) by Jeffrey Way
@@ -29,6 +29,6 @@ In addition to this guide, you may wish to check out some [Laravel books](http:/
 - [Laravel in Action](http://www.manning.com/surguy/) by Maks Surguy
 
 <a name="development-team"></a>
-## Development Team
+## 研發團隊
 
-Laravel was created by [Taylor Otwell](https://github.com/taylorotwell), who continues to lead development of the framework. Other prominent community members and contributors include [Dayle Rees](https://github.com/daylerees), [Shawn McCool](https://github.com/ShawnMcCool), [Jeffrey Way](https://github.com/JeffreyWay), [Jason Lewis](https://github.com/jasonlewis), [Ben Corlett](https://github.com/bencorlett), [Franz Liedke](https://github.com/franzliedke), [Dries Vints](https://github.com/driesvints), [Mior Muhammad Zaki](https://github.com/crynobone), and [Phil Sturgeon](https://github.com/philsturgeon).
+Laravel 由 [Taylor Otwell](https://github.com/taylorotwell)所創建, 並持續領導著框架的開發流程. 其他知名社群成員與貢獻者包含了有 [Dayle Rees](https://github.com/daylerees), [Shawn McCool](https://github.com/ShawnMcCool), [Jeffrey Way](https://github.com/JeffreyWay), [Jason Lewis](https://github.com/jasonlewis), [Ben Corlett](https://github.com/bencorlett), [Franz Liedke](https://github.com/franzliedke), [Dries Vints](https://github.com/driesvints), [Mior Muhammad Zaki](https://github.com/crynobone), 和 [Phil Sturgeon](https://github.com/philsturgeon).
