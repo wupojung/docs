@@ -1,50 +1,50 @@
-# Basic Database Usage
+# 基本資料庫用法
 
-- [Configuration](#configuration)
-- [Running Queries](#running-queries)
-- [Database Transactions](#database-transactions)
-- [Accessing Connections](#accessing-connections)
-- [Query Logging](#query-logging)
+- [設置](#configuration)
+- [執行查詢](#running-queries)
+- [資料庫交易](#database-transactions)
+- [存取連線](#accessing-connections)
+- [查詢記錄](#query-logging)
 
 <a name="configuration"></a>
-## Configuration
+## 設置
 
-Laravel makes connecting with databases and running queries extremely simple. The database configuration file is `app/config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
+Laravel讓連線資料庫及執行查詢時變得相當的簡單，資料庫的相關設定存放在 `app/config/db.php` 檔案中，在這個檔案你可以定義你所有的資料庫連連線，並指定哪一個連線是預設的資料庫連線，所有支援的資料庫系統都寫在這個檔案中。
 
-Currently Laravel supports four database systems: MySQL, Postgres, SQLite, and SQL Server.
+Laravel支援四個資料庫系統: MySQL 、 Postgres 、 SQLite 及 SQL Server。
 
 <a name="running-queries"></a>
-## Running Queries
+## 執行查詢
 
-Once you have configured your database connection, you may run queries using the `DB` class.
+完成資料庫連線的設定後，你就可以使用 `DB` 類別進行資料庫的查詢了。
 
-**Running A Select Query**
+**執行 Select 語法**
 
 	$results = DB::select('select * from users where id = ?', array(1));
 
-The `select` method will always return an `array` of results.
+`select` 方法都會回傳一個 `陣列 (array)` 的結果。
 
-**Running An Insert Statement**
+**執行 Insert 語法**
 
 	DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
 
-**Running An Update Statement**
+**執行 Update 語法**
 
 	DB::update('update users set votes = 100 where name = ?', array('John'));
 
-**Running A Delete Statement**
+**執行 Delete 語法**
 
 	DB::delete('delete from users');
 
-> **Note:** The `update` and `delete` statements return the number of rows affected by the operation.
+> **注意:** `update` 和 `delete` 語法將會回傳在這個操作中，共影響了幾筆資料的結果。
 
-**Running A General Statement**
+**執行一般語法**
 
 	DB::statement('drop table users');
 
-You may listen for query events using the `DB::listen` method:
+你可以使用 `DB::listen` 方法，去監聽查詢事件:
 
-**Listening For Query Events**
+**監聽查詢事件**
 
 	DB::listen(function($sql, $bindings, $time)
 	{
@@ -52,9 +52,9 @@ You may listen for query events using the `DB::listen` method:
 	});
 
 <a name="database-transactions"></a>
-## Database Transactions
+## 資料庫交易
 
-To run a set of operations within a database transaction, you may use the `transaction` method:
+你可以使用 `transaction` 方法，去執行一組資料庫交易集合的操作語法:
 
 	DB::transaction(function()
 	{
@@ -64,27 +64,27 @@ To run a set of operations within a database transaction, you may use the `trans
 	});
 
 <a name="accessing-connections"></a>
-## Accessing Connections
+## 存取連線
 
-When using multiple connections, you may access them via the `DB::connection` method:
+你可以使用 `DB::connection` 方法，去使用數個不同的資料庫連線:
 
 	$users = DB::connection('foo')->select(...);
 
-You may also access the raw, underlying PDO instance:
+你也可以使用 PDO 實例去存取資料:
 
 	$pdo = DB::connection()->getPdo();
 
-Sometimes you may need to reconnect to a given database:
+有時你可能需要重新連結資料庫:
 
 	DB::reconnect('foo');
 
 <a name="query-logging"></a>
-## Query Logging
+## 查詢紀錄
 
-By default, Laravel keeps a log in memory of all queries that have been run for the current request. However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the `disableQueryLog` method:
+預設的情況下， Laravel 會將目前 HTTP 請求中，所執行過的查詢紀錄存放在記憶體中，在一些情況下，像是增加 (Insert) 大量的資料時，這樣可能會造成應用程式使用過多多餘的記憶體資源，所以你可以使用 `disableQueryLog ` 方法去關閉紀錄查詢到記憶體的動作:
 
 	DB::connection()->disableQueryLog();
 
-To get an array of the executed queries, you may use the `getQueryLog` method:
+如果要拿到執行的查詢陣列，可以使用 'getQueryLog` 方法:
 
        $queries = DB::getQueryLog();

@@ -1,33 +1,33 @@
-# Contributing To Laravel
+# 為 Laravel 貢獻
 
-- [Introduction](#introduction)
-- [Pull Requests](#pull-requests)
-- [Coding Guidelines](#coding-guidelines)
+- [介紹](#introduction)
+- [請求合併](#pull-requests)
+- [開發準則](#coding-guidelines)
 
 <a name="introduction"></a>
-## Introduction
+## 介紹
 
-Laravel is free, open-source software, meaning anyone can contribute to its development and progress. Laravel source code is currently hosted on [Github](https://github.com/laravel), which provides an easy method for forking the project and merging your contributions.
+Laravel 是免費的開源軟體，意味著任何人都可以對 Laravel 的發展與進步做出貢獻，Laravel 原始碼託管在[Github](https://github.com/laravel)， Github提供一個簡單的方法去開發專案分支(fork)及合併你對專案的貢獻。
 
 <a name="pull-requests"></a>
-## Pull Requests
+## 請求合併
 
-The pull request process differs for new features and bugs. Before sending a pull request for a new feature, you should first create an issue with `[Proposal]` in the title. The proposal should describe the new feature, as well as implementation ideas. The proposal will then be reviewed and either approved or denied. Once a proposal is approved, a pull request may be created implementing the new feature. Pull requests which do not follow this guideline will be closed immediately.
+Laravel 的新功能(New Features)及臭蟲回報(Bugs)的 Pull 請求的過程中並不相同，在發出新功能(New Features)的 Pull 請求，你應該先建立一個有 `[Proposal]` 為標題的議題，這個提議議題中，必須描述新功能的特徵，以及實作的想法，則該提議的議題將被審查是否通過或拒絕，一旦通過審查， Pull 請求將會被實作在新的功能中，若 Pull請求沒有遵循這樣的準則，則此 Pull請求的議題將會被立即關閉。
 
-Pull requests for bugs may be sent without creating any proposal issue. If you believe that you know of a solution for a bug that has been filed on Github, please leave a comment detailing your proposed fix.
+在發出臭蟲回報(Bugs)的 Pull 請求或許不會建立任何提議的議題，如果你知道已經提交到github檔案中，任何臭蟲的解決方案，請留言詳細說明您建議修復的細節資訊給我們。
 
-Additions and corrections to the documentation may also be contributed via the [documentation repository](https://github.com/laravel/docs) on Github.
+文件的增加與修正也可以透過 Github 上的 [文件源](https://github.com/laravel/docs) 來進行編修。
 
-### Feature Requests
+### 功能請求(Feature Requests)
 
-If you have an idea for a new feature you would like to see added to Laravel, you may create an issue on Github with `[Request]` in the title. The feature request will then be reviewed by a core contributor.
+如果你有想要加入新功能到 Laravel 的點子的話，你或許可以在 Github 建立一個有 `[Request]` 為標題的議題，這個 Laravel 核心的貢獻成員將會審查您提出的功能請求。
 
 <a name="coding-guidelines"></a>
-## Coding Guidelines
+## 開發準則
 
-Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. In addition to these standards, below is a list of other coding standards that should be followed:
+Laravel 遵循 [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) 及 [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) 的程式碼標準規範，除了這些標準，下面的列表是其他應被遵循的程式碼標準:
 
-- Namespace declarations should be on the same line as `<?php`.
-- Class opening `{` should be on the same line as the class name.
-- Function and control structure opening `{` should be on a separate line.
-- Interface names are suffixed with `Interface` (`FooInterface`)
+- 命名空間 (Namespace) 的定義應該與 `<?php` 在同一行。
+- 類別 (Class) 的起始大括號 `{` 應該和類別名稱(Class Name)在同一行。
+- 函式 (Function) 及控制結構 (control structure) 的起始大括號 `{` 應該在不同行中呈現
+- 介面 (Interface) 名稱的後綴字必須要有 `Interface` (`FooInterface`)
