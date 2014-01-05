@@ -25,6 +25,10 @@ Eloquent 新增了新的 `hasManyThrough` 關係鏈。想要了解更多，請�
 
 一個新的 `whereHas` 方法也同時登場，他將允許[檢索基於關係模型的約束](/docs/eloquent#querying-relations)。
 
+### 資料庫讀寫分離
+
+Query Builder 和 Eloquent 目前透過資料庫層，已經可以自動做到讀寫分離。更多的資訊，請參考[文件](/docs/database#read-write-connections)。
+
 ### 隊列排序
 
 隊列排序已經被支援，只要在 `queue:listen` 命令後將隊列以逗號分隔送出。

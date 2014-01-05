@@ -35,13 +35,6 @@
 
 如果 `app/controllers/BaseController.php` 有 `use` 語句在最上面，將 `use Illuminate\Routing\Controllers\Controller;` 改為 `use Illuminate\Routing\Controller;`。
 
-如果在任何你的控制器中，你有覆寫 `missingMethod` 函式的話，請將 `$method` 參數加進該函式中是為第一個參數：
-
-	public function missingMethod($method, $parameters = array())
-	{
-		//
-	}
-
 ### 更新密碼提醒
 
 密碼提醒功能已經大幅修正擁有更大的彈性。你可以執行 Artisan 指令 `php artisan auth:reminders-controller` 來檢查新的存根控制器。你也可以瀏覽 [更新文檔](/docs/security#password-reminders-and-reset) 然後相應的更新你的應用程式。
@@ -70,4 +63,4 @@ Laravel 目前只會產生單一的日誌文件: `app/storage/logs/laravel.log`�
 
 ### Composer 更新
 
-一旦你完成以上的更新，你可以執行 `composer update` 來更新應用程式的核心檔案。
+一旦你完成以上的更新，你可以執行 `composer update` 來更新應用程式的核心檔案。如果有 class load 錯誤，請在 `update` 之後加上 `--no-scripts`，如: `composer update --no-scripts`。
