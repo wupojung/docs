@@ -1,135 +1,135 @@
-# Artisan Development
+# Artisan 開發
 
-- [Introduction](#introduction)
-- [Building A Command](#building-a-command)
-- [Registering Commands](#registering-commands)
-- [Calling Other Commands](#calling-other-commands)
+- [介紹](#introduction)
+- [建立指令](#building-a-command)
+- [註冊指令](#registering-commands)
+- [呼叫其他指令](#calling-other-commands)
 
 <a name="introduction"></a>
-## Introduction
+## 介紹
 
-In addition to the commands provided with Artisan, you may also build your own custom commands for working with your application. You may store your custom commands in the `app/commands` directory; however, you are free to choose your own storage location as long as your commands can be autoloaded based on your `composer.json` settings.
+除了 Artisan 提供的指令外，你也可以在你的應用程式中建立自訂的 Artisan 指令，你可以將你的自訂指令存放在 `app/commands` 目錄中，然而，只要 `composer.json` 檔案中的 "自動載入 (autoload)" 的部分有設定好，你也可以依照你的喜好放置自訂指令到不同的目錄下。
 
 <a name="building-a-command"></a>
-## Building A Command
+## 建立指令
 
-### Generating The Class
+### 產生類別
 
-To create a new command, you may use the `command:make` Artisan command, which will generate a command stub to help you get started:
+你可以在 Artisan 指令中使用 `command:make` 指令，讓你可以產生製作新指令的初始程式框架:
 
-**Generate A New Command Class**
+**產生新的 Artisan 指令類別**
 
 	php artisan command:make FooCommand
 
-By default, generated commands will be stored in the `app/commands` directory; however, you may specify custom path or namespace:
+預設產生的 Artisan 指令類別檔案會存放在 `app/commands` 目錄下，你也可以指定自訂的 "路徑 (path)" 或 "命名空間 (namespace)":
 
 	php artisan command:make FooCommand --path=app/classes --namespace=Classes
 
-### Writing The Command
+### 撰寫 Artisan 指令
 
-Once your command is generated, you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the `list` screen.
+在 Artisan 命令類別寫好後，你應該要替類別加上 `name` 及 `description` 屬性，這些屬性資訊會在 `命令清單 (list)` 畫面中顯示。
 
-The `fire` method will be called when your command is executed. You may place any command logic in this method.
+`fire` 方法會在執行命令後被呼叫執行，你可以在 fire 方法中撰寫任何的指令處理邏輯。
 
-### Arguments & Options
+### 參數 & 選項
 
-The `getArguments` and `getOptions` methods are where you may define any arguments or options your command receives. Both of these methods return an array of commands, which are described by a list of array options.
+可以透過 `getArguments` 及 `getOptions` 方法去取得任何你自訂的參數及選項，這兩個方法皆會回傳在 `命令清單 (list)` 畫面中顯示指令的陣列資料。
 
-When defining `arguments`, the array definition values represent the following:
+在定義 `參數 (arguments)` 時，定義參數值的陣列資料會呈現如下所示:
 
 	array($name, $mode, $description, $defaultValue)
 
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
+參數 `mode` 可以是 `InputArgument::REQUIRED` 或 `InputArgument::OPTIONAL` 中的其中任何一個。
 
-When defining `options`, the array definition values represent the following:
+在定義 `選項 (options)` 時，定義選項值的陣列資料會呈現如下所示:
 
 	array($name, $shortcut, $mode, $description, $defaultValue)
 
-For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
+對於 "選項 (options)" 來說，參數 `mode` 可以是 `InputOption::VALUE_REQUIRED` 、 `InputOption::VALUE_OPTIONAL` 、 `InputOption::VALUE_IS_ARRAY` 或 `InputOption::VALUE_NONE` 中的其中任何一個。
 
-The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
+`VALUE_IS_ARRAY` 模式指的是，在呼叫指令時，該選項數值可以傳入多次:
 
 	php artisan foo --option=bar --option=baz
 
-The `VALUE_NONE` option indicates that the option is simply used as a "switch":
+`VALUE_NONE` 模式指的是該選項僅用來做 "切換 (switch)" 使用，不帶任何資料:
 
 	php artisan foo --option
 
-### Retrieving Input
+### 取得輸入的資料
 
-While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
+當指令執行時，你的應用程式想必一定需要去接收參數及選項，你可以使用 `argument` 及 `option` 方法去接收參數及選項的資料:
 
-**Retrieving The Value Of A Command Argument**
+**取得命令中指定的參數值**
 
 	$value = $this->argument('name');
 
-**Retrieving All Arguments**
+**取得所有參數值**
 
 	$arguments = $this->argument();
 
-**Retrieving The Value Of A Command Option**
+**取得命令中指定的選項值**
 
 	$value = $this->option('name');
 
-**Retrieving All Options**
+**取得所有選項值**
 
 	$options = $this->option();
 
-### Writing Output
+### 撰寫輸出
 
-To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
+你可以使用 `info` 、 `comment` 、 `question` 及 `error` 方法去輸出資料到命令列 (console)，這些方法會使用符合其用途的 ANSI 顏色的字做輸出。
 
-**Sending Information To The Console**
+**傳送 "資訊 (info)" 到命令列**
 
 	$this->info('Display this on the screen');
 
-**Sending An Error Message To The Console**
+**傳送 "錯誤 (error)" 訊息到命令列**
 
 	$this->error('Something went wrong!');
 
-### Asking Questions
+### 詢問問題
 
-You may also use the `ask` and `confirm` methods to prompt the user for input:
+你可以使用 `ask` 及 `confirm` 方法去提示使用者輸入資料:
 
-**Asking The User For Input**
+**詢問使用者請求輸入資料**
 
 	$name = $this->ask('What is your name?');
 
-**Asking The User For Secret Input**
+**詢問使用者請求輸入隱藏資料**
 
 	$password = $this->secret('What is the password?');
 
-**Asking The User For Confirmation**
+**詢問使用者做資訊確認**
 
 	if ($this->confirm('Do you wish to continue? [yes|no]'))
 	{
 		//
 	}
 
-You may also specify a default value to the `confirm` method, which should be `true` or `false`:
+你也可以指定預設值到 `confirm` 方法中，預設值必須為 `true` 或 `false`:
 
 	$this->confirm($question, true);
 
 <a name="registering-commands"></a>
-## Registering Commands
+## 註冊指令
 
-Once your command is finished, you need to register it with Artisan so it will be available for use. This is typically done in the `app/start/artisan.php` file. Within this file, you may use the `Artisan::add` method to register the command:
+在你完成自訂 Artisan 指令後，你需要使用 Artisan 指令進行指令的註冊，這樣才能被使用，這個通常是在 `app/start/artisan.php` 檔案中完成，在這個檔案中，你可以使用 `Artisan::add` 方法去註冊指令:
 
-**Registering An Artisan Command**
+**註冊 Artisan 指令**
 
 	Artisan::add(new CustomCommand);
 
-If your command is registered in the application [IoC container](/docs/ioc), you may use the `Artisan::resolve` method to make it available to Artisan:
+如果你的命令是在應用程式中的 [IoC 容器](/docs/ioc)中註冊，你可以使用 `Artisan::resolve` 方法，讓 Artisan 可以使用該方法:
 
-**Registering A Command That Is In The IoC Container**
+**註冊在 IoC 容器的指令**
 
 	Artisan::resolve('binding.name');
 
 <a name="calling-other-commands"></a>
-## Calling Other Commands
+## 呼叫其他指令
 
-Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
+有時你可能會需要呼叫其他的指令，你可以使用 `call` 方法去呼叫執行其他的指令:
 
-**Calling Another Command**
+**呼叫其他指令**
 
 	$this->call('command.name', array('argument' => 'foo', '--option' => 'bar'));
