@@ -120,7 +120,8 @@ The query builder may also be used to write join statements. Take a look at the 
 	DB::table('users')
 	            ->join('contacts', 'users.id', '=', 'contacts.user_id')
 	            ->join('orders', 'users.id', '=', 'orders.user_id')
-	            ->select('users.id', 'contacts.phone', 'orders.price');
+	            ->select('users.id', 'contacts.phone', 'orders.price')
+	            ->get();
 
 #### Left Join Statement
 
@@ -150,9 +151,9 @@ If you would like to use a "where" style clause on your joins, you may use the `
 <a name="advanced-wheres"></a>
 ## Advanced Wheres
 
-Sometimes you may need to create more advanced where clauses such as "where exists" or nested parameter groupings. The Laravel query builder can handle these as well:
-
 #### Parameter Grouping
+
+Sometimes you may need to create more advanced where clauses such as "where exists" or nested parameter groupings. The Laravel query builder can handle these as well:
 
 	DB::table('users')
 	            ->where('name', '=', 'John')
@@ -238,9 +239,9 @@ You may also specify additional columns to update:
 		array('email' => 'john@example.com', 'votes' => 0)
 	);
 
-If the table has an auto-incrementing id, use `insertGetId` to insert a record and retrieve the id:
-
 #### Inserting Records Into A Table With An Auto-Incrementing ID
+
+If the table has an auto-incrementing id, use `insertGetId` to insert a record and retrieve the id:
 
 	$id = DB::table('users')->insertGetId(
 		array('email' => 'john@example.com', 'votes' => 0)
@@ -284,8 +285,6 @@ If the table has an auto-incrementing id, use `insertGetId` to insert a record a
 
 The query builder also provides a quick way to "union" two queries together:
 
-#### Performing A Query Union
-
 	$first = DB::table('users')->whereNull('first_name');
 
 	$users = DB::table('users')->whereNull('last_name')->union($first)->get();
@@ -310,8 +309,10 @@ To "lock for update" on a SELECT statement, you may use the `lockForUpdate` meth
 
 You may easily cache the results of a query using the `remember` method:
 
-#### Caching A Query Result
-
 	$users = DB::table('users')->remember(10)->get();
 
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
+
+If you are using a [supported cache driver](/docs/cache#cache-tags), you can also add tags to the caches:
+
+	$users = DB::table('users')->cacheTags(array('people', 'authors'))->remember(10)->get();

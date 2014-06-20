@@ -45,6 +45,10 @@ PHP 5.5 之後，一些作業系統需要手動安裝 PHP JSON 套件。如果�
 
 Laravel 幾乎無需設定即可馬上使用。你可以自由的開始開發。然而，你可以查看 `app/config/app.php` 檔案和他的文件。它包含了數個你的應用程式所想要更動的選項如 `時區（timezone）` 和 `語系（locale）` 。
 
+Once Laravel is installed, you should also [configure your local environment](/docs/configuration#environment-configuration). This will allow you to receive detailed error messages when developing on your local machine. By default, detailed error reporting is disabled in your production configuration file.
+
+> **Note:** You should never have `app.debug` set to `true` for a production application. Never, ever do it.
+
 <a name="permissions"></a>
 ### 權限
 
@@ -58,6 +62,8 @@ Laravel 框架有一個目錄需要額外設置權限：app/storage 需要讓網
 <a name="pretty-urls"></a>
 ## 優雅鏈結
 
+### Apache
+
 Laravel 框架透過 `public/.htaccess` 檔案來讓網址中不需要 `index.php`。如果你網頁伺服器是使用 Apache 的話，請確認你有開啟 'mod_rewrite` 模組。
 
 如果框架附帶的 `.htaccess` 檔在 Apache 中無法作用，請嘗試下面的版本：
@@ -68,3 +74,11 @@ Laravel 框架透過 `public/.htaccess` 檔案來讓網址中不需要 `index.ph
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^ index.php [L]
+
+### Nginx
+
+On Nginx, the following directive in your site configuration will allow "pretty" URLs:
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }

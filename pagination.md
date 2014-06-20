@@ -4,6 +4,7 @@
 - [Usage](#usage)
 - [Appending To Pagination Links](#appending-to-pagination-links)
 - [Converting To JSON](#converting-to-json)
+- [Custom Presenters](#custom-presenters)
 
 <a name="configuration"></a>
 ## Configuration
@@ -21,9 +22,9 @@ There are several ways to paginate items. The simplest is by using the `paginate
 
 	$users = DB::table('users')->paginate(15);
 
-You may also paginate [Eloquent](/docs/eloquent) models:
-
 #### Paginating An Eloquent Model
+
+You may also paginate [Eloquent](/docs/eloquent) models:
 
 	$allUsers = User::paginate(15);
 
@@ -55,9 +56,9 @@ You may also access additional pagination information via the following methods:
 - `getTo`
 - `count`
 
-Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
-
 #### Creating A Paginator Manually
+
+Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
 
 	$paginator = Paginator::make($items, $totalItems, $perPage);
 
@@ -93,4 +94,40 @@ This method call will generate URLs that look something like this:
 <a name="converting-to-json"></a>
 ## Converting To JSON
 
-The `Paginator` class implements the `Illuminate\Support\Contracts\JsonableInterface` contract and exposes the `toJson` method. You can may also convert a `Paginator` instance to JSON by returning it from a route. The JSON'd form of the instance will include some "meta" information such as `total`, `current_page`, `last_page`, `from`, and `to`. The instance's data will be available via the `data` key in the JSON array.
+The `Paginator` class implements the `Illuminate\Support\Contracts\JsonableInterface` contract and exposes the `toJson` method. You may also convert a `Paginator` instance to JSON by returning it from a route. The JSON'd form of the instance will include some "meta" information such as `total`, `current_page`, `last_page`, `from`, and `to`. The instance's data will be available via the `data` key in the JSON array.
+
+<a name="custom-presenters"></a>
+## Custom Presenters
+
+The default pagination presenter is Bootstrap compatible out of the box; however, you may customize this with a presenter of your choice.
+
+### Extending The Abstract Presenter
+
+Extend the `Illuminate\Pagination\Presenter` class and implement its abstract methods. An example presenter for Zurb Foundation might look like this:
+
+    class ZurbPresenter extends Illuminate\Pagination\Presenter {
+
+        public function getActivePageWrapper($text)
+        {
+            return '<li class="current">'.$text.'</li>';
+        }
+
+        public function getDisabledTextWrapper($text)
+        {
+            return '<li class="unavailable">'.$text.'</li>';
+        }
+
+        public function getPageLinkWrapper($url, $page)
+        {
+            return '<li><a href="'.$url.'">'.$page.'</a></li>';
+        }
+
+    }
+
+### Using The Custom Presenter
+
+First, create a view in your `app/views` directory that will server as your custom presenter. Then, replace `pagination` option in the `app/config/view.php` configuration file with the new view's name. Finally, the following code would be placed in your custom presenter view:
+
+    <ul class="pagination">
+        <?php echo with(new ZurbPresenter($paginator))->render(); ?>
+    </ul>

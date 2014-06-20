@@ -68,9 +68,9 @@ The `select` method will always return an `array` of results.
 
 	DB::statement('drop table users');
 
-You may listen for query events using the `DB::listen` method:
-
 #### Listening For Query Events
+
+You may listen for query events using the `DB::listen` method:
 
 	DB::listen(function($sql, $bindings, $time)
 	{
@@ -118,7 +118,7 @@ Sometimes you may need to reconnect to a given database:
 
 	DB::reconnect('foo');
 
-If you need to disconnect from the given database due to exceeding the underyling PDO instance's `max_connections` limit, use the `disconnect` method:
+If you need to disconnect from the given database due to exceeding the underlying PDO instance's `max_connections` limit, use the `disconnect` method:
 
 	DB::disconnect('foo');
 

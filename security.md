@@ -8,6 +8,7 @@
 - [HTTP Basic Authentication](#http-basic-authentication)
 - [Password Reminders & Reset](#password-reminders-and-reset)
 - [Encryption](#encryption)
+- [Authentication Drivers](#authentication-drivers)
 
 <a name="configuration"></a>
 ## Configuration
@@ -17,6 +18,8 @@ Laravel aims to make implementing authentication very simple. In fact, almost ev
 By default, Laravel includes a `User` model in your `app/models` directory which may be used with the default Eloquent authentication driver. Please remember when building the Schema for this Model to ensure that the password field is a minimum of 60 characters.
 
 If your application is not using Eloquent, you may use the `database` authentication driver which uses the Laravel query builder.
+
+> **Note:** Before getting started, make sure that your `users` (or equivalent) table contains a nullable, string `remember_token` column of 100 characters. This column will be used to store a token for "remember me" sessions being maintained by your application.
 
 <a name="storing-passwords"></a>
 ## Storing Passwords
@@ -55,18 +58,18 @@ Take note that `email` is not a required option, it is merely used for example. 
 
 When the `attempt` method is called, the `auth.attempt` [event](/docs/events) will be fired. If the authentication attempt is successful and the user is logged in, the `auth.login` event will be fired as well.
 
-To determine if the user is already logged into your application, you may use the `check` method:
-
 #### Determining If A User Is Authenticated
+
+To determine if the user is already logged into your application, you may use the `check` method:
 
 	if (Auth::check())
 	{
 		// The user is logged in...
 	}
 
-If you would like to provide "remember me" functionality in your application, you may pass `true` as the second argument to the `attempt` method, which will keep the user authenticated indefinitely (or until they manually logout):
-
 #### Authenticating A User And "Remembering" Them
+
+If you would like to provide "remember me" functionality in your application, you may pass `true` as the second argument to the `attempt` method, which will keep the user authenticated indefinitely (or until they manually logout). Of course, your `users` table must include the string `remember_token` column, which will be used to store the "remember me" token.
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password), true))
 	{
@@ -83,9 +86,9 @@ If you are "remembering" user logins, you may use the `viaRemember` method to de
 		//
 	}
 
-You also may add extra conditions to the authenticating query:
-
 #### Authenticating A User With Conditions
+
+You also may add extra conditions to the authenticating query:
 
     if (Auth::attempt(array('email' => $email, 'password' => $password, 'active' => 1)))
     {
@@ -94,9 +97,9 @@ You also may add extra conditions to the authenticating query:
 
 > **Note:** For added protection against session fixation, the user's session ID will automatically be regenerated after authenticating.
 
-Once a user is authenticated, you may access the User model / record:
-
 #### Accessing The Logged In User
+
+Once a user is authenticated, you may access the User model / record:
 
 	$email = Auth::user()->email;
 
@@ -104,18 +107,18 @@ To simply log a user into the application by their ID, use the `loginUsingId` me
 
 	Auth::loginUsingId(1);
 
-The `validate` method allows you to validate a user's credentials without actually logging them into the application:
-
 #### Validating User Credentials Without Login
+
+The `validate` method allows you to validate a user's credentials without actually logging them into the application:
 
 	if (Auth::validate($credentials))
 	{
 		//
 	}
 
-You may also use the `once` method to log a user into the application for a single request. No sessions or cookies will be utilized.
-
 #### Logging A User In For A Single Request
+
+You may also use the `once` method to log a user into the application for a single request. No sessions or cookies will be utilized.
 
 	if (Auth::once($credentials))
 	{
@@ -176,13 +179,16 @@ HTTP Basic Authentication provides a quick way to authenticate users of your app
 		// Only authenticated users may enter...
 	}));
 
-By default, the `basic` filter will use the `email` column on the user record when authenticating. If you wish to use another column you may pass the column name as the first parameter to the `basic` method:
+By default, the `basic` filter will use the `email` column on the user record when authenticating. If you wish to use another column you may pass the column name as the first parameter to the `basic` method in your `app/filters.php` file:
 
-	return Auth::basic('username');
-
-You may also use HTTP Basic Authentication without setting a user identifier cookie in the session, which is particularly useful for API authentication. To do so, define a filter that returns the `onceBasic` method:
+	Route::filter('auth.basic', function()
+	{
+		return Auth::basic('username');
+	});
 
 #### Setting Up A Stateless HTTP Basic Filter
+
+You may also use HTTP Basic Authentication without setting a user identifier cookie in the session, which is particularly useful for API authentication. To do so, define a filter that returns the `onceBasic` method:
 
 	Route::filter('basic.once', function()
 	{
@@ -212,11 +218,11 @@ Most web applications provide a way for users to reset their forgotten passwords
 
 	}
 
-Next, a table must be created to store the password reset tokens. To generate a migration for this table, simply execute the `auth:reminders` Artisan command:
-
 #### Generating The Reminder Table Migration
 
-	php artisan auth:reminders
+Next, a table must be created to store the password reset tokens. To generate a migration for this table, simply execute the `auth:reminders-table` Artisan command:
+
+	php artisan auth:reminders-table
 
 	php artisan migrate
 
@@ -236,6 +242,13 @@ A simple form on the `password.remind` view might look like this:
 	</form>
 
 In addition to `getRemind`, the generated controller will already have a `postRemind` method that handles sending the password reminder e-mails to your users. This method expects the `email` field to be present in the `POST` variables. If the reminder e-mail is successfully sent to the user, a `status` message will be flashed to the session. If the reminder fails, an `error` message will be flashed instead.
+
+Within the `postRemind` controller method you may modify the message instance before it is sent to the user:
+
+	Password::remind(Input::only('email'), function($message)
+	{
+		$message->subject('Password Reminder');
+	});
 
 Your user will receive an e-mail with a link that points to the `getReset` method of the controller. The password reminder token, which is used to identify a given password reminder attempt, will also be passed to the controller method. The action is already configured to return a `password.reset` view which you should build. The `token` will be passed to the view, and you should place this token in a hidden form field named `token`. In addition to the `token`, your password reset form should contain `email`, `password`, and `password_confirmation` fields. The form should POST to the `RemindersController@postReset` method.
 
@@ -259,7 +272,7 @@ By default, the `Password::reset` method will verify that the passwords match an
 
 	Password::validator(function($credentials)
 	{
-		return strlen($credentials['password']) >= 8;
+		return strlen($credentials['password']) >= 6;
 	});
 
 > **Note:** By default, password reset tokens expire after one hour. You may change this via the `reminder.expire` option of your `app/config/auth.php` file.
@@ -279,10 +292,15 @@ Laravel provides facilities for strong AES-256 encryption via the mcrypt PHP ext
 
 	$decrypted = Crypt::decrypt($encryptedValue);
 
-You may also set the cipher and mode used by the encrypter:
-
 #### Setting The Cipher & Mode
+
+You may also set the cipher and mode used by the encrypter:
 
 	Crypt::setMode('ctr');
 
 	Crypt::setCipher($cipher);
+
+<a name="authentication-drivers"></a>
+## Authentication Drivers
+
+Laravel offers the `database` and `eloquent` authentication drivers out of the box. For more information about adding additional authentication drivers, check out the [Authentication extension documentation](/docs/extending#authentication).

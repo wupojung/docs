@@ -10,6 +10,12 @@
 <a name="installation"></a>
 ## 開始安裝
 
+### Via Laravel Installer
+
+First, download the [Laravel installer PHAR archive](http://laravel.com/laravel.phar). For convenience, rename the file to `laravel` and move it to `/usr/local/bin`. Once installed, the simple `laravel new` command will create a fresh Laravel installation in the directory you specify. For instance, `laravel new blog` would create a directory named `blog` containing a fresh Laravel installation with all dependencies installed. This method of installation is much faster than installing via Composer.
+
+### Via Composer
+
 Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依性管理。如果還沒有安裝它的話，請先從 [安裝 Composer](http://getcomposer.org/doc/00-intro.md) 開始吧。
 
 安裝之後，你可以透過命令列模式執行下列指令來安裝 Laravel：
@@ -23,6 +29,12 @@ Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依
 ### 權限設定
 
 在安裝 Laravel 之後，你需要讓網頁伺服器有寫入 `app/storage` 目錄的權限。詳情請見[安裝過程](/docs/installation)文件說明。
+
+### Serving Laravel
+
+Typically, you may use a web server such as Apache or Nginx to serve your Laravel applications. If you are on PHP 5.4+ and would like to use PHP's built-in development server, you may use the `serve` Artisan command:
+
+	php artisan serve
 
 <a name="directories"></a>
 ### 目錄結構

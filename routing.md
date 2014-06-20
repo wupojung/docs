@@ -30,6 +30,13 @@ Most of the routes for your application will be defined in the `app/routes.php` 
 		return 'Hello World';
 	});
 
+#### Registering A Route For Multiple Verbs
+
+	Route::match(array('GET', 'POST'), '/', function()
+	{
+		return 'Hello World';
+	});
+
 #### Registering A Route Responding To Any HTTP Verb
 
 	Route::any('foo', function()
@@ -120,7 +127,7 @@ If you need to access a route parameter value outside of a route, you may use th
 <a name="route-filters"></a>
 ## Route Filters
 
-Route filters provide a convenient way of limiting access to a given route, which is useful for creating areas of your site which require authentication. There are several filters included in the Laravel framework, including an `auth` filter, an `auth.basic` filter, a `guest` filter, and a `csrf`filter. These are located in the `app/filters.php` file.
+Route filters provide a convenient way of limiting access to a given route, which is useful for creating areas of your site which require authentication. There are several filters included in the Laravel framework, including an `auth` filter, an `auth.basic` filter, a `guest` filter, and a `csrf` filter. These are located in the `app/filters.php` file.
 
 #### Defining A Route Filter
 
@@ -132,7 +139,7 @@ Route filters provide a convenient way of limiting access to a given route, whic
 		}
 	});
 
-If a response is returned from a filter, that response will be considered the response to the request and the route will not be executed, and any `after` filters on the route will also be cancelled.
+If the filter returns a response, that response is considered the response to the request and the route will not execute. Any `after` filters on the route are also cancelled.
 
 #### Attaching A Filter To A Route
 
@@ -152,6 +159,13 @@ If a response is returned from a filter, that response will be considered the re
 		return 'You are authenticated and over 200 years old!';
 	}));
 
+#### Attaching Multiple Filters Via Array
+
+	Route::get('user', array('before' => array('auth', 'old'), function()
+	{
+		return 'You are authenticated and over 200 years old!';
+	}));
+
 #### Specifying Filter Parameters
 
 	Route::filter('age', function($route, $request, $value)
@@ -166,7 +180,7 @@ If a response is returned from a filter, that response will be considered the re
 
 After filters receive a `$response` as the third argument passed to the filter:
 
-	Route::filter('log', function($route, $request, $response, $value)
+	Route::filter('log', function($route, $request, $response)
 	{
 		//
 	});
@@ -192,7 +206,11 @@ You may also constrain pattern filters by HTTP verbs:
 
 For advanced filtering, you may wish to use a class instead of a Closure. Since filter classes are resolved out of the application [IoC Container](/docs/ioc), you will be able to utilize dependency injection in these filters for greater testability.
 
-#### Defining A Filter Class
+#### Registering A Class Based Filter
+
+	Route::filter('foo', 'FooFilter');
+
+By default, the `filter` method on the `FooFilter` class will be called:
 
 	class FooFilter {
 
@@ -203,9 +221,9 @@ For advanced filtering, you may wish to use a class instead of a Closure. Since 
 
 	}
 
-#### Registering A Class Based Filter
+If you do not wish to use the `filter` method, just specify another method:
 
-	Route::filter('foo', 'FooFilter');
+	Route::filter('foo', 'FooFilter@foo');
 
 <a name="named-routes"></a>
 ## Named Routes
@@ -249,6 +267,13 @@ Sometimes you may need to apply filters to a group of routes. Instead of specify
 		});
 	});
 
+You may also use the `namespace` parameter within your `group` array to specify all controllers within that group as being in a given namespace:
+
+	Route::group(array('namespace' => 'Admin'), function()
+	{
+		//
+	});
+
 <a name="sub-domain-routing"></a>
 ## Sub-Domain Routing
 
@@ -270,8 +295,6 @@ Laravel routes are also able to handle wildcard sub-domains, and pass you wildca
 ## Route Prefixing
 
 A group of routes may be prefixed by using the `prefix` option in the attributes array of a group:
-
-#### Prefixing Grouped Routes
 
 	Route::group(array('prefix' => 'admin'), function()
 	{
@@ -307,7 +330,7 @@ If you wish to specify your own "not found" behavior, you may pass a Closure as 
 
 	Route::model('user', 'User', function()
 	{
-		throw new NotFoundException;
+		throw new NotFoundHttpException;
 	});
 
 Sometimes you may wish to use your own resolver for route parameters. Simply use the `Route::bind` method:

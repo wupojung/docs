@@ -169,11 +169,20 @@ A view composer class should be defined like so:
 
 	}
 
-Note that there is no convention on where composer classes may be stored. You are free to store them anywhere as long as they can be autoloaded using the directives in your `composer.json` file.
+#### Defining Multiple Composers
+
+You may use the `composers` method to register a group of composers at the same time:
+
+	View::composers(array(
+		'AdminComposer' => array('admin.index', 'admin.profile'),
+		'UserComposer' => 'user',
+	));
+
+> **Note:** There is no convention on where composer classes may be stored. You are free to store them anywhere as long as they can be autoloaded using the directives in your `composer.json` file.
 
 ### View Creators
 
-View **creators** work almost exactly like view composers; however, they are fired immediately when the view is instantiated. To register a view creator, simple use the `creator` method:
+View **creators** work almost exactly like view composers; however, they are fired immediately when the view is instantiated. To register a view creator, simply use the `creator` method:
 
 	View::creator('profile', function($view)
 	{

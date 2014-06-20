@@ -110,6 +110,13 @@ Since you often will want to flash input in association with a redirect to the p
 
 The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
 
+#### Determining If An Uploaded File Is Valid
+
+	if (Input::file('photo')->isValid())
+	{
+		//
+	}
+
 #### Moving An Uploaded File
 
 	Input::file('photo')->move($destinationPath);
@@ -145,6 +152,15 @@ The `Request` class provides many methods for examining the HTTP request for you
 
 	$uri = Request::path();
 
+#### Retrieving The Request Method
+
+	$method = Request::method();
+
+	if (Request::isMethod('post'))
+	{
+		//
+	}
+
 #### Determining If The Request Path Matches A Pattern
 
 	if (Request::is('admin/*'))
@@ -168,6 +184,13 @@ The `Request` class provides many methods for examining the HTTP request for you
 
 	$value = Request::server('PATH_INFO');
 
+#### Determining If The Request Is Over HTTPS
+
+	if (Request::secure())
+	{
+		//
+	}
+
 #### Determine If The Request Is Using AJAX
 
 	if (Request::ajax())
@@ -175,9 +198,16 @@ The `Request` class provides many methods for examining the HTTP request for you
 		//
 	}
 
-#### Determining If The Request Is Over HTTPS
+#### Determine If The Request Has JSON Content Type
 
-	if (Request::secure())
+	if (Request::isJson())
+	{
+		//
+	}
+
+#### Determine If The Request Is Asking For JSON
+
+	if (Request::wantsJson())
 	{
 		//
 	}

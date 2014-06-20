@@ -3,6 +3,7 @@
 - [Controller Layouts](#controller-layouts)
 - [Blade Templating](#blade-templating)
 - [Other Blade Control Structures](#other-blade-control-structures)
+- [Extending Blade](#extending-blade)
 
 <a name="controller-layouts"></a>
 ## Controller Layouts
@@ -74,19 +75,19 @@ Sometimes, such as when you are not sure if a section has been defined, you may 
 
 #### Echoing Data
 
-	Hello, {{ $name }}.
+	Hello, {{{ $name }}}.
 
-	The current UNIX timestamp is {{ time() }}.
+	The current UNIX timestamp is {{{ time() }}}.
 
 #### Echoing Data After Checking For Existence
 
 Sometimes you may wish to echo a variable, but you aren't sure if the variable has been set. Basically, you want to do this:
 
-	{{ isset($name) ? $name : 'Default' }}
+	{{{ isset($name) ? $name : 'Default' }}}
 
 However, instead of writing a ternary statement, Blade allows you to use the following convenient short-cut:
 
-	{{ $name or 'Default' }}
+	{{{ $name or 'Default' }}}
 
 #### Displaying Raw Text With Curly Braces
 
@@ -97,6 +98,10 @@ If you need to display a string that is wrapped in curly braces, you may escape 
 Of course, all user supplied data should be escaped or purified. To escape the output, you may use the triple curly brace syntax:
 
 	Hello, {{{ $name }}}.
+
+If you don't want the data to be escaped, you may use double curly-braces:
+
+	Hello, {{ $name }}.
 
 > **Note:** Be very careful when echoing content that is supplied by users of your application. Always use the triple curly brace syntax to escape any HTML entities in the content.
 
@@ -155,3 +160,21 @@ By default, sections are appended to any previous content that exists in the sec
 #### Comments
 
 	{{-- This comment will not be in the rendered HTML --}}
+
+<a name="extending-blade"></a>
+## Extending Blade
+
+Blade even allows you to define your own custom control structures. When a Blade file is compiled, each custom extension is called with the view contents, allowing you to do anything from simple `str_replace` manipulations to more complex regular expressions.
+
+The Blade compiler comes with the helper methods `createMatcher` and `createPlainMatcher`, which generate the expression you need to build your own custom directives.
+
+The `createPlainMatcher` method is used for directives with no arguments like `@endif` and `@stop`, while `createMatcher` is used for directives with arguments.
+
+The following example creates a `@datetime($var)` directive which simply calls `->format()` on `$var`:
+
+	Blade::extend(function($view, $compiler)
+	{
+		$pattern = $compiler->createMatcher('datetime');
+
+		return preg_replace($pattern, '$1<?php echo $2->format('m/d/Y H:i'); ?>', $view);
+	});

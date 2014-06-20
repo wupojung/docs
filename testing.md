@@ -44,9 +44,9 @@ When running unit tests, Laravel will automatically set the configuration enviro
 <a name="calling-routes-from-tests"></a>
 ## Calling Routes From Tests
 
-You may easily call one of your routes for a test using the `call` method:
-
 #### Calling A Route From A Test
+
+You may easily call one of your routes for a test using the `call` method:
 
 	$response = $this->call('GET', 'user/profile');
 
@@ -56,9 +56,9 @@ You may then inspect the `Illuminate\Http\Response` object:
 
 	$this->assertEquals('Hello World', $response->getContent());
 
-You may also call a controller from a test:
-
 #### Calling A Controller From A Test
+
+You may also call a controller from a test:
 
 	$response = $this->action('GET', 'HomeController@index');
 
@@ -159,6 +159,21 @@ Laravel ships with several `assert` methods to make testing a little easier:
 		$this->assertSessionHas('age', $value);
 	}
 
+#### Asserting The Session Has Errors
+
+    public function testMethod()
+    {
+        $this->call('GET', '/');
+
+        $this->assertSessionHasErrors();
+
+        // Asserting the session has errors for a given key...
+        $this->assertSessionHasErrors('name');
+
+        // Asserting the session has errors for several keys...
+        $this->assertSessionHasErrors(array('name', 'age'));
+    }
+
 #### Asserting Old Input Has Some Data
 
 	public function testMethod()
@@ -173,9 +188,15 @@ Laravel ships with several `assert` methods to make testing a little easier:
 
 The `TestCase` class contains several helper methods to make testing your application easier.
 
-You may set the currently authenticated user using the `be` method:
+#### Setting And Flushing Sessions From Tests
+
+	$this->session(['foo' => 'bar']);
+
+	$this->flushSession();
 
 #### Setting The Currently Authenticated User
+
+You may set the currently authenticated user using the `be` method:
 
 	$user = new User(array('name' => 'John'));
 
