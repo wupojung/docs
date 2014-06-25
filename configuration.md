@@ -1,6 +1,5 @@
 # 設定
 
-<<<<<<< HEAD
 - [簡介](#introduction)
 - [環境設定](#environment-configuration)
 - [Provider Configuration](#provider-configuration)
