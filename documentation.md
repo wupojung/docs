@@ -33,7 +33,7 @@
     - [單元測試](/docs/testing)
     - [驗證](/docs/validation)
 - 資料庫
-    - [基本用法]](/docs/database)
+    - [基本用法](/docs/database)
     - [查詢架構器](/docs/queries)
     - [Eloquent ORM](/docs/eloquent)
     - [結構生成器](/docs/schema)
