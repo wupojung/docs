@@ -9,7 +9,7 @@
 <a name="configuration"></a>
 ## 設定檔
 
-日誌處理程序註冊在[開始設定檔](/docs/lifecycle#start-files)`app/start/global.php`。日誌預設儲存在單一檔案，你可以依照需求自定。既然 Laravel 使用廣為人用的 Monolog 日誌，你可以利用很多 Monolog 提供的處理器程序。
+日誌處理程序註冊在 [開始設定檔](/docs/lifecycle#start-files) `app/start/global.php`。日誌預設儲存在單一檔案，你可以依照需求自定。既然 Laravel 使用廣為人用的 Monolog 日誌，你可以利用很多 Monolog 提供的處理器程序。
 
 例如，如果你想每天使用一個日誌檔案而不是使用單一的龐大檔案，你可以照著下面的範例更改開始設定檔：
 
@@ -19,21 +19,21 @@
 
 ### 錯誤顯示
 
-錯誤顯示預設為開啓，意味著當錯誤發生時，將有錯誤頁面顯示詳細的堆疊追蹤和錯誤訊息。你可以關掉錯誤顯示的選項，把`app/config/app.php`裡的`debug`選項改成`false`。
+錯誤顯示預設為開啓，意味著當錯誤發生時，將有錯誤頁面顯示詳細的堆疊追蹤和錯誤訊息。你可以關掉錯誤顯示的選項，把 `app/config/app.php` 裡的 `debug` 選項改成 `false`。
 
 > **注意：**強烈建議在 production 環境中關掉錯誤顯示。
 
 <a name="handling-errors"></a>
 ## 錯誤處理
 
-`app/start/global.php`裡預設有一個處理所有例外的例外處理程序：
+`app/start/global.php` 裡預設有一個處理所有例外的例外處理程序：
 
 	App::error(function(Exception $exception)
 	{
 		Log::error($exception);
 	});
 
-這是最基本的例外處理程序，然而你可以依照需求設定更多例外處理程序。例外處理程序會依照例外的型別提示( type-hint )被呼叫。例如，你可以創造一個只處理`RuntimeException`的例外處理程序：
+這是最基本的例外處理程序，然而你可以依照需求設定更多例外處理程序。例外處理程序會依照例外的型別提示( type-hint )被呼叫。例如，你可以創造一個只處理 `RuntimeException` 的例外處理程序：
 
 	App::error(function(RuntimeException $exception)
 	{
@@ -49,7 +49,7 @@
 		return 'Sorry! Something is wrong with this account!';
 	});
 
-為了監聽 PHP fetal errors，你可以利用`App::fatal`方法：
+為了監聽 PHP fetal errors，你可以利用 `App::fatal` 方法：
 
 	App::fatal(function($exception)
 	{
