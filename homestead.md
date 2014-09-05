@@ -106,7 +106,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 如果想要從本機上透過 Navicat 或者是 Sequel Pro 連接 MySQL 或者 Postgres 資料庫，你可以連接 `127.0.0.1` 的 埠 33060 (MySQL) 或 54320 (Postgres)。而帳號密碼分別是 `homestead` / `secret`。
 
-> **附註:** 你應該怎使用這些非標準的埠從本機來連結資料庫。 You will use the default 3306 and 5432 ports in your Laravel database configuration file since Laravel is running _within_ the Virtual Machine.
+> **附註:** 你應該只能使用這些非標準的連接埠來連接資料庫。因為您將會在本機端使用預設 3306 及 5432 連接埠來連接自己的資料庫。
 
 ### 增加更多的站台
 
