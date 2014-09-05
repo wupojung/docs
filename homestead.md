@@ -4,12 +4,12 @@
 - [內建軟體](#included-software)
 - [安裝與設定](#installation-and-setup)
 - [Daily Usage](#daily-usage)
-- [Ports](#ports)
+- [連接埠](#ports)
 
 <a name="introduction"></a>
 ## 導覽
 
-Laravel 致力於讓 PHP 開發體驗更愉快，也包含你的本地開發環境。[vagrant](http://vagrantup.com) 一個簡單、優雅的方式來管理與供應虛擬機器。
+Laravel 致力於讓 PHP 開發體驗更愉快，也包含你的本地開發環境。[Vagrant](http://vagrantup.com) 一個簡單、優雅的方式來管理與供應虛擬機器。
 
 Laravel Homestead 是一個官方預載的 Vagrant “封裝包”，提供你一個美好的開發環境，不需要你在你的本機端安裝 PHP、網頁伺服器或任何伺服器軟體。不用擔心搞亂你的系統！Vagrant 封裝包完全搞定。如果有什麼地方爛掉了，你只要砍掉重來即可。
 
@@ -21,7 +21,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 ## 內建軟體
 
 - Ubuntu 14.04
-- PHP 5.5
+- PHP 5.6
 - Nginx
 - MySQL
 - Postgres
