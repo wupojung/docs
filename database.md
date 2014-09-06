@@ -131,4 +131,4 @@ Laravel 讓資料庫連線與執行查詢語句變得相當簡單。資料庫設
 
 要得到執行過的操作紀錄陣列，您可以使用 `getQueryLog` 方法:
 
-       $queries = DB::getQueryLog();
+	$queries = DB::getQueryLog();

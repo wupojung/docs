@@ -3,17 +3,17 @@
 - [導覽](#introduction)
 - [內建軟體](#included-software)
 - [安裝與設定](#installation-and-setup)
-- [Daily Usage](#daily-usage)
-- [Ports](#ports)
+- [常見用法](#daily-usage)
+- [連接埠](#ports)
 
 <a name="introduction"></a>
 ## 導覽
 
-Laravel 致力於讓 PHP 開發體驗更愉快，也包含你的本地開發環境。[vagrant](http://vagrantup.com) 一個簡單、優雅的方式來管理與供應虛擬機器。
+Laravel 致力於讓 PHP 開發體驗更愉快，也包含你的本地開發環境。[Vagrant](http://vagrantup.com) 一個簡單、優雅的方式來管理與供應虛擬機器。
 
 Laravel Homestead 是一個官方預載的 Vagrant “封裝包”，提供你一個美好的開發環境，不需要你在你的本機端安裝 PHP、網頁伺服器或任何伺服器軟體。不用擔心搞亂你的系統！Vagrant 封裝包完全搞定。如果有什麼地方爛掉了，你只要砍掉重來即可。
 
-Homestead 可以在任何 Windows, Mac 或 Linux 上面運行，裏面包含了 Nginx 網頁伺服器、PHP 5.5、MySQL、Postgres、Redis、Memcached 還有所有你要開發精彩的 Laravel 應用程式所需的軟體。
+Homestead 可以在任何 Windows, Mac 或 Linux 上面運行，裏面包含了 Nginx 網頁伺服器、PHP 5.6、MySQL、Postgres、Redis、Memcached 還有所有你要開發精彩的 Laravel 應用程式所需的軟體。
 
 Homestead 建置且測試於 Vagrant 1.6 上。
 
@@ -21,7 +21,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 ## 內建軟體
 
 - Ubuntu 14.04
-- PHP 5.5
+- PHP 5.6
 - Nginx
 - MySQL
 - Postgres
@@ -90,38 +90,38 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 繼續讀下去，你會學到如何連結到你的資料庫。
 
 <a name="daily-usage"></a>
-## Daily Usage
+## 常見用法
 
 ### 透過 SSH 連接
 
-要透過 SSH 連接你的 Homestead 環境，你需要使用你設定在 `Homestead.yaml` 檔案中的 SSH 金鑰連接 `127.0.0.1` 的埠 2222。你也可以輕易的從你的 `Homestead` 目錄下執行 `vagrant ssh` 命令來連接。
+要透過 SSH 連接 Homestead 環境，需要使用設定在 `Homestead.yaml` 檔案中的 SSH 金鑰連接 `127.0.0.1` 的連接埠 2222。你也可以輕易的從 `Homestead` 目錄下執行 `vagrant ssh` 命令來連接。
 
-如果你想要更簡便，你可以將下面的 alias 加到你的 `~/.bash_aliases` 或是 `~/.bash_profile` 中：
+如果想要更簡便，可以將下面的 alias 加到你的 `~/.bash_aliases` 或是 `~/.bash_profile` 中：
 
 	alias vm='ssh vagrant@127.0.0.1 -p 2222'
 
-### 連結你的資料庫
+### 連結資料庫
 
 在 `Homestead` 封裝包中，MySQL 與 Postgres 兩套資料庫都已預裝其中。為了更簡便，Laravel 的 `local` 資料庫設定已經預設將其設定完成。
 
-如果你想要從你的本機上透過 Navicat 或者是 Sequel Pro 連接你的 MySQL 或者 Postgres 資料庫，你可以連接 `127.0.0.1` 的 埠 33060 (MySQL) 或 54320 (Postgres)。而帳號密碼分別是 `homestead` / `secret`。
+如果想要從本機上透過 Navicat 或者是 Sequel Pro 連接 MySQL 或者 Postgres 資料庫，你可以連接 `127.0.0.1` 的 埠 33060 (MySQL) 或 54320 (Postgres)。而帳號密碼分別是 `homestead` / `secret`。
 
-> **附註:** 你應該怎使用這些非標準的埠從本機來連結你的資料庫。 You will use the default 3306 and 5432 ports in your Laravel database configuration file since Laravel is running _within_ the Virtual Machine.
+> **附註:** 你應該只能使用這些非標準的連接埠來連接資料庫。因為您將會在本機端使用預設 3306 及 5432 連接埠來連接自己的資料庫。
 
 ### 增加更多的站台
 
-一旦你的 Homestead 環境上架且運行後，你可能會需要為你的 Laravel 應用程式增加夠多的 Nginx 站台。你可以在單一個 Homestead 環境中運行非常多 Laravel 安裝程式。兩個方式可以達到：第一，你可以在你的 `Homestead.yaml` 檔案中增加站台然後執行 `vagrant provision`。
+一旦 Homestead 環境上架且運行後，你可能會需要為 Laravel 應用程式增加更多的 Nginx 站台。你可以在單一個 Homestead 環境中運行非常多 Laravel 安裝程式。兩個方式可以達到：第一，可以在 `Homestead.yaml` 檔案中增加站台然後執行 `vagrant provision`。
 
-另外，你也可以使用放在你的 Homestead 環境中的 `serve` 指令檔。你需要 SSH 進入你的 Homestead 環境中，並執行下列命令：
+另外，也可以使用放在 Homestead 環境中的 `serve` 指令檔。需要 SSH 進入 Homestead 環境中，並執行下列命令：
 
 	serve domain.app /home/vagrant/Code/path/to/public/directory
 
-> **附註:** 在執行 `serve` 指令過後，別忘記將新的站台加進你本機的 `hosts` 檔案中。
+> **附註:** 在執行 `serve` 指令過後，別忘記將新的站台加進本機的 `hosts` 檔案中。
 
 <a name="ports"></a>
 ## 連接埠
 
-以下的埠將會被重導至你的 Homestead 環境：
+以下的埠將會被重導至 Homestead 環境：
 
 - **SSH:** 2222 -> Forwards To 22
 - **HTTP:** 8000 -> Forwards To 80
