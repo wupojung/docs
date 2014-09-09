@@ -16,7 +16,7 @@
 <a name="introduction"></a>
 ## 介紹
 
-Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com) 的訂購管理服務介接。它幾乎處理了所有讓人退步三舍的訂購管理相關邏輯。除了基本的訂購管理， Cashier 還可以處理折價券，訂購轉換，管理訂購「數量」、服務有效期限，甚至產生收據的 PDF 。
+Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com) 的訂購管理服務介接。它幾乎處理了所有讓人退步三舍的訂購管理相關邏輯。除了基本的訂購管理，Cashier 還可以處理折價券，訂購轉換，管理訂購「數量」、服務有效期限，甚至產生收據的 PDF。
 
 <a name="configuration"></a>
 ## 設定檔
@@ -33,7 +33,7 @@ Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com
 
 #### 遷移
 
-使用 Cashier 前，我們需要增加幾個欄位到資料庫。別擔心，你可以使用 `cashier:table` Artisan 命令，建立遷移檔來新增必要欄位。例如，要增加欄位到 users 資料表，使用 `php artisan cashier:table users` 。建立完遷移檔後，只要執行 `migrate` 命令即可。
+使用 Cashier 前，我們需要增加幾個欄位到資料庫。別擔心，你可以使用 `cashier:table` Artisan 命令，建立遷移檔來新增必要欄位。例如，要增加欄位到 users 資料表，使用 `php artisan cashier:table users`。建立完遷移檔後，只要執行 `migrate` 命令即可。
 
 #### 設定模型
 
@@ -87,7 +87,7 @@ Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com
 		'email' => $email, 'description' => 'Our First Customer'
 	]);
 
-想知道更多 Stripe 支援的額外欄位，瞧瞧 Stripe 的線上文件 [建立客戶](https://stripe.com/docs/api#create_customer).
+想知道更多 Stripe 支援的額外欄位，瞧瞧 Stripe 的線上文件 [建立客戶](https://stripe.com/docs/api#create_customer)。
 
 <a name="no-card-up-front"></a>
 ## 免信用卡試用
@@ -135,7 +135,7 @@ Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com
 
 	$user->subscription()->cancel();
 
-當客戶取消訂購時， Cashier 會自動更新資料庫的 `subscription_ends_at` 欄位。這個欄位會被用來判斷 `subscribed` 方法是否該回傳 `false` 。例如，如果顧客在三月一號取消訂購，但是服務可以使用到三月五號為止，那麼 `subscribed` 方法在三月五號前都會傳回 `true` 。
+當客戶取消訂購時，Cashier 會自動更新資料庫的 `subscription_ends_at` 欄位。這個欄位會被用來判斷 `subscribed` 方法是否該回傳 `false`。例如，如果顧客在三月一號取消訂購，但是服務可以使用到三月五號為止，那麼 `subscribed` 方法在三月五號前都會傳回 `true`。
 
 <a name="resuming-a-subscription"></a>
 ## 恢復訂購
