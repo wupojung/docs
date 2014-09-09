@@ -49,20 +49,19 @@
 
 	array($name, $shortcut, $mode, $description, $defaultValue)
 
-對選項而言, 參數 `mode` 可以是下列其中一項： `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
+對選項而言，參數 `mode` 可以是下列其中一項：`InputOption::VALUE_REQUIRED`、`InputOption::VALUE_OPTIONAL`、`InputOption::VALUE_IS_ARRAY`、`InputOption::VALUE_NONE`。
 
 該 `VALUE_IS_ARRAY` 模式表示呼叫指令時可以傳入多筆數值：
 
 	php artisan foo --option=bar --option=baz
 
-該 `VALUE_NONE` 模式表示將選項當作是"開關"
+該 `VALUE_NONE` 模式表示將選項當作是「開關」
 
 	php artisan foo --option
 
 ### 取得輸入
 
-當您的指令執行時，您需要讓您的應用程式可以存取到這些參數和選項的值，
-要做到這一點，您可以使用 `argument` 和 `option` 方法：
+當您的指令執行時，您需要讓您的應用程式可以存取到這些參數和選項的值，要做到這一點，您可以使用 `argument` 和 `option` 方法：
 
 #### 取得自訂指令的輸入參數
 
@@ -82,7 +81,7 @@
 
 ### 產生輸出
 
-顯示資訊到終端上，您可以使用 `info`, `comment`, `question` 和`error`方法，每一種方法將會對應到一個 ANSI 顏色。
+顯示資訊到終端上，您可以使用 `info`、`comment`、`question` 和 `error` 方法，每一種方法將會對應到一個 ANSI 顏色。
 
 #### 顯示訊息到終端
 
@@ -120,7 +119,7 @@
 
 #### 註冊一個 Artisan 指令
 
-當您的自訂指令完成後，您需要向 Artisan 註冊才能使用，通常是在 `app/start/artisan.php` ，在此檔案內，你可以使用 `Artisan::add` 方法註冊該指令：
+當您的自訂指令完成後，您需要向 Artisan 註冊才能使用，通常是在 `app/start/artisan.php`，在此檔案內，你可以使用 `Artisan::add` 方法註冊該指令：
 
 	Artisan::add(new CustomCommand);
 
@@ -132,7 +131,7 @@
 
 #### 在 Service Provider 內註冊指令
 
-如果您需要從 service provider 註冊指令，您應該在 provider 的  `boot` 方法內呼叫 `commands` 方法，傳入 IoC container 綁定此指令：
+如果您需要從 service provider 註冊指令，您應該在 provider 的 `boot` 方法內呼叫 `commands` 方法，傳入 IoC container 綁定此指令：
 
 	public function boot()
 	{
