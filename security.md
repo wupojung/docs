@@ -17,7 +17,7 @@ Laravel 的目標就是要讓實作認證機制變得簡單。事實上，幾乎
 
 Laravel 預設在 `app/models` 資料夾內就包含了一個使用 Eloquent 認證驅動的`User` 模型。請記得在建立模型結構時，密碼欄位至少要有 60 個字元寬度。
 
-假如您的應用程式並不是使用 Eloquent ，你也可以使用 Laravel 的查尋產生器做  `database` 認證驅動。
+假如您的應用程式並不是使用 Eloquent，你也可以使用 Laravel 的查尋產生器做 `database` 認證驅動。
 
 > **注意：** 在開始之前，請先確認您的 `users` (或其他同義) 資料表包含一個名為 `remember_token` 的欄位，欄寬 100 字元、字串型態、可接受 null。這個欄位將會被用來儲存「記住我」的 session token。
 
@@ -54,7 +54,7 @@ Laravel 的 `Hash` 類別提供了安全的 Bcrypt 雜湊演算法：
 		return Redirect::intended('dashboard');
 	}
 
-需提醒的是 `email`並不是一個必要的欄位，在這裡僅用於示範。你可以使用資料庫裡任何類似於「使用者名稱」的欄位做為帳號值。若使用者尚未登入的話，認證篩選器會使用 `Redirect::intended` 方法重導使用者至指定的 URL。我們可指定一個備用 URI ，假如預定的位置不存在時使用。
+需提醒的是 `email` 並不是一個必要的欄位，在這裡僅用於示範。你可以使用資料庫裡任何類似於「使用者名稱」的欄位做為帳號值。若使用者尚未登入的話，認證篩選器會使用 `Redirect::intended` 方法重導使用者至指定的 URL。我們可指定一個備用 URI，假如預定的位置不存在時使用。
 
 當 `attempt` 方法被呼叫時，`auth.attempt` [事件](/docs/events) 將會被觸發。假如認證成功的話，則 `auth.login` 事件會接著被觸發。
 
@@ -76,7 +76,7 @@ Laravel 的 `Hash` 類別提供了安全的 Bcrypt 雜湊演算法：
 		// The user is being remembered...
 	}
 
-**注意：** 假如 `attempt` 方法回傳 `true` ，則表示使用者已經登入您的應用程式。
+**注意：** 假如 `attempt` 方法回傳 `true`，則表示使用者已經登入您的應用程式。
 
 #### 透過記住我來認證使用者
 假如您讓使用者透過「記住我」的方式來登入，則您可以使用 `viaRemember` 方法來判定使用者是否擁有「記住我」cookie 來認證使用者登入：
@@ -209,7 +209,7 @@ HTTP 簡易認證提供了一個快速的方式來認證使用者而不用特定
 
 ### 模型與資料表
 
-大多數的網路應用程式都會提供使用者忘記密碼的功能。為了不讓開發者重複實作這個功能，Laravel 提供了方便的方法來寄送忘記密碼通知及密碼重設的功能。在開始之前，請先確認您的 `User` 模型有實作 `Illuminate\Auth\Reminders\RemindableInterface` 。當然，預設 Laravel 的 `User` 模型本身就已實作，並且引入`Illuminate\Auth\Reminders\RemindableTrait` 來包括所有需要實作的介面方法。
+大多數的網路應用程式都會提供使用者忘記密碼的功能。為了不讓開發者重複實作這個功能，Laravel 提供了方便的方法來寄送忘記密碼通知及密碼重設的功能。在開始之前，請先確認您的 `User` 模型有實作 `Illuminate\Auth\Reminders\RemindableInterface`。當然，預設 Laravel 的 `User` 模型本身就已實作，並且引入`Illuminate\Auth\Reminders\RemindableTrait` 來包括所有需要實作的介面方法。
 
 #### 實作 RemindableInterface
 
@@ -266,7 +266,7 @@ HTTP 簡易認證提供了一個快速的方式來認證使用者而不用特定
 		<input type="submit" value="Reset Password">
 	</form>
 
-最後，`postReset` 方法則是專職處理重設過後的密碼。在這個控制器方法裡，Closure 傳遞 `Password::reset` 方法並且設定 `User` 內的 `password` 屬性後呼叫 `save` 方法。當然，這個 Closure 會假定您的 `User` 模型是一個 [Eloquent 模型](/docs/eloquent) 。當然，您可以自由地修改這個 Closure 內容來符合您的應用程式資料庫儲存方式。
+最後，`postReset` 方法則是專職處理重設過後的密碼。在這個控制器方法裡，Closure 傳遞 `Password::reset` 方法並且設定 `User` 內的 `password` 屬性後呼叫 `save` 方法。當然，這個 Closure 會假定您的 `User` 模型是一個 [Eloquent 模型](/docs/eloquent)。當然，您可以自由地修改這個 Closure 內容來符合您的應用程式資料庫儲存方式。
 
 假如密碼成功的重設，則使用者會被重導至您的應用程式根目錄。同樣的，您可以自由的更改重導的 URL；假如密碼重設失敗的話，使用者會被重導至重設密碼表單頁，而且會有 `error` 訊息被暫存在 session 內。
 
@@ -290,7 +290,7 @@ Laravel 透過 mcrypt PHP 外掛來提供 AES 強度的加密演算：
 
 	$encrypted = Crypt::encrypt('secret');
 
-> **注意：** 記得在 `app/config/app.php` 檔案裡設定一個 16, 24 或 32 字元的隨機字做 `key` ，否則這個加密演算結果將不夠安全。
+> **注意：** 記得在 `app/config/app.php` 檔案裡設定一個 16, 24 或 32 字元的隨機字做 `key`，否則這個加密演算結果將不夠安全。
 
 #### 解密一個值
 

@@ -13,9 +13,9 @@
 
 Laravel 可以簡單的 SSH 到遠端伺服器以及執行指令，讓你可以簡單在遠端執行的建立 Artisan 任務。`SSH` facade 提供了使用方式讓你連線到遠端伺服器並執行指令。
 
-設定檔位在 `app/config/remote.php` ，包含所有你需要設定的遠端連線設定， `connections` 陣列裡有以遠端伺服器名稱作為鍵值的列表。只要在 `connections` 陣列設定好認證，你就準備好可以執行遠端任務了。記得 `SSH` 可以經由密碼或 SSH key 認證。
+設定檔位在 `app/config/remote.php`，包含所有你需要設定的遠端連線設定，`connections` 陣列裡有以遠端伺服器名稱作為鍵值的列表。只要在 `connections` 陣列設定好認證，你就準備好可以執行遠端任務了。記得 `SSH` 可以經由密碼或 SSH key 認證。
 
-> **提示:** 需要再遠端伺服器執行很多任務嗎？瞧瞧 [Envoy 任務執行](#envoy-task-runner)!
+> **提示：** 需要再遠端伺服器執行很多任務嗎？瞧瞧 [Envoy 任務執行](#envoy-task-runner)！
 
 <a name="basic-usage"></a>
 ## 基本用法
@@ -110,7 +110,7 @@ Laravel Envoy 提供了簡潔，輕量的語法，定義在遠端伺服器執行
 <a name="envoy-installation"></a>
 ### 安裝
 
-首先，使用 Composer `global` 指令安裝 Envoy ：
+首先，使用 Composer `global` 指令安裝 Envoy：
 
 	composer global require "laravel/envoy=~1.0"
 

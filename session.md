@@ -9,7 +9,7 @@
 <a name="configuration"></a>
 ## 組態
 
-由於 HTTP 協定是無狀態（Stateless）的，所以 session 提供一種儲存用戶資料的方法。Laravel 支援了多種 session 後端驅動，並透過清楚、統一的 API 提供使用。也內建支援像是 [Memcached](http://memcached.org), [Redis](http://redis.io) 和資料庫的後端驅動。
+由於 HTTP 協定是無狀態（Stateless）的，所以 session 提供一種儲存用戶資料的方法。Laravel 支援了多種 session 後端驅動，並透過清楚、統一的 API 提供使用。也內建支援像是 [Memcached](http://memcached.org)、[Redis](http://redis.io) 和資料庫的後端驅動。
 
 session 的設定檔配置在 `app/config/session.php` 中，請務必看一下 session 設定檔中可用的選項設定及註解。Laravel 預設使用 `file` 的 session 驅動，它在大多的應用中可以良好運作。
 
@@ -104,7 +104,7 @@ Laravel 框架在內部有使用 `flash` 作為 session 的鍵值，所以應該
 <a name="session-drivers"></a>
 ## Session 驅動
 
-session 設定檔中的 "driver" 定義了 session 資料將以哪種方式被儲存。Laravel 提供了許多良好的驅動：
+session 設定檔中的「driver」定義了 session 資料將以哪種方式被儲存。Laravel 提供了許多良好的驅動：
 
 - `file` - sessions 將儲存在 `app/storage/sessions` 資料夾中。
 - `cookie` - sessions 將安全儲存在加密的 cookies 中。
