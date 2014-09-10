@@ -8,14 +8,14 @@
 <a name="introduction"></a>
 ## 介紹
 
-[Redis](http://redis.io) 是開源，先進的鍵值對儲存庫。由於它可用的鍵包含了[字串](http://redis.io/topics/data-types#strings)，[雜湊](http://redis.io/topics/data-types#hashes)，[列表](http://redis.io/topics/data-types#lists)，[集合](http://redis.io/topics/data-types#sets)，和[有序集合](http://redis.io/topics/data-types#sorted-sets)，因此常被稱作資料結構伺服器。
+[Redis](http://redis.io) 是開源，先進的鍵值對儲存庫。由於它可用的鍵包含了 [字串](http://redis.io/topics/data-types#strings)、[雜湊](http://redis.io/topics/data-types#hashes)、[列表](http://redis.io/topics/data-types#lists)、[集合](http://redis.io/topics/data-types#sets) 和 [有序集合](http://redis.io/topics/data-types#sorted-sets)，因此常被稱作資料結構伺服器。
 
 > **提醒：** 如果你用 PECL 安裝了 Redis PHP extension，則需要重新命名 `app/config/app.php` 裡的 Redis 別名。
 
 <a name="configuration"></a>
 ## 設定檔
 
-應用程式的 Redis 設定檔在 **app/config/database.php** 。在這個檔案裡，你會看到 **redis** 陣列，裡面有應用程式使用的 Redis 伺服器資料：
+應用程式的 Redis 設定檔在 **app/config/database.php**。在這個檔案裡，你會看到 **redis** 陣列，裡面有應用程式使用的 Redis 伺服器資料：
 
 	'redis' => array(
 
@@ -62,12 +62,12 @@
 
 	$values = Redis::lrange('names', 5, 10);
 
-> **提示：** 也可以使用 Redis 作為 Laravel 的[快取](/docs/cache) 和 [session](/docs/session) 驅動。
+> **提示：** 也可以使用 Redis 作為 Laravel 的 [快取](/docs/cache) 和 [session](/docs/session) 驅動。
 
 <a name="pipelining"></a>
 ## 管線
 
-當你想要一次發送很多命令到伺服器時可以使用管線 。使用 `pipeline` 方法：
+當你想要一次發送很多命令到伺服器時可以使用管線。使用 `pipeline` 方法：
 
 #### 發送多個命令到伺服器
 
