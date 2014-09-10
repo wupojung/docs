@@ -9,7 +9,7 @@
 <a name="basic-controllers"></a>
 ## 基本 Controllers
 
-除了在單一 `routes.php` 檔中定義所有路由層邏輯外，你可能也想利用控制器類別來整合這些行為模式。控制器可以統合相關的路由邏輯到同一個類別中，並且利用更先進的框架特性的優勢，如自動的[依賴注入](/docs/ioc)。
+除了在單一 `routes.php` 檔中定義所有路由層邏輯外，你可能也想利用控制器類別來整合這些行為模式。控制器可以統合相關的路由邏輯到同一個類別中，並且利用更先進的框架特性的優勢，如自動的 [依賴注入](/docs/ioc)。
 
 
 控制器一般存放在 `app/controllers` 目錄下，這個目錄已預設註冊在 `composer.json` 的 `classmap` 中。然而，技術上控制器可以放在任何目錄或是子目錄。路由宣告與控制器類別存放在哪個位址並無關係。所以，只要 Composer 知道如何自動載入控制器類別，你就可以放在任何你想要的地方。
@@ -58,7 +58,7 @@
 <a name="controller-filters"></a>
 ## 控制器過濾器
 
-[過濾器(Filter)](/docs/routing#route-filters) 在控制器路由中宣告方式，如同"一般"的路由一樣。
+[過濾器(Filter)](/docs/routing#route-filters) 在控制器路由中宣告方式，如同「一般」的路由一樣。
 
 	Route::get('profile', array('before' => 'auth',
 				'uses' => 'UserController@showProfile'));
@@ -99,7 +99,7 @@
 
 	}
 
-如果你想使用控制器裡的方法當做過濾器，你可以使用`@`語法定義過濾器：
+如果你想使用控制器裡的方法當做過濾器，你可以使用 `@` 語法定義過濾器：
 
 	class UserController extends BaseController {
 
@@ -141,7 +141,7 @@ Laravel 讓你可以簡單的經由定義一個路由規則來處理控制器裡
 		{
 			//
 		}
-		
+
 		public function anyLogin()
 		{
 			//
@@ -151,7 +151,7 @@ Laravel 讓你可以簡單的經由定義一個路由規則來處理控制器裡
 
 `index` 方法會對應到 controller 的根 URI，以上面的例子來說，就是 `users`。
 
-若你的控制器方法包含很多單字，你可以在 URI 使用 "破折號(-)" 來對應方法。例如 `UserController` 中，如下的方法會對應到 `users/admin-profile` URI：
+若你的控制器方法包含很多單字，你可以在 URI 使用「破折號(-)」來對應方法。例如 `UserController` 中，如下的方法會對應到 `users/admin-profile` URI：
 
 	public function getAdminProfile() {}
 
@@ -204,11 +204,11 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 
 #### 處理巢狀資源控制器
 
-為了使用巢狀資源控制器，在路由宣告時使用"點"表示法：
+為了使用巢狀資源控制器，在路由宣告時使用「點」表示法：
 
 	Route::resource('photos.comments', 'PhotoCommentController');
 
-這個路由規則會註冊一個"巢狀"資源，可以對應如下的 URLs：`photos/{photoResource}/comments/{commentResource}`。
+這個路由規則會註冊一個「巢狀」資源，可以對應如下的 URLs：`photos/{photoResource}/comments/{commentResource}`。
 
 	class PhotoCommentController extends BaseController {
 
@@ -221,7 +221,7 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 
 #### 增加額外路由規則到 Resource Controller
 
-你果你需要增加額外的 route 規則到預設的 resource controller，你應該在宣告`Route::resource`之前宣告這些規則：
+你果你需要增加額外的 route 規則到預設的 resource controller，你應該在宣告 `Route::resource` 之前宣告這些規則：
 
 	Route::get('photos/popular');
 	Route::resource('photos', 'PhotoController');
@@ -229,7 +229,7 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 <a name="handling-missing-methods"></a>
 ## 對應遺漏的方法
 
-可以定義一個 catch-all 方法，當 controller 找不到對應的方法就會被呼叫，這個方法應該宣告為`missingMethod`, 會傳入請求的方法和參數陣列：
+可以定義一個 catch-all 方法，當 controller 找不到對應的方法就會被呼叫，這個方法應該宣告為 `missingMethod`，會傳入請求的方法和參數陣列：
 
 #### 定義一個 Catch-All 方法
 

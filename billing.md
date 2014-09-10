@@ -224,7 +224,7 @@ Laravel Cashier 提供口語化，流暢的介面和 [Stripe](https://stripe.com
 
 	}
 
-> **注意** 除了更新你資料庫裡的訂購資訊以外， Webhook 控制器也可能會經由 Stripe API 取消你的訂購。
+> **注意：** 除了更新你資料庫裡的訂購資訊以外， Webhook 控制器也可能會經由 Stripe API 取消你的訂購。
 
 <a name="invoices"></a>
 ## 收據
