@@ -11,7 +11,7 @@
 
 ### array_add
 
-如果給定的鍵不在陣列中， `array_add` 函式會把給定的鍵值對加到陣列中。
+如果給定的鍵不在陣列中，`array_add` 函式會把給定的鍵值對加到陣列中。
 
 	$array = array('foo' => 'bar');
 
@@ -27,7 +27,7 @@
 
 ### array_dot
 
-`array_dot` 函式把多維陣列扁平化成一維陣列，並用 "逗點" 符號表示深度。
+`array_dot` 函式把多維陣列扁平化成一維陣列，並用「點」符號表示深度。
 
 	$array = array('foo' => array('bar' => 'baz'));
 
@@ -98,7 +98,7 @@
 
 ### array_forget
 
-`array_forget` 函式將會用 "逗點" 符號從深度巢狀陣列移除給定的鍵值對。
+`array_forget` 函式將會用「點」符號從深度巢狀陣列移除給定的鍵值對。
 
 	$array = array('names' => array('joe' => array('programmer')));
 
@@ -106,7 +106,7 @@
 
 ### array_get
 
-`array_get` 函式將會使用 "逗點" 符號從深度巢狀陣列取回給定的值。
+`array_get` 函式將會使用「點」符號從深度巢狀陣列取回給定的值。
 
 	$array = array('names' => array('joe' => array('programmer')));
 
@@ -142,7 +142,7 @@
 
 ### array_set
 
-`array_set` 函式將會使用 "逗點" 符號在深度巢狀陣列中指定值。
+`array_set` 函式將會使用「點」符號在深度巢狀陣列中指定值。
 
 	$array = array('names' => array('programmer' => 'Joe'));
 
@@ -177,13 +177,13 @@
 
 ### head
 
-回傳陣列中第一個元素。 對 PHP 5.3.x 的方法鏈很有用。
+回傳陣列中第一個元素。對 PHP 5.3.x 的方法鏈很有用。
 
 	$first = head($this->returnsArray('foo'));
 
 ### last
 
-回傳陣列中最後一個元素。 對方法鏈很有用。
+回傳陣列中最後一個元素。對方法鏈很有用。
 
 	$last = last($this->returnsArray('foo'));
 
@@ -273,7 +273,7 @@
 
 ### str_finish
 
-加一個給定字串到句子結尾。 多餘一個的給定字串則移除。
+加一個給定字串到句子結尾。多餘一個的給定字串則移除。
 
 	$string = str_finish('this/string', '/');
 
@@ -281,7 +281,7 @@
 
 ### str_is
 
-判斷字串是否符合給定的模式。 星號可以用來當作萬用字元。
+判斷字串是否符合給定的模式。星號可以用來當作萬用字元。
 
 	$value = str_is('foo*', 'foobar');
 
@@ -313,13 +313,13 @@
 
 ### trans
 
-翻譯給定的語句。 等同 `Lang::get`。
+翻譯給定的語句。等同 `Lang::get`。
 
 	$value = trans('validation.required'):
 
 ### trans_choice
 
-隨著詞形變化翻譯給定的語句。 等同 `Lang::choice`。
+隨著詞形變化翻譯給定的語句。等同 `Lang::choice`。
 
 	$value = trans_choice('foo.bar', $count);
 
@@ -403,12 +403,12 @@
 
 ### value
 
-如果給定的值是個 `閉包`， 回傳 `閉包` 的回傳值。 不是的話，則回傳值。
+如果給定的值是個 `閉包`，回傳 `閉包` 的回傳值。不是的話，則回傳值。
 
 	$value = value(function() { return 'bar'; });
 
 ### with
 
-回傳給定物件。 對 PHP 5.3.x 的建構式方法鏈很有用。
+回傳給定物件。對 PHP 5.3.x 的建構式方法鏈很有用。
 
 	$value = with(new Foo)->doWork();

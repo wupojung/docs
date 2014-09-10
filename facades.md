@@ -10,7 +10,7 @@
 <a name="introduction"></a>
 ## 介紹
 
-Facades 提供一個靜態介面讓類別可以在應用程式的 [IoC 容器](/docs/ioc) 裡運用。 Laravel 附帶許多 facades，甚至你可能已經在使用它們即使你並不知道! Laravel 的 "facades" 在 IoC 容器裡面作為的基底類別的靜態代理，提供有簡潔、易表達優點的語法，同時維持比傳統的靜態方法更高的可測試性和彈性。
+Facades 提供一個靜態介面讓類別可以在應用程式的 [IoC 容器](/docs/ioc) 裡運用。Laravel 附帶許多 facades，甚至你可能已經在使用它們即使你並不知道！Laravel 的「facades」在 IoC 容器裡面作為的基底類別的靜態代理，提供有簡潔、易表達優點的語法，同時維持比傳統的靜態方法更高的可測試性和彈性。
 
 你偶爾或許會希望為你的應用程式和套件建立自己的 facades，所以讓我們來探索這些類別的概念、開發和用法。
 
@@ -19,20 +19,20 @@ Facades 提供一個靜態介面讓類別可以在應用程式的 [IoC 容器](/
 <a name="explanation"></a>
 ## 解釋
 
-在 Laravel 應用程式的環境中， facade 是個提供從容器存取物件的類別。 使這個機制可以運作的原因在 `Facade` 類別中。 Laravel 的 facades 和任何你建立的客製化 facades，將會繼承基本的 `Facade` 類別。
+在 Laravel 應用程式的環境中，facade 是個提供從容器存取物件的類別。使這個機制可以運作的原因在 `Facade` 類別中。Laravel 的 facades 和任何你建立的客製化 facades，將會繼承基本的 `Facade` 類別。
 
-你的 facade 類別只需要去實作一個方法： `getFacadeAccessor`。 `getFacadeAccessor` 方法的工作是定義要從容器解析什麼。 基本的 `Facade` 類別利用 `__callStatic()` 魔術方法去從你的 facade 呼叫到解析物件。
+你的 facade 類別只需要去實作一個方法：`getFacadeAccessor`。`getFacadeAccessor` 方法的工作是定義要從容器解析什麼。基本的 `Facade` 類別利用 `__callStatic()` 魔術方法去從你的 facade 呼叫到解析物件。
 
-所以當你對 facade 呼叫，例如 `Cache::get`， Laravel 從 IoC 容器解析快取管理類別出來，並對類別呼叫 `get` 方法。 用科技術語來說， Laravel Facades 是使用 Laravel IoC 容器作為服務定位器的便捷語法。
+所以當你對 facade 呼叫，例如 `Cache::get`，Laravel 從 IoC 容器解析快取管理類別出來，並對類別呼叫 `get` 方法。用科技術語來說，Laravel Facades 是使用 Laravel IoC 容器作為服務定位器的便捷語法。
 
 <a name="practical-usage"></a>
 ## 實際用法
 
-在下面的例子，對 Laravel 快取系統進行呼叫。 簡單看過這程式碼，有人可能會以為靜態方法 `get` 是被 `Cache` 類別呼叫。
+在下面的例子，對 Laravel 快取系統進行呼叫。簡單看過這程式碼，有人可能會以為靜態方法 `get` 是被 `Cache` 類別呼叫。
 
 	$value = Cache::get('key');
 
-然而，如果我們去看 `Illuminate\Support\Facades\Cache` 類別， 你將會看到他沒有靜態方法 `get`:
+然而，如果我們去看 `Illuminate\Support\Facades\Cache` 類別，你將會看到他沒有靜態方法 `get`:
 
 	class Cache extends Facade {
 
@@ -45,9 +45,9 @@ Facades 提供一個靜態介面讓類別可以在應用程式的 [IoC 容器](/
 
 	}
 
-Cache 類別繼承基本的 `Facade` 類別並定義方法 `getFacadeAccessor()`。 記住，這個方法的工作是回傳 IoC 綁定的名稱。
+Cache 類別繼承基本的 `Facade` 類別並定義方法 `getFacadeAccessor()`。記住，這個方法的工作是回傳 IoC 綁定的名稱。
 
-當使用者參考 `Cache` facade 的任何靜態方法， Laravel 會從 IoC 容器解析被綁定 `cache` ，並對該物件執行被請求的方法 (在這個例子， `get`)。
+當使用者參考 `Cache` facade 的任何靜態方法，Laravel 會從 IoC 容器解析被綁定 `cache`，並對該物件執行被請求的方法 (在這個例子，`get`)。
 
 所以我們的 `Cache::get` 呼叫可以被重寫成這樣：
 
@@ -56,13 +56,13 @@ Cache 類別繼承基本的 `Facade` 類別並定義方法 `getFacadeAccessor()`
 <a name="creating-facades"></a>
 ## 建立 Facades
 
-為你的應用程式或套件建立 facade 是很簡單的。 你只需要 3 個東西：
+為你的應用程式或套件建立 facade 是很簡單的。你只需要 3 個東西：
 
 - 一個 IoC 綁定。
 - 一個 facade 類別。
 - 一個 facade 別名設定。
 
-讓我們來看個例子。 這裡我們有一個定義為 `PaymentGateway\Payment` 的類別。
+讓我們來看個例子。這裡我們有一個定義為 `PaymentGateway\Payment` 的類別。
 
 	namespace PaymentGateway;
 
@@ -77,14 +77,14 @@ Cache 類別繼承基本的 `Facade` 類別並定義方法 `getFacadeAccessor()`
 
 這個類別可以存在在你的 `app/models` 資料夾，或者任何其他 Composer 知道如何自動載入的資料夾。
 
-我們需要可以從 IoC 容器解析出這個類別。 所以，讓我們來加個綁定：
+我們需要可以從 IoC 容器解析出這個類別。所以，讓我們來加個綁定：
 
 	App::bind('payment', function()
 	{
 		return new \PaymentGateway\Payment;
 	});
 
-註冊這個綁定的好方式是建立新的 [服務提供者](/docs/ioc#service-providers) 命名為 `PaymentServiceProvider`，並把這個綁定加到 `register` 方法。 再來你可以從 `app/config/app.php` 檔案設定讓 Laravel 載入你的服務提供者。
+註冊這個綁定的好方式是建立新的 [服務提供者](/docs/ioc#service-providers) 命名為 `PaymentServiceProvider`，並把這個綁定加到 `register` 方法。再來你可以從 `app/config/app.php` 檔案設定讓 Laravel 載入你的服務提供者。
 
 接下來，我們可以建立我們自己的 facade 類別：
 
@@ -96,23 +96,23 @@ Cache 類別繼承基本的 `Facade` 類別並定義方法 `getFacadeAccessor()`
 
 	}
 
-最後，如果我們希望，我們可以在 `app/config/app.php` 設定檔案為我們的 facade 加個別名到 `aliases` 陣列。 現在我們可以對 `Payment` 類別的實體呼叫 `process` 方法。
+最後，如果我們希望，我們可以在 `app/config/app.php` 設定檔案為我們的 facade 加個別名到 `aliases` 陣列。現在我們可以對 `Payment` 類別的實體呼叫 `process` 方法。
 
 	Payment::process();
 
 ### 自動載入別名的附註
 
-在 `aliases` 陣列中的類別在某些實體中不能使用，因為 [PHP 將不會嘗試去自動載入未定義的類型暗示類別](https://bugs.php.net/bug.php?id=39003)。 如果 `\ServiceWrapper\ApiTimeoutException` 命別名為 `ApiTimeoutException`， 在 `\ServiceWrapper` 命名空間外面的  `catch(ApiTimeoutException $e)` 將永遠捕捉不到例外，即便有例外被拋出。類似的問題在有類型暗示的別名類別模型一樣會發生。 唯一的解決辦法就是放棄別名並用 `use` 在每一個檔案的最上面引入你希望暗示類型的類別。
+在 `aliases` 陣列中的類別在某些實體中不能使用，因為 [PHP 將不會嘗試去自動載入未定義的類型暗示類別](https://bugs.php.net/bug.php?id=39003)。如果 `\ServiceWrapper\ApiTimeoutException` 命別名為 `ApiTimeoutException`，即便有例外被拋出，在 `\ServiceWrapper` 命名空間外面的 `catch(ApiTimeoutException $e)` 將永遠捕捉不到例外。類似的問題在有類型暗示的別名類別模型一樣會發生。 唯一的解決辦法就是放棄別名並用 `use` 在每一個檔案的最上面引入你希望暗示類型的類別。
 
 <a name="mocking-facades"></a>
 ## 模擬 Facades
 
-單元測試是為什麼現在 facades 採用這樣的工作方式的重要面向。 事實上，可測試性甚至是 facades 存在的主要理由。 想要獲得更多資訊，請查看文件的 [mocking facades](/docs/testing#mocking-facades) 部分。
+單元測試是為什麼現在 facades 採用這樣的工作方式的重要面向。事實上，可測試性甚至是 facades 存在的主要理由。想要獲得更多資訊，請查看文件的 [mocking facades](/docs/testing#mocking-facades) 部分。
 
 <a name="facade-class-reference"></a>
 ## Facade 類別參考
 
-你將會在下面找到每一個 facade 和它的基底類別。 這是個可以從一個給定的 facade 根源快速地深入 API 文件的有用工具。 可應用的 [IoC 綁定](/docs/ioc) 關鍵字也包含在裡面。
+你將會在下面找到每一個 facade 和它的基底類別。這是個可以從一個給定的 facade 根源快速地深入 API 文件的有用工具。可應用的 [IoC 綁定](/docs/ioc) 關鍵字也包含在裡面。
 
 Facade  |  Class  |  IoC Binding
 ------------- | ------------- | -------------
