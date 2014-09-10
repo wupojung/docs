@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## 介紹
 
-Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使用被引入的 PHPUnit 做測試，而且已經為你的應用程式建立了 `phpunit.xml` 檔案。 除了 PHPUnit 以外，Laravel 也利用 Symfony HttpKernel、 DomCrawler 和 BrowserKit 元件讓你在測試的時候模擬為一個網頁瀏覽器，來檢查和處理你的視圖。
+Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使用被引入的 PHPUnit 做測試，而且已經為你的應用程式建立了 `phpunit.xml` 檔案。除了 PHPUnit 以外，Laravel 也利用 Symfony HttpKernel、 DomCrawler 和 BrowserKit 元件讓你在測試的時候模擬為一個網頁瀏覽器，來檢查和處理你的視圖。
 
 在 `app/tests` 資料夾有提供一個測試範例。在安裝新 Laravel 應用程式之後，只要在命令列上執行 `phpunit` 來進行測試流程。
 
@@ -46,25 +46,25 @@ Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使
 
 #### 從單一測試中呼叫路由
 
-你可以使用 `call` 方法，輕易地呼叫你的其中一個路由來測試:
+你可以使用 `call` 方法，輕易地呼叫你的其中一個路由來測試：
 
 	$response = $this->call('GET', 'user/profile');
 
 	$response = $this->call($method, $uri, $parameters, $files, $server, $content);
 
-接著你可以檢查 `Illuminate\Http\Response` 物件:
+接著你可以檢查 `Illuminate\Http\Response` 物件：
 
 	$this->assertEquals('Hello World', $response->getContent());
 
 #### 從測試呼叫控制器
 
-你也可以從測試呼叫控制器 :
+你也可以從測試呼叫控制器：
 
 	$response = $this->action('GET', 'HomeController@index');
 
 	$response = $this->action('GET', 'UserController@profile', array('user' => 1));
 
-`getContent` 方法會回傳求值後的字串內容回應. 如果你的路由回傳一個 `View`, 你可以透過 `original` 屬性存取它:
+`getContent` 方法會回傳求值後的字串內容回應。如果你的路由回傳一個 `View`，你可以透過 `original` 屬性存取它：
 
 	$view = $response->original;
 
@@ -74,7 +74,7 @@ Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使
 
 	$response = $this->callSecure('GET', 'foo/bar');
 
-> **注意:** 在測試環境中， 路由篩選器是被禁用的。如果要啟用它們，必須增加 `Route::enableFilters()` 到你的測試。
+> **注意:** 在測試環境中，路由篩選器是被禁用的。如果要啟用它們，必須增加 `Route::enableFilters()` 到你的測試。
 
 ### DOM 撈取器
 
@@ -86,12 +86,12 @@ Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使
 
 	$this->assertCount(1, $crawler->filter('h1:contains("Hello World!")'));
 
-如果需要更多如何使用撈取器的資訊，請參考它的[官方文件](http://symfony.com/doc/master/components/dom_crawler.html).
+如果需要更多如何使用撈取器的資訊，請參考它的 [官方文件](http://symfony.com/doc/master/components/dom_crawler.html)。
 
 <a name="mocking-facades"></a>
 ## 模擬 Facades
 
-當測試的時候，你或許常會想要模擬呼叫 Laravel 靜態 facade。舉個例子，思考下面的控制器行為:
+當測試的時候，你或許常會想要模擬呼叫 Laravel 靜態 facade。舉個例子，思考下面的控制器行為：
 
 	public function getIndex()
 	{
@@ -116,7 +116,7 @@ Laravel 在建立時就有考慮到單元測試。事實上，它支援立即使
 <a name="framework-assertions"></a>
 ## 框架 Assertions
 
-Laravel 附帶幾個 `assert` 方法，讓測試更簡單一點:
+Laravel 附帶幾個 `assert` 方法，讓測試更簡單一點：
 
 #### Assert 回應為 OK
 
@@ -196,13 +196,13 @@ Laravel 附帶幾個 `assert` 方法，讓測試更簡單一點:
 
 #### 設定目前經過驗證的使用者
 
-你可以使用 `be` 方法設定目前經過驗證的使用者:
+你可以使用 `be` 方法設定目前經過驗證的使用者：
 
 	$user = new User(array('name' => 'John'));
 
 	$this->be($user);
 
-你可以從測試中使用 `seed` 方法重新填充你的資料庫:
+你可以從測試中使用 `seed` 方法重新填充你的資料庫：
 
 #### 從測試中重新填充資料庫
 
@@ -215,4 +215,4 @@ Laravel 附帶幾個 `assert` 方法，讓測試更簡單一點:
 <a name="refreshing-the-application"></a>
 ## 重置應用程式
 
-你可能已經知道，你可以透過 `$this->app` 在任何測試方法中存取你的 Laravel `應用程式本體` / IoC 容器。這個應用程式物件實例會在每個測試類別被重置。如果你希望在給定的方法手動強制重置應用程式，你可以從你的測試方法使用 `refreshApplication` 方法。 這將會重置任何額外的綁定， 例如那些從測試案例執行開始被放到 IoC 容器的 mocks。
+你可能已經知道，你可以透過 `$this->app` 在任何測試方法中存取你的 Laravel `應用程式本體` / IoC 容器。這個應用程式物件實例會在每個測試類別被重置。如果你希望在給定的方法手動強制重置應用程式，你可以從你的測試方法使用 `refreshApplication` 方法。這將會重置任何額外的綁定， 例如那些從測試案例執行開始被放到 IoC 容器的 mocks。
