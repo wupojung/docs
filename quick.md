@@ -14,18 +14,18 @@
 
 ### 透過 Laravel 安裝器
 
-首先, 使用 `Composer` 全局下載並安裝 `Laravel/installer`: 
+首先，使用 `Composer` 全局下載並安裝 `Laravel/installer`：
 
 	composer global require "laravel/installer=~1.1"
 
 
-請確定把 `~/.composer/vendor/bin` 路徑放置於您的 `PATH` 里, 這樣`laravel` 可執行文件才能被命令行找到,  以後您就可以在命令行下直接使用 `laravel` 命令.
+請確定把 `~/.composer/vendor/bin` 路徑放置於您的 `PATH` 裡，這樣 `laravel` 可執行文件才能被命令行找到，以後您就可以在命令行下直接使用 `laravel` 命令。
 
-安裝並且配置成功後, 可以使用命令 `laravel new` 在您指定的目錄下創建一份全新安裝的 `Laravel 應用`, 如這樣的調用: `laravel new blog` 將會在當前目錄下創建一個叫 `blog` 的目錄, 此目錄裡面存放着全新安裝的 Laravel 應用, 此方法跟其他方法不一樣的地方在於是提前安裝好所有代碼依賴的, 您無需再通過 `composer install` 安裝, 速度一下子提高了很多. 
+安裝並且配置成功後，可以使用命令 `laravel new` 在您指定的目錄下創建一份全新安裝的 `Laravel 應用`，如這樣的調用：`laravel new blog` 將會在當前目錄下創建一個叫 `blog` 的目錄，此目錄裡面存放着全新安裝的 Laravel 應用，此方法跟其他方法不一樣的地方在於是提前安裝好所有代碼依賴的，您無需再通過 `composer install` 安裝，速度一下子提高了很多。
 
 ### 透過 Composer
 
-Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依性管理。如果還沒有安裝它的話，請先從[安裝 Composer](http://getcomposer.org/doc/00-intro.md)開始吧。
+Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依性管理。如果還沒有安裝它的話，請先從 [安裝 Composer](http://getcomposer.org/doc/00-intro.md) 開始吧。
 
 安裝之後，你可以透過命令列模式執行下列指令來安裝 Laravel：
 
@@ -49,7 +49,7 @@ Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依
 <a name="directories"></a>
 ### 目錄結構
 
-安裝完框架後，可以來了解熟悉一下專案的目錄結構。`app` 目錄裡面包含了 `views（視圖）`, `controllers（控制器）`, 還有 `models（模型）` 等目錄。你的應用程式大多數的程式碼都會在這個目錄中。你也會發現 `app/config` 這個目錄，設定檔多存在在這目錄之中。
+安裝完框架後，可以來了解熟悉一下專案的目錄結構。`app` 目錄裡面包含了 `views（視圖）`、`controllers（控制器）` 還有 `models（模型）` 等目錄。你的應用程式大多數的程式碼都會在這個目錄中。你也會發現 `app/config` 這個目錄，設定檔多存在在這目錄之中。
 
 <a name="local-development-environment"></a>
 ## 本地開發環境
@@ -63,7 +63,7 @@ Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依
 - Memcached
 - Beanstalk
 
-不用擔心，即使 "虛擬化" 聽起來複雜，但這是無痛的。VirtualBox 和 Vagrant 是 Homestead 的相依軟體，你需要先安裝他們。兩個軟體都有各平台的簡單圖形化安裝介面。請參閱 [Homestead 文件](/docs/homestead) 進行了解。
+不用擔心，即使「虛擬化」聽起來複雜，但這是無痛的。VirtualBox 和 Vagrant 是 Homestead 的相依軟體，你需要先安裝他們。兩個軟體都有各平台的簡單圖形化安裝介面。請參閱 [Homestead 文件](/docs/homestead) 進行了解。
 
 <a name="routing"></a>
 ## 路由
@@ -126,7 +126,7 @@ Laravel 框架使用 [composer](http://getcomposer.org) 來執行安裝及相依
 
 	php artisan migrate:make create_users_table
 
-然後，在 `app/database/migrations` 目錄下找到產生的遷移檔。檔案中有一個包含了兩個方法 `up` 和 `down` 的類別。在 `up` 方法中，你必須表明你要對你的資料表做哪些更動，而在 `down` 的方法裡，你只要回復這些更動。 
+然後，在 `app/database/migrations` 目錄下找到產生的遷移檔。檔案中有一個包含了兩個方法 `up` 和 `down` 的類別。在 `up` 方法中，你必須表明你要對你的資料表做哪些更動，而在 `down` 的方法裡，你只要回復這些更動。
 
 我們定義一個遷移檔如下：
 
@@ -191,11 +191,11 @@ Laravel 提供了很棒的 ORM：Eloquent。如果你曾經使用過 Ruby on Rai
 
 你會發現沒有看到任何 `echo` 語句。當使用 Blade 時，你可以使用兩個大括號來輸出資料。很容易的，你應該可以透過 `/users` 路由來看到你的用戶資料。
 
-這僅僅只是開始。在本系列教學中，你已經了解了 Laravel 基礎部分，但是還有更多令人興奮的東西等著你學習。繼續閱讀文件且更深入的了解 [Eloquent](/docs/eloquent) 和 [Blade](/docs/templates) 的強大特性。或許，你也更有興趣去了解 [隊列](/docs/queues) 和 [單元測試](/docs/testing)。也或許，你更想要了解 [IoC Container] 來展現實力，選擇在你。
+這僅僅只是開始。在本系列教學中，你已經了解了 Laravel 基礎部分，但是還有更多令人興奮的東西等著你學習。繼續閱讀文件且更深入的了解 [Eloquent](/docs/eloquent) 和 [Blade](/docs/templates) 的強大特性。或許，你也更有興趣去了解 [隊列](/docs/queues) 和 [單元測試](/docs/testing)。也或許，你更想要了解 [IoC Container](/docs/ioc) 來展現實力，選擇在你。
 
 <a name="deploying-your-application"></a>
 ## 部署應用程式
 
-Laravel 的其中一個目標就是讓 PHP 應用程式開發從下載到部署都輕鬆化，而 [Laravel Forge](https://forge.laravel.com) 提供了一個簡單的方式去部署你的 Laravel 應用到快速的服務器上。Forge 可以設定並供應在 DigitalOcean、 Linode、Rackspace 和 Amazon EC2 上的機器群。如同 Homestead 一樣，所有必須的最新版軟體都已安裝在內：Nginx、PHP 5.5、MySQL、Postgres、Redis、Memcached 等等。Forge 的 “快速部署” 可以讓你在每次發布更新至 Github 或是 Bitbucket 時自動部署應用。
+Laravel 的其中一個目標就是讓 PHP 應用程式開發從下載到部署都輕鬆化，而 [Laravel Forge](https://forge.laravel.com) 提供了一個簡單的方式去部署你的 Laravel 應用到快速的服務器上。Forge 可以設定並供應在 DigitalOcean、 Linode、Rackspace 和 Amazon EC2 上的機器群。如同 Homestead 一樣，所有必須的最新版軟體都已安裝在內：Nginx、PHP 5.5、MySQL、Postgres、Redis、Memcached 等等。Forge 的「快速部署」可以讓你在每次發布更新至 Github 或是 Bitbucket 時自動部署應用。
 
 更重要的是，Forge 能幫助你設定 queue workers、SSL、Cron jobs、子網域等等。更多的資訊請參閱 [Forge 網站](https://forge.laravel.com)。
