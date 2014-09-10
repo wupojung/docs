@@ -76,7 +76,7 @@ Laravel 也包含了 Mailgun 和 Mandrill 服務的 HTTP API 的驅動方式。�
 	});
 
 
-當附加檔案到一個電子郵件，你也可以指定一個 MIME type 及/或 一個顯示名稱：
+當附加檔案到一個電子郵件，你也可以指定一個 MIME type 及 / 或一個顯示名稱：
 
 	$message->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 
@@ -85,7 +85,7 @@ Laravel 也包含了 Mailgun 和 Mandrill 服務的 HTTP API 的驅動方式。�
 <a name="embedding-inline-attachments"></a>
 ## 內嵌附件
 
-內嵌圖片到郵件中通常是一件很麻煩的事，然而Laravel 提供一個便利的方式讓你內嵌圖片到你的電子郵件當中且接收相對應的 CID。
+內嵌圖片到郵件中通常是一件很麻煩的事，然而 Laravel 提供一個便利的方式讓你內嵌圖片到你的電子郵件當中且接收相對應的 CID。
 
 #### 內嵌圖片到電子郵件的視圖中
 
@@ -137,6 +137,6 @@ Laravel 也包含了 Mailgun 和 Mandrill 服務的 HTTP API 的驅動方式。�
 在開發應用程式的寄信功能時，通常會希望在本地或是開發環境中關閉寄送功能。你可以呼叫 `Mail::pretend` 方法，或是在 `app/config/mail.php` 設定檔的 `pretend` 為 `true` 可以達到。當在 `pretend` 模式開啟下，郵件將會被寫到你的應用程式日誌中取代實際寄出信件。
 
 
-#### 開啟 "Pretend" 寄送模式
+#### 開啟「Pretend」寄送模式
 
 	Mail::pretend();

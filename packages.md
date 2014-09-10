@@ -34,9 +34,9 @@
 
 	php artisan workbench vendor/package --resources
 
-發行商 (vendor) 名稱是為了識別不同作者發行相同名稱的套件而設計。比方說，我 (Taylor Otwell) 建立了一個新的套件名稱為 "Zapper" ，而發行商的名稱就是 `Taylor`。預設 workbench 指令會建立框架獨立 (framework agnostic) 的套件結構；然後，`resources` 參數則會讓 workbench 在產生套件結構時，額外針對 Laravel 產生特定的資料夾，包括 `migrations`、`views`、`config` 等。
+發行商 (vendor) 名稱是為了識別不同作者發行相同名稱的套件而設計。比方說，我 (Taylor Otwell) 建立了一個新的套件名稱為「Zapper」，而發行商的名稱就是 `Taylor`。預設 workbench 指令會建立框架獨立 (framework agnostic) 的套件結構；然後，`resources` 參數則會讓 workbench 在產生套件結構時，額外針對 Laravel 產生特定的資料夾，包括 `migrations`、`views`、`config` 等。
 
-當 `workbench` 指令被執行後，你的套件就可以在 `workbench` 資料夾內存取。接著，您需要為您的套件`註冊服務提供者 (ServiceProvider)`。您可以透過在 `app/config/app.php` 的 `providers` 陣列裡新增您套件的服務提供者名稱進行註冊，這個動作將會讓 Laravel 啟動時載入您的套件。服務提供者使用 `[Package]ServiceProvider` 這種命名慣例來為程式命名，以上述的例子來說，我們將會新增一行 `Taylor\Zapper\ZapperServiceProvider` 到 `providers` 陣列裡。
+當 `workbench` 指令被執行後，你的套件就可以在 `workbench` 資料夾內存取。接著，您需要為您的套件 `註冊服務提供者 (ServiceProvider)`。您可以透過在 `app/config/app.php` 的 `providers` 陣列裡新增您套件的服務提供者名稱進行註冊，這個動作將會讓 Laravel 啟動時載入您的套件。服務提供者使用 `[Package]ServiceProvider` 這種命名慣例來為程式命名，以上述的例子來說，我們將會新增一行 `Taylor\Zapper\ZapperServiceProvider` 到 `providers` 陣列裡。
 
 當提供者被註冊後，你就已經完成套件開發的前置作業了！不過，建議您在深入開發工作前，先熟悉一下以下章節要介面的套件資料結構及開發工作流程。
 

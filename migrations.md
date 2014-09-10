@@ -9,7 +9,7 @@
 <a name="introduction"></a>
 ## 介紹
 
-遷移是一種資料庫的版本控制。可以讓團隊在修改資料庫結構的同時，保持彼此的進度一致。遷移通常會和[結構生成器](/docs/schema)一起使用，可以簡單的管理資料庫結構。
+遷移是一種資料庫的版本控制。可以讓團隊在修改資料庫結構的同時，保持彼此的進度一致。遷移通常會和 [結構生成器](/docs/schema) 一起使用，可以簡單的管理資料庫結構。
 
 <a name="creating-migrations"></a>
 ## 建立遷移檔
@@ -45,7 +45,7 @@
 
 	php artisan migrate --package=vendor/package
 
-> **提示：** 如果在執行遷移時發生 "class not found"  錯誤，試著先執行 `composer dump-autoload`  命令後再進行一次。
+> **提示：** 如果在執行遷移時發生「class not found」錯誤，試著先執行 `composer dump-autoload` 命令後再進行一次。
 
 ### 在上線（ Production ）環境執行強制遷移
 
