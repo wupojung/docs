@@ -68,7 +68,7 @@ Laravel 提供簡易的方法，讓你可以保護你的應用程式不受到 CS
 
 	echo Form::model($user, array('route' => array('user.update', $user->id)))
 
-現在當你產生表單元素時，像是 text 欄位，模型的值將會自動比對到欄位名稱，並設定此欄位值，舉例來說，使用者模型的 `email` 屬性，將會設定到名稱為 `email` 的 text 欄位的欄位值，不僅如此，當 Session 中有與欄位名稱相符的名稱， Session 的值將會優先於模型的值，而優先順序如下：
+現在當你產生表單元素時，像是 text 欄位，模型的值將會自動比對到欄位名稱，並設定此欄位值，舉例來說，使用者模型的 `email` 屬性，將會設定到名稱為 `email` 的 text 欄位的欄位值，不僅如此，當 Session 中有與欄位名稱相符的名稱，Session 的值將會優先於模型的值，而優先順序如下：
 
 1. Session 的資料 (舊的輸入值)
 2. 明確傳遞的資料
@@ -136,7 +136,7 @@ Laravel 提供簡易的方法，讓你可以保護你的應用程式不受到 CS
 
 	echo Form::file('image');
 
-> **注意：**表單必須已將 `files` 選項設定為 `true`。
+> **注意：** 表單必須已將 `files` 選項設定為 `true`。
 
 <a name="drop-down-lists"></a>
 ## 下拉式選單

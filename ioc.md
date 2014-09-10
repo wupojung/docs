@@ -34,7 +34,7 @@ IoC 容器有兩種解析依賴的方式：經由閉合函數或自動解析。�
 
 當 `App::make` 方法被呼叫，綁定的閉合函數會被呼叫並返回結果。
 
-#### 綁定「共享」的型別到容器 
+#### 綁定「共享」的型別到容器
 
 有時候，你可能希望綁定到容器的型別只會被解析一次，之後的呼叫都返回相同的實例：
 
@@ -56,8 +56,7 @@ IoC 容器有兩種解析依賴的方式：經由閉合函數或自動解析。�
 
 IoC 綁定跟「註冊事件處理」或是「註冊路由」一樣，通常稱為「起始碼」。換句話說，IoC 綁定後等待請求，在路由或控制器呼叫時才實際執行。像其他的「起始碼」一樣，`start` 檔案總是註冊 IoC 綁定的一個選擇。或者，你可以建立一個 `app/ioc.php` 檔案（檔名不重要），並且從 `start` 檔案引入。
 
-如果你的應用程式有很多 IoC 綁定，或是想要分門別類，在不同檔案組織綁定，你可以註冊綁定在[
-服務提供者](#service-providers)。
+如果你的應用程式有很多 IoC 綁定，或是想要分門別類，在不同檔案組織綁定，你可以註冊綁定在 [服務提供者](#service-providers)。
 
 <a name="automatic-resolution"></a>
 ## 自動解析
@@ -75,7 +74,7 @@ IoC 綁定跟「註冊事件處理」或是「註冊路由」一樣，通常稱�
 
 	$fooBar = App::make('FooBar');
 
-雖然我們沒有註冊 FooBar 類別綁定到容器，它還是可以解析類別，甚至自動注入 `Baz` ！
+雖然我們沒有註冊 FooBar 類別綁定到容器，它還是可以解析類別，甚至自動注入 `Baz`！
 
 如果容器裡沒有找到對應的型別綁定，容器會利用 PHP 的 Reflection 檢查類別，並且解讀傳入建構子的型別提示。利用這些資訊，讓容器可以自動建立類別實例。
 
@@ -121,11 +120,11 @@ IoC 綁定跟「註冊事件處理」或是「註冊路由」一樣，通常稱�
 
 	}
 
-在這個範例裡， `OrderRepository` 類別會自動被注入到控制器。意味著在[單元測試](/docs/testing)時，可以綁定一個 "mock" 的 `OrderRepository` 到容器裡，之後被注入到 控制器，讓你不用在測試時一定要和資料庫層互動。
+在這個範例裡，`OrderRepository` 類別會自動被注入到控制器。意味著在 [單元測試](/docs/testing) 時，可以綁定一個「mock」的 `OrderRepository` 到容器裡，之後被注入到 控制器，讓你不用在測試時一定要和資料庫層互動。
 
 #### 其他 Ioc 應用範例
 
-[Filters](/docs/routing#route-filters)，[composers](/docs/responses#view-composers)，和[事件處理](/docs/events#using-classes-as-listeners)也可以使用 IoC 容器解析。只要在註冊的時候設定要使用的類別名稱：
+[Filters](/docs/routing#route-filters)、[composers](/docs/responses#view-composers) 和 [事件處理](/docs/events#using-classes-as-listeners) 也可以使用 IoC 容器解析。只要在註冊的時候設定要使用的類別名稱：
 
 	Route::filter('foo', 'FooFilter');
 
@@ -136,7 +135,7 @@ IoC 綁定跟「註冊事件處理」或是「註冊路由」一樣，通常稱�
 <a name="service-providers"></a>
 ## 服務提供者（ Service Provider ）
 
-使用服務提供者是一個很好的方式，可以把相關的 IoC 註冊放到到同一個地方。可以將服務提供者 想像成是一個在應用程式裡啟動元件的方式。你可以在裡面註冊自定的會員認證，綁定應用程式的 儲存庫類別到 IoC 容器，或甚至設定自定的 Artisan 指令。
+使用服務提供者是一個很好的方式，可以把相關的 IoC 註冊放到到同一個地方。可以將服務提供者想像成是一個在應用程式裡啟動元件的方式。你可以在裡面註冊自定的會員認證，綁定應用程式的儲存庫類別到 IoC 容器，或甚至設定自定的 Artisan 指令。
 
 事實上，大部份的 Laravel 核心元件都有服務提供者，所有被註冊的服務提供者都列在 `app/config/app.php` 設定檔的 `providers` 陣列裡。
 
@@ -162,7 +161,7 @@ IoC 綁定跟「註冊事件處理」或是「註冊路由」一樣，通常稱�
 
 #### 在執行期間註冊服務提供者
 
-你也可以使用 `App::register` 在執行期間註冊服務提供者 ：
+你也可以使用 `App::register` 在執行期間註冊服務提供者：
 
 	App::register('FooServiceProvider');
 
