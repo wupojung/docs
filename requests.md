@@ -59,7 +59,7 @@ Laravel 建立的 cookie 會加密並且加上認證記號，意味著如果被�
 
 #### 加入 Cookie 隊列到下一個回應
 
-如果你想在回應被建立前設定 cookie ，使用 `Cookie::queue()` 方法。 Cookie 會在最後自動加到回應裡。
+如果你想在回應被建立前設定 cookie，使用 `Cookie::queue()` 方法。 Cookie 會在最後自動加到回應裡。
 
 	Cookie::queue($name, $value, $minutes);
 
@@ -72,7 +72,7 @@ Laravel 建立的 cookie 會加密並且加上認證記號，意味著如果被�
 
 你可能想要在使用者下一次發送請求前，保留這次的輸入資料。例如，你可能需要在表單驗證失敗後重新填入表單值。
 
-#### 將輸入資料存成一次性 Session 
+#### 將輸入資料存成一次性 Session
 
 	Input::flash();
 
@@ -82,7 +82,7 @@ Laravel 建立的 cookie 會加密並且加上認證記號，意味著如果被�
 
 	Input::flashExcept('password');
 
-你很可能常常需要在重導至前一頁，並將輸入資料存成一次性 Session 。只要在重導方法串接的方法中傳入輸入資料，就能簡單地完成。
+你很可能常常需要在重導至前一頁，並將輸入資料存成一次性 Session。只要在重導方法串接的方法中傳入輸入資料，就能簡單地完成。
 
 	return Redirect::to('form')->withInput();
 
@@ -108,7 +108,7 @@ Laravel 建立的 cookie 會加密並且加上認證記號，意味著如果被�
 		//
 	}
 
-`file` 方法回傳的物件是 `Symfony\Component\HttpFoundation\File\UploadedFile` 的實例， `UploadedFile` 繼承了 PHP 的 `SplFileInfo` 類別並且提供了很多方法和檔案互動。
+`file` 方法回傳的物件是 `Symfony\Component\HttpFoundation\File\UploadedFile` 的實例，`UploadedFile` 繼承了 PHP 的 `SplFileInfo` 類別並且提供了很多方法和檔案互動。
 
 #### 確認上傳的檔案是否有效
 

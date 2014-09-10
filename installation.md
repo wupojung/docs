@@ -9,31 +9,31 @@
 <a name="install-composer"></a>
 ## 安裝 Composer
 
-Laravel 框架使用 [Composer](http://getcomposer.org)來管理其相依性。首先，下載一份 `composer.phar` 下來。之後，你可以把它放在本地端的專案目錄，或者是搬移至 `/usr/local/bin` 讓全站皆可使用。在 Windows 下，你可以使用 Composer [Windows 安裝工具](https://getcomposer.org/Composer-Setup.exe)。
+Laravel 框架使用 [Composer](http://getcomposer.org) 來管理其相依性。首先，下載一份 `composer.phar` 下來。之後，你可以把它放在本地端的專案目錄，或者是搬移至 `/usr/local/bin` 讓全站皆可使用。在 Windows 下，你可以使用 Composer [Windows 安裝工具](https://getcomposer.org/Composer-Setup.exe)。
 
 <a name="install-laravel"></a>
 ## 安裝 Laravel
 
 ### 透過 Laravel 安裝工具
 
-首先, 使用 `Composer` 下載 Laravel 安裝包: 
+首先，使用 `Composer` 下載 Laravel 安裝包：
 
 	composer global require "laravel/installer=~1.1"
 
 
-請確定把 `~/.composer/vendor/bin` 路徑放置於您的 `PATH` 裡，這樣 `laravel` 執行檔才可以被找到，以後就可以在終端機下直接使用 `laravel` 指令.
+請確定把 `~/.composer/vendor/bin` 路徑放置於您的 `PATH` 裡，這樣 `laravel` 執行檔才可以被找到，以後就可以在終端機下直接使用 `laravel` 指令。
 
-一旦安裝完成後，就可以使用 `laravel new` 指令建立一份全新安裝的 `Laravel` 專案，例如: `laravel new blog` 將會在當前目錄下建立一個叫 `blog` 的目錄, 此目錄裡面存放着全新安裝的 Laravel 相關程式碼, 此方法跟其他方法不一樣的地方在於是提前安裝好所有相關程式碼, 您無需再透過 `composer install` 安裝, 速度一下子提高了很多。
+一旦安裝完成後，就可以使用 `laravel new` 指令建立一份全新安裝的 `Laravel` 專案，例如：`laravel new blog` 將會在當前目錄下建立一個叫 `blog` 的目錄，此目錄裡面存放着全新安裝的 Laravel 相關程式碼，此方法跟其他方法不一樣的地方在於是提前安裝好所有相關程式碼，您無需再透過 `composer install` 安裝，速度一下子提高了很多。
 
 ### 透過 Composer Create-Project
 
-你一樣可以透過 Composer 在命令列執行 `create-project` 來安裝 laravel: 
+你一樣可以透過 Composer 在命令列執行 `create-project` 來安裝 laravel：
 
 	composer create-project laravel/laravel --prefer-dist
 
 ### 透過下載
 
-Composer 安裝完成後，下載[最新版](https://github.com/laravel/laravel/archive/master.zip)的Laravel 框架並且解壓縮到伺服器上的一個目錄中。接著，在 Laravel 應用程式的根目錄下，執行 `php composer.phar install`（或者是 `composer install`）來將所有框架所需的相依套件安裝完成。為了能夠成功完成安裝，您必須在伺服器上安裝好 Git。
+Composer 安裝完成後，下載 [最新版](https://github.com/laravel/laravel/archive/master.zip) 的 Laravel 框架並且解壓縮到伺服器上的一個目錄中。接著，在 Laravel 應用程式的根目錄下，執行 `php composer.phar install`（或者是 `composer install`）來將所有框架所需的相依套件安裝完成。為了能夠成功完成安裝，您必須在伺服器上安裝好 Git。
 
 如果你想要更新 Laravel 框架，你需要在命令列執行 `php composer.phar update` 來更新。
 
@@ -50,9 +50,9 @@ PHP 5.5 之後，一些作業系統需要手動安裝 PHP JSON 套件。如果�
 <a name="configuration"></a>
 ## 設定
 
-Laravel 幾乎無需設定即可馬上使用。你可以自由的開始開發。然而，你可以查看 `app/config/app.php` 檔案和他的文件。它包含了數個你的應用程式所想要更動的選項如 `時區（timezone）` 和 `語系（locale）` 。
+Laravel 幾乎無需設定即可馬上使用。你可以自由的開始開發。然而，你可以查看 `app/config/app.php` 檔案和他的文件。它包含了數個你的應用程式所想要更動的選項如 `時區（timezone）` 和 `語系（locale）`。
 
-一旦 Laravel 安裝完成，你應該同時[設定本地環境](/docs/configuration#environment-configuration)。當你在你的本機上部署時，可以讓你得到更詳細的錯誤訊息。預設在你的正式環境裡詳細的錯誤訊息是被關掉的。
+一旦 Laravel 安裝完成，你應該同時 [設定本地環境](/docs/configuration#environment-configuration)。當你在你的本機上部署時，可以讓你得到更詳細的錯誤訊息。預設在你的正式環境裡詳細的錯誤訊息是被關掉的。
 
 > **附註:** 你不應該在正式環境中將 `app.debug` 設為 `true`。絕對！千萬不要！
 
@@ -85,7 +85,7 @@ Laravel 框架透過 `public/.htaccess` 檔案來讓網址中不需要 `index.ph
 
 ### Nginx
 
-在 Nginx, 在你的網站設定中增加下面的設定將可以開啟"優雅連結"：
+在 Nginx，在你的網站設定中增加下面的設定將可以開啟「優雅連結」：
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;

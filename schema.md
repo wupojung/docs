@@ -20,7 +20,7 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 <a name="creating-and-dropping-tables"></a>
 ## 建立與刪除資料表
 
-要建立一個新的資料表，可使用 `Schema::create` 方法:
+要建立一個新的資料表，可使用 `Schema::create` 方法：
 
 	Schema::create('users', function($table)
 	{
@@ -29,18 +29,18 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 
 傳入 `create` 方法的第一個參數是資料表名稱，第二個參數是 `Closure` 並接收 `Blueprint` 物件被用來定義新的資料表。
 
-要修改資料表名稱，可使用 `rename` 方法:
+要修改資料表名稱，可使用 `rename` 方法：
 
 	Schema::rename($from, $to);
 
-要指定特定連線來操作，可使用 `Schema::connection` 方法:
+要指定特定連線來操作，可使用 `Schema::connection` 方法：
 
 	Schema::connection('foo')->create('users', function($table)
 	{
 		$table->increments('id');
 	});
 
-要移除資料表，可使用 `Schema::drop` 方法:
+要移除資料表，可使用 `Schema::drop` 方法：
 
 	Schema::drop('users');
 
@@ -49,18 +49,18 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 <a name="adding-columns"></a>
 ## 加入欄位
 
-更新現有的資料表，可使用 `Schema::table` 方法:
+更新現有的資料表，可使用 `Schema::table` 方法：
 
 	Schema::table('users', function($table)
 	{
 		$table->string('email');
 	});
 
-資料表產生器提供多種欄位型態可使用，在您建立資料表時也許會用到:
+資料表產生器提供多種欄位型態可使用，在您建立資料表時也許會用到：
 
 指令  | 功能描述
 ------------- | -------------
-`$table->bigIncrements('id');`  |  ID 自動增量，使用相當於 "big integer" 型態.
+`$table->bigIncrements('id');`  |  ID 自動增量，使用相當於「big integer」型態
 `$table->bigInteger('votes');`  |  相當於 BIGINT 型態
 `$table->binary('data');`  |  相當於 BLOB 型態
 `$table->boolean('confirmed');`  |  相當於 BOOLEAN 型態
@@ -94,7 +94,7 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 
 #### 在 MySQL 使用 After 方法
 
-若您使用 MySQL 資料庫，您可以使用 `after` 方法來指定欄位的順序:
+若您使用 MySQL 資料庫，您可以使用 `after` 方法來指定欄位的順序：
 
 	$table->string('name')->after('email');
 
@@ -134,7 +134,7 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 
 #### 檢查資料表是否存在
 
-您可以輕鬆的檢查資料表或欄位是否存在，使用 `hasTable` 和 `hasColumn` 方法:
+您可以輕鬆的檢查資料表或欄位是否存在，使用 `hasTable` 和 `hasColumn` 方法：
 
 	if (Schema::hasTable('users'))
 	{
@@ -151,11 +151,11 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 <a name="adding-indexes"></a>
 ## 加入索引
 
-結構生成器支援多種索引類型，有兩種方法可以加入，方法一，您可以在定義欄位時順道附加上去，或者是分開另外加入:
+結構生成器支援多種索引類型，有兩種方法可以加入，方法一，您可以在定義欄位時順道附加上去，或者是分開另外加入：
 
 	$table->string('email')->unique();
 
-或者，您可以獨立一行來加入索引，以下是支援的索引類型:
+或者，您可以獨立一行來加入索引，以下是支援的索引類型：
 
 指令  | 功能描述
 ------------- | -------------
@@ -167,19 +167,19 @@ Laravel 的 `結構生成器` 提供一個產生資料表可與資料庫無關�
 <a name="foreign-keys"></a>
 ## 外鍵
 
-Laravel 也支援資料表的外鍵約束:
+Laravel 也支援資料表的外鍵約束：
 
 	$table->foreign('user_id')->references('id')->on('users');
 
 範例中，我們關注欄位 `user_id` 參照到 `users` 資料表的 `id` 欄位。
 
-您也可以指定選擇在 "on delete" 和 "on update" 進行約束動作:
+您也可以指定選擇在「on delete」和「on update」進行約束動作：
 
 	$table->foreign('user_id')
           ->references('id')->on('users')
           ->onDelete('cascade');
 
-要移除外鍵，可使用 `dropForeign` 方法。外鍵的命名約定如同其他索引:
+要移除外鍵，可使用 `dropForeign` 方法。外鍵的命名約定如同其他索引：
 
 	$table->dropForeign('posts_user_id_foreign');
 
@@ -188,18 +188,18 @@ Laravel 也支援資料表的外鍵約束:
 <a name="dropping-indexes"></a>
 ## 移除索引
 
-要移除索引您必須指定索引名稱，Laravel 預設有脈絡可循的索引名稱。簡單地連結這些資料表與索引的欄位名稱和型別。舉例如下:
+要移除索引您必須指定索引名稱，Laravel 預設有脈絡可循的索引名稱。簡單地連結這些資料表與索引的欄位名稱和型別。舉例如下：
 
 指令  | 功能描述
 ------------- | -------------
-`$table->dropPrimary('users_id_primary');`  |  從 "users" 資料表移除主鍵
-`$table->dropUnique('users_email_unique');`  |   從 "users" 資料表移除唯一索引
-`$table->dropIndex('geo_state_index');`  |  從 "geo" 資料表移除基本索引
+`$table->dropPrimary('users_id_primary');`  |  從「users」資料表移除主鍵
+`$table->dropUnique('users_email_unique');`  |   從「users」資料表移除唯一索引
+`$table->dropIndex('geo_state_index');`  |  從「geo」資料表移除基本索引
 
 <a name="dropping-timestamps"></a>
 ## 移除時間戳記和軟刪除
 
-要移除 `timestamps`, `nullableTimestamps` 或 `softDeletes` 欄位型態，您可以使用以下方法:
+要移除 `timestamps`、`nullableTimestamps` 或 `softDeletes` 欄位型態，您可以使用以下方法：
 
 指令  | 功能描述
 ------------- | -------------
@@ -209,7 +209,7 @@ Laravel 也支援資料表的外鍵約束:
 <a name="storage-engines"></a>
 ## 儲存引擎
 
-要設定資料表的儲存引擎，可在結構生成器設定 `engine` 屬性:
+要設定資料表的儲存引擎，可在結構生成器設定 `engine` 屬性：
 
     Schema::create('users', function($table)
     {

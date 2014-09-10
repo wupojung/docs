@@ -13,7 +13,7 @@
 
 Laravel 佇列元件提供一個統一的API整合了許多不同的佇列服務，佇列允許你將一個執行任務延後執行，例如寄送郵件延後至你指定的時間，進而大幅的加快你的網站應用程式的速度。
 
-佇列的設定檔在 `app/config/queue.php`，在這個檔案你將可以找到框架中每種不同的佇列服務的連線設定，其中包含了 [Beanstalkd](http://kr.github.com/beanstalkd)，[IronMQ](http://iron.io)，[Amazon SQS](http://aws.amazon.com/sqs)，[Redis](http://redis.io)，以及同步(本地端使用)驅動設定。
+佇列的設定檔在 `app/config/queue.php`，在這個檔案你將可以找到框架中每種不同的佇列服務的連線設定，其中包含了 [Beanstalkd](http://kr.github.com/beanstalkd)、[IronMQ](http://iron.io)、[Amazon SQS](http://aws.amazon.com/sqs)、[Redis](http://redis.io)，以及同步(本地端使用)驅動設定。
 
 下列的 composer.json 設定可以依照你使用的佇列服務必需在使用前安裝：
 
@@ -208,7 +208,7 @@ Laravel 內含一個 Artisan 指令，它將推送到佇列的工作拉來下執
 
 	php artisan queue:subscribe queue_name http://foo.com/queue/receive
 
-現在當你登入你的Iron儀表板，你將會看到你新的推送佇列，以及訂閱的 URL，你可以訂閱許多的URLs給你希望的佇列，接下來建立一個 route 給你的 `queue/receive` 及從 `Queue::marshal` 方法回傳回應：
+現在當你登入你的 Iron 儀表板，你將會看到你新的推送佇列，以及訂閱的 URL，你可以訂閱許多的 URLs 給你希望的佇列，接下來建立一個 route 給你的 `queue/receive` 及從 `Queue::marshal` 方法回傳回應：
 
 	Route::post('queue/receive', function()
 	{
@@ -222,7 +222,7 @@ Laravel 內含一個 Artisan 指令，它將推送到佇列的工作拉來下執
 
 事情往往不會如你預期的一樣，有時後你推送工作到佇列會失敗，別擔心，Laravel 包含一個簡單的方法去指定一個工作最多可以被執行幾次，在工作被執行到一定的次數時，他將會新增至 `failed_jobs` 資料表裡，然後失敗工作的資料表名稱可以在 `app/config/queue.php` 裡進行設定：
 
-要新增一個migration建立 `failed_jobs` 資料表，你可以使用 `queue:failed-table` 指令：
+要新增一個 migration 建立 `failed_jobs` 資料表，你可以使用 `queue:failed-table` 指令：
 
 	php artisan queue:failed-table
 

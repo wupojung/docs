@@ -25,7 +25,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 #### 使用陣列來定義規則
 
-多個規則可以使用"|"符號分隔，或是單一陣列作為單獨的元素分隔。
+多個規則可以使用「|」符號分隔，或是單一陣列作為單獨的元素分隔。
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
@@ -48,7 +48,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
     );
 
 
-當一個 `Validator` 實例被建立，`fails`（或 `passes`） 這二個方法就可以在驗證時使用，如下：
+當一個 `Validator` 實例被建立，`fails`（或 `passes`）這二個方法就可以在驗證時使用，如下：
 
 	if ($validator->fails())
 	{
@@ -61,13 +61,13 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 	$messages = $validator->messages();
 
 
-您可能不需要錯誤訊息，只想取得無法通過驗證的規則，您可以使用 'failed' 方法：
+您可能不需要錯誤訊息，只想取得無法通過驗證的規則，您可以使用「failed」方法：
 
 	$failed = $validator->failed();
 
 #### 驗證檔案
 
-`Validator` 類別提供了一些規則用來驗證檔案，例如 `size`, `mimes` 等等。當需要驗證檔案時，你僅需將它們和你其他的資料一同送給驗證器即可。
+`Validator` 類別提供了一些規則用來驗證檔案，例如 `size`、`mimes` 等等。當需要驗證檔案時，你僅需將它們和你其他的資料一同送給驗證器即可。
 
 <a name="working-with-error-messages"></a>
 ## 使用錯誤訊息
@@ -103,7 +103,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 	echo $messages->first('email', '<p>:message</p>');
 
-> **注意:** 預設錯誤訊息以 Bootstrap 相容語法輸出。
+> **注意：** 預設錯誤訊息以 Bootstrap 相容語法輸出。
 
 #### 查看所有錯誤訊息並以格式化輸出
 
@@ -145,7 +145,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 ### 命名錯誤清單
 
-假如你在一個頁面中有許多的表單, 你可能希望為錯誤命名一個`MessageBag`. 這將讓你針對特定的表單查看其錯誤訊息, 我們只要簡單的在 `withErrors` 的第二個參數設定名稱即可：
+假如你在一個頁面中有許多的表單，你可能希望為錯誤命名一個 `MessageBag`。這將讓你針對特定的表單查看其錯誤訊息，我們只要簡單的在 `withErrors` 的第二個參數設定名稱即可：
 
 	return Redirect::to('register')->withErrors($validator, 'login');
 
@@ -201,7 +201,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 <a name="rule-accepted"></a>
 #### accepted
 
-欄位值為 _yes_, _on_, 或是 _1_ 時，驗證才會通過。這在確認"服務條款"是否同意時很有用。
+欄位值為 _yes_、_on_ 或是 _1_ 時，驗證才會通過。這在確認「服務條款」是否同意時很有用。
 
 <a name="rule-active-url"></a>
 #### active_url
@@ -247,7 +247,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 <a name="rule-confirmed"></a>
 #### confirmed
 
-欄位值需與對應的欄位值 `foo_confirmation` 相同。例如，如果驗證的欄位是 `password` ，那對應的欄位 `password_confirmation` 就必須存在且與 `password` 欄位相符。
+欄位值需與對應的欄位值 `foo_confirmation` 相同。例如，如果驗證的欄位是 `password`，那對應的欄位 `password_confirmation` 就必須存在且與 `password` 欄位相符。
 
 <a name="rule-date"></a>
 #### date
@@ -278,7 +278,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 <a name="rule-boolean"></a>
 #### boolean
 
-欄位必須可以轉換成布林值，可接受的值為 `true`, `false`, `1`, `0`, `"1"`, `"0"`。
+欄位必須可以轉換成布林值，可接受的值為 `true`、`false`、`1`、`0`、`"1"`、`"0"`。
 
 <a name="rule-email"></a>
 #### email
@@ -298,19 +298,19 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 	'state' => 'exists:states,abbreviation'
 
-你可以指定更多條件且那些條件將會被新增至 "where" 查詢裡：
+你可以指定更多條件且那些條件將會被新增至「where」查詢裡：
 
 	'email' => 'exists:staff,email,account_id,1'
 	/* 這個驗證規則為 email 需存在於 staff 這個資料表中 email 欄位中且 account_id=1 */
 
-透過`NULL`搭配"where"的縮寫寫法去檢查資料庫的是否為`NULL`
+透過 `NULL` 搭配「where」的縮寫寫法去檢查資料庫的是否為 `NULL`
 
 	'email' => 'exists:staff,email,deleted_at,NULL'
 
 <a name="rule-image"></a>
 #### image
 
-檔案必需為圖片(jpeg, png, bmp 或 gif)
+檔案必需為圖片(jpeg、png、bmp 或 gif)
 
 <a name="rule-in"></a>
 #### in:_foo_,_bar_,...
@@ -361,7 +361,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 欄位值需符合給定的正規表示式。
 
-**注意:** 當使用`regex`模式時，你必須使用陣列來取代"|"作為分隔，尤其是當正規表示式中含有"|"字元。
+**注意:** 當使用 `regex` 模式時，你必須使用陣列來取代「|」作為分隔，尤其是當正規表示式中含有「|」字元。
 
 <a name="rule-required"></a>
 #### required
@@ -427,7 +427,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 #### 增加額外的 Where 條件
 
-你也可以指定更多的條件式到 "where" 查詢語句中：
+你也可以指定更多的條件式到「where」查詢語句中：
 
 	'email' => 'unique:users,email_address,NULL,id,account_id,1'
 
@@ -467,14 +467,14 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 		return $input->games >= 100;
 	});
 
-傳遞至 `sometimes` 方法的第一個參數是我們要條件式認證的欄位名稱。第二個參數是我們想加入驗證規則。 `閉包（Closure）` 作為第三個參數傳入，如果回傳值為 `true` 那該規則就會被加入。這個方法可以輕而易舉的建立複雜的條件式驗證。你也可以一次對多個欄位增加條件式驗證：
+傳遞至 `sometimes` 方法的第一個參數是我們要條件式認證的欄位名稱。第二個參數是我們想加入驗證規則。`閉包（Closure）` 作為第三個參數傳入，如果回傳值為 `true` 那該規則就會被加入。這個方法可以輕而易舉的建立複雜的條件式驗證。你也可以一次對多個欄位增加條件式驗證：
 
 	$v->sometimes(array('reason', 'cost'), 'required', function($input)
 	{
 		return $input->games >= 100;
 	});
 
-> **注意:** 傳遞至你的 `Closure` 的 `$input` 參數為 `Illuminate\Support\Fluent` 的實例且用來作為存取你的輸入及檔案的物件。
+> **注意：** 傳遞至你的 `Closure` 的 `$input` 參數為 `Illuminate\Support\Fluent` 的實例且用來作為存取你的輸入及檔案的物件。
 
 <a name="custom-error-messages"></a>
 ## 自訂錯誤訊息
@@ -489,7 +489,7 @@ Laravel 透過 `Validation` 類別讓你可以簡單、方便的驗證資料正�
 
 	$validator = Validator::make($input, $rules, $messages);
 
-> **注意:** 在驗證中，`:attribute` 佔位符會被欄位的實際名稱給取代。你也可以在驗證訊息中使用其他的佔位符。
+> **注意：** 在驗證中，`:attribute` 佔位符會被欄位的實際名稱給取代。你也可以在驗證訊息中使用其他的佔位符。
 
 #### 其他的驗證佔位符
 
@@ -537,7 +537,7 @@ Laravel 提供了各種有用的驗證規則，但是，你可能希望可以設
 
 	Validator::extend('foo', 'FooValidator@validate');
 
-注意,你同時需要為你的自訂規則訂立一個錯誤訊息。你可以使用行內自訂訊息陣列或是在認證語言檔裡新增。
+注意，你同時需要為你的自訂規則訂立一個錯誤訊息。你可以使用行內自訂訊息陣列或是在認證語言檔裡新增。
 
 #### 擴展 Validator 類別
 
@@ -571,7 +571,7 @@ Laravel 提供了各種有用的驗證規則，但是，你可能希望可以設
 		return str_replace(':foo', $parameters[0], $message);
 	}
 
-如果你想要增加一個自訂訊息 "replacer" 但不擴展 `Validator` 類別，你可以使用 `Validator::replacer` 方法：
+如果你想要增加一個自訂訊息「replacer」但不擴展 `Validator` 類別，你可以使用 `Validator::replacer` 方法：
 
 	Validator::replacer('rule', function($message, $attribute, $rule, $parameters)
 	{

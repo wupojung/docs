@@ -23,7 +23,7 @@
 <a name="introduction"></a>
 ## 介紹
 
-Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和資料庫互動。 每個資料表會和一個對應的「模型」互動。
+Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和資料庫互動。每個資料表會和一個對應的「模型」互動。
 
 在開始之前，記得把 `app/config/database.php` 裡的資料庫連線設定好。
 
@@ -36,7 +36,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	class User extends Eloquent {}
 
-注意我們並沒有告訴 Eloquent `User` 模型會使用哪個資料表。若沒有特別指定，預設會自動對應名稱為「類別名稱的小寫複數形態」的資料表。所以，在上面的例子中， Eloquent 會假設 `User` 將把資料存在 `users` 資料表。可以在類別裡定義 `table` 屬性自定要對應的資料表。
+注意我們並沒有告訴 Eloquent `User` 模型會使用哪個資料表。若沒有特別指定，預設會自動對應名稱為「類別名稱的小寫複數形態」的資料表。所以，在上面的例子中，Eloquent 會假設 `User` 將把資料存在 `users` 資料表。可以在類別裡定義 `table` 屬性自定要對應的資料表。
 
 	class User extends Eloquent {
 
@@ -58,7 +58,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	var_dump($user->name);
 
-> **提示：** 所有[查詢產生器](/docs/queries)裡的方法，查詢 Eloquent 模型時也可以使用。
+> **提示：** 所有 [查詢產生器](/docs/queries)裡的方法，查詢 Eloquent 模型時也可以使用。
 
 #### 根據主鍵取出一筆資料或拋出例外
 
@@ -119,13 +119,13 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 <a name="mass-assignment"></a>
 ## Mass Assignment
 
-在建立一個新的模型時，你把屬性資料陣列傳入建構子，這些屬性值會經由 mass-assignment 存成模型資料。這非常方便，然而，當盲目地將使用者輸入存到模型時，可能會造成嚴重的安全議題。如果盲目的存入使用者輸入，使用者可以隨意的修改**任何**以及**所有**模型屬性。基於這個理由，所有 Eloquent 模型預設會防止 mass-assignment 。
+在建立一個新的模型時，你把屬性資料陣列傳入建構子，這些屬性值會經由 mass-assignment 存成模型資料。這非常方便，然而，當盲目地將使用者輸入存到模型時，可能會造成嚴重的安全議題。如果盲目的存入使用者輸入，使用者可以隨意的修改**任何**以及**所有**模型屬性。基於這個理由，所有 Eloquent 模型預設會防止 mass-assignment。
 
 在模型裡設定 `fillable` 或 `guarded` 屬性作為開始。
 
 #### 定義模型 Fillable 屬性
 
-`fillable` 屬性指定了哪些欄位 mass-assignable 。可以設定在類別裡或是建立實例後設定。
+`fillable` 屬性指定了哪些欄位 mass-assignable。可以設定在類別裡或是建立實例後設定。
 
 	class User extends Eloquent {
 
@@ -133,7 +133,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	}
 
-在上面的範例裡，只有三個屬性 mass-assignable 。
+在上面的範例裡，只有三個屬性 mass-assignable。
 
 #### 定義模型 Guarded 屬性
 
@@ -145,11 +145,11 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	}
 
-> **注意：** 使用 `guarded` 時， `Input::get()` 或任何使用者可以控制的未過濾資料，永遠不應該傳入 `save` 或 `update` 方法，因為沒有在「黑名單」內的欄位可能被更新。
+> **注意：** 使用 `guarded` 時，`Input::get()` 或任何使用者可以控制的未過濾資料，永遠不應該傳入 `save` 或 `update` 方法，因為沒有在「黑名單」內的欄位可能被更新。
 
 #### 阻擋所有屬性被 Mass Assignment
 
-上面的範例中， `id` 和 `password` 屬性**不會**被 mass assigned，而所有其他的屬性則是 mass assignable。你也可以使用 guard 屬性阻擋**所有**屬性被 mass assignment ：
+上面的範例中，`id` 和 `password` 屬性**不會**被 mass assigned，而所有其他的屬性則是 mass assignable。你也可以使用 guard 屬性阻擋**所有**屬性被 mass assignment：
 
 	protected $guarded = array('*');
 
@@ -166,9 +166,9 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	$user->save();
 
-> **注意：** 通常 Eloquent 模型主鍵值會自動遞增。但是你若想自定主鍵，將 `incrementing` 屬性設成 `false` 。
+> **注意：** 通常 Eloquent 模型主鍵值會自動遞增。但是你若想自定主鍵，將 `incrementing` 屬性設成 `false`。
 
-也可以使用 `create` 方法存入新的模型資料，新增完後會回傳新增的模型實例。但是在新增前，需要先在模型類別裡設定好 `fillable` 或 `guarded` 屬性，因為 Eloquent 預設會防止 mass-assignment 。
+也可以使用 `create` 方法存入新的模型資料，新增完後會回傳新增的模型實例。但是在新增前，需要先在模型類別裡設定好 `fillable` 或 `guarded` 屬性，因為 Eloquent 預設會防止 mass-assignment。
 
 在新模型資料被儲存或新增後，若模型有自動遞增主鍵，可以從物件取得 `id` 屬性值：
 
@@ -260,7 +260,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	$table->softDeletes();
 
-現在當你使用模型呼叫 `delete` 方法時， `deleted_at` 欄位會被更新成現在的時間戳。在查詢使用軟刪除功能的模型時，被「刪除」的模型資料不會出現在查詢結果裡。
+現在當你使用模型呼叫 `delete` 方法時，`deleted_at` 欄位會被更新成現在的時間戳。在查詢使用軟刪除功能的模型時，被「刪除」的模型資料不會出現在查詢結果裡。
 
 #### 強制查詢軟刪除資料
 
@@ -280,11 +280,11 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	$user->restore();
 
-你也可以結合查詢語句使用 `restore` ：
+你也可以結合查詢語句使用 `restore`：
 
 	User::withTrashed()->where('account_id', 1)->restore();
 
-如同 `withTrashed` ， `restore` 方法也可以用在關聯物件：
+如同 `withTrashed`，`restore` 方法也可以用在關聯物件：
 
 	$user->posts()->restore();
 
@@ -307,7 +307,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 <a name="timestamps"></a>
 ## 時間戳
 
-預設 Eloquent 會自動維護資料表的 `created_at` 和 `updated_at` 欄位。只要把這兩個「時間戳」欄位加到資料表， Eloquent 就會處理剩下的工作。如果不想讓 Eloquent 自動維護這些欄位，把下面的屬性加到模型類別裡：
+預設 Eloquent 會自動維護資料表的 `created_at` 和 `updated_at` 欄位。只要把這兩個「時間戳」欄位加到資料表，Eloquent 就會處理剩下的工作。如果不想讓 Eloquent 自動維護這些欄位，把下面的屬性加到模型類別裡：
 
 #### 關閉自動更新時間戳
 
@@ -377,7 +377,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 <a name="relationships"></a>
 ## 關聯
 
-當然，你的資料表很可能跟另一張表相關聯。例如，一篇部落格文章可能有很多評論，或是一張訂單跟下單客戶相關聯。 Eloquent 讓管理和處理這些關聯變得很容易。 Laravel 有很多種關聯種類：
+當然，你的資料表很可能跟另一張表相關聯。例如，一篇部落格文章可能有很多評論，或是一張訂單跟下單客戶相關聯。Eloquent 讓管理和處理這些關聯變得很容易。Laravel 有很多種關聯種類：
 
 - [一對一](#one-to-one)
 - [一對多](#one-to-many)
@@ -391,7 +391,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 #### 定義一對一關聯
 
-一對一關聯是很基本的關聯。例如一個 `User` 模型會對應到一個 `Phone` 。 在 Eloquent 裡可以像下面這樣定義關聯：
+一對一關聯是很基本的關聯。例如一個 `User` 模型會對應到一個 `Phone`。在 Eloquent 裡可以像下面這樣定義關聯：
 
 	class User extends Eloquent {
 
@@ -402,7 +402,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、簡潔的 ActiveRecord 實作來和�
 
 	}
 
-傳到 `hasOne` 方法裡的第一個參數是關聯模型的類別名稱。定義好關聯之後，就可以使用 Eloquent 的[動態屬性](#dynamic-properties)取得關聯物件：
+傳到 `hasOne` 方法裡的第一個參數是關聯模型的類別名稱。定義好關聯之後，就可以使用 Eloquent 的 [動態屬性](#dynamic-properties) 取得關聯物件：
 
 	$phone = User::find(1)->phone;
 
@@ -412,7 +412,7 @@ SQL 會執行如下語句：
 
 	select * from phones where user_id = 1
 
-注意， Eloquent 假設對應的關聯模型資料表裡，外鍵名稱是基於模型名稱。在這個例子裡，預設 `Phone` 模型資料表會以 `user_id` 作為外鍵。如果想要更改這個預設，可以傳入第二個參數到 `hasOne` 方法裡。更進一步，你可以傳入第三個參數，指定關聯的外鍵要對應到本身的哪個欄位：
+注意，Eloquent 假設對應的關聯模型資料表裡，外鍵名稱是基於模型名稱。在這個例子裡，預設 `Phone` 模型資料表會以 `user_id` 作為外鍵。如果想要更改這個預設，可以傳入第二個參數到 `hasOne` 方法裡。更進一步，你可以傳入第三個參數，指定關聯的外鍵要對應到本身的哪個欄位：
 
 	return $this->hasOne('Phone', 'foreign_key');
 
@@ -431,7 +431,7 @@ SQL 會執行如下語句：
 
 	}
 
-在上面的例子裡， Eloquent 預設會使用 `phones` 資料表的 `user_id` 欄位查詢關聯。如果想要自己指定外鍵欄位，可以在 `belongsTo` 方法裡傳入第二個參數：
+在上面的例子裡，Eloquent 預設會使用 `phones` 資料表的 `user_id` 欄位查詢關聯。如果想要自己指定外鍵欄位，可以在 `belongsTo` 方法裡傳入第二個參數：
 
 	class Phone extends Eloquent {
 
@@ -467,7 +467,7 @@ SQL 會執行如下語句：
 
 	}
 
-現在可以經由[動態屬性](#dynamic-properties)取得文章的評論：
+現在可以經由 [動態屬性](#dynamic-properties) 取得文章的評論：
 
 	$comments = Post::find(1)->comments;
 
@@ -497,7 +497,7 @@ SQL 會執行如下語句：
 <a name="many-to-many"></a>
 ### 多對多
 
-多對多關聯更為複雜。這種關聯的例子如，一個使用者（ user ）可能用有很多身份（ role ），而一種身份可能很多使用者都有。例如很多使用者都是「管理者」。多對多關聯需要用到三個資料表： `users` ， `roles` ，和 `role_user` 。 `role_user` 樞紐表命名是以相關聯的兩個模型資料表，依照字母順序命名，樞紐表裡面應該要有 `user_id` 和 `role_id` 欄位。
+多對多關聯更為複雜。這種關聯的例子如，一個使用者（ user ）可能用有很多身份（ role ），而一種身份可能很多使用者都有。例如很多使用者都是「管理者」。多對多關聯需要用到三個資料表：`users`、`roles` 和 `role_user`。`role_user` 樞紐表命名是以相關聯的兩個模型資料表，依照字母順序命名，樞紐表裡面應該要有 `user_id` 和 `role_id` 欄位。
 
 可以使用 `belongsToMany` 方法定義多對多關係：
 
@@ -646,7 +646,7 @@ SQL 會執行如下語句：
 		imageable_type - string
 
 
-要注意的關鍵是 `photos` 資料表的 `imageable_id` 和 `imageable_type`。在上面的例子裡， ID 欄位會包含 staff 或 order 的 ID，而 type 是擁有者的模型類別名稱。這就是讓 ORM 在取得 `imageable` 關聯物件時，決定要哪一種模型物件的機制。
+要注意的關鍵是 `photos` 資料表的 `imageable_id` 和 `imageable_type`。在上面的例子裡，ID 欄位會包含 staff 或 order 的 ID，而 type 是擁有者的模型類別名稱。這就是讓 ORM 在取得 `imageable` 關聯物件時，決定要哪一種模型物件的機制。
 
 <a name="many-to-many-polymorphic-relations"></a>
 ### 多型的多對多關聯
@@ -672,7 +672,7 @@ SQL 會執行如下語句：
 		taggable_id - integer
 		taggable_type - string
 
-現在，我們準備好設定模型關聯了。 `Post` 和 `Video` 模型都可以經由 `tags` 方法建立 `morphToMany` 關聯：
+現在，我們準備好設定模型關聯了。`Post` 和 `Video` 模型都可以經由 `tags` 方法建立 `morphToMany` 關聯：
 
 	class Post extends Eloquent {
 
@@ -712,7 +712,7 @@ SQL 會執行如下語句：
 
 	$posts = Post::has('comments', '>=', 3)->get();
 
-如果想要更進階，可以使用 `whereHas` 和 `orWhereHas` 方法，在 `has` 查詢裡設置 "where" 條件 ：
+如果想要更進階，可以使用 `whereHas` 和 `orWhereHas` 方法，在 `has` 查詢裡設置「where」條件：
 
 	$posts = Post::whereHas('comments', function($q)
 	{
@@ -723,7 +723,7 @@ SQL 會執行如下語句：
 <a name="dynamic-properties"></a>
 ### 動態屬性
 
-Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行關聯查詢，而且會很聰明的知道應該要使用 `get`（用在一對多關聯）或是 `first` （用在一對一關聯）方法。可以經由和「關聯方法名稱相同」的動態屬性取得物件。例如，像是下面的模型物件 `$phone`：
+Eloquent 可以經由動態屬性取得關聯物件。Eloquent 會自動進行關聯查詢，而且會很聰明的知道應該要使用 `get`（用在一對多關聯）或是 `first` （用在一對一關聯）方法。可以經由和「關聯方法名稱相同」的動態屬性取得物件。例如，像是下面的模型物件 `$phone`：
 
 	class Phone extends Eloquent {
 
@@ -736,7 +736,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 
 	$phone = Phone::find(1);
 
-或是像下面這樣印出使用者的 email ：
+或是像下面這樣印出使用者的 email：
 
 	echo $phone->user()->first()->email;
 
@@ -749,7 +749,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 <a name="eager-loading"></a>
 ## 預載入
 
-預載入是用來減少 N + 1 查詢問題。例如，一個 `Book` 模型資料會關聯到一個 `Author` 。關聯會像下面這樣定義：
+預載入是用來減少 N + 1 查詢問題。例如，一個 `Book` 模型資料會關聯到一個 `Author`。關聯會像下面這樣定義：
 
 	class Book extends Eloquent {
 
@@ -767,7 +767,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 		echo $book->author->name;
 	}
 
-上面的迴圈會執行一次查詢取回所有資料表上的書籍，然而每本書籍都會執行一次查詢取得作者。所以若我們有 25 本書，就會進行 26次查詢。
+上面的迴圈會執行一次查詢取回所有資料表上的書籍，然而每本書籍都會執行一次查詢取得作者。所以若我們有 25 本書，就會進行 26 次查詢。
 
 很幸運地，我們可以使用預載入大量減少查詢次數。使用 `with` 方法指定想要預載入的關聯物件：
 
@@ -792,7 +792,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 
 	$books = Book::with('author.contacts')->get();
 
-上面的例子中， `author` 關聯會被預載入， author 的 `contacts` 關聯也會被預載入。
+上面的例子中，`author` 關聯會被預載入，author 的 `contacts` 關聯也會被預載入。
 
 ### 預載入條件限制
 
@@ -804,7 +804,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 
 	}))->get();
 
-上面的例子裡，我們預載入了 user 的 posts 關聯，並限制條件為 post 的 title 欄位需包含 "first" 。
+上面的例子裡，我們預載入了 user 的 posts 關聯，並限制條件為 post 的 title 欄位需包含「first」。
 
 當然，預載入的閉合函數裡不一定只能加上條件限制，也可以加上排序：
 
@@ -827,7 +827,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 
 #### 附加一個關聯模型
 
-你常常會需要加入新的關聯模型。例如新增一個 comment 到 post 。除了手動設定模型的 `post_id` 外鍵，也可以從上層的 `Post` 模型新增關聯的 comment ：
+你常常會需要加入新的關聯模型。例如新增一個 comment 到 post。除了手動設定模型的 `post_id` 外鍵，也可以從上層的 `Post` 模型新增關聯的 comment：
 
 	$comment = new Comment(array('message' => 'A new comment.'));
 
@@ -879,7 +879,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 
 #### 使用 Sync 方法同時附加一個以上多對多關聯
 
-你也可以使用 `sync` 方法附加關聯模型。 `sync` 方法會把根據 ID 陣列把關聯存到樞紐表。附加完關聯後，樞紐表裡的模型只會關聯到 ID 陣列裡的 id ：
+你也可以使用 `sync` 方法附加關聯模型。`sync` 方法會把根據 ID 陣列把關聯存到樞紐表。附加完關聯後，樞紐表裡的模型只會關聯到 ID 陣列裡的 id：
 
 	$user->roles()->sync(array(1, 2, 3));
 
@@ -902,7 +902,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 <a name="touching-parent-timestamps"></a>
 ## 更新上層時間戳
 
-當模型 `belongsTo` 另一個模型，比方說一個 `Comment` 屬於一個 `Post` ，如果能在子模型被更新時，更新上層的時間戳，這將會很有用。例如，當 `Comment` 模型更新時，你可能想要能夠同時自動更新 `Post` 的 `updated_at` 時間戳。 Eloquent 讓事情變得很簡單。只要在子關聯的類別裡，把關聯方法名稱加入 `touches` 屬性即可：
+當模型 `belongsTo` 另一個模型，比方說一個 `Comment` 屬於一個 `Post`，如果能在子模型被更新時，更新上層的時間戳，這將會很有用。例如，當 `Comment` 模型更新時，你可能想要能夠同時自動更新 `Post` 的 `updated_at` 時間戳。Eloquent 讓事情變得很簡單。只要在子關聯的類別裡，把關聯方法名稱加入 `touches` 屬性即可：
 
 	class Comment extends Eloquent {
 
@@ -926,7 +926,7 @@ Eloquent 可以經由動態屬性取得關聯物件。 Eloquent 會自動進行�
 <a name="working-with-pivot-tables"></a>
 ## 使用樞紐表
 
-如你所知，要操作多對多關聯需要一個中間的資料表。 Eloquent 提供了一些有用的方法可以和這張表互動。例如，假設 `User` 物件關聯到很多 `Role` 物件。取出這些關聯物件時，我們可以在關聯模型上取得 `pivot` 資料表的資料：
+如你所知，要操作多對多關聯需要一個中間的資料表。Eloquent 提供了一些有用的方法可以和這張表互動。例如，假設 `User` 物件關聯到很多 `Role` 物件。取出這些關聯物件時，我們可以在關聯模型上取得 `pivot` 資料表的資料：
 
 	$user = User::find(1);
 
@@ -1065,7 +1065,7 @@ Eloquent 提供了便利的方法，可以在取得或設定屬性時進行轉�
 
 	}
 
-上面的例子中， `first_name` 欄位設定了一個存取器。注意傳入方法的參數是原本的欄位資料。
+上面的例子中，`first_name` 欄位設定了一個存取器。注意傳入方法的參數是原本的欄位資料。
 
 #### 定義修改器
 
@@ -1092,7 +1092,7 @@ Eloquent 提供了便利的方法，可以在取得或設定屬性時進行轉�
 		return array('created_at');
 	}
 
-當欄位是表示日期的時候，可以將值設為 UNIX timestamp 、日期字串（ `Y-m-d` ）、 日期時間（ date-time ）字串，當然還有 `DateTime` 或 `Carbon` 實例。
+當欄位是表示日期的時候，可以將值設為 UNIX timestamp、日期字串（ `Y-m-d` ）、日期時間（ date-time ）字串，當然還有 `DateTime` 或 `Carbon` 實例。
 
 要完全關閉日期轉換功能，只要從 `getDates` 方法回傳空陣列即可：
 
@@ -1104,13 +1104,13 @@ Eloquent 提供了便利的方法，可以在取得或設定屬性時進行轉�
 <a name="model-events"></a>
 ## Model Events
 
-Eloquent 模型有很多事件可以驅動，讓你可以在模型操作的生命週期中不同時間點，使用下列方法綁定事件： `creating` 、 `created` 、 `updating` 、 `updated` 、 `saving` 、 `saved` 、 `deleting` 、 `deleted` 、 `restoring` 、 `restored` 。
+Eloquent 模型有很多事件可以驅動，讓你可以在模型操作的生命週期中不同時間點，使用下列方法綁定事件：`creating`、`created`、`updating`、`updated`、`saving`、`saved`、`deleting`、`deleted`、`restoring`、`restored`。
 
-當一個物件初次被儲存到資料庫， `creating` 和 `created` 事件會被驅動。如果不是新物件而呼叫了 `save` 方法， `updating` / `updated` 事件會被驅動。而兩者的 `saving` / `saved` 事件都會被驅動。
+當一個物件初次被儲存到資料庫，`creating` 和 `created` 事件會被驅動。如果不是新物件而呼叫了 `save` 方法，`updating` / `updated` 事件會被驅動。而兩者的 `saving` / `saved` 事件都會被驅動。
 
 #### 使用事件取消資料庫操作
 
-如果 `creating` 、 `updating` 、 `saving` 、 `deleting` 事件回傳 `false` 的話，就會取消資料庫操作：
+如果 `creating`、`updating`、`saving`、`deleting` 事件回傳 `false` 的話，就會取消資料庫操作：
 
 	User::creating(function($user)
 	{
@@ -1135,7 +1135,7 @@ Eloquent 模型有靜態的 `boot` 方法，可以使用它方便的註冊事件
 <a name="model-observers"></a>
 ## 模型觀察者
 
-要整合模型的事件處理，可以註冊一個模型觀察者。觀察者類別裡要設定對應模型事件的方法。例如，觀察者類別裡可能有 `creating` 、 `updating` 、 `saving` 方法，還有其他對應模型事件名稱的方法：
+要整合模型的事件處理，可以註冊一個模型觀察者。觀察者類別裡要設定對應模型事件的方法。例如，觀察者類別裡可能有 `creating`、`updating`、`saving` 方法，還有其他對應模型事件名稱的方法：
 
 例如，一個模型觀察者類別可能看起來如下：
 
@@ -1162,7 +1162,7 @@ Eloquent 模型有靜態的 `boot` 方法，可以使用它方便的註冊事件
 
 #### 將模型資料轉成陣列
 
-建立 JSON API 時，你可能常常需要把模型和關聯物件轉換成陣列或 JSON 。所以 Eloquent 裡已經包含了這些方法。要把模型和已載入的關聯物件轉成陣列，可以使用 `toArray` 方法：
+建立 JSON API 時，你可能常常需要把模型和關聯物件轉換成陣列或 JSON。所以 Eloquent 裡已經包含了這些方法。要把模型和已載入的關聯物件轉成陣列，可以使用 `toArray` 方法：
 
 	$user = User::with('roles')->first();
 

@@ -106,7 +106,7 @@
 	// 使用魔術方法
 	$view = View::make('greeting')->withName('steve');
 
-上面的範例裡，將可以在視圖裡使用變數 `$name` ，其值為 `Steve` 。
+上面的範例裡，將可以在視圖裡使用變數 `$name`，其值為 `Steve`。
 
 如果你想，可以傳入資料陣列作為 `make` 方法第二個參數：
 
@@ -145,7 +145,7 @@
 <a name="view-composers"></a>
 ## 視圖組件
 
-視圖組件是當渲染視圖時呼叫的回呼函數或類別方法。如果你想在每次渲染某些視圖時綁定資料，視圖組件可以把這樣的邏輯組織在同一個地方。因此，視圖組件的作用可能像是 "view models" 或是 "presenters"。
+視圖組件是當渲染視圖時呼叫的回呼函數或類別方法。如果你想在每次渲染某些視圖時綁定資料，視圖組件可以把這樣的邏輯組織在同一個地方。因此，視圖組件的作用可能像是「view models」或是「presenters」。
 
 #### 定義一個組件
 
@@ -154,7 +154,7 @@
 		$view->with('count', User::count());
 	});
 
-之後每當 `profile` 視圖被渲染時， `count` 變數就會被綁定到視圖。
+之後每當 `profile` 視圖被渲染時，`count` 變數就會被綁定到視圖。
 
 你也可以把一個組件同時附加到很多視圖。
 
@@ -163,7 +163,7 @@
 		$view->with('count', User::count());
 	});
 
-如使用類別作為組件，提供了可以從 [IoC 容器](/docs/ioc)自動解析組件的好處，你可以像這樣做：
+如使用類別作為組件，提供了可以從 [IoC 容器](/docs/ioc) 自動解析組件的好處，你可以像這樣做：
 
 	View::composer('profile', 'ProfileComposer');
 
@@ -215,7 +215,7 @@
 
 	return Response::download($pathToFile, $name, $headers);
 
-> **提醒：** 管理檔案下載的套件，Symfony HttpFoundation，要求下載檔名必須為 ASCII 。
+> **提醒：** 管理檔案下載的套件，Symfony HttpFoundation，要求下載檔名必須為 ASCII。
 
 <a name="response-macros"></a>
 ## 回應巨集

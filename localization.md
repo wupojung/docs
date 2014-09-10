@@ -15,7 +15,7 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 <a name="language-files"></a>
 ## 語言檔
 
-語言字串儲存在 `app/lang` 資料夾的檔案裡。 在這個資料夾裡應該要有子資料夾給每一個應用程式支援的語言。
+語言字串儲存在 `app/lang` 資料夾的檔案裡。在這個資料夾裡應該要有子資料夾給每一個應用程式支援的語言。
 
 	/app
 		/lang
@@ -36,13 +36,13 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 
 #### 在執行時變換預設語言
 
-應用程式的預設語言被儲存在 `app/config/app.php` 設定檔。 你可以在任何時候用 `App::setLocale` 方法變換現行語言：
+應用程式的預設語言被儲存在 `app/config/app.php` 設定檔。你可以在任何時候用 `App::setLocale` 方法變換現行語言：
 
 	App::setLocale('es');
 
 #### 設定備用語言
 
-你也可以設定 "備用語言"，它將會在當現行語言沒有給定的語句時被使用。 就像預設語言，備用語言也可以在 `app/config/app.php` 設定檔設定：
+你也可以設定「備用語言」，它將會在當現行語言沒有給定的語句時被使用。就像預設語言，備用語言也可以在 `app/config/app.php` 設定檔設定：
 
 	'fallback_locale' => 'en',
 
@@ -53,7 +53,7 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 
 	echo Lang::get('messages.welcome');
 
- 傳遞給 `get` 方法的字串的第一個部分是語言檔的名稱，第二個部分是應該被取得的句子的名稱。
+傳遞給 `get` 方法的字串的第一個部分是語言檔的名稱，第二個部分是應該被取得的句子的名稱。
 
 > **備註**: 如果句子不存在， `get` 方法將會回傳鍵的名稱。
 
@@ -81,7 +81,7 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 <a name="pluralization"></a>
 ## 複數
 
-複數是個複雜的問題，不同語言對於複數有很多種複雜的規則。 你可以簡單地在你的語言檔裡管理它。 你可以用 "管道" 字元區分字串的單數和複數形態：
+複數是個複雜的問題，不同語言對於複數有很多種複雜的規則。你可以簡單地在你的語言檔裡管理它。你可以用「管道」字元區分字串的單數和複數形態：
 
 	'apples' => 'There is one apple|There are many apples',
 
@@ -89,7 +89,7 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 
 	echo Lang::choice('messages.apples', 10);
 
-你也可以提供一個地區參數來指定語言。 舉個例，如果你想要使用俄語 (ru)：
+你也可以提供一個地區參數來指定語言。舉個例，如果你想要使用俄語 (ru)：
 
 	echo Lang::choice('товар|товара|товаров', $count, array(), 'ru');
 
@@ -106,4 +106,4 @@ Laravel 的 `Lang` 類別提供方便的方法來取得多種語言的字串，�
 <a name="overriding-package-language-files"></a>
 ## 覆寫套件的語言檔
 
-許多套件附帶它們自有的語句。 你可以借由放置檔案在 `app/lang/packages/{locale}/{package}` 資料夾覆寫它們，而不是改變套件的核心檔案來調整這些句子。 所以，舉個例子，如果你需要覆寫 `skyrim/hearthfire` 套件在 `messages.php` 的英文語句 ，你可以放置語言檔在： `app/lang/packages/en/hearthfire/messages.php`。 你可以只定義你想要覆寫的語句在這個檔案裡，任何你沒有覆寫的語句將會仍從套件的語言檔載入。
+許多套件附帶它們自有的語句。你可以借由放置檔案在 `app/lang/packages/{locale}/{package}` 資料夾覆寫它們，而不是改變套件的核心檔案來調整這些句子。所以，舉個例子，如果你需要覆寫 `skyrim/hearthfire` 套件在 `messages.php` 的英文語句，你可以放置語言檔在：`app/lang/packages/en/hearthfire/messages.php`。你可以只定義你想要覆寫的語句在這個檔案裡，任何你沒有覆寫的語句將會仍從套件的語言檔載入。

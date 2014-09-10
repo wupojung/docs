@@ -11,9 +11,9 @@
 
 Laravel 致力於讓 PHP 開發體驗更愉快，也包含你的本地開發環境。[Vagrant](http://vagrantup.com) 一個簡單、優雅的方式來管理與供應虛擬機器。
 
-Laravel Homestead 是一個官方預載的 Vagrant “封裝包”，提供你一個美好的開發環境，不需要你在你的本機端安裝 PHP、網頁伺服器或任何伺服器軟體。不用擔心搞亂你的系統！Vagrant 封裝包完全搞定。如果有什麼地方爛掉了，你只要砍掉重來即可。
+Laravel Homestead 是一個官方預載的 Vagrant「封裝包」，提供你一個美好的開發環境，不需要你在你的本機端安裝 PHP、網頁伺服器或任何伺服器軟體。不用擔心搞亂你的系統！Vagrant 封裝包完全搞定。如果有什麼地方爛掉了，你只要砍掉重來即可。
 
-Homestead 可以在任何 Windows, Mac 或 Linux 上面運行，裏面包含了 Nginx 網頁伺服器、PHP 5.6、MySQL、Postgres、Redis、Memcached 還有所有你要開發精彩的 Laravel 應用程式所需的軟體。
+Homestead 可以在任何 Windows、Mac 或 Linux 上面運行，裏面包含了 Nginx 網頁伺服器、PHP 5.6、MySQL、Postgres、Redis、Memcached 還有所有你要開發精彩的 Laravel 應用程式所需的軟體。
 
 Homestead 建置且測試於 Vagrant 1.6 上。
 
@@ -55,7 +55,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 再來你要編輯在程式源里的 `Homestead.yaml`。你可以在檔案中設定你的 SSH 公開金鑰，以及你主要機器與 Homestead 虛擬機器之間的共享目錄。
 
-你沒有 SSH 金鑰? 在 Mac 和 Linux 下，你可以利用下面的指令來創建一個 SSH 金鑰組:
+你沒有 SSH 金鑰？在 Mac 和 Linux 下，你可以利用下面的指令來創建一個 SSH 金鑰組:
 
 	ssh-keygen -t rsa -C "your@email.com"
 
@@ -69,7 +69,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 ### 設定你的 Nginx 站台
 
-對 Nginx 不熟悉? 沒關係。`sites` 屬性允許你簡單的對應一個 `網域` 到一個你 homestead 環境中的目錄。一個範例的站台設定被在 `Homestead.yaml` 檔案中。同樣的，你可以加任何你需要的站台到你的 Homestead 環境中。Homestead 可以作為你進行中專案的一個方便虛擬化環境。
+對 Nginx 不熟悉？沒關係。`sites` 屬性允許你簡單的對應一個 `網域` 到一個你 homestead 環境中的目錄。一個範例的站台設定被在 `Homestead.yaml` 檔案中。同樣的，你可以加任何你需要的站台到你的 Homestead 環境中。Homestead 可以作為你進行中專案的一個方便虛擬化環境。
 
 ### Bash Aliases
 
@@ -79,7 +79,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 當你根據你的喜好編輯完 `Homestead.yaml` 後，在終端機裡，從 Homestead 目錄裡執行 `vagrant up` 指令。Vagrant 將會將虛擬機器開機，並且自動設定你的共享目錄和 Nginx 站台。
 
-為了你的 Nginx 站台，別忘記在你的機器的 `hosts` 檔將"網域"加進去。`hosts` 檔會將你的本地網域的站台請求重導至你的 Homestead 環境中。在 Mac 和 Linux，該檔案放在 `/etc/hosts`。在 Windows 環境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加進去的內容類似如下：
+為了你的 Nginx 站台，別忘記在你的機器的 `hosts` 檔將「網域」加進去。`hosts` 檔會將你的本地網域的站台請求重導至你的 Homestead 環境中。在 Mac 和 Linux，該檔案放在 `/etc/hosts`。在 Windows 環境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加進去的內容類似如下：
 
 	127.0.0.1  homestead.app
 
@@ -104,9 +104,9 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 在 `Homestead` 封裝包中，MySQL 與 Postgres 兩套資料庫都已預裝其中。為了更簡便，Laravel 的 `local` 資料庫設定已經預設將其設定完成。
 
-如果想要從本機上透過 Navicat 或者是 Sequel Pro 連接 MySQL 或者 Postgres 資料庫，你可以連接 `127.0.0.1` 的 埠 33060 (MySQL) 或 54320 (Postgres)。而帳號密碼分別是 `homestead` / `secret`。
+如果想要從本機上透過 Navicat 或者是 Sequel Pro 連接 MySQL 或者 Postgres 資料庫，你可以連接 `127.0.0.1` 的埠 33060 (MySQL) 或 54320 (Postgres)。而帳號密碼分別是 `homestead` / `secret`。
 
-> **附註:** 你應該只能使用這些非標準的連接埠來連接資料庫。因為您將會在本機端使用預設 3306 及 5432 連接埠來連接自己的資料庫。
+> **附註：** 你應該只能使用這些非標準的連接埠來連接資料庫。因為您將會在本機端使用預設 3306 及 5432 連接埠來連接自己的資料庫。
 
 ### 增加更多的站台
 
@@ -116,7 +116,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 	serve domain.app /home/vagrant/Code/path/to/public/directory
 
-> **附註:** 在執行 `serve` 指令過後，別忘記將新的站台加進本機的 `hosts` 檔案中。
+> **附註：** 在執行 `serve` 指令過後，別忘記將新的站台加進本機的 `hosts` 檔案中。
 
 <a name="ports"></a>
 ## 連接埠

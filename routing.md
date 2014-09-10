@@ -127,7 +127,7 @@
 <a name="route-filters"></a>
 ## 路由篩選器
 
-路由篩選器提供一個便捷的方式對於一個給定的路由做出限制訪問，這對於你的站台需要認證的情況下非常有用。在 Laravel 框架中包含了數個篩選器，像是 `auth`, `auth.basic`, `guest` 和 `csrf` 篩選器。他們都放在 `app/filters.php` 中。
+路由篩選器提供一個便捷的方式對於一個給定的路由做出限制訪問，這對於你的站台需要認證的情況下非常有用。在 Laravel 框架中包含了數個篩選器，像是 `auth`、`auth.basic`、`guest` 和 `csrf` 篩選器。他們都放在 `app/filters.php` 中。
 
 #### 定義一個路由篩選器
 
@@ -204,7 +204,7 @@
 
 #### 篩選器類別
 
-進階的篩選，你可以使用類別來取代閉包。Since filter classes are resolved out of the application [IoC Container](/docs/ioc), you will be able to utilize dependency injection in these filters for greater testability.
+進階的篩選，你可以使用類別來取代閉包。因為篩選器類別被解析出應用程式 [IoC 容器](/docs/ioc)，你將會可以在這些篩選器中利用依賴注入來得到更好的可測試性。
 
 #### 註冊基於類別的篩選器
 
@@ -252,7 +252,7 @@
 <a name="route-groups"></a>
 ## 路由群組
 
-有時候你需要套用篩選器到一個群組的路由上。不需要為每個路由去套用篩選器，你只需使用路由群組:
+有時候你需要套用篩選器到一個群組的路由上。不需要為每個路由去套用篩選器，你只需使用路由群組：
 
 	Route::group(array('before' => 'auth'), function()
 	{

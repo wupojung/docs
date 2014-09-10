@@ -56,16 +56,16 @@
 		//
 	});
 
-如果你有很多例外處理程序，他們應該依照從最通用到最特定的順序被定義。例如，一個對應處理型別為`Exception`的例外處理程序，應該被定義在一個對應處理自定例外型別，如`Illuminate\Encryption\DecryptException`的例外處理程序之前。
+如果你有很多例外處理程序，他們應該依照從最通用到最特定的順序被定義。例如，一個對應處理型別為`Exception`的例外處理程序，應該被定義在一個對應處理自定例外型別，如 `Illuminate\Encryption\DecryptException`的例外處理程序之前。
 
 ### 何處定義例外處理程序
 
-預設上沒有註冊例外處理程序的地方。Laravel 可以讓你自由設定。選擇之一是定義程序在 `start/global.php`中，一般來說，這是一個讓你方便寫入任何"bootstrapping" 程式碼的地方。如果檔案變得很擁擠，可以建立一個 `app/errors.php`檔案，並且在`start/global.php`中引入。第三個選擇是建立 [service provider](/docs/ioc#service-providers) 以註冊程序。再一次地，並沒有正確的答案，選擇一個讓你覺得舒適的地方。
+預設上沒有註冊例外處理程序的地方。Laravel 可以讓你自由設定。選擇之一是定義程序在 `start/global.php` 中，一般來說，這是一個讓你方便寫入任何"bootstrapping" 程式碼的地方。如果檔案變得很擁擠，可以建立一個 `app/errors.php` 檔案，並且在 `start/global.php` 中引入。第三個選擇是建立 [service provider](/docs/ioc#service-providers) 以註冊程序。再一次地，並沒有正確的答案，選擇一個讓你覺得舒適的地方。
 
 <a name="http-exceptions"></a>
 ## HTTP 例外處理
 
-一些例外處理表示來自伺服器的 HTTP 錯誤碼，例如可能是「找不到頁面」錯誤(404)，未授權錯誤(401)，或甚至是工程師導致的500錯誤。使用下列方法以回傳這些回應：
+一些例外處理表示來自伺服器的 HTTP 錯誤碼，例如可能是「找不到頁面」錯誤(404)，未授權錯誤(401)，或甚至是工程師導致的 500 錯誤。使用下列方法以回傳這些回應：
 
 	App::abort(404);
 
@@ -78,7 +78,7 @@
 <a name="handling-404-errors"></a>
 ## 404錯誤處理
 
-你可以註冊一個錯誤處理程序處理所有"404 Not Found"錯誤，讓你可以簡單的回傳自定的404錯誤頁面。
+你可以註冊一個錯誤處理程序處理所有「404 Not Found」錯誤，讓你可以簡單的回傳自定的 404 錯誤頁面。
 
 	App::missing(function($exception)
 	{
@@ -88,7 +88,7 @@
 <a name="logging"></a>
 ## 日誌
 
-Laravel 提供一個建立在強大的 [Monolog](http://github.com/seldaek/monolog) 上的日誌工具。Laravel 預設設定在應用程式裡建立單一日誌檔案，這個檔案儲存在`app/storage/logs/laravel.log`。	你可以像下面這樣寫入訊息：
+Laravel 提供一個建立在強大的 [Monolog](http://github.com/seldaek/monolog) 上的日誌工具。Laravel 預設設定在應用程式裡建立單一日誌檔案，這個檔案儲存在 `app/storage/logs/laravel.log`。	你可以像下面這樣寫入訊息：
 
 	Log::info('This is some useful information.');
 
@@ -96,7 +96,7 @@ Laravel 提供一個建立在強大的 [Monolog](http://github.com/seldaek/monol
 
 	Log::error('Something is really going wrong.');
 
-日誌工具提供了七種定義在 [RFC 5424](http://tools.ietf.org/html/rfc5424) 的級別：**debug**, **info**, **notice**, **warning**, **error**, **critical**, and **alert**
+日誌工具提供了七種定義在 [RFC 5424](http://tools.ietf.org/html/rfc5424) 的級別：**debug**、**info**、**notice**、**warning**、**error**、**critical** 和 **alert**
 
 可以在傳入上下文相關的資料陣列到 log 的方法裡：
 
