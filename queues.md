@@ -11,7 +11,7 @@
 <a name="configuration"></a>
 ## 設定
 
-Laravel 佇列元件提供一個統一的API整合了許多不同的佇列服務，佇列允許你將一個執行任務延後執行，例如寄送郵件延後至你指定的時間，進而大幅的加快你的網站應用程式的速度。
+Laravel 佇列元件提供一個統一的 API 整合了許多不同的佇列服務，佇列允許你將一個執行任務延後執行，例如寄送郵件延後至你指定的時間，進而大幅的加快你的網站應用程式的速度。
 
 佇列的設定檔在 `app/config/queue.php`，在這個檔案你將可以找到框架中每種不同的佇列服務的連線設定，其中包含了 [Beanstalkd](http://kr.github.com/beanstalkd)、[IronMQ](http://iron.io)、[Amazon SQS](http://aws.amazon.com/sqs)、[Redis](http://redis.io)，以及同步(本地端使用)驅動設定。
 
