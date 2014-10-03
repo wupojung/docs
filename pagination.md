@@ -121,7 +121,7 @@
 
         public function getDisabledTextWrapper($text)
         {
-            return '<li class="unavailable">'.$text.'</li>';
+            return '<li class="unavailable"><a href="">'.$text.'</a></li>';
         }
 
         public function getPageLinkWrapper($url, $page)
