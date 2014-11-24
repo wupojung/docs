@@ -22,6 +22,7 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 - Ubuntu 14.04
 - PHP 5.6
+- HHVM
 - Nginx
 - MySQL
 - Postgres
@@ -45,15 +46,23 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 	vagrant box add laravel/homestead
 
-### 複製 Homestead 程式源
+### 安裝 Homestead
 
-一旦封裝包已經被加進你的 Vagrant 安裝程式後，你必須複製並下載該程式源並放置於一個集中的 `Homestead` 目錄中，目錄中放置所有你的 Laravel 專案，如此 homestead 封裝包就可以運行你所有的 Laravel（和 PHP）專案。
+一旦封裝包已經被加進你的 Vagrant 安裝程式後，你已經準備好透過 Composer `global` 全域指令安裝 Homestead CLI 指令:
 
-	git clone https://github.com/laravel/homestead.git Homestead
+	composer global require "laravel/homestead=~2.0"
+
+請確保 `~/.composer/vendor/bin` 有在您的 PATH 變數內，以確保 `homestead` 指令可以在命例列被執行。一旦完成 Homestead CLI 工具，請直接執行 `init` 指令來產生 `Homestead.yaml` 設定檔。
+
+	homestead init
+	
+`Homestead.yaml` 檔案將會被放在 `~/.homestead` 目錄。假如您使用 Mac 或 Linux 系統，可以在終端機執行 `homestead edit` 來編輯 `Homestead.yaml` 設定檔:
+
+	homestead edit
 
 ### 設定你的 SSH 金鑰
 
-再來你要編輯在程式源里的 `Homestead.yaml`。你可以在檔案中設定你的 SSH 公開金鑰，以及你主要機器與 Homestead 虛擬機器之間的共享目錄。
+再來你要編輯 `Homestead.yaml`。可以在檔案中設定你的 SSH 公開金鑰，以及主要機器與 Homestead 虛擬機器之間的共享目錄。
 
 你沒有 SSH 金鑰？在 Mac 和 Linux 下，你可以利用下面的指令來創建一個 SSH 金鑰組:
 
@@ -71,34 +80,37 @@ Homestead 建置且測試於 Vagrant 1.6 上。
 
 對 Nginx 不熟悉？沒關係。`sites` 屬性允許你簡單的對應一個 `網域` 到一個你 homestead 環境中的目錄。一個範例的站台設定被在 `Homestead.yaml` 檔案中。同樣的，你可以加任何你需要的站台到你的 Homestead 環境中。Homestead 可以作為你進行中專案的一個方便虛擬化環境。
 
+你可以透過設定 `hhvm` 屬性為 `true` 來讓虛擬站台支援 [HHVM](http://hhvm.com):
+
+	sites:
+	    - map: homestead.app
+	      to: /home/vagrant/Code/Laravel/public
+	      hhvm: true
+
 ### Bash Aliases
 
-如果要增加 Bash aliases 到你的 Homestead 封裝包中，只要加到 Homestead 目錄最上層的 `aliases` 檔案中。
+如果要增加 Bash aliases 到你的 Homestead 封裝包中，只要加到 `~/.homestead` 目錄最上層的 `aliases` 檔案中。
 
 ### 啟動 Vagrant 封裝包
 
-當你根據你的喜好編輯完 `Homestead.yaml` 後，在終端機裡，從 Homestead 目錄裡執行 `vagrant up` 指令。Vagrant 將會將虛擬機器開機，並且自動設定你的共享目錄和 Nginx 站台。
+當你根據你的喜好編輯完 `Homestead.yaml` 後，在終端機裡執行 `homestead up` 指令。Vagrant 將會將虛擬機器開機，並且自動設定你的共享目錄和 Nginx 站台。如果要移除虛擬機器，可以使用 `homestead destroy` 指令。更多息詳細的 Homestead 指令介紹，可以執行 `homestead list` 取得。
 
 為了你的 Nginx 站台，別忘記在你的機器的 `hosts` 檔將「網域」加進去。`hosts` 檔會將你的本地網域的站台請求重導至你的 Homestead 環境中。在 Mac 和 Linux，該檔案放在 `/etc/hosts`。在 Windows 環境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加進去的內容類似如下：
 
-	127.0.0.1  homestead.app
+	192.168.10.10  homestead.app
 
 一旦你將網域加進你的 `hosts` 檔案中，你家可以從埠 8000 透過你的瀏覽器存取到你的站台。
 
-	http://homestead.app:8000
+	http://homestead.app
 
-繼續讀下去，你會學到如何連結到你的資料庫。
+繼續讀下去，你會學到如何連結到資料庫。
 
 <a name="daily-usage"></a>
 ## 常見用法
 
 ### 透過 SSH 連接
 
-要透過 SSH 連接 Homestead 環境，需要使用設定在 `Homestead.yaml` 檔案中的 SSH 金鑰連接 `127.0.0.1` 的連接埠 2222。你也可以輕易的從 `Homestead` 目錄下執行 `vagrant ssh` 命令來連接。
-
-如果想要更簡便，可以將下面的 alias 加到你的 `~/.bash_aliases` 或是 `~/.bash_profile` 中：
-
-	alias vm='ssh vagrant@127.0.0.1 -p 2222'
+要透過 SSH 連接上您的 Homestead 環境，可以直接在終端機裡執行  `homestead ssh` 指令。
 
 ### 連結資料庫
 
