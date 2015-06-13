@@ -45,7 +45,7 @@
     - [單元測試](/docs/{{version}}/testing)
     - [驗證](/docs/{{version}}/validation)
 - 資料庫
-    - [基本用法](/docs/{{version}}/database)
+    - [基本入門](/docs/{{version}}/database)
     - [查詢架構器](/docs/{{version}}/queries)
     - [Eloquent ORM](/docs/{{version}}/eloquent)
     - [結構生成器](/docs/{{version}}/schema)
