@@ -10,16 +10,15 @@
 <a name="introduction"></a>
 ## 簡介
 
-在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令調度器（command scheduler）允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上面增加一條 Cron 項目即可。
+在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令調度器（command scheduler）允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上增加一條 Cron 項目即可。
 
-你的排程已經定義在 `app/Console/Kernel.php` 檔案的 `schedule` 方法中。為了方便你開始，一個簡單的範例已經包含在該方法中。你可以自由的增加排程到 `Schedule` 物件中。
+你的排程已經定義在 `app/Console/Kernel.php` 檔案的 `schedule` 方法中。為了方便你開始，一個簡單的範例已經包含在該方法。你可以自由的增加排程到 `Schedule` 物件中。
 
 ### 啟動調度器
 
 底下是唯一需要加入到伺服器的 Cron 項目：
 
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
-
 
 該 Cron 將於每分鐘呼叫 Laravel 指令調度器，接著 Laravel 會衡量你排定的任務並執行預定任務。
 
@@ -123,7 +122,7 @@
 
     $schedule->command('emails:send')->withoutOverlapping();
 
-在這個範例，如果非執行中，`emails:send` [Artisan 指令](/docs/{{version}}/artisan) 將於每分鐘執行。當你有些超長執行時間的任務，並且無法預設所需的時間，`withoutOverlapping` 方法將特別有幫助。
+在這個範例，如果非執行中，`emails:send` [Artisan 指令](/docs/{{version}}/artisan) 將於每分鐘執行。當你有些超長執行時間的任務，並且無法預測所需的時間，`withoutOverlapping` 方法將特別有幫助。
 
 <a name="task-output"></a>
 ## 任務輸出
@@ -166,7 +165,6 @@ Laravel 調度器為任務排程輸出提供許多便捷的方法。首先，透
              ->pingBefore($url)
              ->thenPing($url);
 
-
-使用 `pingBefore($url)` 或 `thenPing($url)` 功能需要 Guzzle HTTP 函式庫。你可以透過增加下列到你的 `composer.json` 檔案，將 Guzzle 加入你的專案：
+使用 `pingBefore($url)` 或 `thenPing($url)` 功能需要 Guzzle HTTP 函式庫。你可以透過將下列增加到你的 `composer.json` 檔案，使 Guzzle 加入你的專案：
 
     "guzzlehttp/guzzle": "~5.3|~6.0"
