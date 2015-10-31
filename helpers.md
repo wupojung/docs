@@ -6,7 +6,7 @@
 <a name="introduction"></a>
 ## 簡介
 
-Laravel 包含一群多樣化的 PHP 輔助方法函式。許多也在 Laravel 自身框架中使用；然而，如果覺得方便上手，也可以使用在你的應用當中。
+Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自身框架中使用；不過你也可以在自己的應用當中使用。
 Laravel includes a variety of "helper" PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.
 
 <a name="available-methods"></a>
@@ -172,7 +172,7 @@ The `array_except` method removes the given key / value pairs from the array:
 <a name="method-array-first"></a>
 #### `array_first()` {#collection-method}
 
-`array_first` 函式回傳陣列中第一個通過給定的測試為真的元素：
+`array_first` 函式回傳陣列中第一個通過為真測試的元素：
 The `array_first` method returns the first element of an array passing a given truth test:
 
     $array = [100, 200, 300];
@@ -224,7 +224,7 @@ The `array_get` method retrieves a value from a deeply nested array using "dot" 
 
     // ['price' => 100]
 
-`array_get` 函式同時接受預設值，當指定的鍵找不到時回傳。
+`array_get` 函式同樣接受預設值，當指定的鍵找不到時回傳。
 The `array_get` function also accepts a default value, which will be returned if the specific key is not found:
 
     $value = array_get($array, 'names.john', 'default');
@@ -244,7 +244,7 @@ The `array_only` method will return only the specified key / value pairs from th
 <a name="method-array-pluck"></a>
 #### `array_pluck()` {#collection-method}
 
-`array_pluck` 函式從陣列拉出給定鍵值對的清單：
+`array_pluck` 函式從陣列拉出一列給定的鍵值對：
 The `array_pluck` method will pluck a list of the given key / value pairs from the array:
 
     $array = [
@@ -259,7 +259,7 @@ The `array_pluck` method will pluck a list of the given key / value pairs from t
 <a name="method-array-pull"></a>
 #### `array_pull()` {#collection-method}
 
-`array_pull` 函式從陣列回傳給定的鍵值對並移除：
+`array_pull` 函式從陣列移除並回傳給定的鍵值對：
 The `array_pull` method returns and removes a key / value pair from the array:
 
     $array = ['name' => 'Desk', 'price' => 100];
@@ -389,7 +389,7 @@ The `app_path` function returns the fully qualified path to the `app` directory:
 
     $path = app_path();
 
-你也可以使用 `app_path` 函式產生針對給定檔案相對於 app 目錄的完整路徑：
+你同樣可以使用 `app_path` 函式產生針對給定檔案相對於 app 目錄的完整路徑：
 You may also use the `app_path` function to generate a fully qualified path to a given file relative to the application directory:
 
     $path = app_path('Http/Controllers/Controller.php');
@@ -402,7 +402,7 @@ The `base_path` function returns the fully qualified path to the project root:
 
     $path = base_path();
 
-你也可以使用 `base_path` 函式產生針對給定檔案相對於專案根目錄的完整路徑：
+你同樣可以使用 `base_path` 函式產生針對給定檔案相對於專案根目錄的完整路徑：
 You may also use the `base_path` function to generate a fully qualified path to a given file relative to the application directory:
 
     $path = base_path('vendor/bin');
@@ -439,7 +439,7 @@ The `storage_path` function returns the fully qualified path to the `storage` di
 
     $path = storage_path();
 
-你也可以使用 `storage_path` 函式產生針對給定檔案相對於 storage 目錄的完整路徑：
+你同樣可以使用 `storage_path` 函式產生針對給定檔案相對於 storage 目錄的完整路徑：
 You may also use the `storage_path` function to generate a fully qualified path to a given file relative to the storage directory:
 
     $path = storage_path('app/file.txt');
@@ -460,7 +460,7 @@ The `camel_case` function converts the given string to `camelCase`:
 <a name="method-class-basename"></a>
 #### `class_basename()` {#collection-method}
 
-`class_basename` 回傳給定類別不含任何命名空間的類別名稱：
+`class_basename` 回傳給定類別不包含命名空間的類別名稱：
 The `class_basename` returns the class name of the given class with the class' namespace removed:
 
     $class = class_basename('Foo\Bar\Baz');
@@ -518,7 +518,7 @@ The `starts_with` function determines if the given string begins with the given 
 <a name="method-str-contains"></a>
 #### `str_contains()` {#collection-method}
 
-`str_contains` 函式判斷字串是否包含給定內容：
+`str_contains` 函式判斷給定字串是否包含指定內容：
 The `str_contains` function determines if the given string contains the given value:
 
     $value = str_contains('This is my name', 'my');
@@ -584,7 +584,7 @@ The `str_singular` function converts a string to its singular form. This functio
 <a name="method-str-slug"></a>
 #### `str_slug()` {#collection-method}
 
-`str_slug` 函式從給定字串產生對網址友善的「slug」：
+`str_slug` 函式從給定字串產生網址友善的「slug」：
 The `str_slug` function generates a URL friendly "slug" from the given string:
 
     $title = str_slug("Laravel 5 Framework", "-");
@@ -807,7 +807,7 @@ The `view` function retrieves a [view](/docs/{{version}}/views) instance:
 <a name="method-with"></a>
 #### `with()` {#collection-method}
 
-`with` 函式回傳給定的數值。該函式主要有助於方法鍊結（method chaining）使用，除此之外不太可能用到。
+`with` 函式回傳給定的數值。該函式主要用於方法鍊結（method chaining），除此之外不太可能用到。
 The `with` function return the value it is given. This function is primarily useful for method chaining where it would otherwise be impossible:
 
     $value = with(new Foo)->work();
