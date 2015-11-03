@@ -10,17 +10,17 @@
 <a name="introduction"></a>
 ## 簡介
 
-在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令調度器（command scheduler）允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上增加一條 Cron 項目即可。
+在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令排程器（command scheduler）允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上增加一條 Cron 項目即可。
 
 你的排程已經定義在 `app/Console/Kernel.php` 檔案的 `schedule` 方法中。為了方便你開始，一個簡單的範例已經包含在該方法。你可以自由的增加排程到 `Schedule` 物件中。
 
-### 啟動調度器
+### 啟動排程器
 
 底下是唯一需要加入到伺服器的 Cron 項目：
 
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 
-該 Cron 將於每分鐘呼叫 Laravel 指令調度器，接著 Laravel 會衡量你排定的任務並執行預定任務。
+該 Cron 將於每分鐘呼叫 Laravel 指令排程器，接著 Laravel 會衡量你排定的任務並執行預定任務。
 
 <a name="defining-schedules"></a>
 ## 定義排程
@@ -127,7 +127,7 @@
 <a name="task-output"></a>
 ## 任務輸出
 
-Laravel 調度器為任務排程輸出提供許多便捷的方法。首先，透過 `sendOutputTo` 你可以發送輸出到單一檔案做為後續檢查：
+Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透過 `sendOutputTo` 你可以發送輸出到單一檔案做為後續檢查：
 
     $schedule->command('emails:send')
              ->daily()
@@ -158,7 +158,7 @@ Laravel 調度器為任務排程輸出提供許多便捷的方法。首先，透
 
 #### Ping 網址
 
-透過 `pingBefore` 與 `thenPing` 方法，調度器能自動的在一個任務完成之前或之後 ping 一個給定的網址。該方法在你排定的任務進行或完成時，能有效的通知一個外部服務，例如 [Laravel Envoyer](https://envoyer.io)。
+透過 `pingBefore` 與 `thenPing` 方法，排程器能自動的在一個任務完成之前或之後 ping 一個給定的網址。該方法在你排定的任務進行或完成時，能有效的通知一個外部服務，例如 [Laravel Envoyer](https://envoyer.io)。
 
     $schedule->command('emails:send')
              ->daily()
