@@ -1,0 +1,7 @@
+stages:
+  - deploy
+
+deploy:
+  script:
+    - rm ${DEPLOY_DOC_PATH}/${CI_BUILD_REF_NAME}/*
+    - cp . ${DEPLOY_DOC_PATH}/${CI_BUILD_REF_NAME} 
