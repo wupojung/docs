@@ -87,10 +87,10 @@
 `->weekly();`  |  於每週執行該任務
 `->monthly();`  |  於每月執行該任務
 
-這些方法可以合併其他限制條件，藉以產生更精細的排程。例如在某週的某幾天執行排程。舉個例子，排定一個每週一的排程：
+這些方法可以結合其他的限制條件，來建立更精細的排程，讓它只在一週的某幾天執行。舉個例子，排定一個在每週一執行的排程：
 
     $schedule->call(function () {
-        // Runs once a week on Monday at 13:00...
+        // 在某個週一的 13:00 執行...
     })->weekly()->mondays()->at('13:00');
 
 下方列出額外的限制條件：
@@ -150,10 +150,10 @@ Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透
     $schedule->command('emails:send')
              ->daily()
              ->before(function () {
-                 // Task is about to start...
+                 // 任務即將開始...
              })
              ->after(function () {
-                 // Task is complete...
+                 // 任務完成...
              });
 
 #### Ping 網址
