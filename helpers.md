@@ -26,6 +26,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
 <div class="collection-method-list" markdown="1">
 [array_add](#method-array-add)
+[array_collapse](#method-array-collapse)
 [array_divide](#method-array-divide)
 [array_dot](#method-array-dot)
 [array_except](#method-array-except)
@@ -33,12 +34,13 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 [array_flatten](#method-array-flatten)
 [array_forget](#method-array-forget)
 [array_get](#method-array-get)
+[array_has](#method-array-has)
 [array_only](#method-array-only)
 [array_pluck](#method-array-pluck)
 [array_pull](#method-array-pull)
 [array_set](#method-array-set)
 [array_sort](#method-array-sort)
-[array_sort_recursive](#method-array-recursive)
+[array_sort_recursive](#method-array-sort-recursive)
 [array_where](#method-array-where)
 [head](#method-head)
 [last](#method-last)
@@ -94,6 +96,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 [auth](#method-auth)
 [back](#method-back)
 [bcrypt](#method-bcrypt)
+[collect](#method-collect)
 [config](#method-config)
 [csrf_field](#method-csrf-field)
 [csrf_token](#method-csrf-token)
@@ -104,7 +107,9 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 [method_field](#method-method-field)
 [old](#method-old)
 [redirect](#method-redirect)
+[request](#method-request)
 [response](#method-response)
+[session](#method-session)
 [value](#method-value)
 [view](#method-view)
 [with](#method-with)
@@ -134,6 +139,15 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
     $array = array_add(['name' => 'Desk'], 'price', 100);
 
     // ['name' => 'Desk', 'price' => 100]
+
+<a name="method-array-collapse"></a>
+#### `array_collapse()` {#collection-method}
+
+The `array_collapse` function collapse an array of arrays into a single array:
+
+    $array = array_collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+
+    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 <a name="method-array-divide"></a>
 #### `array_divide()` {#collection-method}
@@ -220,6 +234,17 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     $value = array_get($array, 'names.john', 'default');
 
+<a name="method-array-has"></a>
+#### `array_has()` {#collection-method}
+
+`array_has` 函式使用「點」式語法檢查給定的項目是否存在於陣列中：
+
+    $array = ['products' => ['desk' => ['price' => 100]]];
+
+    $hasDesk = array_has($array, ['products.desk']);
+
+    // true
+
 <a name="method-array-only"></a>
 #### `array_only()` {#collection-method}
 
@@ -237,13 +262,19 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 `array_pluck` 函式從陣列拉出一列給定的鍵值對：
 
     $array = [
-        ['developer' => ['name' => 'Taylor']],
-        ['developer' => ['name' => 'Abigail']]
+        ['developer' => ['id' => 1, 'name' => 'Taylor']],
+        ['developer' => ['id' => 2, 'name' => 'Abigail']],
     ];
 
     $array = array_pluck($array, 'developer.name');
 
     // ['Taylor', 'Abigail'];
+
+你也能指定以什麼做為結果列的鍵值：
+
+    $array = array_pluck($array, 'developer.name', 'developer.id');
+
+    // [1 => 'Taylor', 2 => 'Abigail'];
 
 <a name="method-array-pull"></a>
 #### `array_pull()` {#collection-method}
@@ -293,7 +324,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-array-sort-recursive"></a>
 #### `array_sort_recursive()` {#collection-method}
 
-`array_sort` 函式使用 `sort` 函式遞迴排序陣列：
+`array_sort_recursive` 函式使用 `sort` 函式遞迴排序陣列：
 
     $array = [
         [
@@ -534,6 +565,16 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     // children
 
+You may provide an integer as a second argument to the function to retrieve the singular or plural form of the string:
+
+    $plural = str_plural('child', 2);
+
+    // children
+
+    $plural = str_plural('child', 1);
+
+    // child
+
 <a name="method-str-random"></a>
 #### `str_random()` {#collection-method}
 
@@ -647,12 +688,19 @@ Generate a URL for an asset using HTTPS:
 
     return back();
 
-<a href="method-bcrypt"></a>
+<a name="method-bcrypt"></a>
 #### `bcrypt()` {#collection-method}
 
 `bcrypt` 函式使用 Bcrypt 雜湊給定的數值。你可以使用它替代 `Hash` facade。
 
     $password = bcrypt('my-secret-password');
+
+<a name="method-collect"></a>
+#### `collect()` {#collection-method}
+
+The `collect` function creates a [collection](/docs/{{version}}/collections) instance from the supplied items:
+
+    $collection = collect(['taylor', 'abigail']);
 
 <a name="method-config"></a>
 #### `config()` {#collection-method}
@@ -688,7 +736,6 @@ The `config` helper may also be used to set configuration variables at runtime b
 
     dd($value);
 
-<<<<<<< HEAD
 <a name="method-elixir"></a>
 #### `elixir()` {#collection-method}
 
@@ -696,8 +743,6 @@ The `config` helper may also be used to set configuration variables at runtime b
 
     elixir($file);
 
-=======
->>>>>>> e7a47549ba0a8b0253f377cfda118b37eb33b100
 <a name="method-env"></a>
 #### `env()` {#collection-method}
 
@@ -745,6 +790,15 @@ The `config` helper may also be used to set configuration variables at runtime b
 
     return redirect('/home');
 
+<a name="method-request"></a>
+#### `request()` {#collection-method}
+
+The `request` function returns the current [request](/docs/{{version}}/requests) instance or obtains an input item:
+
+    $request = request();
+
+    $value = request('key', $default = null)
+
 <a name="method-response"></a>
 #### `response()` {#collection-method}
 
@@ -753,6 +807,23 @@ The `config` helper may also be used to set configuration variables at runtime b
     return response('Hello World', 200, $headers);
 
     return response()->json(['foo' => 'bar'], 200, $headers);
+
+<a name="method-session"></a>
+#### `session()` {#collection-method}
+
+The `session` function may be used to get / set a session value:
+
+    $value = session('key');
+
+You may set values by passing an array of key / value pairs to the function:
+
+    session(['chairs' => 7, 'instruments' => 3]);
+
+The session store will be returned if no value is passed to the function:
+
+    $value = session()->get('key');
+
+    session()->put('key', $value);
 
 <a name="method-value"></a>
 #### `value()` {#collection-method}

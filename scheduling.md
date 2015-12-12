@@ -109,11 +109,13 @@
 
 #### 為真驗證限制條件
 
-`when` 方法可以被用於限制任務執行與否，基於給定一個為真驗證的執行結果。換句話說，如果給定的 ` 閉包 ` 回傳 `true`，這個任務將持續被執行只要沒有其他的限制條件。
+`when` 方法可以被用於限制任務執行與否，基於給定一個為真驗證的執行結果。換句話說，如果給定的 `閉包` 回傳 `true`，這個任務將持續被執行只要沒有其他的限制條件。
 
     $schedule->command('emails:send')->daily()->when(function () {
         return true;
     });
+
+When using chained `when` methods, the scheduled command will only execute if all `when` conditions return `true`.
 
 <a name="preventing-task-overlaps"></a>
 ### 避免任務重複
@@ -133,7 +135,7 @@ Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透
              ->daily()
              ->sendOutputTo($filePath);
 
-透過 `emailOutputTo` 方法，你可以發送輸出到你所選的電子郵件。注意，你必須先透過 `sendOutputTo` 方法輸出到一個檔案。同時，在將任務輸出發送到電子郵件之前，你需要先設定 Laravel 的 [電子郵件服務](/docs/{{version}}/mail)：
+透過 `emailOutputTo` 方法，你可以發送輸出到你所選的電子郵件。注意，你必須先透過 `sendOutputTo` 方法輸出到一個檔案。同時，在將任務輸出發送到電子郵件之前，你需要先設定 Laravel 的[電子郵件服務](/docs/{{version}}/mail)：
 
     $schedule->command('foo')
              ->daily()
