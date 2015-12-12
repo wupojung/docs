@@ -75,7 +75,6 @@
 
 方法  | 描述
 ------------- | -------------
-<<<<<<< HEAD
 `->cron('* * * * *');`  |  於自訂的 Cron 排程執行該任務
 `->everyMinute();`  |  於每分鐘執行該任務
 `->everyFiveMinutes();`  |  於每五分鐘執行該任務
@@ -89,21 +88,6 @@
 `->monthly();`  |  於每月執行該任務
 
 這些方法可以合併其他限制條件，藉以產生更精細的排程。例如在某週的某幾天執行排程。舉個例子，排定一個每週一的排程：
-=======
-`->cron('* * * * *');`  |  Run the task on a custom Cron schedule
-`->everyMinute();`  |  Run the task every minute
-`->everyFiveMinutes();`  |  Run the task every five minutes
-`->everyTenMinutes();`  |  Run the task every ten minutes
-`->everyThirtyMinutes();`  |  Run the task every thirty minutes
-`->hourly();`  |  Run the task every hour
-`->daily();`  |  Run the task every day at midnight
-`->dailyAt('13:00');`  |  Run the task every day at 13:00
-`->twiceDaily(1, 13);`  |  Run the task daily at 1:00 & 13:00
-`->weekly();`  |  Run the task every week
-`->monthly();`  |  Run the task every month
-
-These methods may be combined with additional constraints to create even more finely tuned schedules that only run on certain days of the week. For example, to schedule a command to run weekly on Monday:
->>>>>>> e7a47549ba0a8b0253f377cfda118b37eb33b100
 
     $schedule->call(function () {
         // Runs once a week on Monday at 13:00...

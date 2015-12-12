@@ -734,11 +734,7 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-old"></a>
 #### `old()` {#collection-method}
 
-<<<<<<< HEAD
 `old` 函式 [取得](/docs/{{version}}/requests#retrieving-input) 快閃到 session 的舊有輸入數值：
-=======
-The `old` function [retrieves](/docs/{{version}}/requests#retrieving-input) an old input value flashed into the session:
->>>>>>> e7a47549ba0a8b0253f377cfda118b37eb33b100
 
     $value = old('value');
 
