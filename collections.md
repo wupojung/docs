@@ -236,6 +236,23 @@
         }
     });
 
+<a name="method-every"></a>
+#### `every()` {#collection-method}
+
+`every` 方法會建立一個包含每第 n 個元素的新集合：
+
+    $collection = collect(['a', 'b', 'c', 'd', 'e', 'f']);
+
+    $collection->every(4);
+
+    // ['a', 'e']
+
+你可以選擇性的傳遞偏移值作為第二個參數：
+
+    $collection->every(4, 1);
+
+    // ['b', 'f']
+
 <a name="method-filter"></a>
 #### `filter()` {#collection-method}
 

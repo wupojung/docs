@@ -51,6 +51,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 [base_path](#method-base-path)
 [config_path](#method-config-path)
 [database_path](#method-database-path)
+[elixir](#method-elixir)
 [public_path](#method-public-path)
 [storage_path](#method-storage-path)
 </div>
@@ -81,6 +82,8 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
 <div class="collection-method-list" markdown="1">
 [action](#method-action)
+[asset](#method-asset)
+[secure_asset](#method-secure-asset)
 [route](#method-route)
 [url](#method-url)
 </div>
@@ -95,7 +98,6 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 [csrf_field](#method-csrf-field)
 [csrf_token](#method-csrf-token)
 [dd](#method-dd)
-[elixir](#method-elixir)
 [env](#method-env)
 [event](#method-event)
 [factory](#method-factory)
@@ -397,6 +399,13 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     $path = database_path();
 
+<a name="method-elixir"></a>
+#### `elixir()` {#collection-method}
+
+The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/elixir) file:
+
+    elixir($file);
+
 <a name="method-public-path"></a>
 #### `public_path()` {#collection-method}
 
@@ -442,6 +451,8 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 `e` 函式對給定字串執行 `htmlentities`：
 
     echo e('<html>foo</html>');
+
+    // &lt;html&gt;foo&lt;/html&gt;
 
 <a name="method-ends-with"></a>
 #### `ends_with()` {#collection-method}
@@ -585,6 +596,20 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     $url = action('UserController@profile', ['id' => 1]);
 
+<a name="method-asset"></a>
+#### `asset()` {#collection-method}
+
+Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+
+	$url = asset('img/photo.jpg');
+
+<a name="method-secure-asset"></a>
+#### `secure_asset()` {#collection-method}
+
+Generate a URL for an asset using HTTPS:
+
+	echo secure_asset('foo/bar.zip', $title, $attributes = []);
+
 <a name="method-route"></a>
 #### `route()` {#collection-method}
 
@@ -638,6 +663,10 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     $value = config('app.timezone', $default);
 
+The `config` helper may also be used to set configuration variables at runtime by passing an array of key / value pairs:
+
+    config(['app.debug' => true]);
+
 <a name="method-csrf-field"></a>
 #### `csrf_field()` {#collection-method}
 
@@ -659,6 +688,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     dd($value);
 
+<<<<<<< HEAD
 <a name="method-elixir"></a>
 #### `elixir()` {#collection-method}
 
@@ -666,6 +696,8 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     elixir($file);
 
+=======
+>>>>>>> e7a47549ba0a8b0253f377cfda118b37eb33b100
 <a name="method-env"></a>
 #### `env()` {#collection-method}
 
@@ -688,7 +720,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
 `factory` 函式根據給定類別、名稱以及總數產生模型工廠建構器（model factory builder）。可用於 [測試](/docs/{{version}}/testing#model-factories) 或 [資料填充](/docs/{{version}}/seeding#using-model-factories)：
 
-    $user = factory('App\User')->make();
+    $user = factory(App\User::class)->make();
 
 <a name="method-method-field"></a>
 #### `method_field()` {#collection-method}
@@ -702,7 +734,11 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-old"></a>
 #### `old()` {#collection-method}
 
+<<<<<<< HEAD
 `old` 函式 [取得](/docs/{{version}}/requests#retrieving-input) 快閃到 session 的舊有輸入數值：
+=======
+The `old` function [retrieves](/docs/{{version}}/requests#retrieving-input) an old input value flashed into the session:
+>>>>>>> e7a47549ba0a8b0253f377cfda118b37eb33b100
 
     $value = old('value');
 
