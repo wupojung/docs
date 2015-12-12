@@ -402,7 +402,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-elixir"></a>
 #### `elixir()` {#collection-method}
 
-The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/elixir) file:
+`elixir` 函式取得加上版本號的 [Elixir](/docs/{{version}}/elixir) 檔案路徑：
 
     elixir($file);
 
@@ -430,7 +430,7 @@ The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/
 <a name="method-camel-case"></a>
 #### `camel_case()` {#collection-method}
 
-`camel_case` 函式轉換給定的字串成 ` 駝峰式命名 `：
+`camel_case` 函式會將給定的字串轉換成 ` 駝峰式命名 `：
 
     $camel = camel_case('foo_bar');
 
@@ -466,7 +466,7 @@ The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/
 <a name="method-snake-case"></a>
 #### `snake_case()` {#collection-method}
 
-`snake_case` 函式轉換給定的字串成 ` 蛇形命名 `：
+`snake_case` 函式會將給定的字串轉換成 ` 蛇形命名 `：
 
     $snake = snake_case('fooBar');
 
@@ -511,7 +511,7 @@ The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/
 <a name="method-str-is"></a>
 #### `str_is()` {#collection-method}
 
-`str_is` 函式判斷字串是否符合給定模式。星號可作為萬用字元使用：
+`str_is` 函式判斷給定的字串與給定的格式是否符合。星號可作為萬用字元使用：
 
     $value = str_is('foo*', 'foobar');
 
@@ -562,7 +562,7 @@ The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/
 <a name="method-studly-case"></a>
 #### `studly_case()` {#collection-method}
 
-`studly_case` 函式轉換給定字串成 ` 首字大寫命名 `：
+`studly_case` 函式將給定字串轉換成 ` 首字大寫命名 `：
 
     $value = studly_case('foo_bar');
 
@@ -571,7 +571,7 @@ The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/
 <a name="method-trans"></a>
 #### `trans()` {#collection-method}
 
-`trans` 函式根據你的 [在地化檔案](/docs/{{version}}/localization) 翻譯給定的語句：
+`trans` 函式根據你的[在地化檔案](/docs/{{version}}/localization)翻譯給定的語句：
 
     echo trans('validation.required'):
 
@@ -636,14 +636,14 @@ Generate a URL for an asset using HTTPS:
 <a name="method-auth"></a>
 #### `auth()` {#collection-method}
 
-`auth` 函式回傳一個認證器（authenticator）實例。你可以使用它取代 `Auth` facade：
+`auth` 函式回傳一個認證器實例。你可以使用它取代 `Auth` facade：
 
     $user = auth()->user();
 
 <a name="method-back"></a>
 #### `back()` {#collection-method}
 
-`back()` 函式產生一個重導回應（redirect response），返回使用者之前的位置：
+`back()` 函式產生一個重導回應讓使用者回到之前的位置：
 
     return back();
 
@@ -711,14 +711,14 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-event"></a>
 #### `event()` {#collection-method}
 
-`event` 函式配送給定 [事件](/docs/{{version}}/events) 到所屬的監聽器：
+`event` 函式配送給定[事件](/docs/{{version}}/events)到所屬的監聽器：
 
     event(new UserRegistered($user));
 
 <a name="method-factory"></a>
 #### `factory()` {#collection-method}
 
-`factory` 函式根據給定類別、名稱以及總數產生模型工廠建構器（model factory builder）。可用於 [測試](/docs/{{version}}/testing#model-factories) 或 [資料填充](/docs/{{version}}/seeding#using-model-factories)：
+`factory` 函式根據給定類別、名稱以及總數產生模型工廠建構器（model factory builder）。可用於[測試](/docs/{{version}}/testing#model-factories)或[資料填充](/docs/{{version}}/seeding#using-model-factories)：
 
     $user = factory(App\User::class)->make();
 
@@ -734,21 +734,21 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-old"></a>
 #### `old()` {#collection-method}
 
-`old` 函式 [取得](/docs/{{version}}/requests#retrieving-input) 快閃到 session 的舊有輸入數值：
+`old` 函式[取得](/docs/{{version}}/requests#retrieving-input)快閃到 session 的舊有輸入數值：
 
     $value = old('value');
 
 <a name="method-redirect"></a>
 #### `redirect()` {#collection-method}
 
-`redirect` 函式回傳 redirector 實例以進行 [重導](/docs/{{version}}/responses#redirects)：
+`redirect` 函式回傳重導器實例以進行 [重導](/docs/{{version}}/responses#redirects)：
 
     return redirect('/home');
 
 <a name="method-response"></a>
 #### `response()` {#collection-method}
 
-`response` 函式建立一個 [回應](/docs/{{version}}/responses) 實例或獲取一個回應工廠（response factory）實例：
+`response` 函式建立一個[回應](/docs/{{version}}/responses)實例或獲取一個回應工廠（response factory）實例：
 
     return response('Hello World', 200, $headers);
 
@@ -757,14 +757,14 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-value"></a>
 #### `value()` {#collection-method}
 
-`value` 函式回傳給定數值。而當你傳遞一個 ` 閉包 ` 給該函式，該 ` 閉包 ` 將被執行並回傳結果：
+`value` 函式回傳給定數值。而當你傳遞一個`閉包`給該函式，該`閉包`將被執行並回傳結果：
 
     $value = value(function() { return 'bar'; });
 
 <a name="method-view"></a>
 #### `view()` {#collection-method}
 
-`view` 函式取得 [視圖](/docs/{{version}}/views) 實例：
+`view` 函式取得[視圖](/docs/{{version}}/views) 實例：
 
     return view('auth.login');
 
