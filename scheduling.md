@@ -10,7 +10,7 @@
 <a name="introduction"></a>
 ## 簡介
 
-在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令排程器（command scheduler）允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上增加一條 Cron 項目即可。
+在過去，開發者必須為每個需要排程的任務產生 Cron 項目。然而令人頭疼的是任務排程不受版本控制，並且你需要 SSH 到你的伺服器增加 Cron 項目。Laravel 指令排程器允許你清楚流暢的在 Laravel 當中定義指令排程，並且僅需要在你的伺服器上增加一條 Cron 項目即可。
 
 你的排程已經定義在 `app/Console/Kernel.php` 檔案的 `schedule` 方法中。為了方便你開始，一個簡單的範例已經包含在該方法。你可以自由的增加排程到 `Schedule` 物件中。
 
@@ -60,7 +60,7 @@
         }
     }
 
-除了排定 ` 閉包 ` 呼叫，你還能排定 [Artisan 命令](/docs/{{version}}/artisan) 以及作業系統指令。舉個例子，你可以使用 `command` 方法排定一個 Artisan 指令：
+除了排定 `閉包` 呼叫，你還能排定 [Artisan 指令](/docs/{{version}}/artisan) 以及作業系統指令。舉個例子，你可以使用 `command` 方法排定一個 Artisan 指令：
 
     $schedule->command('emails:send --force')->daily();
 
