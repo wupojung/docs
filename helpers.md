@@ -430,7 +430,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-camel-case"></a>
 #### `camel_case()` {#collection-method}
 
-`camel_case` 函式會將給定的字串轉換成 ` 駝峰式命名 `：
+`camel_case` 函式會將給定的字串轉換成 `駝峰式命名`：
 
     $camel = camel_case('foo_bar');
 
@@ -466,7 +466,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-snake-case"></a>
 #### `snake_case()` {#collection-method}
 
-`snake_case` 函式會將給定的字串轉換成 ` 蛇形命名 `：
+`snake_case` 函式會將給定的字串轉換成 `蛇形命名`：
 
     $snake = snake_case('fooBar');
 
@@ -562,7 +562,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-studly-case"></a>
 #### `studly_case()` {#collection-method}
 
-`studly_case` 函式將給定字串轉換成 ` 首字大寫命名 `：
+`studly_case` 函式將給定字串轉換成 `首字大寫命名`：
 
     $value = studly_case('foo_bar');
 
@@ -757,7 +757,7 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-value"></a>
 #### `value()` {#collection-method}
 
-`value` 函式回傳給定數值。而當你傳遞一個`閉包`給該函式，該`閉包`將被執行並回傳結果：
+`value` 函式回傳給定數值。而當你傳遞一個 `閉包` 給該函式，該 `閉包` 將被執行並回傳結果：
 
     $value = value(function() { return 'bar'; });
 
