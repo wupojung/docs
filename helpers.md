@@ -143,7 +143,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-array-collapse"></a>
 #### `array_collapse()` {#collection-method}
 
-The `array_collapse` function collapse an array of arrays into a single array:
+`array_collapse` 函式將陣列的每一個陣列折成單一陣列：
 
     $array = array_collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 
@@ -565,7 +565,7 @@ The `array_collapse` function collapse an array of arrays into a single array:
 
     // children
 
-You may provide an integer as a second argument to the function to retrieve the singular or plural form of the string:
+你能提供一整數做為第二參數，取得字串的單數或複數形：
 
     $plural = str_plural('child', 2);
 
@@ -640,14 +640,14 @@ You may provide an integer as a second argument to the function to retrieve the 
 <a name="method-asset"></a>
 #### `asset()` {#collection-method}
 
-Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+根據目前請求的協定（HTTP 或 HTTPS）產生資源檔網址：
 
 	$url = asset('img/photo.jpg');
 
 <a name="method-secure-asset"></a>
 #### `secure_asset()` {#collection-method}
 
-Generate a URL for an asset using HTTPS:
+根據 HTTPS 產生資源檔網址：
 
 	echo secure_asset('foo/bar.zip', $title, $attributes = []);
 
@@ -698,7 +698,7 @@ Generate a URL for an asset using HTTPS:
 <a name="method-collect"></a>
 #### `collect()` {#collection-method}
 
-The `collect` function creates a [collection](/docs/{{version}}/collections) instance from the supplied items:
+`collect` 函式從給定的項目產生[集合](/docs/{{version}}/collections)實例
 
     $collection = collect(['taylor', 'abigail']);
 
@@ -711,7 +711,7 @@ The `collect` function creates a [collection](/docs/{{version}}/collections) ins
 
     $value = config('app.timezone', $default);
 
-The `config` helper may also be used to set configuration variables at runtime by passing an array of key / value pairs:
+`config` 輔助方法也可以在執行期間，根據給定的鍵值對指定設定值：
 
     config(['app.debug' => true]);
 
@@ -735,13 +735,6 @@ The `config` helper may also be used to set configuration variables at runtime b
 `dd` 函式印出給定變數並結束腳本執行：
 
     dd($value);
-
-<a name="method-elixir"></a>
-#### `elixir()` {#collection-method}
-
-`elixir` 函式取得加上版本號的 [Elixir](/docs/{{version}}/elixir) 檔案路徑：
-
-    elixir($file);
 
 <a name="method-env"></a>
 #### `env()` {#collection-method}
@@ -793,7 +786,7 @@ The `config` helper may also be used to set configuration variables at runtime b
 <a name="method-request"></a>
 #### `request()` {#collection-method}
 
-The `request` function returns the current [request](/docs/{{version}}/requests) instance or obtains an input item:
+`request` 函式取得目前的[請求](/docs/{{version}}/requests)實例或輸入的項目：
 
     $request = request();
 
@@ -811,15 +804,15 @@ The `request` function returns the current [request](/docs/{{version}}/requests)
 <a name="method-session"></a>
 #### `session()` {#collection-method}
 
-The `session` function may be used to get / set a session value:
+`session` 函式可被用於取得或設定單一 session 內容：
 
     $value = session('key');
 
-You may set values by passing an array of key / value pairs to the function:
+你可以透過傳遞鍵值對給該函式進行內容設定：
 
     session(['chairs' => 7, 'instruments' => 3]);
 
-The session store will be returned if no value is passed to the function:
+該函式在沒有內容傳遞時，將回傳所儲存的 seesion 內容：
 
     $value = session()->get('key');
 

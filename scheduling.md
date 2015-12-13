@@ -135,6 +135,12 @@ Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透
              ->daily()
              ->sendOutputTo($filePath);
 
+如果想將輸出附加到給定的檔案，你可以使用 `appendOutputTo` 方法：
+
+    $schedule->command('emails:send')
+             ->daily()
+             ->appendOutputTo($filePath);
+
 透過 `emailOutputTo` 方法，你可以發送輸出到你所選的電子郵件。注意，你必須先透過 `sendOutputTo` 方法輸出到一個檔案。同時，在將任務輸出發送到電子郵件之前，你需要先設定 Laravel 的[電子郵件服務](/docs/{{version}}/mail)：
 
     $schedule->command('foo')
