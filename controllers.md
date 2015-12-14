@@ -74,7 +74,7 @@
 
     $url = action('FooController@method');
 
-You may access the name of the controller action being run using the `currentRouteAction` method on the `Route` facade:
+你可以使用 `Route` facade 的 `currentRouteAction` 方法存取正在執行的控制器行為名稱：
 
 	$action = Route::currentRouteAction();
 
@@ -343,7 +343,7 @@ Laravel [服務容器](/docs/{{version}}/container)用於解析所有的 Laravel
 <a name="route-caching"></a>
 ## 路由快取
 
-> **Note:** Route caching does not work with Closure based routes. To use route caching, you must convert any Closure routes to use controller classes.
+> **注意：**路由快取並不會作用在基於閉包的路由。要使用路由快取，你必須將所有閉包路由轉換為控制器類別。
 
 若您的應用程式完全透過控制器使用路由，您可以利用 Laravel 的路由快取。使用路由快取可以大幅降低註冊您應用程式全部的路由所需的時間。在某些情況下，您的路由註冊甚至可以快上一百倍！要產生路由快取，只要執行 `route:cache` 此 Artisan 指令：
 
