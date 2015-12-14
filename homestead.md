@@ -41,12 +41,12 @@ Homestead 目前是建置且測試於 Vagrant 1.7。
 - Sqlite3
 - Postgres
 - Composer
-- Node (With PM2, Bower, Grunt, and Gulp)
+- Node（附帶了 PM2、Bower、Grunt 與 Gulp）
 - Redis
-- Memcached (PHP 5.x Only)
+- Memcached (僅限 PHP 5.x)
 - Beanstalkd
 - [Laravel Envoy](/docs/{{version}}/envoy)
-- [Blackfire Profiler](#blackfire-profiler)
+- [Blackfire 分析器](#blackfire-profiler)
 
 <a name="installation-and-setup"></a>
 ## 安裝與設定
@@ -70,11 +70,11 @@ Homestead 目前是建置且測試於 Vagrant 1.7。
 
 #### 手動克隆 Homestead 資源庫
 
-你可以簡單地透過手動克隆資源庫的方式來安裝 Homestead。建議可將資源庫克隆至你的 "home" 目錄中的 `Homestead` 資料夾，如此一來 Homestead box 將能提供主機服務給你所有的 Laravel 專案：
+你可以簡單地透過手動克隆資源庫的方式來安裝 Homestead。建議可將資源庫克隆至你的「home」目錄中的 `Homestead` 資料夾，如此一來 Homestead box 將能提供主機服務給你所有的 Laravel 專案：
 
     git clone https://github.com/laravel/homestead.git Homestead
 
-If you would like to try the PHP 7.0 version of Homestead, clone the `php-7` branch of the repository:
+如果你想嘗試 PHP 7.0 版本的 Homestead，可以克隆資源庫的 `php-7` 分支：
 
     git clone -b php-7 https://github.com/laravel/homestead.git Homestead
 
@@ -83,38 +83,38 @@ If you would like to try the PHP 7.0 version of Homestead, clone the `php-7` bra
     bash init.sh
 
 <a name="upgrading-to-php-7"></a>
-#### Upgrading To PHP 7.0
+#### 升級至 PHP 7.0
 
-If you are already using the PHP 5.x Homestead box, you may easily upgrade your installation to PHP 7.0. First, clone the `php-7` branch of the `laravel/homestead` repository into a new folder:
+如果你已經使用 PHP 5.x 的 Homestead box，你可以很簡單的升級你的安裝檔至 PHP 7.0。首先，克隆 `laravel/homestead` 資源庫的 `php-7` 分支至新的資料夾：
 
     git clone -b php-7 https://github.com/laravel/homestead.git Homestead7
 
-If you already have a `Homestead.yaml` file in your `~/.homestead` directory, there is no need to run the `init.sh` script. However, if this is the first and only Homestead installation on your machine, you should run `bash init.sh` from your new Homestead directory.
+如果你的 `~/.homestead` 目錄已經擁有 `Homestead.yaml` 檔案，那麼你就不需要執行 `init.sh` 腳本。不過，如果這是你機器第一次且唯一 Homestead 安裝，你需要在你新的 Homestead 目錄執行 `bash init.sh`。
 
-Next, add then the `box` directive to the top of your `~/.homestead/Homestead.yaml` file (on a new line after `---` mark):
+接著，在你的 `~/.homestead/Homestead.yaml` 檔案最上方增加 `box` 指令（在 `---` 標記後新的一行）：
 
     box: laravel/homestead-7
 
-Finally, you may run the `vagrant up` command from the directory that contains your new clone of the `laravel/homestead` repository.
+最後，你可以在包含你新克隆 `laravel/homestead` 資源庫的資目錄中執行 `vagrant up` 指令。
 
 <a name="configuring-homestead"></a>
 ### 配置 Homestead
 
-#### 設定你的 Provider
+#### 設定你的提供者
 
-在 `Homestead.yaml` 檔案中的 `provider` 參數是用來設定你想要使用哪一個 Vagrant provider： `virtualbox`、`vmware_fusion` 或 `vmware_workstation`。你可以根據你的喜好來決定 provider：
+在 `Homestead.yaml` 檔案中的 `provider` 參數是用來設定你想要使用哪一個 Vagrant 提供者：`virtualbox`、`vmware_fusion` 或 `vmware_workstation`。你可以根據你的喜好來決定提供者：
 
     provider: virtualbox
 
 #### 設定你的 SSH 金鑰
 
-你還需要將你的 public SSH 金鑰的路徑，配置在 `Homestead.yaml` 檔案中。你沒有 SSH 金鑰？在 Mac 和 Linux 下，你可以利用下面的指令來創建一組 SSH 金鑰：
+你還需要將你的公有 SSH 金鑰的路徑配置在 `Homestead.yaml` 檔案中。你沒有 SSH 金鑰？在 Mac 和 Linux 下，你可以利用下面的指令來建立一組 SSH 金鑰：
 
     ssh-keygen -t rsa -C "you@homestead"
 
 在 Windows 下，你需要安裝 [Git](http://git-scm.com/) 並且使用包含在 Git 裡的 `Git Bash` 來執行上述的指令。另外你也可以使用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) 和 [PuTTYgen](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)。
 
-一旦你創建了一組 SSH 金鑰，記得在你的 `Homestead.yaml` 檔案中的 `authorize` 屬性去設定 public 金鑰的路徑。
+一旦你創建了一組 SSH 金鑰，記得在你的 `Homestead.yaml` 檔案中的 `authorize` 屬性去設定公有金鑰的路徑。
 
 #### 設定共享資料夾
 
@@ -213,29 +213,29 @@ Windows:
 一旦 Homestead 環境配置完畢且運行後，你可能會想要為 Laravel 應用程式增加更多的 Nginx 網站。你可以在單一個 Homestead 環境中運行非常多 Laravel 安裝程式。只要在 `Homestead.yaml` 檔中增加另一個網站設定後，接著在終端機中進入到你的 Homestead 目錄並執行 `vagrant provision` 指令，即可增加另一個網站。
 
 <a name="configuring-cron-schedules"></a>
-### Configuring Cron Schedules
+### 設定 Cron 排程器
 
-Laravel provides a convenient way to [schedule Cron jobs](/docs/{{version}}/scheduling) by scheduling a single `schedule:run` Artisan command to be run every minute. The `schedule:run` command will examine the job scheduled defined in your `App\Console\Kernel` class to determine which jobs should be run.
+Laravel 提供了便利的方式來[排程 Cron 任務](/docs/{{version}}/scheduling)，透過 `schedule:run` Artisan 指令，排程便會在每分鐘被執行。`schedule:run` 指令會檢查定義在你 `App\Console\Kernel` 類別中排程的任務，判斷哪個任務該被執行。
 
-If you would like the `schedule:run` command to be run for a Homestead site, you may set the `schedule` option to `true` when defining the site:
+如果你想為 Homestead 網站使用 `schedule:run` 指令，你可以在定義網站時設置 `schedule` 選項為 `true`：
 
     sites:
         - map: homestead.app
           to: /home/vagrant/Code/Laravel/public
           schedule: true
 
-The Cron job for the site will be defined in the `/etc/cron.d` folder of the virtual machine.
+該網站的 Cron 任務會被定義於虛擬機器的 `/etc/cron.d` 資料夾中。
 
 <a name="ports"></a>
 ### 連接埠
 
 以下的連接埠將會被轉發至 Homestead 環境：
 
-- **SSH:** 2222 &rarr; 轉發至 22
-- **HTTP:** 8000 &rarr; 轉發至 80
-- **HTTPS:** 44300 &rarr; 轉發至 443
-- **MySQL:** 33060 &rarr; 轉發至 3306
-- **Postgres:** 54320 &rarr; 轉發至 5432
+- **SSH：**2222 &rarr; 轉發至 22
+- **HTTP：**8000 &rarr; 轉發至 80
+- **HTTPS：**44300 &rarr; 轉發至 443
+- **MySQL：**33060 &rarr; 轉發至 3306
+- **Postgres：**54320 &rarr; 轉發至 5432
 
 #### 轉發更多連接埠
 
