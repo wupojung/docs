@@ -23,7 +23,7 @@
 <a name="basic-routing"></a>
 ## 基本路由
 
-你會在 `app/Http/routes.php` 中定義應用程式大多數的路由，該檔案將會被 `App\Providers\RouteServiceProvider` 類別載入。而最基本的 Laravel 路由僅接受 URI 加上一個 `閉包 (Closure)`：
+你會在 `app/Http/routes.php` 中定義應用程式大多數的路由，該檔案將會被 `App\Providers\RouteServiceProvider` 類別載入。而最基本的 Laravel 路由僅接受 URI 加上一個`閉包`：
 
     Route::get('/', function () {
         return 'Hello World';
@@ -79,9 +79,9 @@
         //
     });
 
-路由的參數都會被放在「大括號」內。當執行路由時，參數會透過路由 `閉包 (Closure)` 來傳遞。
+路由的參數都會被放在「大括號」內。當執行路由時，參數會透過路由`閉包`來傳遞。
 
-> **注意：** 路由參數不能包含 `-` 字元。用下劃線 (`_`) 來取代。
+> **注意：**路由參數不能包含 `-` 字元。用底線 (`_`) 來取代。
 
 <a name="parameters-optional-parameters"></a>
 ### 選擇性路由參數
@@ -155,17 +155,17 @@
         'as' => 'profile', 'uses' => 'UserController@showProfile'
     ]);
 
-Instead of specifying the route name in the route array definition, you may chain the `name` method onto the end of the route definition:
+除了在路由的陣列定義中指定路由名稱外，你也可以在路由定義後方鏈結 `name` 方法：
 
     Route::get('user/profile', 'UserController@showProfile')->name('profile');
 
 #### 路由群組和命名路由
 
-假設你使用 [路由群組](#route-groups)，你可以指定一個 `as` 關鍵字在你的路由群組的屬性陣列，也允許你設定所有路由群組中共同的路由名稱前綴：
+假設你使用[路由群組](#route-groups)，你可以指定一個 `as` 關鍵字在你的路由群組的屬性陣列，也允許你設定所有路由群組中共同的路由名稱前綴：
 
     Route::group(['as' => 'admin::'], function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
-            // Route named "admin::dashboard"
+            // 路由名稱為「admin::dashboard」
         }]);
     });
 
@@ -199,11 +199,11 @@ Instead of specifying the route name in the route array definition, you may chai
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', function ()    {
-            // Uses Auth Middleware
+            // 使用 Auth 中介層
         });
 
         Route::get('user/profile', function () {
-            // Uses Auth Middleware
+            // 使用 Auth 中介層
         });
     });
 
@@ -215,11 +215,11 @@ Instead of specifying the route name in the route array definition, you may chai
 
     Route::group(['namespace' => 'Admin'], function()
     {
-        // Controllers Within The "App\Http\Controllers\Admin" Namespace
+        // 控制器在「App\Http\Controllers\Admin」命名空間
 
         Route::group(['namespace' => 'User'], function()
         {
-            // Controllers Within The "App\Http\Controllers\Admin\User" Namespace
+            // 控制器在「App\Http\Controllers\Admin\User」命名空間
         });
     });
 
@@ -243,7 +243,7 @@ Instead of specifying the route name in the route array definition, you may chai
 
     Route::group(['prefix' => 'admin'], function () {
         Route::get('users', function ()    {
-            // Matches The "/admin/users" URL
+            // 符合「/admin/users」URL
         });
     });
 
@@ -251,7 +251,7 @@ Instead of specifying the route name in the route array definition, you may chai
 
     Route::group(['prefix' => 'accounts/{account_id}'], function () {
         Route::get('detail', function ($account_id)    {
-            // Matches The accounts/{account_id}/detail URL
+            // 符合 accounts/{account_id}/detail URL
         });
     });
 
@@ -323,13 +323,13 @@ Laravel 會自動產生了一個 CSRF token 給每個活動使用者受應用程
 Laravel 也會在 `XSRF-TOKEN` cookie 中儲存 CSRF token。你也可以使用 cookie 的值來設定 `X-XSRF-TOKEN` 請求標頭。一些 JavaScript 框架會自動幫你處理，例如：Angular。你不太可能會需要手動去設定這個值。
 
 <a name="route-model-binding"></a>
-## Route Model Binding
+## 路由模型綁定
 
-Laravel route model binding provides a convenient way to inject class instances into your routes. For example, instead of injecting a user's ID, you can inject the entire `User` class instance that matches the given ID.
+Laravel 路由模型綁定提供了一個方便的方式來注入類別實例至你的路由中。例如，除了注入一個使用者的 ID，你可以注入與給定 ID 相符的完整 `User` 類別實例。
 
-First, use the router's `model` method to specify the class for a given parameter. You should define your model bindings in the `RouteServiceProvider::boot` method:
+首先，使用路由的 `model` 方法為給定參數指定類別。你必須在 `RouteServiceProvider::boot` 方法中定義你的模型綁定：
 
-#### Binding A Parameter To A Model
+#### 綁定參數至模型
 
     public function boot(Router $router)
     {
@@ -338,23 +338,23 @@ First, use the router's `model` method to specify the class for a given paramete
         $router->model('user', 'App\User');
     }
 
-Next, define a route that contains a `{user}` parameter:
+接著，定義包含 `{user}` 參數的路由：
 
     $router->get('profile/{user}', function(App\User $user) {
         //
     });
 
-Since we have bound the `{user}` parameter to the `App\User` model, a `User` instance will be injected into the route. So, for example, a request to `profile/1` will inject the `User` instance which has an ID of 1.
+因為我們已經綁定 `{user}` 參數至 `App\User` 模型，所以 `User` 實例會被注入至該路由。所以，舉個例子，一個至 `profile/1` 的請求會注入 ID 為 1 的 `User` 實例。
 
-> **Note:** If a matching model instance is not found in the database, a 404 exception will be thrown automatically.
+> **注意：**如果符合的模型不存在於資料庫中，就會自動拋出一個 404 例外。
 
-If you wish to specify your own "not found" behavior, pass a Closure as the third argument to the `model` method:
+如果你希望指定你自己的「不存在」行為，只要傳遞一個閉包作為 `model` 方法的第三個參數：
 
     $router->model('user', 'App\User', function() {
         throw new NotFoundHttpException;
     });
 
-If you wish to use your own resolution logic, you should use the `Route::bind` method. The Closure you pass to the `bind` method will receive the value of the URI segment, and should return an instance of the class you want to be injected into the route:
+如果你希望使用你自己的解析邏輯，那麼你必須使用 `Route::bind` 方法。你傳遞至 `bind` 方法的閉包會取得 URI 的部分值，且必須回傳你想注入至路由的類別實例：
 
     $router->bind('user', function($value) {
         return App\User::where('name', $value)->first();
@@ -370,11 +370,11 @@ HTML 表單沒有支援 `PUT`、`PATCH` 或 `DELETE` 動作。所以在定義 `P
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
 
-To generate the hidden input field `_method`, you may also use the `method_field` helper function:
+要產生隱藏的輸入欄位 `_method`，你也可以使用 `methid_field` 輔助函式：
 
     <?php echo method_field('PUT'); ?>
 
-Of course, using the Blade [templating engine](/docs/{{version}}/blade):
+當然，可以使用 Blade [模板引擎](/docs/{{version}}/blade)：
 
     {{ method_field('PUT') }}
 
@@ -387,4 +387,4 @@ Of course, using the Blade [templating engine](/docs/{{version}}/blade):
 
 第二，你可以手動拋出 `Symfony\Component\HttpKernel\Exception\NotFoundHttpException` 的實例。
 
-更多有關如何操作 404 例外和自訂的回應，可以到 [錯誤](/docs/{{version}}/errors#http-exceptions) 章節內參考文件。
+更多有關如何操作 404 例外和自訂的回應，可以到[錯誤](/docs/{{version}}/errors#http-exceptions)章節內參考文件。
