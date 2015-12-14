@@ -132,13 +132,13 @@
 <a name="method-avg"></a>
 #### `avg()` {#collection-method}
 
-The `avg` method returns the average of all items in the collection:
+`avg` 方法回傳集合中所有項目的平均值：
 
     collect([1, 2, 3, 4, 5])->avg();
 
     // 3
 
-If the collection contains nested arrays or objects, you should pass a key to use for determining which values to calculate the average:
+如果集合包含了巢狀陣列或物件，你可以傳遞鍵來指定使用哪些值計算平均值：
 
     $collection = collect([
         ['name' => 'JavaScript: The Good Parts', 'pages' => 176],
@@ -282,7 +282,7 @@ If the collection contains nested arrays or objects, you should pass a key to us
 <a name="method-except"></a>
 #### `except()` {#collection-method}
 
-The `except` method returns all items in the collection except for those with the specified keys:
+`except` 方法回傳集合中排除指定鍵的所有項目：
 
     $collection = collect(['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]);
 
@@ -292,7 +292,7 @@ The `except` method returns all items in the collection except for those with th
 
     // ['product_id' => 1, 'name' => 'Desk']
 
-For the inverse of `except`, see the [only](#method-only) method.
+與 `except` 相反的方法請查看 [only](#method-only)。
 
 <a name="method-filter"></a>
 #### `filter()` {#collection-method}
@@ -607,7 +607,7 @@ For the inverse of `except`, see the [only](#method-only) method.
 <a name="method-max"></a>
 #### `max()` {#collection-method}
 
-The `max` method return the maximum value of a given key:
+`max` 方法會傳給定鍵的最大值：
 
     $max = collect([['foo' => 10], ['foo' => 20]])->max('foo');
 
@@ -643,7 +643,7 @@ The `max` method return the maximum value of a given key:
 <a name="method-min"></a>
 #### `min()` {#collection-method}
 
-The `min` method return the minimum value of a given key:
+`max` 方法會傳給定鍵的最小值：
 
     $min = collect([['foo' => 10], ['foo' => 20]])->min('foo');
 
@@ -656,7 +656,7 @@ The `min` method return the minimum value of a given key:
 <a name="method-only"></a>
 #### `only()` {#collection-method}
 
-The `only` method returns the items in the collection with the specified keys:
+`only` 方法回傳集合中指定鍵的所有項目：
 
     $collection = collect(['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]);
 
@@ -666,7 +666,7 @@ The `only` method returns the items in the collection with the specified keys:
 
     // ['product_id' => 1, 'name' => 'Desk']
 
-For the inverse of `only`, see the [except](#method-except) method.
+與 `only` 相反的方法請查看 [except](#method-only)。
 
 <a name="method-pluck"></a>
 #### `pluck()` {#collection-method}
@@ -720,7 +720,7 @@ For the inverse of `only`, see the [except](#method-except) method.
 
     // [0, 1, 2, 3, 4, 5]
 
-You can optionally pass a second argument to set the key of the prepended item:
+你可以傳遞選擇性的第二個參數來設置前置項目的鍵：
 
     $collection = collect(['one' => 1, 'two', => 2]);
 
