@@ -213,7 +213,7 @@ Laravel 允許你在[視圖](/docs/{{version}}/views)中存放電子郵件訊息
     });
 
 <a name="mail-and-local-development"></a>
-## 郵件與本地端開發
+## 郵件與本機端開發
 
 當開發需要寄送電子郵件的應用程式時，你有可能不想要實際地送出電子郵件到真正的郵件地址。Laravel 提供了幾種方法以「停止」將電子郵件訊息真正寄出。
 
@@ -235,12 +235,12 @@ Laravel 允許你在[視圖](/docs/{{version}}/views)中存放電子郵件訊息
 最後，你可以使用像 [Mailtrap](https://mailtrap.io) 這樣的服務以及 `smtp` 驅動來將你的郵件訊息寄到一個「假的」郵箱，而你可以在一個真的郵件客戶端檢視它們。這個方法的好處是讓你可以在 Mailtrap 的訊息檢閱器中實際查看最終的電子郵件。
 
 <a name="events"></a>
-## Events
+## 事件
 
-Laravel fires the `mailer.sending` event just before sending mail messages. Remember, this event is fired when the mail is *sent*, not when it is queued. You may register an event listener in your `EventServiceProvider`:
+Laravel 會在發送郵件訊息之前觸發 `mailer.sending` 事件。切記，此事件只會在郵件**發送**時觸發，在隊列時則不會。你可以在你的 `EventServiceProvider` 註冊一個事件監聽器：
 
     /**
-     * Register any other events for your application.
+     * 註冊你應用程式中的任何其他事件。
      *
      * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
