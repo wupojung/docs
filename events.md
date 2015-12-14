@@ -11,7 +11,7 @@
     - [將事件標記為廣播](#marking-events-for-broadcast)
     - [廣播資料](#broadcast-data)
     - [消耗事件廣播](#consuming-event-broadcasts)
-- [事件訂閱器](#event-subscribers))
+- [事件訂閱器](#event-subscribers)
 - [框架事件](#framework-events)
 
 <a name="introduction"></a>
@@ -41,12 +41,12 @@ Laravel 應用程式包含了 `EventServiceProvider` 提供一個方便的位置
 
     php artisan event:generate
 
-### Registering Events Manually
+### 手動註冊事件
 
-Typically, events should be registered via the `EventServiceProvider` `$listen` array; however, you may also register events manually with the event dispatcher using either the `Event` facade or the `Illuminate\Contracts\Events\Dispatcher` contract implementation:
+一般來說，事件必須透過 `EventServiceProvider` 的 `$listen` 陣列進行註冊；不過，你也可以透過 `Event` facade 或是 `Illuminate\Contracts\Events\Dispatcher` contract 實作的事件發送器來手動註冊事件：
 
     /**
-     * Register any other events for your application.
+     * 註冊你應用程式中的任何其他事件。
      *
      * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
@@ -60,9 +60,9 @@ Typically, events should be registered via the `EventServiceProvider` `$listen` 
         });
     }
 
-#### Wildcard Event Listeners
+#### 事件監聽器的萬用字元
 
-You may even register listeners using the `*` as a wildcard, allowing you to catch multiple events on the same listener. Wildcard listeners receive the entire event data array as a single argument:
+你也可以使用 `*` 萬用字元註冊監聽器，讓你可以在同個監聽器攔截多個事件。萬用字元監聽器會接收完整事件資料的陣列作為唯一的參數：
 
     $events->listen('event.*', function (array $data) {
         //
@@ -235,7 +235,7 @@ You may even register listeners using the `*` as a wildcard, allowing you to cat
 <a name="broadcasting-events"></a>
 ## 廣播事件
 
-在許多現代的 web 應用程式，web sockets 都用在實現即時，即時更新使用者介面。當在伺服器上更新一些資料，websocket 連線通常傳送一個訊息透過客戶端處理。
+在許多現代的網頁應用程式，web sockets 都用在實現即時，即時更新使用者介面。當在伺服器上更新一些資料，websocket 連線通常傳送一個訊息透過客戶端處理。
 
 為了協助你建立這些類型的應用程式，Laravel 讓你可以簡單的經由 websocket 連線來「廣播」你的事件。廣播你的 Laravel 事件讓你能夠在你的伺服器端程式碼和你的客戶端 JavaScript 框架間分享相同的事件名稱。
 
@@ -299,12 +299,12 @@ You may even register listeners using the `*` as a wildcard, allowing you to cat
 接著，你只需要像往常的[觸發事件](#firing-events)。一旦事件被觸發之後，[隊列任務](/docs/{{version}}/queues)將會自動的廣播事件到你指定的廣播驅動。
 
 <a name="overriding-broadcast-event-name"></a>
-#### Overriding Broadcast Event Name
+#### 覆寫廣播事件名稱
 
-By default, the broadcast event name will be the fully qualified class name of the event. Using the example class above, the broadcast event would be `App\Events\ServerCreated`. You can customize this broadcast event name to whatever you want using the `broadcastAs` method:
+預設情況下，廣播事件名稱會使用完整的事件類別名稱。以下方類別為範例，該廣播事件會是 `App\Events\ServerCreated`。你可以使用 `broadcastAs` 方法來自定你想要的廣播事件名稱：
 
     /**
-     * Get the broadcast event name.
+     * 取得廣播事件名稱。
      *
      * @return string
      */
@@ -461,11 +461,11 @@ By default, the broadcast event name will be the fully qualified class name of t
     }
 
 <a name="framework-events"></a>
-## Framework Events
+## 框架事件
 
-Laravel provides a variety of "core" events for actions performed by the framework. You can subscribe to them in the same way that you subscribe to your own custom events:
+Laravel 為框架執行的行為提供了許多「核心」事件。你可以使用與你訂閱自定事件同樣的方式訂閱它們：
 
-Event  |  Parameter(s)
+事件  |  參數
 ------------- | -----------
 artisan.start | $application
 auth.attempt | $credentials, $remember, $login
