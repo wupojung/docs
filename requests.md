@@ -23,7 +23,7 @@
     class UserController extends Controller
     {
         /**
-         * Store a new user.
+         * 儲存新的使用者。
          *
          * @param  Request  $request
          * @return Response
@@ -52,7 +52,7 @@
     class UserController extends Controller
     {
         /**
-         * Update the specified user.
+         * 更新指定的使用者。
          *
          * @param  Request  $request
          * @param  int  $id
@@ -123,7 +123,7 @@ PSR-7 標準制定的 HTTP 訊息介面包含了請求及回應。如果你想�
 
     $name = $request->input('name');
 
-Alternatively, you may access user input using the properties of the `Illuminate\Http\Request` instance. For example, if one of your application's forms contains a `name` field, you may access the value of the posted field like so:
+此外，你可以使用 `Illuminate\Http\Request` 的屬性存取使用者輸入。例如，如果你應用程式的表單含有一個 `name` 欄位，你可以從傳遞的欄位存取它的值，像這樣：
 
     $name = $request->name;
 
