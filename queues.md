@@ -296,7 +296,6 @@ Laravel 的隊列服務為不同的隊列後端系統提供一個統一的 API �
 
 #### 任務完成事件
 
-The `Queue::after` method allows you to register a callback to be executed when a queued job executes successfully. This callback is a great opportunity to perform additional logging, queue a subsequent job, or increment statistics for a dashboard. For example, we may attach a callback to this event from the `AppServiceProvider` that is included with Laravel:
 `Queue::after` 方法讓你能夠註冊一個回呼，當隊列任務執行完成後就會被執行。在此回呼進行額外的紀錄、隊列後續任務、或為儀表板增加統計都是很好的時機。舉個例子，我們可以在 Laravel 所包含的 `AppServiceProvider` 附加一個回呼到此事件：
 
     <?php
