@@ -151,9 +151,9 @@ Eloquent 的 `create` 方法現在可以不帶任何參數呼叫。如果你有�
 
 ### 集合類別
 
-#### The `sort` Method
+#### `sort` 方法
 
-The `sort` method now returns a fresh collection instance instead of modifying the existing collection:
+`sort` 方法現在回傳全新的集合實例，取代修改原有的集合：
 
     $collection = $collection->sort($callback);
 
