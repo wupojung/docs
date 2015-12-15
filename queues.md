@@ -292,11 +292,12 @@ Laravel 的隊列服務為不同的隊列後端系統提供一個統一的 API �
     ]);
 
 <a name="job-events"></a>
-### Job Events
+### 任務事件
 
-#### Job Completion Event
+#### 任務完成事件
 
 The `Queue::after` method allows you to register a callback to be executed when a queued job executes successfully. This callback is a great opportunity to perform additional logging, queue a subsequent job, or increment statistics for a dashboard. For example, we may attach a callback to this event from the `AppServiceProvider` that is included with Laravel:
+`Queue::after` 方法讓你能夠註冊一個回呼，當隊列任務執行完成後就會被執行。在此回呼進行額外的紀錄、隊列後續任務、或為儀表板增加統計都是很好的時機。舉個例子，我們可以在 Laravel 所包含的 `AppServiceProvider` 附加一個回呼到此事件：
 
     <?php
 
@@ -308,7 +309,7 @@ The `Queue::after` method allows you to register a callback to be executed when 
     class AppServiceProvider extends ServiceProvider
     {
         /**
-         * Bootstrap any application services.
+         * 啟動所有應用程式服務。
          *
          * @return void
          */
@@ -320,7 +321,7 @@ The `Queue::after` method allows you to register a callback to be executed when 
         }
 
         /**
-         * Register the service provider.
+         * 註冊服務提供者。
          *
          * @return void
          */
@@ -528,11 +529,11 @@ Supervisor 的設定檔一般是放在 `/etc/supervisor/conf.d` 目錄下，在�
 
     php artisan queue:failed
 
-`queue:failed` 指令會列出所有任務編號、連結、隊列以及失敗時間，任務編號會用在重試失敗的任務。例如要重試一個編號為 5 的失敗任務，其指令如下：
+`queue:failed` 指令會列出所有任務 ID、連結、隊列以及失敗時間，任務 ID 會用在重試失敗的任務。例如要重試一個 ID 為 5 的失敗任務，其指令如下：
 
     php artisan queue:retry 5
 
-To retry all of your failed jobs, use `queue:retry` with `all` as the ID:
+要重試所有失敗的任務，可以使用 `queue:retry` 並使用 `all` 作為 ID：
 
     php artisan queue:retry all
 
