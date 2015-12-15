@@ -7,7 +7,7 @@
     - [Sessions 和認證](#sessions-and-authentication)
     - [停用中介層](#disabling-middleware)
     - [自訂 HTTP 請求](#custom-http-requests)
-    - [PHPUnit Assertions](#phpunit-assertions)
+    - [PHPUnit 斷言](#phpunit-assertions)
 - [使用資料庫](#working-with-databases)
     - [每次測試結束後重置資料庫](#resetting-the-database-after-each-test)
     - [模型工廠](#model-factories)
@@ -293,24 +293,24 @@ Laravel 提供了幾個輔助方法在測試時使用 Session。首先，你需�
        $response = $this->call('POST', '/user', ['name' => 'Taylor']);
 
 <a name="phpunit-assertions"></a>
-### PHPUnit Assertions
+### PHPUnit 斷言
 
-Laravel provides several additional assertion methods for [PHPUnit](https://phpunit.de/) tests:
+Laravel 為 [PHPUnit](https://phpunit.de/) 測試提供了一些額外的斷言方法：
 
-Method  | Description
+方法  | 描述
 ------------- | -------------
-`->assertResponseOk();`  |  Assert that the client response has an OK status code.
-`->assertResponseStatus($code);`  |  Assert that the client response has a given code.
-`->assertViewHas($key, $value = null);`  |  Assert that the response view has a given piece of bound data.
-`->assertViewHasAll(array $bindings);`  |  Assert that the view has a given list of bound data.
-`->assertViewMissing($key);`  |  Assert that the response view is missing a piece of bound data.
-`->assertRedirectedTo($uri, $with = []);`  |  Assert whether the client was redirected to a given URI.
-`->assertRedirectedToRoute($name, $parameters = [], $with = []);`  |  Assert whether the client was redirected to a given route.
-`->assertRedirectedToAction($name, $parameters = [], $with = []);`  |  Assert whether the client was redirected to a given action.
-`->assertSessionHas($key, $value = null);`  |  Assert that the session has a given value.
-`->assertSessionHasAll(array $bindings);`  |  Assert that the session has a given list of values.
-`->assertSessionHasErrors($bindings = [], $format = null);`  |  Assert that the session has errors bound.
-`->assertHasOldInput();`  |  Assert that the session has old input.
+`->assertResponseOk();`  |  斷言客戶端的回應擁有 OK 狀態碼。
+`->assertResponseStatus($code);`  |  斷言客戶端的回應擁有給定的狀態碼。
+`->assertViewHas($key, $value = null);`  |  斷言回應視圖擁有給定的部分綁定資料。
+`->assertViewHasAll(array $bindings);`  |  斷言回應視圖擁有給定的綁定資料列表。
+`->assertViewMissing($key);`  |  斷言回應視圖不包含給定的部分綁定資料。
+`->assertRedirectedTo($uri, $with = []);`  |  斷言客戶端是否被重導至給定的 URI。
+`->assertRedirectedToRoute($name, $parameters = [], $with = []);`  | 斷言客戶端是否被重導至給定的路由
+`->assertRedirectedToAction($name, $parameters = [], $with = []);`  |  斷言客戶端是否被重導至給定的行為。
+`->assertSessionHas($key, $value = null);`  |  斷言 session 中有給定的值。
+`->assertSessionHasAll(array $bindings);`  |  斷言 session 中有給定的列表值。
+`->assertSessionHasErrors($bindings = [], $format = null);`  |  斷言 session 有錯誤的綁定。
+`->assertHasOldInput();`  |  斷言 session 有舊輸入資料。
 
 <a name="working-with-databases"></a>
 ## 使用資料庫
@@ -383,7 +383,7 @@ Laravel 也提供了多種有用的工具，讓你更容易測試使用資料庫
         }
     }
 
-> **Note:** This trait will only wrap the default database connection in a transaction.
+> **注意：**此 trait 的交易只會包含預設的資料庫連接。
 
 <a name="model-factories"></a>
 ### 模型工廠

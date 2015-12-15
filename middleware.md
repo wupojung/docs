@@ -125,7 +125,7 @@ HTTP 請求在實際碰觸到應用程式之前，最好是可以層層通過許
         //
     }]);
 
-Instead of using an array, you may also chain the `middleware` method onto the route definition:
+除了使用陣列之外，你也可以在路由的定義之後鏈結 `middleware` 方法：
 
     Route::get('/', function () {
         //
@@ -165,7 +165,7 @@ Instead of using an array, you may also chain the `middleware` method onto the r
 
     }
 
-在路由中可使用冒號 `：` 來區隔中介層名稱與指派參數，多筆參數可使用逗號作為分隔：
+在路由中可使用冒號 `:` 來區隔中介層名稱與指派參數，多筆參數可使用逗號作為分隔：
 
     Route::put('post/{id}', ['middleware' => 'role:editor', function ($id) {
         //

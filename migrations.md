@@ -7,52 +7,44 @@
     - [還原遷移](#rolling-back-migrations)
 - [編寫遷移](#writing-migrations)
     - [建立資料表](#creating-tables)
-    - [重新命名 / 刪除資料表](#renaming-and-dropping-tables)
+    - [重新命名與刪除資料表](#renaming-and-dropping-tables)
     - [建立欄位](#creating-columns)
     - [修改欄位](#modifying-columns)
-    - [刪除欄位](#dropping-columns)
+    - [移除欄位](#dropping-columns)
     - [建立索引](#creating-indexes)
-    - [刪除索引](#dropping-indexes)
+    - [移除索引](#dropping-indexes)
     - [外鍵約束](#foreign-key-constraints)
 
 <a name="introduction"></a>
 ## 簡介
 
-遷移是一種資料庫的版本控制, 讓團隊能夠輕鬆的修改跟共享應用程式的資料庫模式。
-遷移通常是 Laravel 搭配的結構生成器，讓您可以輕鬆的建立應用程式的資料庫架構。
+遷移是一種資料庫的版本控制，讓團隊能夠輕鬆的修改跟共享應用程式的資料庫結構。遷移通常會搭配 Laravel 的結構建構器，讓你可以輕鬆的建構應用程式的資料庫結構。
 
-Laravel 的結構生成器「Schema」，[facade](/docs/{{version}}/facades) 提供創建和操作表的資料庫相關支援，
-它分享相同的表現，也是支援所有 Laravel 資料庫系統的 API。
+Laravel 的 `Schema` [facade](/docs/{{version}}/facades) 提供了在資料庫建立和操作資料表的相關支援。它對所有 Laravel 所支援的資料庫系統共用了同樣一目了然、流暢的 API。
 
 <a name="generating-migrations"></a>
 ## 產生遷移
 
-建立遷移, 使用 「make:migration」 [Artisan command](/docs/{{version}}/artisan):
+可以使用 `make:migration` [Artisan 指令](/docs/{{version}}/artisan) 建立遷移：
 
     php artisan make:migration create_users_table
 
-新的遷移檔將會放置在「database/migrations」資料夾內。
-每個文件名都將包含 Laravel 自帶的時間戳記，用來確認遷移的順序。
+新的遷移檔將會放置在 `database/migrations` 目錄中。每個遷移檔名稱都包含了一個時間戳記，讓 Laravel 能夠確認遷移的順序。
 
-「--table」和 「--create」選項可用來指定表內的操作或是用來創建新的表。
-這些選項只要預先填入在生成表的遷移文件 :
+`--table` 和 `--create` 選項可用來指定資料表的名稱，或是該遷移會建立新的資料表。這些選項只需預先在產生遷移建置檔案時填入指定的資料表：
 
     php artisan make:migration add_votes_to_users_table --table=users
 
     php artisan make:migration create_users_table --create=users
 
-If you would like to specify a custom output path for the generated migration, you may use the `--path` option when executing the `make:migration` command. The provided path should be relative to your application's base path.
+如果你想為產生的遷移指定一個自定的輸出路徑，你可以在執行 `make:migration` 指令時使用 `--path` 選項。提供的路徑必須相對於你應用程式的基本路徑。
 
 <a name="migration-structure"></a>
 ## 遷移結構
 
-遷移類包含兩個方法: 「up」和 「down」。
-「up」方法是在資料庫內添加新的表、欄位、或索引，而「down」方法則是簡單的反向執行「up」方法。
+一個遷移類別會包含兩個方法：`up` 和 `down`。`up` 方法用於在資料庫內增加新的資料表表、欄位、或索引，而 `down` 方法則必須簡單的反向執行 `up` 方法的操作。
 
-在這兩個方法您必需使用 Laravel 建立出來的類別去創建跟修改表。
-在此您可以使用這兩種方去讓 Laravel schema 結構生成器自動的創建或修改表。
-例如 :  我們來產生一個 遷移 創建 `flights` 表 :
-要瞭解所有的方法，可在結構生成器「Schema」內查看[check out its documentation](#creating-tables)
+這兩個方法中你可以使用 Laravel 結構建構器明確的建立及修改資料表。若要瞭解`結構`建構器中所有可用的方法，[請查閱它的文件](#creating-tables)。例如：讓我們瞧瞧建立一張 `flights` 資料表的例子：
 
     <?php
 
@@ -62,7 +54,7 @@ If you would like to specify a custom output path for the generated migration, y
     class CreateFlightsTable extends Migration
     {
         /**
-         * Run the migrations.
+         * 執行遷移。
          *
          * @return void
          */
@@ -77,7 +69,7 @@ If you would like to specify a custom output path for the generated migration, y
         }
 
         /**
-         * Reverse the migrations.
+         * 還原遷移。
          *
          * @return void
          */
@@ -91,61 +83,54 @@ If you would like to specify a custom output path for the generated migration, y
 <a name="running-migrations"></a>
 ## 執行遷移
 
-要運行所有未遷移過的應用程式，在 Artisan 的命令提示字元內使用 `migrate `指令。
-如果您使用 [Homestead 虛擬主機](/docs/{{version}}/homestead)，只要執行下面的指令:
+要執行你應用程式中所有未完成的遷移，可以使用 `migrate` Artisan 指令。如果你使用 [Homestead 虛擬主機](/docs/{{version}}/homestead)，你應該在你的虛擬機器中執行下方的指令：
 
     php artisan migrate
 
-如果您執行時出現 "class not found" 的錯誤，請試試運行完 `composer dump-autoload` 後再次執行一次。
+如果在你執行時出現「class not found」的錯誤，請試著在執行 `composer dump-autoload` 指令後再次執行一次遷移指令。
 
-#### 正式機上強制執行遷移
+#### 在上線環境強制執行遷移
 
-一些遷移的操作是有破壞性的，意思是它們可能會導致您失去資料。
-為了保護您在資料庫內的資料，在正式機上執行這些命令之前將會提示您進行確認。
-要執行命令而沒有任何的提示的狀況下運行，可在後面加入 `--force` :
+一些遷移的操作是有破壞性的，意思是它們可能會導致你失去資料。為了保護你上線環境的資料庫執行這些指令，你會在這些指令被執行之前，系統將會提示你進行確認。若要忽略提示強制執行指令，你可以使用 `--force` 標記：
 
     php artisan migrate --force
 
 <a name="rolling-back-migrations"></a>
 ### 還原遷移
 
-要還原遷移至上一個操作，使用 `rollback` 指令。
-請注意，此還原是回復到上一次的"批次處理"，其中可能包括多筆的 遷移檔案:
+若要還原遷移至上一個「操作」，你可以使用 `rollback` 指令。請注意，此還原是回復到上一次執行的「批量」遷移，其中可能包括多筆的遷移檔案：
 
     php artisan migrate:rollback
 
-`migrate:reset` 指令將會還原到最初時的 遷移:
+`migrate:reset` 指令會還原應用程式的所有遷移：
 
     php artisan migrate:reset
 
-#### 在單個命令列內還原 / 執行遷移
+#### 單個指令還原或執行遷移
 
-`migrate:refresh` 命令將會還原至最初時的遷移後，再運行 `migrate` 指令。
-此指令能有效的重新創建整個資料庫:
+`migrate:refresh` 指令首先會還原你資料庫的所有遷移，接著再執行 `migrate` 指令。此指令能有效的重新建立整個資料庫：
 
     php artisan migrate:refresh
 
     php artisan migrate:refresh --seed
 
 <a name="writing-migrations"></a>
-## 編寫遷移
+## 撰寫遷移
 
 <a name="creating-tables"></a>
-### 創建資料表
+### 建力資料表
 
-創建一個新的資料表， 使用 `Schema` 結構生成器類別內 `create`方法。
-`create`方法內需代入二個參數。
-第一個參數代表資料表名稱，第二個參數代表一個 `Closure` 它接收一個 `Blueprint` 對象用來定義新的資料表:
+要建立一張新的資料表，可以使用 `Schema` facade 的 `create`方法。`create` 方法接收兩個參數。第一個參數為資料表的名稱，第二個參數為一個`閉包`，它接收一個用於定義新資料表的 `Blueprint` 物件：
 
     Schema::create('users', function (Blueprint $table) {
         $table->increments('id');
     });
 
-當創建新的表時，你可以使用任何的 schema 結構生成器[創建欄位](#creating-columns)去定義資料表欄位內容的屬性。
+當然，當建立資料表時，你可以使用任何的結構建構器的[欄位方法](#creating-columns)來定義資料表的欄位。
 
-#### 表單 / 欄位存在檢查
+#### 檢查資料表或欄位是否存在
 
-您可以使用 `hasTable` 和 `hasColumn` 簡單的檢查表單或欄位存不存在:
+您可以使用 `hasTable` 和 `hasColumn` 方法簡單的檢查資料表或欄位是否存在：
 
     if (Schema::hasTable('users')) {
         //
@@ -155,15 +140,15 @@ If you would like to specify a custom output path for the generated migration, y
         //
     }
 
-#### 連線 & 儲存引擎
+#### 連接與儲存引擎
 
-如果您想要的一個資料庫連結，並不是默認的資料庫連結可使用 `connection` 方法指定連結方式:
+如果你想要在一個非預設的資料庫連接進行結構操作，可以使用 `connection` 方法：
 
     Schema::connection('foo')->create('users', function ($table) {
         $table->increments('id');
     });
 
-設定資料表的儲存引擎，在schema 結構生成器上 設定 `engine`屬性:
+若要設置資料表的儲存引擎，只要在結構建構器上設置 `engine` 屬性：
 
     Schema::create('users', function ($table) {
         $table->engine = 'InnoDB';
@@ -172,34 +157,32 @@ If you would like to specify a custom output path for the generated migration, y
     });
 
 <a name="renaming-and-dropping-tables"></a>
-### 重新命名 / 刪除資料表
+### 重新命名與刪除資料表
 
-重新命合資料表，使用 `rename` 方法:
+若要重新命名一張已存在的資料表，可以使用 `rename` 方法：
 
     Schema::rename($from, $to);
 
-刪除存在的資料表，您可使用 `drop` 或 `dropIfExists` 方法:
+要刪除已存在的資料表，你可使用 `drop` 或 `dropIfExists` 方法：
 
     Schema::drop('users');
 
     Schema::dropIfExists('users');
 
 <a name="creating-columns"></a>
-### 創建欄位
+### 建立欄位
 
-更新資料表，我們將使用 `Schema` 結構生成器內的 `table`方法。
-
-像是 `create`方法，`table`方法接收二個參數， 第一個為資料表名稱和第二個為一個 `Closure` 它接收一個 `Blueprint` ，我們可以使用它新增表的欄位:
+若要更新一張已存在的資料表，我們會使用 `Schema` facade 的 `table` 方法。如同 `create` 方法，`table` 方法接收兩個參數：資料表的名稱，及一個接收 `Blueprint` 實例的`閉包`，我們可以使用它為資料表增加欄位：
 
     Schema::table('users', function ($table) {
         $table->string('email');
     });
 
-#### 可用的欄位狀態
+#### 可用的欄位類型
 
-schema 結構生成器包含許多欄位狀態，您能夠使用它們去創建您的資料表:
+當然，結構建構器包含許多欄位類型，供你建構資料表時使用：
 
-Command  | Description
+指令  | 描述
 ------------- | -------------
 `$table->bigIncrements('id');`  |  遞增的 ID（主鍵），使用相當於「UNSIGNED BIG INTEGER」的型態。
 `$table->bigInteger('votes');`  |  相當於 BIGINT 型態。
@@ -235,109 +218,104 @@ Command  | Description
 
 #### 欄位修飾
 
-除了上述的欄位類型，還有其它一些的欄位「修飾」，它們能增加至欄位。例如，若要在欄位增加「nullable」屬性，你可以使用 `nullable` 方法：
+除了上述的欄位類型列表，還有一些其它的欄位「修飾」，你可以將它增加至欄位。例如，若要讓欄位「nullable」，那麼你可以使用 `nullable` 方法：
 
     Schema::table('users', function ($table) {
         $table->string('email')->nullable();
     });
 
-以下清單為欄位內可用的修飾方法，此列表不包括[索引修飾](#creating-indexes)：
+以下列表為欄位可用的修飾。此列表不包括[索引修飾](#creating-indexes)：
 
-Modifier  | Description
+修飾  | 描述
 ------------- | -------------
-`->first()`  |  將此欄位放置為第一個 (MySQL Only)
-`->after('column')`  |  放置此欄位在某欄位名稱之後 (MySQL Only)
-`->nullable()`  |  欄位允許NULL
-`->default($value)`  |  設定欄位預設值為 $value
-`->unsigned()`  |  設定欄位內容值為正整數
+`->first()`  |  將此欄位放置在資料表的「第一個」（僅限 MySQL）
+`->after('column')`  |  將此欄位放置在其他欄位「之後」（僅限 MySQL）
+`->nullable()`  |  此欄位允許寫入 NULL 值
+`->default($value)`  |  為此欄位指定「預設」值
+`->unsigned()`  |  設置 `integer` 欄位為 `UNSIGNED`
 
 <a name="changing-columns"></a>
 <a name="modifying-columns"></a>
 ### 修改欄位
 
-#### 必要條件
+#### 先決條件
 
-在修正欄位之前, 在您的 `composer.json` 的檔案內必需先有 `doctrine/dbal` 套件。
-此套件是用來產出要修正欄位指定的 SQL 語句。
+在修改欄位之前，務必在你的 `composer.json` 的增加 `doctrine/dbal` 依賴。Doctrine DBAL 函式庫被用於判斷目前的欄位狀態及建立調整指定欄位的 SQL 查詢。
 
 #### 更新欄位屬性
 
-有時候您需要修改一個存在的欄位，或修改欄位的屬性。例如：您可能想增加儲存文字欄位的長度。
-藉由 change 方法讓這件事情變得非常容易，假設我們想要將欄位 name 的長度從 25 增加到 50 的時候：
+`change` 方法讓你可以修改一個已存在欄位的類型，或修改欄位的屬性。例如，你可以想增加字串欄位的長度。要看看 `change` 方法的作用，讓我們將 `name` 欄位的長度從 25 增加到 50：
 
     Schema::table('users', function ($table) {
         $table->string('name', 50)->change();
     });
 
-另外也能將某個欄位修改為允許 NULL：
+我們也能將欄位修改為 nullable：
 
     Schema::table('users', function ($table) {
         $table->string('name', 50)->nullable()->change();
     });
 
 <a name="renaming-columns"></a>
-#### 修改欄位名稱
+#### 重新命名欄位
 
-要修改欄位名稱，可在結構生成器內使用 renameColumn 方法，請確認在修改前 composer.json 檔案內已經加入 doctrine/dbal:
+要重新命名欄位，你可使用結構建構器的 `renameColumn` 方法。在重新命名欄位前，請確定你的 `composer.json` 檔案內已經加入 `doctrine/dbal` 依賴：
 
     Schema::table('users', function ($table) {
         $table->renameColumn('from', 'to');
     });
 
-> **注意:** Renum 欄位型別現在不支援修改欄位名稱。
+> **注意：**資料表的 `enum` 欄位目前尚未支援修改欄位名稱。
 
 <a name="dropping-columns"></a>
 ### 移除欄位
 
-要移除欄位，可在結構生成器內使用 dropColumn 方法:
+要移除欄位，可使用結構建構器的 `dropColumn` 方法：
 
     Schema::table('users', function ($table) {
         $table->dropColumn('votes');
     });
 
-您可在方法內加入陣列，移除多筆資料欄位:
+你可以傳遞欄位名稱的陣列至 `dropCloumn` 方法，移除多筆欄位：
 
     Schema::table('users', function ($table) {
         $table->dropColumn(['votes', 'avatar', 'location']);
     });
 
-> **注意:** 請確認在移除前 composer.json 檔案內已經加入 doctrine/dbal.
+> **注意：**在 SQLite 資料庫中移除欄位前，你需要增加 `doctrine/dbal` 依賴至你的 `composer.json` 檔案，並在你的終端機執行 `composer update` 指令安裝該函式庫。
 
-> **Note:** Dropping or modifying multiple columns within a single migration while using a SQLite database is not supported.
+> **注意：**當使用 SQLite 資料庫時並不支援在單行遷移中移除或修改多筆欄位。
 
 <a name="creating-indexes"></a>
-### 加入索引
+### 建立索引
 
-結構生成器支援多種索引類型，首先下面的例子為在欄位內的值應該是唯一值。
-您可以在定義欄位時順便附加 `unique` 方法上去:
+結構建構器支援多種類型的索引。首先，讓我們看看一個指定欄位的值必須是唯一的例子。要建立索引，我們可以簡單的在欄位定義之後鏈結上 `unique` 方法：
 
     $table->string('email')->unique();
 
-您也可在創建完欄位後，另外加入。
-
-例如:
+此外，你可以在定義完欄位之後建立索引。例如：
 
     $table->unique('email');
 
-你可在方法中加入一個陣列，創建一個複合索引:
+你也可以傳遞一個欄位的陣列至索引方法來建立複合索引：
 
     $table->index(['account_id', 'created_at']);
 
-#### 支援的索引類型
+#### 可用的索引類型
 
-Command  | Description
+指令  | 描述
 ------------- | -------------
-`$table->primary('id');`  |  加入主鍵 (primary key)。
-`$table->primary(['first', 'last']);`  |  加入複合鍵 (composite keys)。
-`$table->unique('email');`  |  加入唯一索引 (unique index)。
-`$table->index('state');`  |  加入基本索引 (index)。
+`$table->primary('id');`  |  加入主鍵。
+`$table->primary(['first', 'last']);`  |  加入複合鍵。
+`$table->unique('email');`  |  加入唯一索引。
+`$table->index('state');`  |  加入基本索引。
 
 <a name="dropping-indexes"></a>
 ### 移除索引
 
-若要移除索引，你必須指定索引名稱。預設中，Laravel 自動分配合理的名稱至索引。簡單地連結這些資料表名稱，索引的欄位名稱，及索引型別。舉例如下：
+若要移除索引，你必須指定索引的名稱。預設中，Laravel 會自動分配合理的名稱至索引。簡單地連結這些資料表名稱，索引的欄位名稱，及索引類型。舉例如下：
 
-Command  | Description
+指令  | 描述
 ------------- | -------------
 `$table->dropPrimary('users_id_primary');`  |  從「users」資料表移除主鍵。
 `$table->dropUnique('users_email_unique');`  |  從「users」資料表移除唯一索引。
@@ -346,8 +324,7 @@ Command  | Description
 <a name="foreign-key-constraints"></a>
 ### 外鍵約束
 
-Laravel 也支援資料表的外鍵約束, 這是用在資料庫型別的強制約束. 例如,
-在 `posts` 表內有一個 `user_id` 欄位要強制約束到 `users` 表的 `id` 欄位 :
+Laravel 也為建立外鍵約束提供支援，這是用於在資料庫層面強制參考完整性。例如，讓我們定義 `posts` 資料表內有個 `user_id` 欄位要參考至 `users` 資料表的 `id` 欄位：
 
     Schema::table('posts', function ($table) {
         $table->integer('user_id')->unsigned();
@@ -355,12 +332,12 @@ Laravel 也支援資料表的外鍵約束, 這是用在資料庫型別的強制�
         $table->foreign('user_id')->references('id')->on('users');
     });
 
-您也可以指定選擇在「on delete」和「on update」進行約束動作：
+你也可以指定約束的「on delete」及「on update」作為所需的操作：
 
     $table->foreign('user_id')
           ->references('id')->on('users')
           ->onDelete('cascade');
 
-要移除外鍵，可使用 `dropForeign` 方法。外鍵的命名方式如同其他索引，所以我們可以使用 "_foreign" 將表名和欄位名做外鍵約束 :
+要移除外鍵，你可以使用 `dropForeign` 方法。外鍵約束與索引採用相同的命名方式。所以，我們可以連結資料表明與約束的欄位，接著在該名稱加上「_foreign」後綴：
 
     $table->dropForeign('posts_user_id_foreign');
