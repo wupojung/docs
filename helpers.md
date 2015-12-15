@@ -230,7 +230,7 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 
     // ['price' => 100]
 
-`array_get` 函式同樣接受預設值，當指定的鍵找不到時回傳。
+`array_get` 函式同樣接受預設值，當指定的鍵找不到時回傳：
 
     $value = array_get($array, 'names.john', 'default');
 
@@ -691,14 +691,14 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-bcrypt"></a>
 #### `bcrypt()` {#collection-method}
 
-`bcrypt` 函式使用 Bcrypt 雜湊給定的數值。你可以使用它替代 `Hash` facade。
+`bcrypt` 函式使用 Bcrypt 雜湊給定的數值。你可以使用它替代 `Hash` facade：
 
     $password = bcrypt('my-secret-password');
 
 <a name="method-collect"></a>
 #### `collect()` {#collection-method}
 
-`collect` 函式從給定的項目產生[集合](/docs/{{version}}/collections)實例
+`collect` 函式從給定的項目產生[集合](/docs/{{version}}/collections)實例：
 
     $collection = collect(['taylor', 'abigail']);
 
@@ -835,6 +835,6 @@ Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自�
 <a name="method-with"></a>
 #### `with()` {#collection-method}
 
-`with` 函式回傳給定的數值。該函式主要用於方法鍊結（method chaining），除此之外不太可能用到。
+`with` 函式回傳給定的數值。該函式主要用於方法鍊結（method chaining），除此之外不太可能用到：
 
     $value = with(new Foo)->work();

@@ -75,7 +75,7 @@
 
 方法  | 描述
 ------------- | -------------
-`->cron('* * * * *');`  |  於自訂的 Cron 排程執行該任務
+`->cron('* * * * * *');`  |  於自訂的 Cron 排程執行該任務
 `->everyMinute();`  |  於每分鐘執行該任務
 `->everyFiveMinutes();`  |  於每五分鐘執行該任務
 `->everyTenMinutes();`  |  於每十分鐘執行該任務
@@ -83,9 +83,10 @@
 `->hourly();`  |  於每小時執行該任務
 `->daily();`  |  於每天午夜執行該任務
 `->dailyAt('13:00');`  |  於每天 13:00 執行該任務
-`->twiceDaily();`  |  於每天 1:00 及 13:00 執行該任務
+`->twiceDaily(1, 13);`  |  於每天 1:00 及 13:00 執行該任務
 `->weekly();`  |  於每週執行該任務
 `->monthly();`  |  於每月執行該任務
+`->yearly();`  |  於每年執行該任務
 
 這些方法可以合併其他限制條件，藉以產生更精細的排程。例如在某週的某幾天執行排程。舉個例子，排定一個每週一的排程：
 
@@ -115,7 +116,7 @@
         return true;
     });
 
-When using chained `when` methods, the scheduled command will only execute if all `when` conditions return `true`.
+當鏈結使用 `when` 方法，排定指令只有在所有的 `when` 條件回傳 `true` 的時候才執行。
 
 <a name="preventing-task-overlaps"></a>
 ### 避免任務重複
@@ -166,7 +167,7 @@ Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透
 
 #### Ping 網址
 
-透過 `pingBefore` 與 `thenPing` 方法，排程器能自動的在一個任務完成之前或之後 ping 一個給定的網址。該方法在你排定的任務進行或完成時，能有效的通知一個外部服務，例如 [Laravel Envoyer](https://envoyer.io)。
+透過 `pingBefore` 與 `thenPing` 方法，排程器能自動的在一個任務完成之前或之後 ping 一個給定的網址。該方法在你排定的任務進行或完成時，能有效的通知一個外部服務，例如 [Laravel Envoyer](https://envoyer.io)：
 
     $schedule->command('emails:send')
              ->daily()
