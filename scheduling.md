@@ -38,7 +38,7 @@
     class Kernel extends ConsoleKernel
     {
         /**
-         * The Artisan commands provided by your application.
+         * 你的應用程式提供的 Artisan 指令。
          *
          * @var array
          */
@@ -47,7 +47,7 @@
         ];
 
         /**
-         * Define the application's command schedule.
+         * 定義應用程式的指令排程。
          *
          * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
          * @return void
@@ -91,7 +91,7 @@
 這些方法可以合併其他限制條件，藉以產生更精細的排程。例如在某週的某幾天執行排程。舉個例子，排定一個每週一的排程：
 
     $schedule->call(function () {
-        // Runs once a week on Monday at 13:00...
+        // 在每個禮拜一的 13:00 跑一次...
     })->weekly()->mondays()->at('13:00');
 
 下方列出額外的限制條件：
@@ -159,10 +159,10 @@ Laravel 排程器為任務排程輸出提供許多便捷的方法。首先，透
     $schedule->command('emails:send')
              ->daily()
              ->before(function () {
-                 // Task is about to start...
+                 // 任務將要開始...
              })
              ->after(function () {
-                 // Task is complete...
+                 // 任務已完成...
              });
 
 #### Ping 網址
