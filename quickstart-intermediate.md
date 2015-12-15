@@ -343,7 +343,7 @@
 <a name="defining-the-child-view"></a>
 ### 定義子視圖
 
-很好，我們的應用程式佈局已經完成。接下來，我們需要定義包含建立任務的表單及列出已有任務表格的視圖。讓我們將此視圖定義在 `resources/views/tasks/index.blade.php`, which will correspond to the `index` method in our `TaskController`.
+很好，我們的應用程式佈局已經完成。接下來，我們需要定義包含建立任務的表單及列出已有任務表格的視圖。讓我們將此視圖定義在 `resources/views/tasks/index.blade.php`，它會對應至我們 `TaskController` 的 `index` 方法。
 
 我們會跳過一些 Bootstrap CSS 樣板，只專注在重要的事物上。切記，你可以在 [GitHub](https://github.com/laravel/quickstart-intermediate) 下載應用程式的完整原始碼：
 
@@ -390,7 +390,7 @@
 
 在繼續之前，讓我們談談有關模板的一些事項。首先 `@extends` 指令會告知 Blade，我們使用定義於 `resources/views/layouts/app.blade.php` 的佈局。所有在 `@section('content')` 及 `@endsection` 之間的內容會被注入到 `app.blade.php` 佈局中的 `@yield('content')` 位置裡。
 
-現在我們已經為我們的應用程式定義了基本的佈局及視圖。Let's go ahead and return this view from the `index` method of our `TaskController`:
+現在我們已經為我們的應用程式定義了基本的佈局及視圖。接著讓我們在 `TaskController` 的 `index` 方法回傳此視圖：
 
     /**
      * 顯示使用者所有任務的清單。
@@ -465,7 +465,7 @@
 
 現在輸入已經被驗證處理完畢。讓我們繼續填寫我們的路由來實際的建立一筆新的任務。一旦新的任務被建立後，我們會將使用者重導回 `/tasks` URL。要建立該任務，我們會充分的利用 Eloquent 的關聯功能。
 
-Laravel 大部分的關聯提供了一個 `save` 方法，它接收一個關聯模型實例，並會在儲存至資料庫前自動設置關聯模型的外鍵值。在此例中，`save` 方法會自動將給定任務的 `user_id` 屬性設置為目前已驗證使用者的 ID，因為我們透過 `$request->user()` 存取。
+Laravel 大部分的關聯提供了一個 `create` 方法，它接收一個包含屬性的陣列，並會在儲存至資料庫前自動設置關聯模型的外鍵值。在此例中，`create` 方法會自動將給定任務的 `user_id` 屬性設置為目前已驗證使用者的 ID，因為我們透過 `$request->user()` 存取。
 
     /**
      * 建立新的任務。
