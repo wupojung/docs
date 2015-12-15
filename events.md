@@ -4,7 +4,7 @@
 - [註冊事件或監聽器](#registering-events-and-listeners)
 - [定義事件](#defining-events)
 - [定義監聽器](#defining-listeners)
-    - [隊列事件的監聽器](#queued-event-listeners)
+    - [可隊列的事件監聽器](#queued-event-listeners)
 - [觸發事件](#firing-events)
 - [廣播事件](#broadcasting-events)
     - [設定](#broadcast-configuration)
@@ -152,9 +152,9 @@ Laravel 應用程式包含了 `EventServiceProvider` 提供一個方便的位置
 有時候，你可能希望停止一個事件的傳播到其他的監聽器。你可以在監聽器的 `handle` 方法回傳 `false` 達到這項目的。
 
 <a name="queued-event-listeners"></a>
-### 隊列事件的監聽器
+### 可隊列的事件監聽器
 
-需要一個[隊列](/docs/{{version}}/queues)事件監聽器嗎？它是再容易不過了。只要增加 `ShouldQueue` 介面到你的監聽器類別。由 `event:generate` Artisan 指令產生的監聽器已經將目前存在的介面載入到命名空間，所以你可以立即的使用它：
+需要一個可[隊列](/docs/{{version}}/queues)的事件監聽器嗎？它是再容易不過了。只要增加 `ShouldQueue` 介面到你的監聽器類別。由 `event:generate` Artisan 指令產生的監聽器已經將目前存在的介面載入到命名空間，所以你可以立即的使用它：
 
     <?php
 
