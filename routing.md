@@ -282,7 +282,7 @@ Laravel 會自動產生了一個 CSRF token 給每個活動使用者受應用程
 
 有時候你可能會希望一組 URIs 不要被 CSRF 保護。例如，你如果使用 [Stripe](https://stripe.com) 處理付款，並且利用他們的 webhook 系統，你需要從 Laravel CSRF 保護中，排除 webhook 的處理路由。
 
-你可以在 `VerifyCsrfToken` 中介層中增加 `$execpt` 屬性來排除 URIs：
+你可以在 `VerifyCsrfToken` 中介層中增加 `$except` 屬性來排除 URIs：
 
     <?php
 
