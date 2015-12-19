@@ -27,7 +27,7 @@
 - 系統服務
     - [認證](/docs/{{version}}/authentication)
     - [授權](/docs/{{version}}/authorization)
-    - [Artisan 命令列](/docs/{{version}}/artisan)
+    - [Artisan 指令列](/docs/{{version}}/artisan)
     - [交易](/docs/{{version}}/billing)
     - [快取](/docs/{{version}}/cache)
     - [集合](/docs/{{version}}/collections)
