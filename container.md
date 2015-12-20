@@ -156,7 +156,7 @@ Laravel 服務容器是管理類別依賴與執行依賴注入的強力工具。
 
     $fooBar = $this->app['FooBar'];
 
-最後，但是最重要的，你可以簡單地在類別的建構子對依賴使用「型別提示」，類別將會從容器中進行解析，包含[控制器](/docs/{{version}}/controllers)、[事件監聽器](/docs/{{version}}/events)、[對列任務](/docs/{{version}}/queues)、[中介層](/docs/{{version}}/middleware)及其他等等。在實際情形中，這就是為何大部分的物件都是由從器中解析。
+最後，但是最重要的，你可以簡單地在類別的建構子對依賴使用「型別提示」，類別將會從容器中進行解析，包含[控制器](/docs/{{version}}/controllers)、[事件監聽器](/docs/{{version}}/events)、[對列任務](/docs/{{version}}/queues)、[中介層](/docs/{{version}}/middleware)及其他等等。在實際情形中，這就是為何大部分的物件都是由容器中解析。
 
 容器會自動為類別注入解析出的依賴。舉個例子，你可以在控制器的建構子中對應用程式中定義的儲存庫進行型別提示。儲存庫會自動被解析及注入至類別中：
 
