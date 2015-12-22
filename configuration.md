@@ -10,7 +10,6 @@
 <a name="introduction"></a>
 ## 簡介
 
-All of the configuration files for the Laravel framework are stored in the `config` directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 Laravel 框架的所有設定都存放於 `config` 目錄中。每個選項都有文件，你可以隨意瀏覽這些檔案，並熟悉這些可用的選項。
 
 <a name="accessing-configuration-values"></a>
