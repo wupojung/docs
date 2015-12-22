@@ -34,7 +34,6 @@ Laravel 透過 Vance Lucas 的 [DotEnv](https://github.com/vlucas/phpdotenv) PHP
 
     'debug' => env('APP_DEBUG', false),
 
-The second value passed to the `env` function is the "default value". This value will be used if no environment variable exists for the given key.
 傳遞至 `env` 函式的第二個參數為「預設值」。當給定的鍵沒有環境變數存在時就會使用該值。
 
 你的 `.env` 檔案不應該被提交到應用程式的版本控制系統，因為每個開發人員或伺服器在使用你的應用程式時，可能需要不同的環境設定。
