@@ -35,7 +35,7 @@
 
 	composer create-project laravel/laravel quickstart --prefer-dist
 
-#### 安裝此快速上手（自行選擇）
+#### 安裝此快速入門（選擇性）
 
 你可以自由的只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要克隆它的 Git 資源庫並安裝依賴：
 
