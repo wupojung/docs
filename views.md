@@ -146,7 +146,7 @@
     class ProfileComposer
     {
         /**
-         * 使用者物件的實例。
+         * 使用者儲存庫的實例。
          *
          * @var UserRepository
          */
