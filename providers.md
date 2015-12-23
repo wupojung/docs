@@ -56,16 +56,12 @@ Artisan 命令列介面可以很容易地透過 `make:provider` 指令產生新�
         }
     }
 
-<<<<<<< HEAD
-此服務提供者只定義了一個 `register` 方法，並在服務容器中使用此方法定義了一份 `Riak\Contracts\Connection` 的實作。若你不瞭解服務容器是如何運作的，可查閱[其文件](/docs/{{version}}/container)。
-=======
-This service provider only defines a `register` method, and uses that method to define an implementation of `Riak\Connection` in the service container. If you don't understand how the service container works, check out [its documentation](/docs/{{version}}/container).
->>>>>>> headstream/5.2
+此服務提供者只定義了一個 `register` 方法，並在服務容器中使用此方法定義了一份 `Riak\Connection` 的實作。若你不瞭解服務容器是如何運作的，去看看[相關文件](/docs/{{version}}/container)。
 
 <a name="the-boot-method"></a>
-### 啟動方法
+### 啟動（boot）方法
 
-因此，若我們需要在我們的服務提供者中註冊一個視圖 composer 呢？這應該在 `boot` 方法中完成。**此方法會在所有其他的服務提供者被註冊後才被呼叫**，意味著你能存取已經被框架註冊的所有其他服務：
+因此，若我們需要在我們的服務提供者中註冊一個視圖 composer 呢？這應該在 `boot` 方法中完成。**此方法會在所有其他的服務提供者被註冊後才被呼叫**，意味著你可以取得已經被框架註冊的所有其他服務：
 
     <?php
 
@@ -76,14 +72,10 @@ This service provider only defines a `register` method, and uses that method to 
 
     class EventServiceProvider extends ServiceProvider
     {
-        // Other Service Provider Properties...
+        // 其他 Service Provider 屬性...
 
         /**
-<<<<<<< HEAD
-         * 執行註冊後的啟動服務。
-=======
-         * Register any other events for your application.
->>>>>>> headstream/5.2
+         * 註冊應用程式其他的事件
          *
          * @param  \Illuminate\Contracts\Events\Dispatcher  $events
          * @return void
@@ -96,28 +88,11 @@ This service provider only defines a `register` method, and uses that method to 
                 //
             });
         }
-<<<<<<< HEAD
-
-        /**
-         * 在容器中註冊綁定。
-         *
-         * @return void
-         */
-        public function register()
-        {
-            //
-        }
-=======
->>>>>>> headstream/5.2
     }
 
 #### 啟動方法依賴注入
 
-<<<<<<< HEAD
-我們可以為我們 `boot` 方法中的依賴作型別提式。[服務容器](/docs/{{version}}/container)會自動注入你所需要的任何依賴：
-=======
-You are able to type-hint dependencies for your service provider's `boot` method. The [service container](/docs/{{version}}/container) will automatically inject any dependencies you need:
->>>>>>> headstream/5.2
+你可以對服務提供者的 `boot` 方法作依賴的型別提式。[服務容器](/docs/{{version}}/container)會自動注入你所需要的任何依賴：
 
     use Illuminate\Contracts\Routing\ResponseFactory;
 
