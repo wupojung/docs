@@ -65,7 +65,7 @@ Homestead 可以在任何 Windows、Mac 或 Linux 系統上面執行，裡面包
 
 #### 安裝 Homestead
 
-你可以簡單地透過手動克隆資源庫的方式來安裝 Homestead。建議可將資源庫克隆至你的「home」目錄中的 `Homestead` 資料夾，如此一來 Homestead box 將能提供主機服務給你所有的 Laravel 專案：
+你可以簡單地透過手動 clone 資源庫的方式來安裝 Homestead。建議可將資源庫克隆至你的「home」目錄中的 `Homestead` 資料夾，如此一來 Homestead box 將能提供主機服務給你所有的 Laravel 專案：
 
     cd ~
 
@@ -76,23 +76,23 @@ Homestead 可以在任何 Windows、Mac 或 Linux 系統上面執行，裡面包
     bash init.sh
 
 <a name="configuring-homestead"></a>
-### 配置 Homestead
+### 設定 Homestead
 
-#### 設定你的提供者
+#### 設定 Vagrant 提供者
 
-在 `Homestead.yaml` 檔案中的 `provider` 鍵是用來設定你想要使用哪一個 Vagrant 提供者：`virtualbox`、`vmware_fusion` 或 `vmware_workstation`。你可以根據你的喜好來決定提供者：
+在 `Homestead.yaml` 檔案中的 `provider` 是用來設定你想要使用哪一個 Vagrant 提供者，像是：`virtualbox`、`vmware_fusion` 或 `vmware_workstation`。你可以根據喜好來決定提供者：
 
     provider: virtualbox
 
-#### 設定共享資料夾
+#### 設定共享目錄
 
-你可以在 `Homestead.yaml` 檔案的 `folders` 屬性裡列出所有你想與你的 Homestead 環境共享的資料夾。這些資料夾中的檔案若有更動，它們將會同步更動在你的本機電腦與 Homestead 環境。你可以將多個你所需要的共享資料夾都設定於此：
+你可以在 `Homestead.yaml` 檔案的 `folders` 屬性裡列出所有你想與 Homestead 環境共享的目錄。這些目錄中的檔案若有更動，它們將會同步更動在你的本機電腦與 Homestead 環境。你可以將多個共享目錄都設定於此：
 
     folders:
         - map: ~/Code
           to: /home/vagrant/Code
 
-若要啟用 [NFS](http://docs.vagrantup.com/v2/synced-folders/nfs.html)，你只需要在共享資料夾的設定值中加入一個簡單的參數：
+若要啟用 [NFS](http://docs.vagrantup.com/v2/synced-folders/nfs.html)，你只需要在共享目錄的設定值中加入一個簡單的參數：
 
     folders:
         - map: ~/Code
@@ -101,7 +101,7 @@ Homestead 可以在任何 Windows、Mac 或 Linux 系統上面執行，裡面包
 
 #### 設定 Nginx 網站
 
-對 Nginx 不熟悉嗎？沒關係。`sites` 屬性幫助你可以輕易的指定一個 `網域` 對應至 homestead 環境中的一個目錄。在 `Homestead.yaml` 檔案中已內含一個網站設定的範本。同樣的，你可以增加數個你所需要的網站到你的 Homestead 環境中。Homestead 可以為每個你正在開發中的 Laravel 專案提供方便的虛擬化環境：
+對 Nginx 不熟悉嗎？沒關係。`sites` 屬性幫助你可以輕易的指定 `網域` 對應至 homestead 環境中的目錄。在 `Homestead.yaml` 檔案中已包含一個網站設定範例。同樣的，你可以增加數個網站到 Homestead 環境中。Homestead 可以為每個你正在開發中的 Laravel 專案提供方便的虛擬化環境：
 
     sites:
         - map: homestead.app
@@ -116,18 +116,18 @@ Homestead 可以在任何 Windows、Mac 或 Linux 系統上面執行，裡面包
 
 #### Hosts 檔案
 
-你必須為 Nginx 網站在你機器中的 `host` 檔案增加「網域」。`hosts` 檔案會將你對 Homestead 網站的請求重導至 Homestead 機器。在 Mac 或 Linux 上，該檔案通常會存放在 `/etc/hosts`。在 Windows 上，則存放於 `C:\Windows\System32\drivers\etc\hosts`。你增加至該檔案的內容看起來會像這樣：
+你必須為 Nginx 網站在你機器中的 `hosts` 檔案增加「網域」。`hosts` 檔案會將你對 Homestead 網站的請求重導至 Homestead 機器。在 Mac 或 Linux 上，該檔案通常會存放在 `/etc/hosts`。在 Windows 上，則存放於 `C:\Windows\System32\drivers\etc\hosts`。你增加至該檔案的內容看起來會像這樣：
 
     192.168.10.10  homestead.app
 
-務必確認 IP 位置與你的 `~/.homestead/Homestead.yaml` 檔案中設定的相同。一旦你將網域設定在 `hosts` 檔案之後，你就可以透過網頁瀏覽器造訪你的網站！
+務必確認 IP 位置與你的 `~/.homestead/Homestead.yaml` 檔案中設定相同。一旦將網域設定在 `hosts` 檔案之後，你就可以透過網頁瀏覽器造訪網站！
 
     http://homestead.app
 
 <a name="launching-the-vagrant-box"></a>
 ### 啟動 Vagrant box
 
-當你根據你的喜好編輯完 `Homestead.yaml` 後，在終端機裡進入你的 Homestead 目錄並執行 `vagrant up` 指令。Vagrant 就會自將虛擬主機啟動並自動設定你的共享資料夾和 Nginx 網站。
+當你編輯完 `Homestead.yaml` 後，在終端機裡進入你的 Homestead 目錄並執行 `vagrant up` 指令。Vagrant 就會自將虛擬主機啟動並自動設定你的共享目錄和 Nginx 網站。
 
 如果要移除虛擬機器，可以使用 `vagrant destroy --force` 指令。
 
