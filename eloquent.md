@@ -14,6 +14,8 @@
     - [軟刪除](#soft-deleting)
     - [查詢被軟刪除的模型](#querying-soft-deleted-models)
 - [查詢範圍](#query-scopes)
+    - [全域範圍](#global-scopes)
+    - [查詢範圍](#local-scopes)
 - [事件](#events)
 
 <a name="introduction"></a>
