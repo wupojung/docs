@@ -116,17 +116,13 @@
         return true;
     });
 
-<<<<<<< HEAD
-當鏈結使用 `when` 方法，排定指令只有在所有的 `when` 條件回傳 `true` 的時候才執行。
-=======
-The `reject` method may be seen as the inverse of `when`. If the `reject` method returns `true`, the scheduled task will not be executed:
+`reject` 方法可以視為跟 `when` 相反。如果 `reject` 方法回傳 `true`，排程任務就不會被執行：
 
     $schedule->command('emails:send')->daily()->reject(function () {
         return true;
     });
 
-When using chained `when` methods, the scheduled command will only execute if all `when` conditions return `true`.
->>>>>>> headstream/5.2
+當鏈結使用 `when` 方法，排定指令只有在所有的 `when` 條件回傳 `true` 的時候才執行。
 
 <a name="preventing-task-overlaps"></a>
 ### 避免任務重複
