@@ -3,7 +3,7 @@
 - [簡介](#introduction)
 - [基本用法](#basic-usage)
 - [隱藏來自 JSON 的屬性](#hiding-attributes-from-json)
-- [添加一些值到 JSON](#appending-values-to-json)
+- [附加一些值到 JSON](#appending-values-to-json)
 
 <a name="introduction"></a>
 ## 簡介
@@ -90,14 +90,14 @@
 
 #### 暫時顯示隱藏的屬性
 
-如果你想要讓一些通常被隱藏的屬性在你給定的模型的實例可以被看見，你可以使用 `makeVisible` 方法。`makeVisible` 方法回傳模型實例讓你可以方便的使用方法鏈結：
+如果你想要在給定的模型實例中讓原先隱藏的屬性變為可見，你可以使用 `makeVisible` 方法。`makeVisible` 方法回傳模型實例讓你可以方便的使用方法鏈結：
 
     return $user->makeVisible('attribute')->toArray();
 
 <a name="appending-values-to-json"></a>
-## 應該在陣列中可見的屬性。
+## 附加一些值到 JSON
 
-有時候，你可能需要添加在資料庫沒有對應欄位的陣列屬性。要達成這個目地，首先必須為這個值定義一個[存取器](/docs/{{version}}/eloquent-mutators)：
+有時候，你可能需要增加在資料庫沒有對應欄位的陣列屬性。要達成這個目地，首先必須為這個值定義一個[存取器](/docs/{{version}}/eloquent-mutators)：
 
     <?php
 
@@ -118,7 +118,7 @@
         }
     }
 
-一旦你建立了存取器，就可以把將屬性名稱添加到模型中的 `appends` 屬性：
+一旦你建立了存取器，就可以把將屬性名稱增加到模型中的 `appends` 屬性：
 
     <?php
 
@@ -136,4 +136,4 @@
         protected $appends = ['is_admin'];
     }
 
-一旦屬性被添加到 `appends` 清單，在模型的陣列和 JSON 兩種形式都將會包含進去。在 `appends` 陣列中的屬性也遵循模型中 `visible` 和 `hidden` 的設定。
+一旦屬性被增加到 `appends` 清單，在模型的陣列和 JSON 兩種形式都將會包含進去。在 `appends` 陣列中的屬性也遵循模型中 `visible` 和 `hidden` 的設定。
