@@ -492,7 +492,7 @@ Eloquent 的 `all` 方法會回傳在模型資料表中所有的結果。由於�
     class OldScope implements Scope
     {
         /**
-         * 分配給定的範圍到給定的 Eloquent 搜尋構造器。
+         * 套用範圍至給定的 Eloquent 查詢構造器。
          *
          * @param  \Illuminate\Database\Eloquent\Builder  $builder
          * @param  \Illuminate\Database\Eloquent\Model  $model
@@ -504,7 +504,7 @@ Eloquent 的 `all` 方法會回傳在模型資料表中所有的結果。由於�
         }
     }
 
-在預設的 Laravel 應用程式裡沒有預先定義範圍（scpoes）的資料夾，所以你可以自由地建立自己的 `Scopes` 資料夾在你的 Laravel 應用程式的 `app` 目錄下。
+在預設的 Laravel 應用程式裡沒有預先定義範圍（scpoes）的資料夾，所以你可以自由地在 Laravel 應用程式的 `app` 目錄中建立自己的 `Scopes` 資料夾。
 
 #### 使用全域範圍
 
@@ -581,9 +581,9 @@ Eloquent 還允許你使用 Closures 來定義全域範圍，這在簡單的作�
     User::withoutGlobalScopes([FirstScope::class, SecondScope::class])->get();
 
 <a name="local-scopes"></a>
-### 查詢範圍
+### 局部範圍
 
-查詢範圍讓你定義限制的共用集合，它可以輕鬆地在你的應用程式重複使用。例如，你可能需要頻繁地取得所有被認為是「受歡迎的」使用者。要定義範圍，必須簡單地在 Eloquent 模型方法前面加上前綴 `scope`
+局部範圍讓你定義限制的共用集合，它可以輕鬆地在你的應用程式重複使用。例如，你可能需要頻繁地取得所有被認為是「受歡迎的」使用者。要定義範圍，必須簡單地在 Eloquent 模型方法前面加上前綴 `scope`
 
 範圍應總是回傳查詢建構器的實例：
 
