@@ -183,7 +183,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 
     'custom' => [
         'person.*.email' => [
-            'unique' => '每個人必須有一個唯一的 e-mail',
+            'unique' => '每個人必須有一個唯一的 e-mail 地址',
         ]
     ],
 
@@ -589,7 +589,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 <a name="rule-digits-between"></a>
 #### digits_between:_min_,_max_
 
-驗證欄位值的長度在 _min_ 和 _max_ 之間
+驗證欄位值的長度在 _min_ 和 _max_ 之間。
 
 <a name="rule-email"></a>
 #### email
