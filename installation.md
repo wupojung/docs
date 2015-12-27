@@ -43,9 +43,9 @@ Laravel 使用 [Composer](http://getcomposer.org) 來管理相依性。所以，
 
 #### 透過 Composer Create-Project
 
-你也可以透過 Composer 在命令列執行 `create-project` 指令來安裝 Laravel：
+除此之外，你也可以透過 Composer 在指令列執行 `create-project` 指令來安裝 Laravel：
 
-    composer create-project laravel/laravel --prefer-dist
+    composer create-project laravel/laravel --prefer-dist blog
 
 <a name="configuration"></a>
 ## 設定
