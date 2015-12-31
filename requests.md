@@ -67,11 +67,7 @@
 <a name="basic-request-information"></a>
 ### 基本請求資訊
 
-<<<<<<< HEAD
-`Illuminate\Http\Request` 的實例提供了多種方法，用於檢查應用程式的 HTTP 請求。Larevel 的 `Illuminate\Http\Request` 繼承了 `Symfony\Component\HttpFoundation\Request` 類別。下方是該類別的幾個有用的方法：
-=======
-The `Illuminate\Http\Request` instance provides a variety of methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are a few more of the useful methods available on this class:
->>>>>>> headstream/5.2
+`Illuminate\Http\Request` 的實例繼承了 `Symfony\Component\HttpFoundation\Request` 類別，並提供了多種方法，用於檢查應用程式的 HTTP 請求。Larevel 的 `Illuminate\Http\Request` 。下方是該類別的幾個有用的方法：
 
 #### 取得請求的 URI
 
@@ -85,23 +81,15 @@ The `Illuminate\Http\Request` instance provides a variety of methods for examini
         //
     }
 
-<<<<<<< HEAD
-若要取得完整的網址，而不只有路徑資訊，你可以對請求實例使用 `url` 方法：
-=======
-To get the full URL, not just the path info, you may use the `url` or `fullUrl` methods on the request instance:
->>>>>>> headstream/5.2
+若要取得完整的網址，而不只有路徑資訊，你可以對請求實例使用 `url` 或 `fullUrl` 方法：
 
     // Without Query String...
     $url = $request->url();
 
-<<<<<<< HEAD
-#### 取得請求的方法
-=======
     // With Query String...
     $url = $request->fullUrl();
 
-#### Retrieving The Request Method
->>>>>>> headstream/5.2
+#### 取得請求的方法\
 
 `method` 方法會回傳當次請求的 HTTP 動詞。你也可以透過 `isMethod` 方法來驗證 HTTP 動詞和給定的字串是否互相匹配：
 
@@ -139,11 +127,7 @@ PSR-7 標準制定的 HTTP 訊息介面包含了請求及回應。如果你想�
 
     $name = $request->input('name');
 
-<<<<<<< HEAD
-此外，你可以使用 `Illuminate\Http\Request` 的屬性存取使用者輸入。例如，如果你應用程式的表單含有一個 `name` 欄位，你可以從傳遞的欄位存取它的值，像這樣：
-=======
-Alternatively, you may access user input using dynamic properties on the `Illuminate\Http\Request` instance. For example, if one of your application's forms contains a `name` field, you may access the value of the posted field like so:
->>>>>>> headstream/5.2
+此外，你可以使用 `Illuminate\Http\Request` 的動態屬性存取使用者輸入。例如，如果你應用程式的表單含有一個 `name` 欄位，你可以從傳遞的欄位存取它的值，像這樣：
 
     $name = $request->name;
 
@@ -214,11 +198,7 @@ Laravel 可以讓你保留這次的輸入資料，直到下一次請求發送前
 
     $username = $request->old('username');
 
-<<<<<<< HEAD
-Laravel 也提供了全域輔助方法 `old`。如果你要在 [Blade 模板](/docs/{{version}}/blade)顯示舊輸入資料，可以使用更加方便的輔助方法 `old`：
-=======
-Laravel also provides a global `old` helper function. If you are displaying old input within a [Blade template](/docs/{{version}}/blade), it is more convenient to use the `old` helper. If no old input exists for the given string, `null` will be returned:
->>>>>>> headstream/5.2
+Laravel 也提供了全域輔助方法 `old`。如果你要在 [Blade 模板](/docs/{{version}}/blade)顯示舊輸入資料，可以使用更加方便的輔助方法 `old`。如果給定字串的舊輸入資料不存在則會回傳 `ull`：
 
     <input type="text" name="username" value="{{ old('username') }}">
 
@@ -254,13 +234,7 @@ Laravel 提供了全域輔助方法 `cookie`，透過簡易的工廠來產生新
 
     $file = $request->file('photo');
 
-<<<<<<< HEAD
-#### 確認檔案是否有上傳
-
 你可以使用請求的 `hasFile` 方法確定上傳的檔案是否存在：
-=======
-You may determine if a file is present on the request using the `hasFile` method:
->>>>>>> headstream/5.2
 
     if ($request->hasFile('photo')) {
         //
@@ -284,8 +258,4 @@ You may determine if a file is present on the request using the `hasFile` method
 
 #### 其他上傳檔案的方法
 
-<<<<<<< HEAD
-`UploadedFile` 的實例還有許多可用的方法，可以至[該物件的 API 文件](http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/File/UploadedFile.html)瞭解有關這些方法的詳細資訊。
-=======
-There are a variety of other methods available on `UploadedFile` instances. Check out the [API documentation for the class](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/File/UploadedFile.html) for more information regarding these methods.
->>>>>>> headstream/5.2
+`UploadedFile` 的實例還有許多可用的方法。可以至[該物件的 API 文件](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/File/UploadedFile.html)瞭解有關這些方法的詳細資訊。
