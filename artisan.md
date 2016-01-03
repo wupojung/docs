@@ -7,42 +7,43 @@
     - [定義預期的輸入](#defining-input-expectations)
     - [取得輸入](#retrieving-input)
     - [為輸入加上提示](#prompting-for-input)
-    - [撰寫輸出](#writing-output)
+    - [輸出至畫面](#writing-output)
 - [註冊指令](#registering-commands)
 - [使用程式碼來呼叫指令](#calling-commands-via-code)
 
 <a name="introduction"></a>
 ## 介紹
 
-Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的應用程式時，它提供了許多有用的指令來幫助你開發。它是由強大的 Symfony 終端元件所驅動的。你可以使用 `list` 指令來列出所有可以使用的 Artisan 指令：
+Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的應用程式時，它提供了許多有用的指令來幫助你開發。它是基於由強大的 Symfony Console 元件來的。你可以使用 `list` 指令來列出所有可以使用的 Artisan 指令：
 
     php artisan list
 
-每個指令也包含了「幫助」畫面，它會顯示並敘述指令可以使用的參數及選項。只要在指令前面加上 `help` 即可顯示幫助畫面：
+每個指令也包含了「help」畫面，它會顯示並敘述指令可以使用的參數及選項。在指令前面加上 `help` 即可顯示：
 
     php artisan help migrate
 
 <a name="writing-commands"></a>
 ## 撰寫指令
 
-除了使用 Artisan 本身所提供的指令之外，你也可以建立自定的指令來為你的應用程式進行作業。你可以將你的自訂指令儲存在 `app/Console/Commands` 目錄中；當然，只要你的指令可以藉由 `composer.json` 的設定來自動載入，你也可以自由選擇你想要放置的地方。
+除了使用 Artisan 本身提供的指令外，你也可以建立自定的指令來進行作業。你可以將你的自定指令放在 `app/Console/Commands` 目錄下；當然，只要指令可以基於 `composer.json` 的設定自動載入，你可以自由選擇想要放置的地方。
 
-若要建立新的指令，你可以使用 `make:console` Artisan 指令產生一個預設的腳本來幫助你開始撰寫：
+要建立新的指令，可以使用 `make:console` Artisan 指令產生一個預設的腳本來作為起頭：
 
     php artisan make:console SendEmails
 
-上面的這個指令會產生一個放置在 `app/Console/Commands/SendEmails.php` 的類別。當建立指令時，`--command` 這個選擇可以用來指定要使用的終端指令名稱：
+上面的這個指令會在 `app/Console/Commands/SendEmails.php` 建立一個類別。當建立指令時，`--command` 這個選項可以用來指定要使用的終端指令名稱：
 
     php artisan make:console SendEmails --command=emails:send
 
 <a name="command-structure"></a>
 ### 指令結構
 
-一旦你的指令被產生，你應該填寫類別的 `signature` 和 `description` 這兩個屬性，它們會被顯示在 `list` 畫面：
+建立指令後，你應該填寫類別的 `signature` 和 `description` 這兩個屬性，它們會被顯示在 `list` 畫面：
 
-當你的指令被執行的時候 `handle` 方法會被呼叫，因此你可以將任何的指令邏輯放置在這個方法中，讓我們來看看一個範例。
+當指令被執行的時候，`handle` 方法會被呼叫，因此你可以將任何的指令邏輯放置在這個方法中，讓我們來看看一個範例。
 
-注意我們可以注入任何我們需要的依賴在建構子中，Laravel 的[服務容器](/docs/{{version}}/container)將會自動注入任何有型別提示的依賴到建構子中。為了更好的程式碼重用性，並讓你的終端指令更輕量，將它們緩載到應用程式服務來完成任務是一個好習慣。
+注意我們可以在建構子中注入任何需要的依賴，Laravel 的[服務容器](/docs/{{version}}/container)將會自動注入任何型別提示的依賴到建構子中。為了更好的程式碼重用性，保持指令內容
+輕量，並利用應用程式服務緩載來完成任務是一個好的實作方式。
 
     <?php
 
@@ -69,7 +70,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
         protected $description = 'Send drip e-mails to a user';
 
         /**
-         * 滴灌電子郵件服務。
+         * drip e-mail 服務。
          *
          * @var DripEmailer
          */
@@ -105,7 +106,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
 <a name="defining-input-expectations"></a>
 ### 定義預期的輸入
 
-當撰寫指令列時，從參數或是選項來得到使用者的輸入是一種普遍的做法。藉由使用指令的 `signature` 屬性，Laravel 讓你很方便的定義希望從使用者得到的輸入。`signature` 屬性允許你用單一、具表現力、與路由相似的語法，並用以定義指令的名字、參數及選項。
+撰寫指令列時，經由參數或是選項取得使用者的輸入是很常見的。藉由使用指令的 `signature` 屬性，Laravel 讓你很方便的定義預期從使用者得到的輸入。`signature` 屬性允許你用單一、具表現力、與路由相似的語法，並用以定義指令的名字、參數及選項。
 
 所有提供給使用者的參數及選項都在包在大括號中。如下方範例，此指令定義一個**必須的**參數：`user`：
 
@@ -116,15 +117,15 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
      */
     protected $signature = 'email:send {user}';
 
-你也可以使用選擇性的參數和定義預設的值給選擇性的參數：
+你也可以使用讓參數是可選的並定義預設的值：
 
-    // 選擇性的參數...
+    // 可選的的參數...
     email:send {user?}
 
-    // 選擇性的參數及預設的值...
+    // 可選的的參數及預設的值...
     email:send {user=foo}
 
-選項，就跟參數一樣，同樣是使用者輸入的一種格式，不過當使用選項時，需要加入兩個連字符號（`--`）在指令列，我們可以像這樣子在用法中定義選項：
+選項，就跟參數一樣，也是一種使用者輸入，不過使用選項時，需要在選項名稱前加入兩個連字符號（`--`），我們可以在 signature 中這樣定義選項：
 
     /**
      * 指令列的名稱及用法。
@@ -137,7 +138,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
 
     php artisan email:send 1 --queue
 
-你也可以藉由在這個選項後面加個 `=` 來為選項明確指定值：
+你也可以在選項後面加上 `=`，表示選項需要明確指定值：
 
     /**
      * 指令列的名稱及用法。
@@ -158,7 +159,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
 
     email:send {user} {--Q|queue}
 
-如果你想定義預期輸入的參數或選項為陣列，你可以使用 `*` 符號：
+如果你想定義預期輸入的參數或選項為陣列，可以使用 `*` 符號：
 
     email:send {user*}
 
@@ -180,7 +181,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
 <a name="retrieving-input"></a>
 ### 取得輸入
 
-當你的指令正在被執行時，你將需要存取參數及選項。為了達到這個目的，你會需要使用 `argument` 及 `option` 方法：
+執行指令時，你會需要取得接收的參數及選項。為了達到這個目的，你會需要使用 `argument` 及 `option` 方法：
 
     /**
      * 執行這個指令列。
@@ -246,7 +247,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
     $name = $this->choice('你的名字是?', ['Taylor', 'Dayle'], false);
 
 <a name="writing-output"></a>
-### 撰寫輸出
+### 輸出至畫面
 
 使用 `line`、`info`、`comment`、`question` 和 `error` 方法來傳送輸出到終端。每個方法都有適當的 ANSI 顏色來表達它們的目的。
 
@@ -282,7 +283,7 @@ Artisan 是 Laravel 裡的一個指令列介面的名稱。當你在開發你的
 
 #### 進度條
 
-對於需要長時間執行的任務，使用進度指示器將會有不錯的幫助。使用 output 物件，我們可以開始、前進、停止進度條，當開始執行時你需要定義總共有幾個階段，然後每階段完成後就讓進度條前進：
+對於需要長時間執行的任務，顯示進度指示器將會很有幫助。使用 output 物件，我們可以開始、前進、停止進度條，當開始執行時你需要定義總共有幾個階段，然後每階段完成後就讓進度條前進：
 
     $users = App\User::all();
 
