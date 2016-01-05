@@ -165,7 +165,7 @@
 <a name="displaying-a-view"></a>
 ### 顯示視圖
 
-接著，讓我們填寫我們的 `/` 路由。在此路由中，我們想要渲染一個包含新增任務的表單，及目前所有任務清單的 HTML 樣板。
+接著，讓我們來填寫 `/` 路由。在此路由中，我們想要渲染一個包含新增任務的表單，以及目前所有任務清單的 HTML 樣板。
 
 在 Laravel 裡，所有的 HTML 樣板都儲存在 `resources/views` 目錄，且我們可以在路由中使用 `view` 輔助方法來回傳這些樣板的其中一個：
 
@@ -178,16 +178,16 @@
 <a name="building-layouts-and-views"></a>
 ## 建構佈局與視圖
 
-這個應用程式只會有一張視圖，包含新增任務的表單，及目前所有任務的清單。為了幫助你想像此視圖，下方是完成後應用程式的截圖，套用了基本的 Bootstrap CSS 樣式：
+這個應用程式只會有一張視圖，包含新增任務的表單，以及目前所有任務的清單。為了幫助你想像此視圖，下方是完成後應用程式的截圖，套用了基本的 Bootstrap CSS 樣式：
 
 ![應用程式圖片](https://laravel.tw/assets/img/quickstart/basic-overview.png)
 
 <a name="defining-the-layout"></a>
 ### 定義佈局
 
-幾乎所有的網頁應用程式都會在不同頁面共用相同的佈局。舉個例子，應用程式通常在每個頁面（如果我們有一個以上）的頂部都擁有導航欄。Laravel 使用了 Blade **佈局**讓不同頁面共用這些相同的功能。
+幾乎所有的網頁應用程式都會在不同頁面共用相同的佈局。舉個例子，應用程式通常在每個頁面（如果我們有一個以上）的頂部都擁有導航欄。Laravel 使用了 Blade **佈局**讓不同頁面共享這些相同的功能。
 
-如同我們前面討論，Laravel 所有的視圖都被儲存在 `resources/views`。所以，讓我們定義一個新的佈局視圖至 `resources/views/layouts/app.blade.php`。`.blade.php` 副檔名會告知框架使用 [Blade 模板引擎](/docs/{{version}}/blade)渲染此視圖。當然，你可以在 Laravel 使用純 PHP 的樣板。不過，Blade 提供了方便的簡寫來撰寫乾淨、簡潔的模板。
+如同我們前面討論的，Laravel 所有的視圖都被儲存在 `resources/views`。所以，讓我們定義一個新的佈局視圖至 `resources/views/layouts/app.blade.php`。`.blade.php` 副檔名會告知框架使用 [Blade 模板引擎](/docs/{{version}}/blade)渲染此視圖。當然，你可以在 Laravel 使用純 PHP 的樣板。不過，Blade 提供了方便的簡寫來撰寫乾淨、簡潔的模板。
 
 我們的 `app.blade.php` 視圖看起來應該如下：
 
@@ -212,7 +212,7 @@
 		</body>
 	</html>
 
-注意佈局中的 `@yield('content')` 部分。這是特別的 Blade 指令，讓子頁面可以在此處注入自己的內容以延伸佈局。接著，讓我們定義將會使用此佈局並提供主要內容的子視圖。
+注意佈局中的 `@yield('content')` 部分。這是特別的 Blade 指令，讓子頁面可以在此處注入自己的內容來延伸佈局。接著，讓我們定義將會使用此佈局並提供主要內容的子視圖。
 
 <a name="defining-the-child-view"></a>
 ### 定義子視圖
