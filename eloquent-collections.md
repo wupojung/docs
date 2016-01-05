@@ -7,9 +7,9 @@
 <a name="introduction"></a>
 ## 簡介
 
-由 Eloquent 回傳的所有多種結果的集合都是一個 `Illuminate\Database\Eloquent\Collection` 物件的實例，包含經由 `get` 方法或是經由存取一個關聯來取得的結果。Eloquent 集合物件繼承了 Laravel [基底集合](/docs/{{version}}/collections)，所以它自然繼承了許多可用於流暢地與 Eloquent 模型的底層陣列合作的方法。
+由 Eloquent 回傳的所有多種結果的集合都是 `Illuminate\Database\Eloquent\Collection` 物件的實例，包含經由 `get` 方法取得或是經由關聯來存取的結果。Eloquent 集合物件繼承了 Laravel [基底集合](/docs/{{version}}/collections)，所以它自然繼承了許多可用於流暢地與 Eloquent 模型的底層陣列合作的方法。
 
-當然，所有集合也可以作為迭代器，讓你可以遍歷集合像是一個簡單的 PHP 陣列：
+當然，所有的集合也都可以作為迭代器，讓你像是操作簡單的 PHP 陣列一般去遍歷集合：
 
     $users = App\User::where('active', 1)->get();
 
@@ -17,7 +17,7 @@
         echo $user->name;
     }
 
-然而，集合比陣列更強大的地方是使用各種 map 或 reduce 直觀的鏈結操作。例如，讓我們移除所有未啟用的模型並收集其餘每個使用者的名字：
+然而，集合比陣列更強大並提供 map 或 reduce 等各種鏈結操作的直觀介面。例如，讓我們來移除所有未啟用的模型並收集其餘每個使用者的名字：
 
     $users = App\User::where('active', 1)->get();
 
@@ -28,14 +28,14 @@
         return $user->name;
     });
 
-> **注意：** 雖然大多數 Eloquent 集合方法回傳一個新的 Eloquent 集合的實例，`pluck`、`keys`、`zip`、`collapse`、`flatten` 和 `flip` 方法回傳一個[基底集合](/docs/{{version}}/collections)實例。
+> **注意：** 雖然大多數 Eloquent 集合方法回傳一個新的 Eloquent 集合的實例，但是 `pluck`、`keys`、`zip`、`collapse`、`flatten` 和 `flip` 方法是回傳一個[基底集合](/docs/{{version}}/collections)ˇ的實例。
 
 <a name="available-methods"></a>
 ## 可用的方法
 
-### 基底的集合
+### 基底集合
 
-所有 Eloquent 集合繼承了基底 [Laravel 集合](/docs/{{version}}/collections)物件；因此，他們繼承所有基底集合類別所提供的強大的方法：
+所有 Eloquent 集合繼承了基底 [Laravel 集合](/docs/{{version}}/collections)物件；因此，他們繼承了所有基底集合類別所提供的強大的方法：
 
 <style>
     #collection-method-list > p {
