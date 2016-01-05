@@ -153,7 +153,7 @@
 
 如果你的路由有參數，你可以將參數放進 `route` 方法的第二個參數：
 
-    // For a route with the following URI: profile/{id}
+    // 針對是這樣 URI 的路由：profile/{id}
 
     return redirect()->route('profile', ['id' => 1]);
 
@@ -194,7 +194,7 @@
 <a name="response-macros"></a>
 ## 回應巨集
 
-如果你想要定義可以不同路由和控制器重複使用的自訂回應，你可以使用 `Illuminate\Contracts\Routing\ResponseFactory` 的實作或是 `Response` facade 的 `macro` 方法。
+如果你想要定義可以不同路由和控制器重複使用的自訂回應，你可以使用 `Response` facade 的 `macro` 方法或是 `Illuminate\Contracts\Routing\ResponseFactory` 的實作。
 
 舉個例子，來自[服務提供者的](/docs/{{version}}/providers) `boot` 方法：
 
