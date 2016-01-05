@@ -37,7 +37,7 @@
 
 #### 安裝此快速入門（選擇性）
 
-你可以選擇只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要克隆它的 Git 資源庫並安裝依賴套件：
+你可以選擇只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要 clone 它的 Git 資源庫並安裝依賴套件：
 
 	git clone https://github.com/laravel/quickstart-basic quickstart
 	cd quickstart
