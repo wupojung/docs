@@ -22,7 +22,7 @@
 <a name="introduction"></a>
 ## 簡介
 
-這個快速入門導引為 Laravel 框架提供了基本的介紹，內容概括了資料庫遷移、Eloquent ORM、路由、驗證、視圖，及 Blade 樣板。如果你是第一次使用 Laravel 框架或 PHP 框架，那麼這會是個很好的起始點。如果你已經在使用 Laravel 或者其它的框架，不仿參考我們進階的快速入門。
+這個快速入門導引為 Laravel 框架提供了基本的介紹，內容概括了資料庫遷移、Eloquent ORM、路由、驗證、視圖，及 Blade 樣板。如果你是第一次使用 Laravel 框架或 PHP 框架，那麼這會是個很好的起始點。如果你已經在使用 Laravel 或者其它的框架，不妨參考我們進階的快速入門。
 
 要在 Laravel 功能中為樣本做基本的選擇，我們會建構一個簡單的任務清單，可以使用它追蹤所有想完成的任務。換句話說，就是典型的「代辦事項清單」範例。此專案完整並完成的原始碼[在 GitHub 上](http://github.com/laravel/quickstart-basic)。
 
@@ -37,14 +37,14 @@
 
 #### 安裝此快速入門（選擇性）
 
-你可以自由的只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要克隆它的 Git 資源庫並安裝依賴：
+你可以選擇只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要克隆它的 Git 資源庫並安裝依賴套件：
 
 	git clone https://github.com/laravel/quickstart-basic quickstart
 	cd quickstart
 	composer install
 	php artisan migrate
 
-欲了解更多關於建構本機 Laravel 開發環境已完成的文件，請查閱完整的 [Homestead](/docs/{{version}}/homestead) 及[安裝](/docs/{{version}}/installation)文件。
+欲了解更多關於建構本機 Laravel 開發環境的完整文件，請查閱 [Homestead](/docs/{{version}}/homestead) 及[安裝](/docs/{{version}}/installation)的整個文件。
 
 <a name="prepping-the-database"></a>
 ## 準備資料庫
@@ -52,9 +52,9 @@
 <a name="database-migrations"></a>
 ### 資料庫遷移
 
-首先，讓我們使用遷移定義資料表來容納我們所有的任務。Laravel 的資料庫遷移提供了一個簡單的方式，使用流暢，一目了然的 PHP 程式碼來定義資料表的結構與修改。不必再告訴你的團隊成員手動增加欄位至他們本機的資料庫副本中，你的隊友可以簡單的執行你推送至版本控制的遷移。
+首先，讓我們使用遷移定義資料表來容納我們所有的任務。Laravel 的資料庫遷移提供了一個簡單的方式，使用流暢、一目了然的 PHP 程式碼來定義資料表的結構與修改。不必再告訴你的團隊成員手動增加欄位至他們本機的資料庫副本中，你的團隊成員可以簡單的執行你提交至版本控制的遷移。
 
-所以，讓我們建構一張我們將容納所有任務的資料表。[Artisan 指令列介面](/docs/{{version}}/artisan)可以被用於產生各種類別，為你建構 Laravel 專案時節省大量的手動輸入。在此例中，讓我們使用 `make:migration` 指令為 `tasks` 資料表產生新的資料庫遷移：
+所以，讓我們建構來一張我們容納所有任務的資料表。[Artisan 指令列介面](/docs/{{version}}/artisan)可以被用於產生各種類別，在建構 Laravel 專案時為你節省大量的手動輸入。在這個範例中，讓我們使用 `make:migration` 指令為 `tasks` 資料表產生新的資料庫遷移：
 
 	php artisan make:migration create_tasks_table --create=tasks
 
@@ -92,22 +92,22 @@
 	    }
 	}
 
-我們可以使用 `migrate` Artisan 指令執行遷移。如果你使用 Homestead，你必須在你的虛擬機器執行這個指令，因為你的主機無法直接存取資料庫：
+我們將會使用 `migrate` Artisan 指令執行遷移。如果你使用 Homestead，你必須在你的虛擬機器執行這個指令，因為你的主機無法直接存取資料庫：
 
 	php artisan migrate
 
-這個指令會建立我們所有的資料表。如果你使用你選擇的資料庫客戶端檢查資料表，你應該看到新的 `tasks` 資料表，並包含了我們遷移中所定義的欄位。接著，我們已經準備好為我們的任務定義一個 Eloquent ORM 模型！
+這個指令會建立我們所有的資料表。如果你使用你選擇的資料庫客戶端去檢查資料表，你應該看到新的 `tasks` 資料表，並包含了我們遷移中所定義的欄位。接著，我們已經準備好為我們的任務定義 Eloquent ORM 模型！
 
 <a name="eloquent-models"></a>
 ### Eloquent 模型
 
-[Eloquent](/docs/{{version}}/eloquent) 是 Laravel 預設的 ORM（物件關聯對映）。Eloqunet 透過明確的定義「模型」，讓你無痛的在資料庫取得及儲存資料。一般情況下，每個 Eloqunet 模型會直接對應於一張資料表。
+[Eloquent](/docs/{{version}}/eloquent) 是 Laravel 預設的 ORM（物件關聯對映）。Eloqunet 透過明確的定義「模型」，讓你無痛的在資料庫取得及儲存資料。一般情況下，每個 Eloqunet 模型會直接對應一張資料表。
 
-所以，讓我們定義一個對應至 `tasks` 資料表的 `Task` 模型。同樣的，我們可以使用 Artisan 指令來產生此模型。在此例中，我們會使用 `make:model` 指令：
+所以，讓我們定義一個對應至 `tasks` 資料表的 `Task` 模型。同樣的，我們可以使用 Artisan 指令來產生此模型。在這個範例中，我們會使用 `make:model` 指令：
 
 	php artisan make:model Task
 
-這個模型會放置在你應用程式的 `app` 目錄中。預設中，此模型類別會是空的。我們不必明確告知 Eloquent 模型要對應哪張資料表，因為它會假設資料表是模型名稱的複數型態。所以，在此例中，`Task` 模型會假設對應至 `tasks` 資料表。我們的空模型看起來應該如下：
+這個模型會放置在你應用程式的 `app` 目錄中。預設中，此模型類別會是空的。我們不必明確告知 Eloquent 模型要對應哪張資料表，因為它會假設資料表是模型名稱的複數型態。所以，在這個範例中，`Task` 模型會假設要對應至 `tasks` 資料表。我們的空模型看起來應該如下：
 
 	<?php
 
@@ -120,7 +120,7 @@
 		//
 	}
 
-在為我們的應用程式增加路由時，我們會學習更多關於如何使用 Eloquent 模型。當然，你可以很自由的參考[完整的 Eloquent 文件](/docs/{{version}}/eloquent)取得更多資訊。
+在為我們的應用程式增加路由時，我們會學習到更多如何使用 Eloquent 模型的相關內容。當然，你可以自由參考[完整的 Eloquent 文件](/docs/{{version}}/eloquent)來取得更多資訊。
 
 <a name="routing"></a>
 ## 路由
@@ -128,9 +128,9 @@
 <a name="stubbing-the-routes"></a>
 ### 建置路由
 
-接著，我們已經準備好增加一些路由至應用程式中。路由被用於將 URLs 指向控制器或是匿名函式，當使用者進入特定頁面時就會被執行。預設中，Laravel 所有的路由被定義在 `app/Http/routes.php` 檔案，每個新的專案都會包含此檔案。
+接著，我們已經準備好開始增加一些路由至應用程式中。路由被用來將 URLs 指向控制器或是匿名函式，當使用者進入特定頁面時就會被執行。預設中，Laravel 所有的路由被定義在 `app/Http/routes.php` 檔案，每個新的專案都會包含此檔案。
 
-對於本應用程式，我們知道我們最後會需要三個路由：一個路由用於顯示我們所有任務的清單、一個路由用於新增任務、一個路由用於刪除已有的任務。我們會將這些路由包在 `web` 中介層內，這樣它們會擁有 session 狀態及 CSRF 保護。所以，讓我們在 `app/Http/routes.php` 中建置這所有的路由：
+對於本應用程式，我們知道我們最後會需要三個路由：一個用於顯示我們所有任務的清單、一個用於新增任務、一個用於刪除已有的任務。我們會將這些路由包在 `web` 中介層內，這樣它們會擁有 session 狀態及 CSRF 保護。所以，讓我們在 `app/Http/routes.php` 中建置這所有的路由：
 
 	<?php
 
