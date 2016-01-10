@@ -1,76 +1,76 @@
-# Intermediate Task List
+# 中級任務清單
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Prepping The Database](#prepping-the-database)
-	- [Database Migrations](#database-migrations)
-	- [Eloquent Models](#eloquent-models)
-	- [Eloquent Relationships](#eloquent-relationships)
-- [Routing](#routing)
-	- [Displaying A View](#displaying-a-view)
-	- [Authentication](#authentication-routing)
-	- [The Task Controller](#the-task-controller)
-- [Building Layouts & Views](#building-layouts-and-views)
-	- [Defining The Layout](#defining-the-layout)
-	- [Defining The Child View](#defining-the-child-view)
-- [Adding Tasks](#adding-tasks)
-	- [Validation](#validation)
-	- [Creating The Task](#creating-the-task)
-- [Displaying Existing Tasks](#displaying-existing-tasks)
-	- [Dependency Injection](#dependency-injection)
-	- [Displaying The Tasks](#displaying-the-tasks)
-- [Deleting Tasks](#deleting-tasks)
-	- [Adding The Delete Button](#adding-the-delete-button)
-	- [Route Model Binding](#route-model-binding)
-	- [Authorization](#authorization)
-	- [Deleting The Task](#deleting-the-task)
+- [簡介](#introduction)
+- [安裝](#installation)
+- [準備資料庫](#prepping-the-database)
+	- [資料庫遷移](#database-migrations)
+	- [Eloquent 模型](#eloquent-models)
+	- [Eloquent 關聯](#eloquent-relationships)
+- [路由](#routing)
+	- [顯示視圖](#displaying-a-view)
+	- [認證](#authentication-routing)
+	- [任務控制器](#the-task-controller)
+- [建構佈局與視圖](#building-layouts-and-views)
+	- [定義佈局](#defining-the-layout)
+	- [定義子視圖](#defining-the-child-view)
+- [增加任務](#adding-tasks)
+	- [驗證](#validation)
+	- [建立任務](#creating-the-task)
+- [顯示已有的任務](#displaying-existing-tasks)
+	- [依賴注入](#dependency-injection)
+	- [顯示任務](#displaying-the-tasks)
+- [刪除任務](#deleting-tasks)
+	- [增加刪除按鈕](#adding-the-delete-button)
+	- [路由模型綁定](#route-model-binding)
+	- [授權](#authorization)
+	- [刪除該筆任務](#deleting-the-task)
 
 <a name="introduction"></a>
-## Introduction
+## 簡介
 
-This quickstart guide provides an intermediate introduction to the Laravel framework and includes content on database migrations, the Eloquent ORM, routing, authentication, authorization, dependency injection, validation, views, and Blade templates. This is a great starting point if you are familiar with the basics of the Laravel framework or PHP frameworks in general.
+這個快速入門導引為 Laravel 框架提供了進階的介紹，內容概括了資料庫遷移、Eloquent ORM、路由、認證、授權、依賴注入、驗證、視圖，及 Blade 樣板。如果你已經熟悉 Laravel 框架的基礎或 PHP 框架，那麼這會是個很好的起始點。
 
-To sample a basic selection of Laravel features, we will build a task list we can use to track all of the tasks we want to accomplish. In other words, the typical "to-do" list example. In contrast to the "basic" quickstart, this tutorial will allow users to create accounts and authenticate with the application. The complete, finished source code for this project is [available on GitHub](http://github.com/laravel/quickstart-intermediate).
+要在 Laravel 功能中為樣本做基本的選擇，我們會建構一個簡單的任務清單，可以使用它追蹤所有想完成的任務。換句話說，就是典型的「代辦事項清單」範例。。與「基本」快速入門相比，此教學會允許使用者在應用程式建立帳號並認證。此專案完整並完成的原始碼[在 GitHub 上](http://github.com/laravel/quickstart-intermediate)。
 
 <a name="installation"></a>
-## Installation
+## 安裝
 
-#### Installing Laravel
+#### 安裝 Laravel
 
-Of course, first you will need a fresh installation of the Laravel framework. You may use the [Homestead virtual machine](/docs/{{version}}/homestead) or the local PHP environment of your choice to run the framework. Once your local environment is ready, you may install the Laravel framework using Composer:
+當然，首先你需要一個全新安裝的 Laravel 框架。你可以選擇使用 [Homestead 虛擬機器](/docs/{{version}}/homestead)或是其他本機 PHP 環境來執行框架。只要你的本機環境準備好，就可以使用 Composer 安裝 Laravel 框架：
 
 	composer create-project laravel/laravel quickstart --prefer-dist
 
-#### Installing The Quickstart (Optional)
+#### 安裝此快速入門（選擇性）
 
-You're free to just read along for the remainder of this quickstart; however, if you would like to download the source code for this quickstart and run it on your local machine, you may clone its Git repository and install its dependencies:
+你可以自由的只閱讀快速入門的剩餘部分；不過，如果你想下載這個快速入門的原始碼並在你的本機機器執行，那麼你需要克隆它的 Git 資源庫並安裝依賴：
 
 	git clone https://github.com/laravel/quickstart-intermediate quickstart
 	cd quickstart
 	composer install
 	php artisan migrate
 
-For more complete documentation on building a local Laravel development environment, check out the full [Homestead](/docs/{{version}}/homestead) and [installation](/docs/{{version}}/installation) documentation.
+欲了解更多關於建構本機 Laravel 開發環境已完成的文件，請查閱完整的 [Homestead](/docs/{{version}}/homestead) 及[安裝](/docs/{{version}}/installation)文件。
 
 <a name="prepping-the-database"></a>
-## Prepping The Database
+## 準備資料庫
 
 <a name="database-migrations"></a>
-### Database Migrations
+### 資料庫遷移
 
-First, let's use a migration to define a database table to hold all of our tasks. Laravel's database migrations provide an easy way to define your database table structure and modifications using fluent, expressive PHP code. Instead of telling your team members to manually add columns to their local copy of the database, your teammates can simply run the migrations you push into source control.
+首先，讓我們使用遷移定義資料表來容納我們所有的任務。Laravel 的資料庫遷移提供了一個簡單的方式，使用流暢，一目了然的 PHP 程式碼來定義資料表的結構與修改。不必再告訴你的團隊成員手動增加欄位至他們本機的資料庫副本中，你的隊友可以簡單的執行你推送至版本控制的遷移。
 
-#### The `users` Table
+#### `users` 資料表
 
-Since we are going to allow users to create their accounts within the application, we will need a table to store all of our users. Thankfully, Laravel already ships with a migration to create a basic `users` table, so we do not need to manually generate one. The default migration for the `users` table is located in the `database/migrations` directory.
+因為我們要讓使用者可以在應用程式中建立他們的帳號，所以我們需要一張資料表來儲存我們的使用者。值得慶幸的是，Laravel 已經附帶了建立 `users` 資料表的遷移，所以我們不必手動產生一個。預設的 `users` 資料表遷移位於 `database/migrations` 目錄中。
 
-#### The `tasks` Table
+#### `tasks` 資料表
 
-Next, let's build a database table that will hold all of our tasks. The [Artisan CLI](/docs/{{version}}/artisan) can be used to generate a variety of classes and will save you a lot of typing as you build your Laravel projects. In this case, let's use the `make:migration` command to generate a new database migration for our `tasks` table:
+接著，讓我們建構一張我們將容納所有任務的資料表。[Artisan 指令列介面](/docs/{{version}}/artisan)可以被用於產生各種類別，為你建構 Laravel 專案時節省大量的手動輸入。在此例中，讓我們使用 `make:migration` 指令為 `tasks` 資料表產生新的資料庫遷移：
 
 	php artisan make:migration create_tasks_table --create=tasks
 
-The migration will be placed in the `database/migrations` directory of your project. As you may have noticed, the `make:migration` command already added an auto-incrementing ID and timestamps to the migration file. Let's edit this file and add an additional `string` column for the name of our tasks, as well as a `user_id` column which will link our `tasks` and `users` tables:
+此遷移會被放置於你專案的 `database/migrations` 目錄中。你可能已經注意到，`make:migration` 指令已經增加了自動遞增的 ID 及時間戳記至遷移檔。讓我們編輯這個檔案並為任務的名稱增加額外的 `string` 欄位，也增加連結 `tasks` 與 `users` 資料表的 `user_id` 欄位：
 
 	<?php
 
@@ -80,7 +80,7 @@ The migration will be placed in the `database/migrations` directory of your proj
 	class CreateTasksTable extends Migration
 	{
 	    /**
-	     * Run the migrations.
+	     * 執行遷移。
 	     *
 	     * @return void
 	     */
@@ -95,7 +95,7 @@ The migration will be placed in the `database/migrations` directory of your proj
 	    }
 
 	    /**
-	     * Reverse the migrations.
+	     * 還原遷移。
 	     *
 	     * @return void
 	     */
@@ -105,30 +105,30 @@ The migration will be placed in the `database/migrations` directory of your proj
 	    }
 	}
 
-To run our migrations, we will use the `migrate` Artisan command. If you are using Homestead, you should run this command from within your virtual machine, since your host machine will not have direct access to the database:
+我們可以使用 `migrate` Artisan 指令執行遷移。如果你使用 Homestead，你必須在你的虛擬機器執行這個指令，因為你的主機無法直接存取資料庫：
 
 	php artisan migrate
 
-This command will create all of our database tables. If you inspect the database tables using the database client of your choice, you should see new `tasks` and `users` tables which contains the columns defined in our migration. Next, we're ready to define our Eloquent ORM models!
+這個指令會建立我們所有的資料表。如果你使用你選擇的資料庫客戶端檢查資料表，你應該看到新的 `tasks` 與 `users` 資料表，並包含了我們遷移中所定義的欄位。接著，我們已經準備好定義我們的 Eloquent ORM 模型！
 
 <a name="eloquent-models"></a>
-### Eloquent Models
+### Eloquent 模型
 
-[Eloquent](/docs/{{version}}/eloquent) is Laravel's default ORM (object-relational mapper). Eloquent makes it painless to retrieve and store data in your database using clearly defined "models". Usually, each Eloquent model corresponds directly with a single database table.
+[Eloquent](/docs/{{version}}/eloquent) 是 Laravel 預設的 ORM（物件關聯對映）。Eloqunet 透過明確的定義「模型」，讓你無痛的在資料庫取得及儲存資料。一般情況下，每個 Eloqunet 模型會直接對應於一張資料表。
 
-#### The `User` Model
+#### `User` 模型
 
-First, we need a model that corresponds to our `users` database table. However, if you look in the `app` directory of your project, you will see that Laravel already ships with a `User` model, so we do not need to generate one manually.
+首先，我們需要對應至 `users` 資料表的模型。不過，如果你看過你專案的 `app` 目錄，你會發現 Laravel 已經附帶了一個 `User` 模型，所以我們不必手動產生。
 
-#### The `Task` Model
+#### `Task` 模型
 
-So, let's define a `Task` model that corresponds to our `tasks` database table we just created. Again, we can use an Artisan command to generate this model. In this case, we'll use the `make:model` command:
+所以，讓我們定義一個對應至 `tasks` 資料表的 `Task` 模型。同樣的，我們可以使用 Artisan 指令來產生此模型。在此例中，我們會使用 `make:model` 指令：
 
 	php artisan make:model Task
 
-The model will be placed in the `app` directory of your application. By default, the model class is empty. We do not have to explicitly tell the Eloquent model which table it corresponds to because it will assume the database table is the plural form of the model name. So, in this case, the `Task` model is assumed to correspond with the `tasks` database table.
+這個模型會放置在你應用程式的 `app` 目錄中。預設中，此模型類別會是空的。我們不必明確告知 Eloquent 模型要對應哪張資料表，因為它會假設資料表是模型名稱的複數型態。所以，在此例中，`Task` 模型會假設對應至 `tasks` 資料表。
 
-Let's add a few things to this model. First, we will state that the `name` attribute on the model should be "mass-assignable". This will allow us to fill the `name` attribute when using Eloquent's `create` method:
+讓我們增加一些東西至模型。首先，我們需要宣告模型的 `name` 屬性應該能被「批量賦值」。這麼做讓我們在使用 Eloquent 的 `create` 方法時能填入 `name` 屬性：
 
 	<?php
 
@@ -139,19 +139,19 @@ Let's add a few things to this model. First, we will state that the `name` attri
 	class Task extends Model
 	{
 	    /**
-	     * The attributes that are mass assignable.
+	     * 這些屬性能被批量賦值。
 	     *
 	     * @var array
 	     */
 	    protected $fillable = ['name'];
 	}
 
-We'll learn more about how to use Eloquent models as we add routes to our application. Of course, feel free to consult the [complete Eloquent documentation](/docs/{{version}}/eloquent) for more information.
+在為我們的應用程式增加路由時，我們會學習更多關於如何使用 Eloquent 模型。當然，你可以很自由的參考[完整的 Eloquent 文件](/docs/{{version}}/eloquent)取得更多資訊。
 
 <a name="eloquent-relationships"></a>
-### Eloquent Relationships
+### Eloquent 關聯
 
-Now that our models are defined, we need to link them. For example, our `User` can have many `Task` instances, while a `Task` is assigned to a single `User`. Defining a relationship will allow us to fluently walk through our relations like so:
+現在我們的模型已經定義好，我們需要將他們連結在一起。例如，我們的 `User` 可以擁有多筆 `Task` 實例，而一筆 `Task` 則被賦予給一名 `User`。定義關聯可以讓我們流暢的漫步在關聯中，像這樣：
 
 	$user = App\User::find(1);
 
@@ -159,9 +159,9 @@ Now that our models are defined, we need to link them. For example, our `User` c
 		echo $task->name;
 	}
 
-#### The `tasks` Relationship
+#### `tasks` 關聯
 
-First, let's define the `tasks` relationship on our `User` model. Eloquent relationships are defined as methods on models. Eloquent supports several different types of relationships, so be sure to consult the [full Eloquent documentation](/docs/{{version}}/eloquent-relationships) for more information. In this case, we will define a `tasks` function on the `User` model which calls the `hasMany` method provided by Eloquent:
+首先，讓我們在 `User` 模型定義 `tasks` 的關聯。Eloquent 關聯被定義為模型中的方法。Eloquent 支援多種不同類型的關聯，所以請務必查閱[完整的 Eloquent 文件](/docs/{{version}}/eloquent-relationships)取得更多資訊。在本例中，我們會在 `User` 模型中定義一個 `tasks` 函式，並呼叫 Eloquent 提供的 `hasMany` 方法：
 
 	<?php
 
@@ -171,10 +171,10 @@ First, let's define the `tasks` relationship on our `User` model. Eloquent relat
 
 	class User extends Authenticatable
 	{
-	    // Other Eloquent Properties...
+	    // 其他的 Eloquent 屬性...
 
 	    /**
-	     * Get all of the tasks for the user.
+	     * 取得該使用者的所有任務。
 	     */
 	    public function tasks()
 	    {
@@ -182,9 +182,9 @@ First, let's define the `tasks` relationship on our `User` model. Eloquent relat
 	    }
 	}
 
-#### The `user` Relationship
+#### `user` 關聯
 
-Next, let's define the `user` relationship on the `Task` model. Again, we will define the relationship as a method on the model. In this case, we will use the `belongsTo` method provided by Eloquent to define the relationship:
+接著，讓我們在 `Task` 模型定義 `user` 關聯。同樣的，我們會將此關聯定義為模型中的方法。在本例中，我們會使用 Eloquent 提供的 `belongsTo` 方法來定義關聯：
 
 	<?php
 
@@ -196,14 +196,14 @@ Next, let's define the `user` relationship on the `Task` model. Again, we will d
 	class Task extends Model
 	{
 	    /**
-	     * The attributes that are mass assignable.
+	     * 這些屬性能被批量賦值。
 	     *
 	     * @var array
 	     */
 	    protected $fillable = ['name'];
 
 	    /**
-	     * Get the user that owns the task.
+	     * 取得擁有此任務的使用者。
 	     */
 	    public function user()
 	    {
@@ -211,64 +211,64 @@ Next, let's define the `user` relationship on the `Task` model. Again, we will d
 	    }
 	}
 
-Wonderful! Now that our relationships are defined, we can start building our controllers!
+太棒了！現在我們的關聯已經定義好了，我們可以開始建構我們的控制器！
 
 <a name="routing"></a>
-## Routing
+## 路由
 
-In the [basic version](/docs/{{version}}/quickstart) of our task list application, we defined all of our logic using Closures within our `routes.php` file. For the majority of this application, we will use [controllers](/docs/{{version}}/controllers) to organize our routes. Controllers will allow us to break out HTTP request handling logic across multiple files for better organization.
+在我們任務清單應用程式的[基本版本](/docs/{{version}}/quickstart)中，我們在我們的 `routes.php` 中將所有邏輯都定義為閉包。對於大多數的應用程式來說，我們會使用[控制器](/docs/{{version}}/controllers)來組織我們的路由。控制器讓我們將 HTTP 請求處理邏輯分散至多個檔案以進行更好的組織。
 
 <a name="displaying-a-view"></a>
-### Displaying A View
+### 顯示視圖
 
-We will have a single route that uses a Closure: our `/` route, which will simply be a landing page for application guests. So, let's fill out our `/` route. From this route, we want to render an HTML template that contains the "welcome" page:
+我們只會有一個路由使用閉包：`/` 路由，它會是個給應用程式訪客的簡單起始頁面。所以，讓我們填寫我們的 `/` 路由。對於此路由，我們想渲染一個包含「歡迎」頁面的 HTML 模板：
 
-In Laravel, all HTML templates are stored in the `resources/views` directory, and we can use the `view` helper to return one of these templates from our route:
+在 Laravel 裡，所有的 HTML 樣板都儲存在 `resources/views` 目錄，且我們可以在路由中使用 `view` 輔助方法來回傳這些樣板的其中一個：
 
 	Route::get('/', function () {
 		return view('welcome');
 	});
 
-Of course, we need to actually define this view. We'll do that in a bit!
+當然，我們必須確實的定義這些視圖。我們將在稍後完成！
 
 <a name="authentication-routing"></a>
-### Authentication
+### 認證
 
-Remember, we also need to let users create accounts and login to our application. Typically, it can be a tedious task to build an entire authentication layer into a web application. However, since it is such a common need, Laravel attempts to make this procedure totally painless.
+還記得我們需要讓使用者建立帳號並登入至我們的應用程式。一般來說，為網頁應用程式建構完整的認證是相當乏味的工作。不過，因為它是一個通用的需求，所以 Laravel 試著讓這個過程變得無痛。
 
-First, notice that there is already a `app/Http/Controllers/Auth/AuthController` included in your Laravel application. This controller uses a special `AuthenticatesAndRegistersUsers` trait which contains all of the necessary logic to create and authenticate users.
+首先，你會注意到在應用程式中已經包含一個 `app/Http/Controllers/Auth/AuthController`。這個控制器使用了特別的 `AuthenticatesAndRegistersUsers` trait，它包含了所有建立及認證使用者必要的邏輯。
 
-#### Authentication Routes & Views
+#### 認證路由及視圖
 
-So, what's left for us to do? Well, we still need to create the registration and login templates as well as define the routes to point to the authentication controller. We can do all of this using the `make:auth` Artisan command:
+所以，還有哪些部分是留著讓我們做的？好的，我們依然需要建立註冊及登入模板，與定義指向認證控制器的路由。我們可以使用 `make:auth` Artisan 指令做到這些事：
 
 	php artisan make:auth --views
 
-> **Note:** If you would like to view complete examples for these views, remember that the entire application's source code is [available on GitHub](https://github.com/laravel/quickstart-intermediate).
+> **注意：**如果你想查看這些視圖的完整範例，請記得應用程式的完整原始碼可以在 [GitHub 上取得](https://github.com/laravel/quickstart-intermediate)。
 
-Now, all we have to do is add the authentication routes to our routes file. We can do this using the `auth` method on the `Route` facade, which will register all of the routes we need for registration, login, and password reset:
+現在，所以我們需要做的事就是增加認證路由至我們的路由檔案。我們可以使用 `Route` facade 的 `auth` 方法做到，它會註冊我們註冊、登入及重置密碼所需的所有路由：
 
-	// Authentication Routes...
+	// 認證路由...
 	Route::auth();
 
 <a name="the-task-controller"></a>
-### The Task Controller
+### 任務控制器
 
-Since we know we're going to need to retrieve and store tasks, let's create a `TaskController` using the Artisan CLI, which will place the new controller in the `app/Http/Controllers` directory:
+因為我們已經知道我們需要取得及儲存任務，所以讓我們使用 Artisan 指令列介面建立一個 `TaskController`，這個新的控制器會放置在 `app/Http/Controllers` 目錄中：
 
 	php artisan make:controller TaskController --plain
 
-Now that the controller has been generated, let's go ahead and stub out some routes in our `app/Http/routes.php` file to point to the controller:
+現在這個控制器已經被產生，讓我們繼續在 `app/Http/routes.php` 檔案中建置一些對應至此控制器的路由：
 
 	Route::get('/tasks', 'TaskController@index');
 	Route::post('/task', 'TaskController@store');
 	Route::delete('/task/{task}', 'TaskController@destroy');
 
-#### Authenticating All Task Routes
+#### 認證所有的任務路由
 
-For this application, we want all of our task routes to require an authenticated user. In other words, the user must be "logged into" the application in order to create a task. So, we need to restrict access to our task routes to only authenticated users. Laravel makes this a cinch using [middleware](/docs/{{version}}/middleware).
+對於此應用程式，我們希望我們所有的任務路由需要一個認證的使用者。換句話說，使用者為了建立任務必須「登入至」應用程式中。所以，我們需要限制我們的任務路由僅限已認證的使用者存取。Laravel 使用[中介層](/docs/{{version}}/middleware)讓這件事變得相當容易。
 
-To require an authenticated users for all actions on the controller, we can add a call to the `middleware` method from the controller's constructor. All available route middleware are defined in the `app/Http/Kernel.php` file. In this case, we want to assign the `auth` middleware to all actions on the controller:
+要讓所有控制器中的行為要求已認證的使用者，我們可以在控制器的建構子中增加 `middleware` 方法的呼叫。所以可用的路由中介層都被定義在 `app/Http/Kernel.php` 檔案中。在本例中，我們希望為所有控制器的動作指派 `auth` 中介層：
 
 	<?php
 
@@ -281,7 +281,7 @@ To require an authenticated users for all actions on the controller, we can add 
 	class TaskController extends Controller
 	{
 	    /**
-	     * Create a new controller instance.
+	     * 建立一個新的控制器實例。
 	     *
 	     * @return void
 	     */
@@ -292,35 +292,35 @@ To require an authenticated users for all actions on the controller, we can add 
 	}
 
 <a name="building-layouts-and-views"></a>
-## Building Layouts & Views
+## 建構佈局與視圖
 
-The primary part of this application only has a single view which contains a form for adding new tasks as well as a listing of all current tasks. To help you visualize the view, here is a screenshot of the finished application with basic Bootstrap CSS styling applied:
+這個應用程式只會有一張視圖，包含新增任務的表單，及目前所有任務的清單。為了幫助你想像此視圖，下方是完成後應用程式的截圖，套用了基本的 Bootstrap CSS 樣式：
 
-![Application Image](http://laravel.com/assets/img/quickstart/basic-overview.png)
+![應用程式圖片](https://laravel.tw/assets/img/quickstart/basic-overview.png)
 
 <a name="defining-the-layout"></a>
-### Defining The Layout
+### 定義佈局
 
-Almost all web applications share the same layout across pages. For example, this application has a top navigation bar that would be typically present on every page (if we had more than one). Laravel makes it easy to share these common features across every page using Blade **layouts**.
+幾乎所有的網頁應用程式都會在不同頁面共用相同的佈局。舉個例子，應用程式通常在每個頁面（如果我們有一個以上）的頂部都擁有導航欄。Laravel 使用了 Blade **佈局**讓不同頁面共用這些相同的功能。
 
-As we discussed earlier, all Laravel views are stored in `resources/views`. So, let's define a new layout view in `resources/views/layouts/app.blade.php`. The `.blade.php` extension instructs the framework to use the [Blade templating engine](/docs/{{version}}/blade) to render the view. Of course, you may use plain PHP templates with Laravel. However, Blade provides convenient short-cuts for writing cleaner, terse templates.
+如同我們前面討論，Laravel 所有的視圖都被儲存在 `resources/views`。所以，讓我們定義一個新的佈局視圖至 `resources/views/layouts/app.blade.php`。`.blade.php` 副檔名會告知框架使用 [Blade 模板引擎](/docs/{{version}}/blade)渲染此視圖。當然，你可以在 Laravel 使用純 PHP 的樣板。不過，Blade 提供了方便的簡寫來撰寫乾淨、簡潔的模板。
 
-Our `app.blade.php` view should look like the following:
+我們的 `app.blade.php` 視圖看起來應該如下：
 
     // resources/views/layouts/app.blade.php
 
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
-			<title>Laravel Quickstart - Intermediate</title>
+			<title>Laravel 快速入門 - 進階</title>
 
-			<!-- CSS And JavaScript -->
+			<!-- CSS 及 JavaScript -->
 		</head>
 
 		<body>
 			<div class="container">
 				<nav class="navbar navbar-default">
-					<!-- Navbar Contents -->
+					<!-- Navbar 內容 -->
 				</nav>
 			</div>
 
@@ -328,14 +328,14 @@ Our `app.blade.php` view should look like the following:
 		</body>
 	</html>
 
-Note the `@yield('content')` portion of the layout. This is a special Blade directive that specifies where all child pages that extend the layout can inject their own content. Next, let's define the child view that will use this layout and provide its primary content.
+注意佈局中的 `@yield('content')` 部分。這是特別的 Blade 指令，讓子頁面可以在此處注入自己的內容以延伸佈局。接著，讓我們定義將會使用此佈局並提供主要內容的子視圖。
 
 <a name="defining-the-child-view"></a>
-### Defining The Child View
+### 定義子視圖
 
-Great, our application layout is finished. Next, we need to define a view that contains a form to create a new task as well as a table that lists all existing tasks. Let's define this view in `resources/views/tasks/index.blade.php`, which will correspond to the `index` method in our `TaskController`.
+很好，我們的應用程式佈局已經完成。接下來，我們需要定義包含建立任務的表單及列出已有任務表格的視圖。讓我們將此視圖定義在 `resources/views/tasks/index.blade.php`，它會對應至我們 `TaskController` 的 `index` 方法。
 
-We'll skip over some of the Bootstrap CSS boilerplate and only focus on the things that matter. Remember, you can download the full source for this application on [GitHub](https://github.com/laravel/quickstart-intermediate):
+我們會跳過一些 Bootstrap CSS 樣板，只專注在重要的事物上。切記，你可以在 [GitHub](https://github.com/laravel/quickstart-intermediate) 下載應用程式的完整原始碼：
 
     // resources/views/tasks/index.blade.php
 
@@ -343,49 +343,49 @@ We'll skip over some of the Bootstrap CSS boilerplate and only focus on the thin
 
 	@section('content')
 
-        <!-- Bootstrap Boilerplate... -->
+		<!-- Bootstrap 樣板... -->
 
 		<div class="panel-body">
-            <!-- Display Validation Errors -->
+			<!-- 顯示驗證錯誤 -->
 			@include('common.errors')
 
-			<!-- New Task Form -->
+			<!-- 新任務的表單 -->
 			<form action="/task" method="POST" class="form-horizontal">
 				{{ csrf_field() }}
 
-                <!-- Task Name -->
+				<!-- 任務名稱 -->
 				<div class="form-group">
-					<label for="task-name" class="col-sm-3 control-label">Task</label>
+					<label for="task-name" class="col-sm-3 control-label">任務</label>
 
 					<div class="col-sm-6">
 						<input type="text" name="name" id="task-name" class="form-control">
 					</div>
 				</div>
 
-                <!-- Add Task Button -->
+				<!-- 增加任務按鈕-->
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-6">
 						<button type="submit" class="btn btn-default">
-							<i class="fa fa-plus"></i> Add Task
+							<i class="fa fa-plus"></i> 增加任務
 						</button>
 					</div>
 				</div>
 			</form>
 		</div>
 
-		<!-- TODO: Current Tasks -->
+		<!-- 代辦：目前任務 -->
 	@endsection
 
-#### A Few Notes Of Explanation
+#### 一些注意事項的說明
 
-Before moving on, let's talk about this template a bit. First, the `@extends` directive informs Blade that we are using the layout we defined at `resources/views/layouts/app.blade.php`. All of the content between `@section('content')` and `@endsection` will be injected into the location of the `@yield('content')` directive within the `app.blade.php` layout.
+在繼續之前，讓我們談談有關模板的一些事項。首先 `@extends` 指令會告知 Blade，我們使用定義於 `resources/views/layouts/app.blade.php` 的佈局。所有在 `@section('content')` 及 `@endsection` 之間的內容會被注入到 `app.blade.php` 佈局中的 `@yield('content')` 位置裡。
 
-The `@include('common.errors')` directive will load the template located at `resources/views/common/errors.blade.php`. We haven't defined this template, but we will soon!
+`@include('common.errors')` 指令會載入位於 `resources/views/common/errors.blade.php` 的模板。我們尚未定義此模板，但是我們將會在稍後定義它！
 
-Now we have defined a basic layout and view for our application. Let's go ahead and return this view from the `index` method of our `TaskController`:
+現在我們已經為我們的應用程式定義了基本的佈局及視圖。接著讓我們在 `TaskController` 的 `index` 方法回傳此視圖：
 
     /**
-     * Display a list of all of the user's task.
+     * 顯示使用者所有任務的清單。
      *
      * @param  Request  $request
      * @return Response
@@ -395,20 +395,20 @@ Now we have defined a basic layout and view for our application. Let's go ahead 
 		return view('tasks.index');
 	}
 
-Next, we're ready to add code to our `POST /task` route's controller method to handle the incoming form input and add a new task to the database.
+接著，我們已經準備好增加程式碼至我們的 `POST /task` 路由的控制器方法，以處理接收到的表單輸入並增加新的任務至資料庫中。
 
 <a name="adding-tasks"></a>
-## Adding Tasks
+## 增加任務
 
 <a name="validation"></a>
-### Validation
+### 驗證
 
-Now that we have a form in our view, we need to add code to our `TaskController@store` method to validate the incoming form input and create a new task. First, let's validate the input.
+現在我們視圖中已經有一個表單，我們需要增加程式碼至我們的 `TaskController@store` 方法來驗證接收到的表單輸入並建立新的任務。首先，讓我們驗證輸入。
 
-For this form, we will make the `name` field required and state that it must contain less than `255` characters. If the validation fails, we want to redirect the user back to the `/tasks` URL, as well as flash the old input and errors into the [session](/docs/{{version}}/session):
+對此表單來說，我們要讓 `name` 欄位為必填，且它必須少於 `255` 字元。如果驗證失敗，我們會將使用者重導回 `/` URL，並將舊的輸入及錯誤訊息快閃至 [session](/docs/{{version}}/session)：
 
     /**
-     * Create a new task.
+     * 建立新的任務。
      *
      * @param  Request  $request
      * @return Response
@@ -422,20 +422,20 @@ For this form, we will make the `name` field required and state that it must con
 		// Create The Task...
 	}
 
-If you followed along with the [basic quickstart](/docs/{{version}}/quickstart), you'll notice this validation code looks quite a bit different! Since we are in a controller, we can leverage the convenience of the `ValidatesRequests` trait that is included in the base Laravel controller. This trait exposes a simple `validate` method which accepts a request and an array of validation rules.
+如果你跟隨過[基本快速入門](/docs/{{version}}/quickstart)，你會注意到驗證的程式碼相比起來有些不同！因為我們在控制器內，所以我們可以利用 Laravel 基底控制器所包含方便的 `ValidatesRequests` trait。這個 trait 提供了一個簡單的 `validate` 方法，它接收一個請求與包含驗證規則的陣列。
 
-We don't even have to manually determine if the validation failed or do manual redirection. If the validation fails for the given rules, the user will automatically be redirected back to where they came from and the errors will automatically be flashed to the session. Nice!
+我們不必再手動判斷當驗證失敗時需手動重導。如果給定的規則驗證失敗，使用者會自動被重導回原本的位置，並自動將錯誤訊息快閃至 session 中。很好！
 
-#### The `$errors` Variable
+#### `$errors` 變數
 
-Remember that we used the `@include('common.errors')` directive within our view to render the form's validation errors. The `common.errors` will allow us to easily show validation errors in the same format across all of our pages. Let's define the contents of this view now:
+記得我們在視圖中使用了 `@include('common.errors')` 指令來渲染表單的驗證錯誤訊息。`common.errors` 讓我們可以簡單的在我們所有的頁面顯示相同格式的驗證錯誤訊息。現在讓我們定義此視圖的內容：
 
     // resources/views/common/errors.blade.php
 
     @if (count($errors) > 0)
-        <!-- Form Error List -->
+        <!-- 表單錯誤清單 -->
         <div class="alert alert-danger">
-            <strong>Whoops! Something went wrong!</strong>
+            <strong>哎呀！出了些問題！</strong>
 
             <br><br>
 
@@ -448,17 +448,17 @@ Remember that we used the `@include('common.errors')` directive within our view 
     @endif
 
 
-> **Note:** The `$errors` variable is available in **every** Laravel view. It will simply be an empty instance of `ViewErrorBag` if no validation errors are present.
+> **注意：**`errors` 變數可用於**每個** Laravel 的視圖中。如果沒有驗證錯誤訊息存在，那麼它就會是一個空的 `ViewErrorBag` 實例。
 
 <a name="creating-the-task"></a>
-### Creating The Task
+### 建立任務
 
-Now that input validation is handled, let's actually create a new task by continuing to fill out our route. Once the new task has been created, we will redirect the user back to the `/tasks` URL. To create the task, we are going to leverage the power of Eloquent's relationships.
+現在輸入已經被驗證處理完畢。讓我們繼續填寫我們的路由來實際的建立一筆新的任務。一旦新的任務被建立後，我們會將使用者重導回 `/tasks` URL。要建立該任務，我們會充分的利用 Eloquent 的關聯功能。
 
-Most of Laravel's relationships expose a `create` method, which accepts an array of attributes and will automatically set the foreign key value on the related model before storing it in the database. In this case, the `create` method will automatically set the `user_id` property of the given task to the ID of the currently authenticated user, which we are accessing using `$request->user()`:
+Laravel 大部分的關聯提供了一個 `create` 方法，它接收一個包含屬性的陣列，並會在儲存至資料庫前自動設置關聯模型的外鍵值。在此例中，`create` 方法會自動將給定任務的 `user_id` 屬性設置為目前已驗證使用者的 ID，因為我們透過 `$request->user()` 存取。
 
     /**
-     * Create a new task.
+     * 建立新的任務。
      *
      * @param  Request  $request
      * @return Response
@@ -476,12 +476,12 @@ Most of Laravel's relationships expose a `create` method, which accepts an array
         return redirect('/tasks');
     }
 
-Great! We can now successfully create tasks. Next, let's continue adding to our view by building a list of all existing tasks.
+好極了！我們現在可以成功的建立任務。接著，讓我們繼續建構已有的任務清單，並增加至我們的視圖中。
 
 <a name="displaying-existing-tasks"></a>
-## Displaying Existing Tasks
+### 顯示已有的任務
 
-First, we need to edit our `TaskController@index` method to pass all of the existing tasks to the view. The `view` function accepts a second argument which is an array of data that will be made available to the view, where each key in the array will become a variable within the view. For example, we could do this:
+首先，我們需要編輯我們的 `TaskController@index` 方法，以傳遞所有已有的任務至視圖。`view` 函式接收一個能在視圖中取用之資料的陣列作為第二個參數，陣列中的每個鍵都會在視圖中作為變數。For example, we could do this:
 
     /**
      * Display a list of all of the user's task.
@@ -498,18 +498,18 @@ First, we need to edit our `TaskController@index` method to pass all of the exis
         ]);
     }
 
-However, let's explore some of the dependency injection capabilities of Laravel to inject a `TaskRepository` into our `TaskController`, which we will use for all of our data access.
+不過，讓我們來探討一些 Laravel 的依賴注入功能，注入 `TaskRepository` 至我們的 `TaskController`，我們會透過它存取所有的資料。
 
 <a name="dependency-injection"></a>
-### Dependency Injection
+### 依賴注入
 
-Laravel's [service container](/docs/{{version}}/container) is one of the most powerful features of the entire framework. After reading this quickstart, be sure to read over all of the container's documentation.
+Laravel 的[服務容器](/docs/{{version}}/container)是整個框架中最強大的功能之一。在讀完本快速上手之後，請務必閱讀容器文件的全部。
 
-#### Creating The Repository
+#### 建立資源庫
 
-As we mentioned earlier, we want to define a `TaskRepository` that holds all of our data access logic for the `Task` model. This will be especially useful if the application grows and you need to share some Eloquent queries across the application.
+如前面所提，我們希望定義一個 `TaskRepository` 存放所有 `Task` 模型的資料存取邏輯。當應用程式擴增，且你需要在整個應用程式中共用同樣的 Eloquent 查詢，那麼這會是相當有用的。
 
-So, let's create an `app/Repositories` directory and add a `TaskRepository` class. Remember, all Laravel `app` folders are auto-loaded using the PSR-4 auto-loading standard, so you are free to create as many extra directories as needed:
+所以，讓我們建立一個 `app/Repositories` 目錄，並增加 `TaskRepository` 類別。切記，Laravel 的 `app` 中所有的資料夾會自動載入並使用 PSR-4 自動載入標準，所以你可以自由的建立許多需要的額外目錄。
 
 	<?php
 
@@ -521,7 +521,7 @@ So, let's create an `app/Repositories` directory and add a `TaskRepository` clas
 	class TaskRepository
 	{
 	    /**
-	     * Get all of the tasks for a given user.
+	     * 取得給定使用者的所有任務。
 	     *
 	     * @param  User  $user
 	     * @return Collection
@@ -534,9 +534,9 @@ So, let's create an `app/Repositories` directory and add a `TaskRepository` clas
 	    }
 	}
 
-#### Injecting The Repository
+#### 注入資源庫
 
-Once our repository is defined, we can simply "type-hint" it in the constructor of our `TaskController` and utilize it within our `index` route. Since Laravel uses the container to resolve all controllers, our dependencies will automatically be injected into the controller instance:
+一旦我們的資源庫定義好，我們可以簡單的在 `TaskController` 控制器的建構子中對它使用「型別提示」，並在我們的 `index` 路由中使用它。因為 Laravel 使用容器來解析所有的控制器，所以我們的依賴會自動被注入至控制器的實例中：
 
 	<?php
 
@@ -551,14 +551,14 @@ Once our repository is defined, we can simply "type-hint" it in the constructor 
 	class TaskController extends Controller
 	{
 	    /**
-	     * The task repository instance.
+	     * 任務資源庫的實例。
 	     *
 	     * @var TaskRepository
 	     */
 	    protected $tasks;
 
 	    /**
-	     * Create a new controller instance.
+	     * 建立新的控制器實例。
 	     *
 	     * @param  TaskRepository  $tasks
 	     * @return void
@@ -571,7 +571,7 @@ Once our repository is defined, we can simply "type-hint" it in the constructor 
 	    }
 
 	    /**
-	     * Display a list of all of the user's task.
+	     * 取得給定使用者的所有任務。
 	     *
 	     * @param  Request  $request
 	     * @return Response
@@ -585,42 +585,42 @@ Once our repository is defined, we can simply "type-hint" it in the constructor 
 	}
 
 <a name="displaying-the-tasks"></a>
-### Displaying The Tasks
+### 顯示任務
 
-Once the data is passed, we can spin through the tasks in our `tasks/index.blade.php` view and display them in a table. The `@foreach` Blade construct allows us to write concise loops that compile down into blazing fast plain PHP code:
+一旦資料被傳遞之後，我們在我們的 `tasks/index.blade.php` 視圖中將任務切分並將它們顯示至表格中。`@foreach` 指令結構讓我們可以撰寫簡潔的迴圈，並編譯成快速的純 PHP 程式碼：
 
 	@extends('layouts.app')
 
 	@section('content')
-        <!-- Create Task Form... -->
+        <!-- 建立任務表單... -->
 
-        <!-- Current Tasks -->
+        <!-- 目前任務 -->
         @if (count($tasks) > 0)
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Current Tasks
+                   目前任務
                 </div>
 
                 <div class="panel-body">
                     <table class="table table-striped task-table">
 
-                        <!-- Table Headings -->
+                        <!-- 表頭 -->
                         <thead>
                             <th>Task</th>
                             <th>&nbsp;</th>
                         </thead>
 
-                        <!-- Table Body -->
+                        <!-- 表身 -->
                         <tbody>
                             @foreach ($tasks as $task)
                                 <tr>
-                                    <!-- Task Name -->
+                                    <!-- 任務名稱 -->
                                     <td class="table-text">
                                         <div>{{ $task->name }}</div>
                                     </td>
 
                                     <td>
-                                        <!-- TODO: Delete Button -->
+                                       <!-- 代辦：刪除按鈕 -->
                                     </td>
                                 </tr>
                             @endforeach
@@ -631,51 +631,51 @@ Once the data is passed, we can spin through the tasks in our `tasks/index.blade
         @endif
 	@endsection
 
-Our task application is almost complete. But, we have no way to delete our existing tasks when they're done. Let's add that next!
+我們任務應用程式大部分都完成了。但是，當我們完成已有的任務後，還沒有任何方式可以刪除它們。接著讓我們增加此功能！
 
 <a name="deleting-tasks"></a>
-## Deleting Tasks
+## 刪除任務
 
 <a name="adding-the-delete-button"></a>
-### Adding The Delete Button
+### 增加刪除按鈕
 
-We left a "TODO" note in our code where our delete button is supposed to be. So, let's add a delete button to each row of our task listing within the `tasks/index.blade.php` view. We'll create a small single-button form for each task in the list. When the button is clicked, a `DELETE /task` request will be sent to the application which will trigger our `TaskController@destroy` method:
+我們在我們的程式碼中應該放刪除按鈕的地方留下了「待辦」的事項。所以，讓我們在 `tasks/index.blade.php` 視圖中列出任務的每一行增加一個刪除按鈕。我們會為列表中的每個任務建立一個只有單個按鈕的小表單。當按鈕被按下時，一個 `DELETE /task` 的請求將會被發送到應用程式，它會觸發我們的 `TaskController@destroy` 方法：
 
     <tr>
-        <!-- Task Name -->
+        <!-- 任務名稱 -->
         <td class="table-text">
             <div>{{ $task->name }}</div>
         </td>
 
-        <!-- Delete Button -->
+        <!-- 刪除按鈕 -->
         <td>
             <form action="/task/{{ $task->id }}" method="POST">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
 
-                <button>Delete Task</button>
+                <button>刪除任務</button>
             </form>
         </td>
     </tr>
 
 <a name="a-note-on-method-spoofing"></a>
-#### A Note On Method Spoofing
+#### 方法欺騙的註記
 
-Note that the delete button's form `method` is listed as `POST`, even though we are responding to the request using a `Route::delete` route. HTML forms only allow the `GET` and `POST` HTTP verbs, so we need a way to spoof a `DELETE` request from the form.
+注意，刪除按鈕的表單 `method` 被列為 `POST`，即使我們回應的請求使用了 `Route::delete` 路由。HTML 表單只允許 `GET` 及 `POST` HTTP 動詞，所以我們需要有個方式在表單假冒一個 `DELETE` 請求。
 
-We can spoof a `DELETE` request by outputting the results of the `method_field('DELETE')` function within our form. This function generates a hidden form input that Laravel recognizes and will use to override the actual HTTP request method. The generated field will look like the following:
+我們可以在表單中透過 `method_field('DELETE')` 函式輸出的結果假冒一個 `DELETE` 請求。此函式會產生一個隱藏的表單輸入，Laravel 會辨識並覆蓋掉實際使用的 HTTP 請求方法。產生的欄位看起來如下：
 
 	<input type="hidden" name="_method" value="DELETE">
 
 <a name="route-model-binding"></a>
-### Route Model Binding
+### 路由模型綁定
 
-Now, we're almost ready to define the `destroy` method on our `TaskController`. But, first, let's revisit our route declaration and controller method for this route:
+現在，我們大致上已經準備好定義我們 `TaskController` 的 `destroy` 方法。但是首先，讓我們重新審視我們對此路由的路由宣告及控制器方法：
 
 	Route::delete('/task/{task}', 'TaskController@destroy');
 
     /**
-     * Destroy the given task.
+     * 移除給定的任務。
      *
      * @param  Request  $request
      * @param  Task  $task
@@ -686,20 +686,20 @@ Now, we're almost ready to define the `destroy` method on our `TaskController`. 
 		//
 	}
 
-Since the `{task}` variable in our route matches the `$task` variable defined in our controller method, Laravel's [implicit model binding](/docs/{{version}}/routing#route-model-binding) will automatically inject the corresponding Task model instance.
+因為我們路由中的 `{task}` 變數與控制器方法中定義的 `$task` 變數相符，所以 Laravel 的[隱式模型綁定](/docs/{{version}}/routing#route-model-binding)會自動注入對應的任務模型實例。
 
 <a name="authorization"></a>
-### Authorization
+### 認證
 
-Now, we have a `Task` instance injected into our `destroy` method; however, we have no guarantee that the authenticated user actually "owns" the given task. For example, a malicious request could have been concocted in an attempt to delete another user's tasks by passing a random task ID to the `/tasks/{task}` URL. So, we need to use Laravel's authorization capabilities to make sure the authenticated user actually owns the `Task` instance that was injected into the route.
+現在，我們有一個注入至 `destroy` 方法的 `Task` 實例；然而，我們不能保證通過認證的使用者實際上「擁有」給定的任務。舉個例子，一個惡意的請求可能透過傳遞一個隨機任務 ID 至 `/tasks/{task}` URL，企圖嘗試刪除其他使用者的任務。所以，我們需要使用 Laravel 的授權功能，以確保已認證的使用者實際上擁有注入至路由的 `Task` 實例。
 
-#### Creating A Policy
+#### 建立一個原則
 
-Laravel uses "policies" to organize authorization logic into simple, small classes. Typically, each policy corresponds to a model. So, let's create a `TaskPolicy` using the Artisan CLI, which will place the generated file in `app/Policies/TaskPolicy.php`:
+Laravel 使用了「原則」將授權邏輯組織至簡單，小型的類別。一般來說，每個原則會對應至一個模型。所以，讓我們使用 Artisan 指令列介面建立一個 `TaskPolicy`，產生的檔案會被放置於 `app/Policies/TaskPolicy.php`：
 
 	php artisan make:policy TaskPolicy
 
-Next, let's add a `destroy` method to the policy. This method will receive a `User` instance and a `Task` instance. The method should simply check if the user's ID matches the `user_id` on the task. In fact, all policy methods should either return `true` or `false`:
+接著，讓我們增加一個 `destroy` 方法治原則中。此方法會取得一個 `User` 實例及一個 `Task` 實例。此方法會簡單的檢查當使用者的 ID 符合任務的 `user_id`。實際上，所有的授權方法必須回傳 `true` 或 `false`：
 
 	<?php
 
@@ -714,7 +714,7 @@ Next, let's add a `destroy` method to the policy. This method will receive a `Us
 	    use HandlesAuthorization;
 
 	    /**
-	     * Determine if the given user can delete the given task.
+	     * 判斷當給定的使用者可以刪除給定的任務。
 	     *
 	     * @param  User  $user
 	     * @param  Task  $task
@@ -726,10 +726,10 @@ Next, let's add a `destroy` method to the policy. This method will receive a `Us
 	    }
 	}
 
-Finally, we need to associate our `Task` model with our `TaskPolicy`. We can do this by adding a line in the `app/Providers/AuthServiceProvider.php` file's `$policies` property. This will inform Laravel which policy should be used whenever we try to authorize an action on a `Task` instance:
+最後，我們需要連接我們的 `Task` 模型與 `TaskPolicy`。我們可以透過增加一行至 `app/Providers/AuthServiceProvider.php` 檔案的 `$policies` 屬性做到這件事。這會告知 Laravel，每當我們嘗試授權 `Task` 實例的行為時該用哪個原則：
 
     /**
-     * The policy mappings for the application.
+     * 應用程式的原則對應。
      *
      * @var array
      */
@@ -738,12 +738,12 @@ Finally, we need to associate our `Task` model with our `TaskPolicy`. We can do 
     ];
 
 
-#### Authorizing The Action
+#### 授權行為
 
-Now that our policy is written, let's use it in our `destroy` method. All Laravel controllers may call an `authorize` method, which is exposed by the `AuthorizesRequest` trait:
+現在我們的原則已經撰寫完，讓我們在我們的 `destroy` 方法中使用它。Laravel 所有的控制器可以呼叫一個 `authorize` 方法，它由 `AuthorizesRequest` trait 所提供：
 
     /**
-     * Destroy the given task.
+     * 移除給定的任務。
      *
      * @param  Request  $request
      * @param  Task  $task
@@ -753,22 +753,22 @@ Now that our policy is written, let's use it in our `destroy` method. All Larave
     {
         $this->authorize('destroy', $task);
 
-        // Delete The Task...
+        // 刪除該任務...
     }
 
-Let's examine this method call for a moment. The first argument passed to the `authorize` method is the name of the policy method we wish to call. The second argument is the model instance that is our current concern. Remember, we recently told Laravel that our `Task` model corresponds to our `TaskPolicy`, so the framework knows on which policy to fire the `destroy` method. The current user will automatically be sent to the policy method, so we do not need to manually pass it here.
+讓我們花點時間看看此方法的呼叫。傳遞至 `authorize` 的第一個參數是我們希望呼叫的原則方法名稱。第二個參數是我們目前有關的模型實例。切記，我們已經告訴 Laravel 我們的 `Task` 模型會對應至我們的 `TaskPolicy`，所以框架會知道該觸發哪個原則的 `destroy` 方法。目前的使用者會自動發送至授權的方法中，所以我們不必在此手動傳遞它。
 
-If the action is authorized, our code will continue executing normally. However, if the action is not authorized (meaning the policy's `destroy` method returned `false`), a 403 exception will be thrown and an error page will be displayed to the user.
+如果該行為被授權了，我們的程式碼會繼續正常執行。但是，如果該行為不被授權（意指原則的 `destroy` 方法回傳 `false`），會自動被拋出一個 403 例外並顯示錯誤頁面給使用者。
 
-> **Note:** There are several other ways to interact with the authorization services Laravel provides. Be sure to browse the complete [authorization documentation](/docs/{{version}}/authorization).
+> **注意：**Laravel 提供的授權服務還有多種方式可供互動。請務必瀏覽完整的[授權文件](/docs/{{version}}/authorization)。
 
 <a name="deleting-the-task"></a>
-### Deleting The Task
+### 刪除該任務
 
-Finally, let's finish adding the logic to our `destroy` method to actually delete the given task. We can use Eloquent's `delete` method to delete the given model instance in the database. Once the record is deleted, we will redirect the user back to the `/tasks` URL:
+最後，讓我們完成增加邏輯至我們的 `destroy` 方法來實際刪除給定的任務。我們可以使用 Eloquent 的 `delete` 方法從資料庫中刪除給定的模型實例。一旦記錄被刪除，我們會將使用者重導回 `tasks` URL：
 
     /**
-     * Destroy the given task.
+     * 移除給定的任務。
      *
      * @param  Request  $request
      * @param  Task  $task
