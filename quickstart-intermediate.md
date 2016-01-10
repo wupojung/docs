@@ -28,9 +28,9 @@
 <a name="introduction"></a>
 ## 簡介
 
-這個快速入門導引為 Laravel 框架提供了進階的介紹，內容概括了資料庫遷移、Eloquent ORM、路由、認證、授權、依賴注入、驗證、視圖，及 Blade 樣板。如果你已經熟悉 Laravel 框架的基礎或 PHP 框架，那麼這會是個很好的起始點。
+這個快速入門導引為 Laravel 框架提供了進階的介紹，內容概括了資料庫遷移、Eloquent ORM、路由、認證、授權、依賴注入、驗證、視圖，及 Blade 樣板。如果你已經熟悉 Laravel 框架的基礎或其他 PHP 框架，那麼這會是個很好的起始點。
 
-要在 Laravel 功能中為樣本做基本的選擇，我們會建構一個簡單的任務清單，可以使用它追蹤所有想完成的任務。換句話說，就是典型的「代辦事項清單」範例。。與「基本」快速入門相比，此教學會允許使用者在應用程式建立帳號並認證。此專案完整並完成的原始碼[在 GitHub 上](http://github.com/laravel/quickstart-intermediate)。
+要在 Laravel 功能中為樣本做基本的選擇，我們會建構一個簡單的任務清單，可以使用它追蹤所有想完成的任務。換句話說，就是典型的「代辦事項清單」範例。。與「基本」快速入門相比，此教學要能讓使用者在應用程式建立帳號並認證。此專案完整的原始碼[在 GitHub 上](http://github.com/laravel/quickstart-intermediate)。
 
 <a name="installation"></a>
 ## 安裝
@@ -58,19 +58,19 @@
 <a name="database-migrations"></a>
 ### 資料庫遷移
 
-首先，讓我們使用遷移定義資料表來容納我們所有的任務。Laravel 的資料庫遷移提供了一個簡單的方式，使用流暢，一目了然的 PHP 程式碼來定義資料表的結構與修改。不必再告訴你的團隊成員手動增加欄位至他們本機的資料庫副本中，你的隊友可以簡單的執行你推送至版本控制的遷移。
+首先，讓我們使用遷移定義資料表來儲存所有的任務。Laravel 的資料庫遷移提供了一個簡單的方式，使用流暢，具表達性的 PHP 程式碼來定義資料表的結構與修改。不必再告訴你的團隊成員手動增加欄位至他們本機的資料庫副本中，你的隊友可以簡單的執行你推送至版本控制的遷移。
 
 #### `users` 資料表
 
-因為我們要讓使用者可以在應用程式中建立他們的帳號，所以我們需要一張資料表來儲存我們的使用者。值得慶幸的是，Laravel 已經附帶了建立 `users` 資料表的遷移，所以我們不必手動產生一個。預設的 `users` 資料表遷移位於 `database/migrations` 目錄中。
+因為我們要讓使用者可以在應用程式中建立他們的帳號，所以我們需要一張資料表來儲存使用者。值得慶幸的是，Laravel 已經附帶了建立 `users` 資料表的遷移，所以我們不必手動產生一個。預設的 `users` 資料表遷移位於 `database/migrations` 目錄中。
 
 #### `tasks` 資料表
 
-接著，讓我們建構一張我們將容納所有任務的資料表。[Artisan 指令列介面](/docs/{{version}}/artisan)可以被用於產生各種類別，為你建構 Laravel 專案時節省大量的手動輸入。在此例中，讓我們使用 `make:migration` 指令為 `tasks` 資料表產生新的資料庫遷移：
+接著，讓我們建構一張我們將容納所有任務的資料表。可以用 [Artisan 指令列介面](/docs/{{version}}/artisan)產生各種類別，讓你在建構 Laravel 專案時節省大量的手動輸入。在此例中，讓我們使用 `make:migration` 指令為 `tasks` 資料表產生新的資料庫遷移：
 
 	php artisan make:migration create_tasks_table --create=tasks
 
-此遷移會被放置於你專案的 `database/migrations` 目錄中。你可能已經注意到，`make:migration` 指令已經增加了自動遞增的 ID 及時間戳記至遷移檔。讓我們編輯這個檔案並為任務的名稱增加額外的 `string` 欄位，也增加連結 `tasks` 與 `users` 資料表的 `user_id` 欄位：
+此遷移會被放置於你專案的 `database/migrations` 目錄下。你可能已經注意到，`make:migration` 指令已經增加了自動遞增的 ID 及時間戳記至遷移檔。讓我們編輯這個檔案並為任務的名稱增加額外的 `string` 型別的 `tasks` 欄位，以及與 `users` 資料表關聯的 `user_id` 欄位：
 
 	<?php
 
@@ -109,16 +109,16 @@
 
 	php artisan migrate
 
-這個指令會建立我們所有的資料表。如果你使用你選擇的資料庫客戶端檢查資料表，你應該看到新的 `tasks` 與 `users` 資料表，並包含了我們遷移中所定義的欄位。接著，我們已經準備好定義我們的 Eloquent ORM 模型！
+這個指令會建立所有的資料表。如果你使用資料庫客戶端檢視資料表，你應該看到新的 `tasks` 與 `users` 資料表，並包含了遷移檔中所定義的欄位。接下來，我們準備定義 Eloquent ORM 模型！
 
 <a name="eloquent-models"></a>
 ### Eloquent 模型
 
-[Eloquent](/docs/{{version}}/eloquent) 是 Laravel 預設的 ORM（物件關聯對映）。Eloqunet 透過明確的定義「模型」，讓你無痛的在資料庫取得及儲存資料。一般情況下，每個 Eloqunet 模型會直接對應於一張資料表。
+[Eloquent](/docs/{{version}}/eloquent) 是 Laravel 預設的 ORM（物件關聯對映）。Eloqunet 透過明確的定義「模型」，讓你輕鬆的在資料庫取得及儲存資料。一般情況下，每個 Eloqunet 模型會直接對應到一張資料表。
 
 #### `User` 模型
 
-首先，我們需要對應至 `users` 資料表的模型。不過，如果你看過你專案的 `app` 目錄，你會發現 Laravel 已經附帶了一個 `User` 模型，所以我們不必手動產生。
+首先，我們需要對應 `users` 資料表的模型。不過，如果你看過專案的 `app` 目錄，你會發現 Laravel 已經附帶了一個 `User` 模型，所以我們不必手動產生。
 
 #### `Task` 模型
 
@@ -126,9 +126,9 @@
 
 	php artisan make:model Task
 
-這個模型會放置在你應用程式的 `app` 目錄中。預設中，此模型類別會是空的。我們不必明確告知 Eloquent 模型要對應哪張資料表，因為它會假設資料表是模型名稱的複數型態。所以，在此例中，`Task` 模型會假設對應至 `tasks` 資料表。
+這個模型會放置在你應用程式的 `app` 目錄下。預設此模型類別會是空的。我們不必明確告知 Eloquent 模型要對應哪張資料表，因為它會假設資料表是模型名稱的複數型態。所以，在此例中，`Task` 模型會假設對應至 `tasks` 資料表。
 
-讓我們增加一些東西至模型。首先，我們需要宣告模型的 `name` 屬性應該能被「批量賦值」。這麼做讓我們在使用 Eloquent 的 `create` 方法時能填入 `name` 屬性：
+讓我們增加一些內容至模型。首先，我們需要宣告模型的 `name` 屬性應該能被「批量賦值」。讓我們在使用 Eloquent 的 `create` 方法時，能夠填入 `name` 屬性：
 
 	<?php
 
@@ -146,12 +146,12 @@
 	    protected $fillable = ['name'];
 	}
 
-在為我們的應用程式增加路由時，我們會學習更多關於如何使用 Eloquent 模型。當然，你可以很自由的參考[完整的 Eloquent 文件](/docs/{{version}}/eloquent)取得更多資訊。
+在為我們的應用程式增加路由時，我們會學習更多關於如何使用 Eloquent 模型。當然，你可以參考[完整的 Eloquent 文件](/docs/{{version}}/eloquent)取得更多資訊。
 
 <a name="eloquent-relationships"></a>
 ### Eloquent 關聯
 
-現在我們的模型已經定義好，我們需要將他們連結在一起。例如，我們的 `User` 可以擁有多筆 `Task` 實例，而一筆 `Task` 則被賦予給一名 `User`。定義關聯可以讓我們流暢的漫步在關聯中，像這樣：
+現在模型已經定義好，我們需要將他們連結在一起。例如，`User` 可以擁有多筆 `Task` 實例，而一筆 `Task` 則被指定給一名 `User`。定義關聯可以讓我們流暢的進行關聯，像這樣：
 
 	$user = App\User::find(1);
 
@@ -161,7 +161,7 @@
 
 #### `tasks` 關聯
 
-首先，讓我們在 `User` 模型定義 `tasks` 的關聯。Eloquent 關聯被定義為模型中的方法。Eloquent 支援多種不同類型的關聯，所以請務必查閱[完整的 Eloquent 文件](/docs/{{version}}/eloquent-relationships)取得更多資訊。在本例中，我們會在 `User` 模型中定義一個 `tasks` 函式，並呼叫 Eloquent 提供的 `hasMany` 方法：
+首先，讓我們在 `User` 模型定義與 `tasks` 的關聯。Eloquent 的關聯在模型中會定義成一個方法。Eloquent 支援多種不同類型的關聯，所以請務必查閱[完整的 Eloquent 文件](/docs/{{version}}/eloquent-relationships)取得更多資訊。在本例中，我們會在 `User` 模型中定義一個 `tasks` 函式，並呼叫 Eloquent 提供的 `hasMany` 方法：
 
 	<?php
 
@@ -211,30 +211,30 @@
 	    }
 	}
 
-太棒了！現在我們的關聯已經定義好了，我們可以開始建構我們的控制器！
+太棒了！現在我們的關聯已經定義好了，我們可以開始建構控制器！
 
 <a name="routing"></a>
 ## 路由
 
-在我們任務清單應用程式的[基本版本](/docs/{{version}}/quickstart)中，我們在我們的 `routes.php` 中將所有邏輯都定義為閉包。對於大多數的應用程式來說，我們會使用[控制器](/docs/{{version}}/controllers)來組織我們的路由。控制器讓我們將 HTTP 請求處理邏輯分散至多個檔案以進行更好的組織。
+在[基本版本](/docs/{{version}}/quickstart)的任務清單應用程式中，我們在 `routes.php` 中將所有邏輯都定義為閉包。在大多數的應用程式中，會使用[控制器](/docs/{{version}}/controllers)來組織路由。控制器讓我們將 HTTP 請求處理邏輯分散至多個檔案以進行更好的組織。
 
 <a name="displaying-a-view"></a>
 ### 顯示視圖
 
-我們只會有一個路由使用閉包：`/` 路由，它會是個給應用程式訪客的簡單起始頁面。所以，讓我們填寫我們的 `/` 路由。對於此路由，我們想渲染一個包含「歡迎」頁面的 HTML 模板：
+我們只會有一個路由使用閉包：`/` 路由，它會是個給應用程式訪客的簡單起始頁面。所以，讓我們填寫 `/` 路由。對於此路由，我們想渲染一個包含「歡迎」頁面的 HTML 模板：
 
-在 Laravel 裡，所有的 HTML 樣板都儲存在 `resources/views` 目錄，且我們可以在路由中使用 `view` 輔助方法來回傳這些樣板的其中一個：
+在 Laravel 裡，所有的 HTML 樣板都儲存在 `resources/views` 目錄下，且我們可以在路由中使用 `view` 輔助方法來回傳這些樣板：
 
 	Route::get('/', function () {
 		return view('welcome');
 	});
 
-當然，我們必須確實的定義這些視圖。我們將在稍後完成！
+當然，我們必須實際建立這些視圖。我們將在稍後完成！
 
 <a name="authentication-routing"></a>
 ### 認證
 
-還記得我們需要讓使用者建立帳號並登入至我們的應用程式。一般來說，為網頁應用程式建構完整的認證是相當乏味的工作。不過，因為它是一個通用的需求，所以 Laravel 試著讓這個過程變得無痛。
+還記得我們需要讓使用者建立帳號並登入應用程式。一般來說，為網頁應用程式建構完整的認證是相當乏味的工作。不過，因為它是一個通用的需求，所以 Laravel 試著讓這個過程變得輕鬆。
 
 首先，你會注意到在應用程式中已經包含一個 `app/Http/Controllers/Auth/AuthController`。這個控制器使用了特別的 `AuthenticatesAndRegistersUsers` trait，它包含了所有建立及認證使用者必要的邏輯。
 
@@ -246,7 +246,7 @@
 
 > **注意：**如果你想查看這些視圖的完整範例，請記得應用程式的完整原始碼可以在 [GitHub 上取得](https://github.com/laravel/quickstart-intermediate)。
 
-現在，所以我們需要做的事就是增加認證路由至我們的路由檔案。我們可以使用 `Route` facade 的 `auth` 方法做到，它會註冊我們註冊、登入及重置密碼所需的所有路由：
+現在，所以我們需要做的事就是增加認證路由至路由檔案。我們可以使用 `Route` facade 的 `auth` 方法做到，它會註冊我們註冊、登入及重置密碼所需的所有路由：
 
 	// 認證路由...
 	Route::auth();
@@ -254,7 +254,7 @@
 <a name="the-task-controller"></a>
 ### 任務控制器
 
-因為我們已經知道我們需要取得及儲存任務，所以讓我們使用 Artisan 指令列介面建立一個 `TaskController`，這個新的控制器會放置在 `app/Http/Controllers` 目錄中：
+因為我們已經知道會需要取得及儲存任務，所以讓我們使用 Artisan 指令列介面建立一個 `TaskController`，這個新的控制器會放置在 `app/Http/Controllers` 目錄下：
 
 	php artisan make:controller TaskController --plain
 
@@ -266,7 +266,7 @@
 
 #### 認證所有的任務路由
 
-對於此應用程式，我們希望我們所有的任務路由需要一個認證的使用者。換句話說，使用者為了建立任務必須「登入至」應用程式中。所以，我們需要限制我們的任務路由僅限已認證的使用者存取。Laravel 使用[中介層](/docs/{{version}}/middleware)讓這件事變得相當容易。
+對於此應用程式，我們希望我們所有的任務路由需要一個認證的使用者。換句話說，使用者為了建立任務必須「登入」應用程式。所以，我們需要限制我們的任務路由只讓已認證的使用者存取。Laravel 使用[中介層](/docs/{{version}}/middleware)讓這件事變得相當容易。
 
 要讓所有控制器中的行為要求已認證的使用者，我們可以在控制器的建構子中增加 `middleware` 方法的呼叫。所以可用的路由中介層都被定義在 `app/Http/Kernel.php` 檔案中。在本例中，我們希望為所有控制器的動作指派 `auth` 中介層：
 
@@ -301,9 +301,9 @@
 <a name="defining-the-layout"></a>
 ### 定義佈局
 
-幾乎所有的網頁應用程式都會在不同頁面共用相同的佈局。舉個例子，應用程式通常在每個頁面（如果我們有一個以上）的頂部都擁有導航欄。Laravel 使用了 Blade **佈局**讓不同頁面共用這些相同的功能。
+幾乎所有的網頁應用程式都會在不同頁面共用相同佈局。舉個例子，應用程式通常在每個頁面（如果我們有一個以上）的頂部都擁有導航欄。Laravel 使用了 Blade **layouts** 讓不同頁面共用這些相同的功能。
 
-如同我們前面討論，Laravel 所有的視圖都被儲存在 `resources/views`。所以，讓我們定義一個新的佈局視圖至 `resources/views/layouts/app.blade.php`。`.blade.php` 副檔名會告知框架使用 [Blade 模板引擎](/docs/{{version}}/blade)渲染此視圖。當然，你可以在 Laravel 使用純 PHP 的樣板。不過，Blade 提供了方便的簡寫來撰寫乾淨、簡潔的模板。
+如同前面討論，Laravel 所有的視圖都被儲存在 `resources/views`。所以，讓我們定義一個新的佈局視圖至 `resources/views/layouts/app.blade.php`。`.blade.php` 副檔名會告知框架使用 [Blade 模板引擎](/docs/{{version}}/blade)渲染此視圖。當然，你可以在 Laravel 使用純 PHP 的樣板。不過，Blade 提供了方便的簡寫來撰寫乾淨、簡潔的模板。
 
 我們的 `app.blade.php` 視圖看起來應該如下：
 
