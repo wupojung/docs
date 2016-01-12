@@ -44,7 +44,7 @@
     Route::delete($uri, $callback);
     Route::options($uri, $callback);
 
-有時候你可能需要註冊一個路由來回應多個 HTTP 動詞。你可以使用 `match` 方法做到。或者，你甚至可以透過 `any` 方法來使用註冊路由並回應所有的 HTTP 動詞：
+有時候你可能需要讓註冊一個路由可以應對到多個 HTTP 動詞。你可以使用 `match` 方法做到。或者甚至可以透過 `any` 方法來使用註冊路由並回應所有的 HTTP 動詞：
 
     Route::match(['get', 'post'], '/', function () {
         //
@@ -74,12 +74,12 @@
 
 路由的參數都會被放在「大括號」內。當執行路由時，參數會透過路由`閉包`來傳遞。
 
-> **注意：**路由參數不能包含 `-` 字元。用底線 (`_`) 來取代。
+> **注意：**路由參數不能包含 `-` 字元。請使用底線 (`_`) 。
 
 <a name="parameters-optional-parameters"></a>
 ### 選擇性路由參數
 
-有時候你可能需要指定路由參數，但是讓路由參數的存在是選擇性的。你可以藉由在參數名稱後面加上 `?` 達成。請確保給予該路由對應的預設值：
+有時候你可能需要指定路由參數，但是讓路由參數的存在是選擇性的。你可以藉由在參數名稱後面加上 `?` 達成。記得給該路由的對應參數一個預設值：
 
     Route::get('user/{name?}', function ($name = null) {
         return $name;
@@ -104,13 +104,13 @@
         'as' => 'profile', 'uses' => 'UserController@showProfile'
     ]);
 
-除了在路由的陣列定義中指定路由名稱外，你也可以在路由定義後方鏈結 `name` 方法：
+除了在路由的陣列定義中指定路由名稱外，你也可以在路由定義後方串連 `name` 方法：
 
     Route::get('user/profile', 'UserController@showProfile')->name('profile');
 
 #### 路由群組和命名路由
 
-假設你使用[路由群組](#route-groups)，你可以指定一個 `as` 關鍵字在你的路由群組的屬性陣列，也允許你設定所有路由群組中共同的路由名稱前綴：
+假設使用[路由群組](#route-groups)，你可以指定一個 `as` 關鍵字在路由群組的屬性陣列中，來指定路由群組中共同的前綴：
 
     Route::group(['as' => 'admin::'], function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
@@ -128,7 +128,7 @@
     // 產生重導...
     return redirect()->route('profile');
 
-如果在命名路由定義參數，你可以把參數作為第二個參數傳遞給 `route` 函式。給定的參數將自動加入到 URL 中正確的位置：
+若指定路由時有定義參數，可以在 `route` 函式傳入第二個參數。給定的參數將自動加入到 URL 中正確的位置：
 
     Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
         //
@@ -161,7 +161,7 @@
 <a name="route-group-namespaces"></a>
 ### 命名空間
 
-另一個常見的範例是，指派相同的 PHP 命名空間中給控制器群組。你可以使用 `namespace` 參數指定群組內所有控制器的命名空間：
+另一個常見的用例是，指定相同的 PHP 命名空間中給一群控制器。你可以使用 `namespace` 參數指定群組內所有控制器的命名空間前綴：
 
     Route::group(['namespace' => 'Admin'], function()
     {
@@ -172,12 +172,12 @@
         });
     });
 
-記得，預設 `RouteServiceProvider` 會在命名空間群組內導入你的 `routes.php` 檔案，讓你不用指定完整的 `App\Http\Controllers` 命名空間前綴就能註冊控制器路由。所以，我們只需要指定在基底 `App\Http\Controllers` 根命名空間之後的命名空間部分。
+記得，預設 `RouteServiceProvider` 會在命名空間群組內導入你的 `routes.php` 檔案，讓你不用指定完整的 `App\Http\Controllers` 命名空間前綴就能註冊控制器路由。所以，我們只需要指定在基底 `App\Http\Controllers` 根命名空間之後的命名。
 
 <a name="route-group-sub-domain-routing"></a>
 ### 子網域路由
 
-路由群組也可以用來處理萬用字元的子網域。子網域可以像路由 URIs 分配路由參數，讓你在你的路由或控制器取得子網域參數。可以使用路由群組屬性陣列上的 `domain` 指定子網域變數名稱：
+路由群組也可以用來處理萬用字元的子網域。子網域可以像路由 URIs 分配路由參數，讓你在路由或控制器取得子網域參數。可以使用路由群組屬性陣列上的 `domain` 指定子網域變數名稱：
 
     Route::group(['domain' => '{account}.myapp.com'], function () {
         Route::get('user/{id}', function ($account, $id) {
@@ -196,7 +196,7 @@
         });
     });
 
-你也可以使用 `prefix` 參數去指定你的路由群組中共用的參數：
+你也可以使用 `prefix` 參數去指定路由群組中共用的參數：
 
     Route::group(['prefix' => 'accounts/{account_id}'], function () {
         Route::get('detail', function ($accountId)    {
@@ -212,9 +212,9 @@
 
 Laravel 提供簡單的方法保護你的應用程式不受到[跨網站請求偽造](http://en.wikipedia.org/wiki/Cross-site_request_forgery)（CSRF）攻擊。跨網站請求偽造是一種惡意的攻擊，藉以透過經過身份驗證的使用者身份執行未經授權的命令。
 
-Laravel 會自動產生了一個 CSRF 「token」給每個活動使用者由應用程式管理的 session。該 token 用來驗證使用者為實際發出請求至應用程式的使用者。
+Laravel 會自動產生一個 CSRF「token」給每個活動使用者由應用程式管理的 session。該 token 用來驗證使用者為實際發出請求至應用程式的使用者。
 
-在你的應用程式定義 HTML 表單任何時候，你的表單應該包含一個隱藏的 CSRF token 欄位，CSRF 保護中介層才能驗證請求。要產生一個包含 CSRF token 的隱藏輸入欄位 `_token`，你可以使用 `csrf_field` 輔助函式：
+在應用程式中定義 HTML 表單的時候，表單裡應該包含一個隱藏的 CSRF token 欄位，防護 CSRF 的中介層才能驗證請求。要產生一個包含 CSRF token 的隱藏輸入欄位 `_token`，可以使用 `csrf_field` 輔助函式：
 
     // 原生 PHP
     <?php echo csrf_field(); ?>
@@ -222,7 +222,7 @@ Laravel 會自動產生了一個 CSRF 「token」給每個活動使用者由應�
     // Blade 模板語法
     {{ csrf_field() }}
 
-`csrf_field` 輔助函式產生以下的 HTML：
+`csrf_field` 輔助函式會產生以下的 HTML：
 
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -256,7 +256,7 @@ Laravel 會自動產生了一個 CSRF 「token」給每個活動使用者由應�
 <a name="csrf-x-csrf-token"></a>
 ### X-CSRF-TOKEN
 
-除了檢查 CSRF token 當作 POST 參數之外，在 Laravel `VerifyCsrfToken` 中介層也會確認請求標頭中的 `X-CSRF-TOKEN`。例如，你可以將其儲存在 meta 標籤中：
+除了檢查當作 POST 參數的 CSRF token 之外，在 Laravel `VerifyCsrfToken` 中介層也會確認請求標頭中的 `X-CSRF-TOKEN`。例如，你可以將其儲存在 meta 標籤中：
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -271,12 +271,12 @@ Laravel 會自動產生了一個 CSRF 「token」給每個活動使用者由應�
 <a name="csrf-x-xsrf-token"></a>
 ### X-XSRF-TOKEN
 
-Laravel 也會在 `XSRF-TOKEN` cookie 中儲存 CSRF token。你也可以使用 cookie 的值來設定 `X-XSRF-TOKEN` 請求標頭。一些 JavaScript 框架會自動幫你處理，例如：Angular。你不太可能會需要手動去設定這個值。
+Laravel 也會在 `XSRF-TOKEN` cookie 中儲存 CSRF token。你也可以使用 cookie 的值來設定 `X-XSRF-TOKEN` 請求標頭。一些 JavaScript 框架會自動幫你處理，例如：Angular。你很少會需要手動去設定這個值。
 
 <a name="route-model-binding"></a>
 ## 路由模型綁定
 
-Laravel 路由模型綁定提供了一個方便的方式來注入類別實例至你的路由中。例如，除了注入一個使用者的 ID，你可以注入與給定 ID 相符的完整 `User` 類別實例。
+Laravel 路由模型綁定提供了一個方便的方式來注入類別實例至路由中。例如，除了注入一個使用者的 ID，你可以注入與給定 ID 相符的完整 `User` 類別實例。
 
 ### 隱式綁定
 
@@ -286,7 +286,7 @@ Laravel 會自動解析路由或控制器行為中變數名稱與路由片段名
         return $user->email;
     });
 
-在這個例子中，因為對路由 URI 的 `{user}` 片段所符合 `$user` 變數使用 Eloquent 型別提示，所以 Laravel 會自動注入與請求 URI 的 ID 值對應的模型實例。
+在這個例子中，因為對路由 URI 的 `{user}` 片段所符合 `$user` 變數的 Eloquent 型別提示，所以 Laravel 會自動注入與請求 URI 的 ID 值對應的模型實例。
 
 如果符合的模型實例不存在於資料庫中，就會自動產生一個 404 HTTP 回應。
 
