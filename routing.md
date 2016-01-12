@@ -1,27 +1,27 @@
-# HTTP Routing
+# HTTP 路由
 
-- [Basic Routing](#basic-routing)
-- [Route Parameters](#route-parameters)
-    - [Required Parameters](#required-parameters)
-    - [Optional Parameters](#parameters-optional-parameters)
-- [Named Routes](#named-routes)
-- [Route Groups](#route-groups)
-    - [Middleware](#route-group-middleware)
-    - [Namespaces](#route-group-namespaces)
-    - [Sub-Domain Routing](#route-group-sub-domain-routing)
-    - [Route Prefixes](#route-group-prefixes)
-- [CSRF Protection](#csrf-protection)
-    - [Introduction](#csrf-introduction)
-    - [Excluding URIs](#csrf-excluding-uris)
+- [基本路由](#basic-routing)
+- [路由參數](#route-parameters)
+    - [必要參數](#required-parameters)
+    - [選擇性參數](#parameters-optional-parameters)
+- [命名路由](#named-routes)
+- [路由群組](#route-groups)
+    - [中介層](#route-group-middleware)
+    - [命名空間](#route-group-namespaces)
+    - [子網域路由](#route-group-sub-domain-routing)
+    - [路由前綴](#route-group-prefixes)
+- [CSRF 保護](#csrf-protection)
+    - [簡介](#csrf-introduction)
+    - [例外 URIs](#csrf-excluding-uris)
     - [X-CSRF-Token](#csrf-x-csrf-token)
     - [X-XSRF-Token](#csrf-x-xsrf-token)
-- [Route Model Binding](#route-model-binding)
-- [Form Method Spoofing](#form-method-spoofing)
+- [路由模型綁定](#route-model-binding)
+- [表單方法欺騙](#form-method-spoofing)
 
 <a name="basic-routing"></a>
-## Basic Routing
+## 基本路由
 
-You will define all of the routes for your application in the `app/Http/routes.php` file, which is loaded by the `App\Providers\RouteServiceProvider` class. The most basic Laravel routes simply accept a URI and a `Closure`:
+你會在 `app/Http/routes.php` 檔案中為應用程式定義所有的路由，它會被 `App\Providers\RouteServiceProvider` 類別載入。而最基本的 Laravel 路由僅接收一個 URI 及一個`閉包`：
 
     Route::get('foo', function () {
         return 'Hello World';
@@ -31,11 +31,11 @@ You will define all of the routes for your application in the `app/Http/routes.p
         //
     });
 
-By default, the `routes.php` file contains a single route as well as a [route group](#route-groups) that applies the `web` middleware group to all routes it contains. This middleware group provides session state and CSRF protection to routes. **Typically, you will place most of your routes within this group.**
+預設情況下，`routes.php` 檔案包含了一個路由及一個套用了 `web` 中介層群組的[路由群組](#route-groups)，讓你將所有路由放置於此。這個中介層群組為路由提供了 session 狀態及 CSRF 保護。**一般來說，你會將大部分的路由放置於此群組中。**
 
-#### Available Router Methods
+#### 可用的路由器方法
 
-The router allows you to register routes that respond to any HTTP verb:
+路由器能讓你註冊回應任何 HTTP 動詞的路由：
 
     Route::get($uri, $callback);
     Route::post($uri, $callback);
@@ -44,7 +44,7 @@ The router allows you to register routes that respond to any HTTP verb:
     Route::delete($uri, $callback);
     Route::options($uri, $callback);
 
-Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method. Or, you may even register a route that responds to all HTTP verbs using the `any` method:
+有時候你可能需要註冊一個路由來回應多個 HTTP 動詞。你可以使用 `match` 方法做到。或者，你甚至可以透過 `any` 方法來使用註冊路由並回應所有的 HTTP 動詞：
 
     Route::match(['get', 'post'], '/', function () {
         //
@@ -55,31 +55,31 @@ Sometimes you may need to register a route that responds to multiple HTTP verbs.
     });
 
 <a name="route-parameters"></a>
-## Route Parameters
+## 路由參數
 
 <a name="required-parameters"></a>
-### Required Parameters
+### 基礎路由參數
 
-Of course, sometimes you will need to capture segments of the URI within your route. For example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:
+有時候你可能需要在你的 URI 路由中，取得一些參數。例如，你可能需要從 URL 取得使用者的 ID。你可以透過定義路由參數來取得：
 
     Route::get('user/{id}', function ($id) {
         return 'User '.$id;
     });
 
-You may define as many route parameters as required by your route:
+你可以依照路由需要，定義任何數量的路由參數：
 
     Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
         //
     });
 
-Route parameters are always encased within "curly" braces. The parameters will be passed into your route's `Closure` when the route is executed.
+路由的參數都會被放在「大括號」內。當執行路由時，參數會透過路由`閉包`來傳遞。
 
-> **Note:** Route parameters cannot contain the `-` character. Use an underscore (`_`) instead.
+> **注意：**路由參數不能包含 `-` 字元。用底線 (`_`) 來取代。
 
 <a name="parameters-optional-parameters"></a>
-### Optional Parameters
+### 選擇性路由參數
 
-Occasionally you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name. Make sure to give the route's corresponding variable a default value:
+有時候你可能需要指定路由參數，但是讓路由參數的存在是選擇性的。你可以藉由在參數名稱後面加上 `?` 達成。請確保給予該路由對應的預設值：
 
     Route::get('user/{name?}', function ($name = null) {
         return $name;
@@ -90,45 +90,45 @@ Occasionally you may need to specify a route parameter, but make the presence of
     });
 
 <a name="named-routes"></a>
-## Named Routes
+## 命名路由
 
-Named routes allow the convenient generation of URLs or redirects for specific routes. You may specify a name for a route using the `as` array key when defining the route:
+命名路由讓你更方便為特定路由產生 URLs 或進行重導。你可以在定義路由時使用陣列的 `as` 鍵為路由指定名稱：
 
     Route::get('profile', ['as' => 'profile', function () {
         //
     }]);
 
-You may also specify route names for controller actions:
+你還可以指定路由名稱到你的控制器操作：
 
     Route::get('profile', [
         'as' => 'profile', 'uses' => 'UserController@showProfile'
     ]);
 
-Alternatively, instead of specifying the route name in the route array definition, you may chain the `name` method onto the end of the route definition:
+除了在路由的陣列定義中指定路由名稱外，你也可以在路由定義後方鏈結 `name` 方法：
 
     Route::get('user/profile', 'UserController@showProfile')->name('profile');
 
-#### Route Groups & Named Routes
+#### 路由群組和命名路由
 
-If you are using [route groups](#route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
+假設你使用[路由群組](#route-groups)，你可以指定一個 `as` 關鍵字在你的路由群組的屬性陣列，也允許你設定所有路由群組中共同的路由名稱前綴：
 
     Route::group(['as' => 'admin::'], function () {
         Route::get('dashboard', ['as' => 'dashboard', function () {
-            // Route named "admin::dashboard"
+            // 路由名稱為「admin::dashboard」
         }]);
     });
 
-#### Generating URLs To Named Routes
+#### 對命名路由產生 URLs
 
-Once you have assigned a name to a given route, you may use the route's name when generating URLs or redirects via the global `route` function:
+一旦你在給定的路由中分配了名稱，你可以在透過全域 `route` 函式時，使用路由名稱產生 URLs 或是重導：
 
-    // Generating URLs...
+    // 產生 URLs...
     $url = route('profile');
 
-    // Generating Redirects...
+    // 產生重導...
     return redirect()->route('profile');
 
-If the named route defines parameters, you may pass the parameters as the second argument to the `route` function. The given parameters will automatically be inserted into the URL in their correct positions:
+如果在命名路由定義參數，你可以把參數作為第二個參數傳遞給 `route` 函式。給定的參數將自動加入到 URL 中正確的位置：
 
     Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
         //
@@ -137,47 +137,47 @@ If the named route defines parameters, you may pass the parameters as the second
     $url = route('profile', ['id' => 1]);
 
 <a name="route-groups"></a>
-## Route Groups
+## 路由群組
 
-Route groups allow you to share route attributes, such as middleware or namespaces, across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.
+路由群組允許你共用路由屬性，像是中介層、命名空間，你可以利用路由群組套用這些屬性到多個路由，而不需在每個路由都設定一次。共用屬性被指定為陣列格式，當作 `Route::group` 方法的第一個參數：
 
-To learn more about route groups, we'll walk through several common use-cases for the feature.
+為了暸解更多路由群組相關內容，我們會逐步介紹幾個功能及常見的使用範例。
 
 <a name="route-group-middleware"></a>
-### Middleware
+### 中介層
 
-To assign middleware to all routes within a group, you may use the `middleware` key in the group attribute array. Middleware will be executed in the order you define this array:
+要指定中介層到所有群組內的路由，你可以在群組屬性陣列裡使用 `middleware` 參數。中介層將會依照你在列表內指定的順序執行：
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', function ()    {
-            // Uses Auth Middleware
+            // 使用 Auth 中介層
         });
 
         Route::get('user/profile', function () {
-            // Uses Auth Middleware
+            // 使用 Auth 中介層
         });
     });
 
 <a name="route-group-namespaces"></a>
-### Namespaces
+### 命名空間
 
-Another common use-case for route groups is assigning the same PHP namespace to a group of controllers. You may use the `namespace` parameter in your group attribute array to specify the namespace for all controllers within the group:
+另一個常見的範例是，指派相同的 PHP 命名空間中給控制器群組。你可以使用 `namespace` 參數指定群組內所有控制器的命名空間：
 
     Route::group(['namespace' => 'Admin'], function()
     {
-        // Controllers Within The "App\Http\Controllers\Admin" Namespace
+        // 控制器在「App\Http\Controllers\Admin」命名空間
 
         Route::group(['namespace' => 'User'], function() {
-            // Controllers Within The "App\Http\Controllers\Admin\User" Namespace
+            // 控制器在「App\Http\Controllers\Admin\User」命名空間
         });
     });
 
-Remember, by default, the `RouteServiceProvider` includes your `routes.php` file within a namespace group, allowing you to register controller routes without specifying the full `App\Http\Controllers` namespace prefix. So, we only need to specify the portion of the namespace that comes after the base `App\Http\Controllers` namespace.
+記得，預設 `RouteServiceProvider` 會在命名空間群組內導入你的 `routes.php` 檔案，讓你不用指定完整的 `App\Http\Controllers` 命名空間前綴就能註冊控制器路由。所以，我們只需要指定在基底 `App\Http\Controllers` 根命名空間之後的命名空間部分。
 
 <a name="route-group-sub-domain-routing"></a>
-### Sub-Domain Routing
+### 子網域路由
 
-Route groups may also be used to route wildcard sub-domains. Sub-domains may be assigned route parameters just like route URIs, allowing you to capture a portion of the sub-domain for usage in your route or controller. The sub-domain may be specified using the `domain` key on the group attribute array:
+路由群組也可以用來處理萬用字元的子網域。子網域可以像路由 URIs 分配路由參數，讓你在你的路由或控制器取得子網域參數。可以使用路由群組屬性陣列上的 `domain` 指定子網域變數名稱：
 
     Route::group(['domain' => '{account}.myapp.com'], function () {
         Route::get('user/{id}', function ($account, $id) {
@@ -186,54 +186,54 @@ Route groups may also be used to route wildcard sub-domains. Sub-domains may be 
     });
 
 <a name="route-group-prefixes"></a>
-### Route Prefixes
+### 路由前綴
 
-The `prefix` group attribute may be used to prefix each route in the group with a given URI. For example, you may want to prefix all route URIs within the group with `admin`:
+`prefix` 群組屬性可以用於為群組中每個路由加上給定的 URI 前綴。舉個例子，你可能想要為路由群組中的每個路由加上 `admin` 的 URIs 前綴：
 
     Route::group(['prefix' => 'admin'], function () {
         Route::get('users', function ()    {
-            // Matches The "/admin/users" URL
+            // 符合「/admin/users」URL
         });
     });
 
-You may also use the `prefix` parameter to specify common parameters for your grouped routes:
+你也可以使用 `prefix` 參數去指定你的路由群組中共用的參數：
 
     Route::group(['prefix' => 'accounts/{account_id}'], function () {
         Route::get('detail', function ($accountId)    {
-            // Matches The "/accounts/{account_id}/detail" URL
+            // 符合 accounts/{account_id}/detail URL
         });
     });
 
 <a name="csrf-protection"></a>
-## CSRF Protection
+## CSRF 保護
 
 <a name="csrf-introduction"></a>
-### Introduction
+### 介紹
 
-Laravel makes it easy to protect your application from [cross-site request forgery](http://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) attacks. Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of an authenticated user.
+Laravel 提供簡單的方法保護你的應用程式不受到[跨網站請求偽造](http://en.wikipedia.org/wiki/Cross-site_request_forgery)（CSRF）攻擊。跨網站請求偽造是一種惡意的攻擊，藉以透過經過身份驗證的使用者身份執行未經授權的命令。
 
-Laravel automatically generates a CSRF "token" for each active user session managed by the application. This token is used to verify that the authenticated user is the one actually making the requests to the application.
+Laravel 會自動產生了一個 CSRF 「token」給每個活動使用者由應用程式管理的 session。該 token 用來驗證使用者為實際發出請求至應用程式的使用者。
 
-Anytime you define a HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware will be able to validate the request. To generate a hidden input field `_token` containing the CSRF token, you may use the `csrf_field` helper function:
+在你的應用程式定義 HTML 表單任何時候，你的表單應該包含一個隱藏的 CSRF token 欄位，CSRF 保護中介層才能驗證請求。要產生一個包含 CSRF token 的隱藏輸入欄位 `_token`，你可以使用 `csrf_field` 輔助函式：
 
-    // Vanilla PHP
+    // 原生 PHP
     <?php echo csrf_field(); ?>
 
-    // Blade Template Syntax
+    // Blade 模板語法
     {{ csrf_field() }}
 
-The `csrf_field` helper function generates the following HTML:
+`csrf_field` 輔助函式產生以下的 HTML：
 
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-You do not need to manually verify the CSRF token on POST, PUT, or DELETE requests. The `VerifyCsrfToken` [middleware](/docs/{{version}}/middleware), which is included in the `web` middleware group, will automatically verify that the token in the request input matches the token stored in the session.
+你不需要手動驗證 POST、PUT 或 DELETE 請求的 CSRF token。包含在 `web` 中介層群組內的 `VerifyCsrfToken` [中介層](/docs/{{version}}/middleware) 將自動驗證請求與 session 中的 token 是否相符。
 
 <a name="csrf-excluding-uris"></a>
-### Excluding URIs From CSRF Protection
+### 不受 CSRF 保護的 URIs
 
-Sometimes you may wish to exclude a set of URIs from CSRF protection. For example, if you are using [Stripe](https://stripe.com) to process payments and are utilizing their webhook system, you will need to exclude your webhook handler route from Laravel's CSRF protection.
+有時候你可能會希望一組 URIs 不要被 CSRF 保護。例如，你如果使用 [Stripe](https://stripe.com) 處理付款，並且利用他們的 webhook 系統，你需要從 Laravel CSRF 保護中，排除 webhook 的處理路由。
 
-You may exclude URIs by defining their routes outside of the `web` middleware group that is included in the default `routes.php` file, or by adding the URIs to the `$except` property of the `VerifyCsrfToken` middleware:
+你可以透過在 `web` 中介層群組之外定義路由來排除 URIs，它被包含在預設的 `routes.php` 檔案中，或者可以在 `VerifyCsrfToken` 中介層中的 `$except` 屬性增加 URIs：
 
     <?php
 
@@ -244,7 +244,7 @@ You may exclude URIs by defining their routes outside of the `web` middleware gr
     class VerifyCsrfToken extends BaseVerifier
     {
         /**
-         * The URIs that should be excluded from CSRF verification.
+         * 這些 URIs 應該從 CSRF 驗證排除。
          *
          * @var array
          */
@@ -256,11 +256,11 @@ You may exclude URIs by defining their routes outside of the `web` middleware gr
 <a name="csrf-x-csrf-token"></a>
 ### X-CSRF-TOKEN
 
-In addition to checking for the CSRF token as a POST parameter, the Laravel `VerifyCsrfToken` middleware will also check for the `X-CSRF-TOKEN` request header. You could, for example, store the token in a "meta" tag:
+除了檢查 CSRF token 當作 POST 參數之外，在 Laravel `VerifyCsrfToken` 中介層也會確認請求標頭中的 `X-CSRF-TOKEN`。例如，你可以將其儲存在 meta 標籤中：
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-Once you have created the `meta` tag, you can instruct a library like jQuery to add the token to all request headers. This provides simple, convenient CSRF protection for your AJAX based applications:
+一旦你建立了 `meta` 標籤，你可以使用 jQuery 之類的函式庫將 token 加入到所有的請求標頭。基於 AJAX 的應用，提供了簡單、方便的 CSRF 保護：
 
     $.ajaxSetup({
             headers: {
@@ -271,31 +271,31 @@ Once you have created the `meta` tag, you can instruct a library like jQuery to 
 <a name="csrf-x-xsrf-token"></a>
 ### X-XSRF-TOKEN
 
-Laravel also stores the CSRF token in a `XSRF-TOKEN` cookie. You can use the cookie value to set the `X-XSRF-TOKEN` request header. Some JavaScript frameworks, like Angular, do this automatically for you. It is unlikely that you will need to use this value manually.
+Laravel 也會在 `XSRF-TOKEN` cookie 中儲存 CSRF token。你也可以使用 cookie 的值來設定 `X-XSRF-TOKEN` 請求標頭。一些 JavaScript 框架會自動幫你處理，例如：Angular。你不太可能會需要手動去設定這個值。
 
 <a name="route-model-binding"></a>
-## Route Model Binding
+## 路由模型綁定
 
-Laravel route model binding provides a convenient way to inject model instances into your routes. For example, instead of injecting a user's ID, you can inject the entire `User` model instance that matches the given ID.
+Laravel 路由模型綁定提供了一個方便的方式來注入類別實例至你的路由中。例如，除了注入一個使用者的 ID，你可以注入與給定 ID 相符的完整 `User` 類別實例。
 
-### Implicit Binding
+### 隱式綁定
 
-Laravel will automatically resolve type-hinted Eloquent model's defined in routes or controller actions whose variable names match a route segment name. For example:
+Laravel 會自動解析路由或控制器行為中變數名稱與路由片段名稱相符，並由型別提示所定義的 Eloquent 模型。例如：
 
     Route::get('api/users/{user}', function (App\User $user) {
         return $user->email;
     });
 
-In this example, since the Eloquent type-hinted `$user` variable defined on the route matches the `{user}` segment in the route's URI, Laravel will automatically inject the model instance that has an ID matching the corresponding value from the request URI.
+在這個例子中，因為對路由 URI 的 `{user}` 片段所符合 `$user` 變數使用 Eloquent 型別提示，所以 Laravel 會自動注入與請求 URI 的 ID 值對應的模型實例。
 
-If a matching model instance is not found in the database, a 404 HTTP response will be automatically generated.
+如果符合的模型實例不存在於資料庫中，就會自動產生一個 404 HTTP 回應。
 
-#### Customizing The Key Name
+#### 自定鍵名
 
-If you would like the implicit model binding to use a database column other than `id` when retrieving models, you may override the `getRouteKeyName` method on your Eloquent model:
+如果你想讓隱式模型綁定取得模型時使用 `id` 以外的資料庫欄位，你可以覆寫 Eloquent 模型的 `getRouteKeyName` 方法：
 
     /**
-     * Get the route key for the model.
+     * 取得模型在路由的鍵。
      *
      * @return string
      */
@@ -304,11 +304,11 @@ If you would like the implicit model binding to use a database column other than
         return 'slug';
     }
 
-### Explicit Binding
+### 顯式綁定
 
-To register an explicit binding, use the router's `model` method to specify the class for a given parameter. You should define your model bindings in the `RouteServiceProvider::boot` method:
+要註冊一個顯式綁定，可以使用路由器的 `model` 方法為給定參數指定類別。你必須在 `RouteServiceProvider::boot` 方法中定義你的模型綁定：
 
-#### Binding A Parameter To A Model
+#### 綁定參數至模型
 
     public function boot(Router $router)
     {
@@ -317,46 +317,46 @@ To register an explicit binding, use the router's `model` method to specify the 
         $router->model('user', 'App\User');
     }
 
-Next, define a route that contains a `{user}` parameter:
+接著，定義包含 `{user}` 參數的路由：
 
     $router->get('profile/{user}', function(App\User $user) {
         //
     });
 
-Since we have bound the `{user}` parameter to the `App\User` model, a `User` instance will be injected into the route. So, for example, a request to `profile/1` will inject the `User` instance which has an ID of 1.
+因為我們已經綁定 `{user}` 參數至 `App\User` 模型，所以 `User` 實例會被注入至該路由。所以，舉個例子，一個至 `profile/1` 的請求會注入 ID 為 1 的 `User` 實例。
 
-If a matching model instance is not found in the database, a 404 HTTP response will be automatically generated.
+如果符合的模型實例不存在於資料庫中，就會自動產生一個 404 HTTP 回應。
 
-#### Customizing The Resolution Logic
+#### 自定解析邏輯
 
-If you wish to use your own resolution logic, you should use the `Route::bind` method. The Closure you pass to the `bind` method will receive the value of the URI segment, and should return an instance of the class you want to be injected into the route:
+如果你希望使用你自己的解析邏輯，那麼你必須使用 `Route::bind` 方法。你傳遞至 `bind` 方法的閉包會取得 URI 的部分值，且必須回傳你想注入至路由的類別實例：
 
     $router->bind('user', function($value) {
         return App\User::where('name', $value)->first();
     });
 
-#### Customizing The "Not Found" Behavior
+#### 自定「不存在」行為
 
-If you wish to specify your own "not found" behavior, pass a Closure as the third argument to the `model` method:
+如果你希望指定你自己的「不存在」行為，只要傳遞一個閉包作為 `model` 方法的第三個參數：
 
     $router->model('user', 'App\User', function() {
         throw new NotFoundHttpException;
     });
 
 <a name="form-method-spoofing"></a>
-## Form Method Spoofing
+## 表單方法欺騙
 
-HTML forms do not support `PUT`, `PATCH` or `DELETE` actions. So, when defining `PUT`, `PATCH` or `DELETE` routes that are called from an HTML form, you will need to add a hidden `_method` field to the form. The value sent with the `_method` field will be used as the HTTP request method:
+HTML 表單沒有支援 `PUT`、`PATCH` 或 `DELETE` 動作。所以在定義 `PUT`、`PATCH` 或 `DELETE` 路由，並在 HTML 表單中被呼叫的時候，你將需要在表單中增加隱藏的 `_method` 欄位。隨著 `_method` 欄位送出的值將被視為 HTTP 請求方法使用：
 
     <form action="/foo/bar" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
 
-To generate the hidden input field `_method`, you may also use the `method_field` helper function:
+要產生隱藏的輸入欄位 `_method`，你也可以使用 `methid_field` 輔助函式：
 
     <?php echo method_field('PUT'); ?>
 
-Of course, using the Blade [templating engine](/docs/{{version}}/blade):
+當然，可以使用 Blade [模板引擎](/docs/{{version}}/blade)：
 
     {{ method_field('PUT') }}
