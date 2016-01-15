@@ -71,7 +71,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
          */
         public function store(Request $request)
         {
-            // Validate and store the blog post...
+            // 驗證以及儲存部落格發表文章...
         }
     }
 
@@ -85,7 +85,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 為了更能夠理解 `validate` 方法，讓我們先回到 `store` 方法：
 
     /**
-     * 儲存一個新的部落格文章。
+     * 儲存一篇新的部落格文章。
      *
      * @param  Request  $request
      * @return Response
@@ -97,7 +97,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
             'body' => 'required',
         ]);
 
-        // The blog post is valid, store in database...
+        // 部落格發表文章是有效的，儲存到資料庫...
     }
 
 正如你所看到的，我們簡單的傳遞當次 HTTP 請求及所需的驗證規則至 `validate` 方法中。再提醒一次，如果驗證失敗，將會自動產生一個對應的回應。如果通過驗證，那我們的控制器會繼續正常的執行。
@@ -188,7 +188,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
     class PostController extends Controller
     {
         /**
-         * Store a new blog post.
+         * 儲存一篇新的部落格文章。
          *
          * @param  Request  $request
          * @return Response
@@ -206,7 +206,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
                             ->withInput();
             }
 
-            // Store the blog post...
+            // 儲存部落格發表文章...
         }
     }
 
@@ -251,7 +251,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 新產生的類別檔會放在 `app/Http/Requests` 目錄下。讓我們加入一些驗證規則到 `rules` 方法中：
 
     /**
-     * Get the validation rules that apply to the request.
+     * 取得適用於請求的驗證規則。
      *
      * @return array
      */
@@ -266,14 +266,14 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 所以，驗證的規則會如何被執行？你所需要的只有在控制器方法，利用型別提示傳入請求。進入的請求會在控制器方法被呼叫前進行驗證，意思說你不會因為驗證邏輯而把控制器弄得一團糟：
 
     /**
-     * Store the incoming blog post.
+     * 儲存傳入的部落格發表文章。
      *
      * @param  StoreBlogPostRequest  $request
      * @return Response
      */
     public function store(StoreBlogPostRequest $request)
     {
-        // The incoming request is valid...
+        // 傳入的請求是有效的...
     }
 
 假設驗證失敗，會產生一個重導回應把使用者返回到先前的位置。這些錯誤會被閃存到 session，所以這些錯誤都可以被顯示。如果進來的是 AJAX 請求的話，而是會傳回一個 HTTP 回應，包含 422 狀態碼，並包含驗證錯誤的 JSON 資料。
@@ -393,7 +393,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 如果有需要，你可以自訂錯誤的驗證訊息來取代預設的驗證訊息。有幾種方法可以來自訂指定的訊息。首先，你需要先自訂驗證訊息，透過三個參數傳到 `Validator::make` 的方法：
 
     $messages = [
-        'required' => 'The :attribute field is required.',
+        'required' => ':attribute 的欄位是必要的。',
     ];
 
     $validator = Validator::make($input, $rules, $messages);
@@ -401,10 +401,10 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 在這個範例中，`:attribute` 透過驗證欄位的的實際名稱，預留的欄位會被取代。你還可以使用其他預設欄位的驗證訊息。例如：
 
     $messages = [
-        'same'    => 'The :attribute and :other must match.',
-        'size'    => 'The :attribute must be exactly :size.',
-        'between' => 'The :attribute must be between :min - :max.',
-        'in'      => 'The :attribute must be one of the following types: :values',
+        'same'    => ':attribute 和 :other 必須相同。',
+        'size'    => ':attribute 必須是 :size。',
+        'between' => ':attribute 必須介於 :min - :max。',
+        'in'      => ':attribute 必須是以下的類型之一： :values。',
     ];
 
 #### 指定自訂訊息到特定的屬性
@@ -412,7 +412,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 有時候你可能想要對特定的欄位自訂錯誤訊息。在你的屬性名稱後，加上「.」符號，並加上指定驗證的規則：
 
     $messages = [
-        'email.required' => 'We need to know your e-mail address!',
+        'email.required' => '我們需要知道你的 e-mail 地址！',
     ];
 
 <a name="localization"></a>
@@ -422,7 +422,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 
     'custom' => [
         'email' => [
-            'required' => 'We need to know your e-mail address!',
+            'required' => '我們需要知道你的 e-mail 地址！',
         ],
     ],
 
@@ -504,7 +504,7 @@ Laravel 提供了各種不同的處理方法來驗證應用程式傳入進來的
 
     'start_date' => 'required|date|after:tomorrow'
 
-Instead of passing a date string to be evaluated by `strtotime`, you may specify another field to compare against the date:
+相反的傳入日期字串透過 `strtotime` 來確認，你可以指定其他的欄位來比較日期：
 
     'finish_date' => 'required|date|after:start_date'
 
@@ -551,7 +551,7 @@ Instead of passing a date string to be evaluated by `strtotime`, you may specify
 <a name="rule-date"></a>
 #### date
 
-驗證欄位值是有效的日期，會根據 PHP 的 `strtotime` 函示做驗證。
+驗證欄位值是有效的日期，會根據 PHP 的 `strtotime` 函式做驗證。
 
 <a name="rule-date-format"></a>
 #### date_format:_format_
@@ -566,7 +566,7 @@ Instead of passing a date string to be evaluated by `strtotime`, you may specify
 <a name="rule-digits"></a>
 #### digits:_value_
 
-驗證欄位值為 _數字_ 且長度為 _value_。
+驗證欄位值為 _numeric_ 且長度為 _value_。
 
 <a name="rule-digits-between"></a>
 #### digits_between:_min_,_max_
@@ -591,11 +591,11 @@ Instead of passing a date string to be evaluated by `strtotime`, you may specify
 
     'state' => 'exists:states,abbreviation'
 
-也可以指定更多的條件，它們會被加到 "where" 查詢語句裡：
+也可以指定更多的條件，它們會被加到「where」查詢語句裡：
 
     'email' => 'exists:staff,email,account_id,1'
 
-你也可以傳遞 `NULL` 或 `NOT_NULL` 至「Where」語句：
+你也可以傳遞 `NULL` 或 `NOT_NULL` 至「where」語句：
 
     'email' => 'exists:staff,email,deleted_at,NULL'
 
@@ -624,7 +624,7 @@ Instead of passing a date string to be evaluated by `strtotime`, you may specify
 <a name="rule-json"></a>
 #### json
 
-The field under validation must a valid JSON string.
+驗證欄位必須是一個有效的 JSON 字串。
 
 <a name="rule-max"></a>
 #### max:_value_
@@ -813,7 +813,7 @@ Laravel 提供了很多有用的驗證規則；但是，你可能希望自訂一
     class AppServiceProvider extends ServiceProvider
     {
         /**
-         * Bootstrap any application services.
+         * 啟動所有應用程式服務。
          *
          * @return void
          */
@@ -825,7 +825,7 @@ Laravel 提供了很多有用的驗證規則；但是，你可能希望自訂一
         }
 
         /**
-         * Register the service provider.
+         * 註冊服務提供者。
          *
          * @return void
          */
@@ -845,16 +845,16 @@ Laravel 提供了很多有用的驗證規則；但是，你可能希望自訂一
 
 在你的自訂的規則中，需要定義錯誤訊息。你可以自訂訊息陣列或是在驗證語系檔中加入新的規則。這個訊息應該被放在第一個級別的陣列，而不是放在 `custom` 陣列， 這是僅對特定屬性的錯誤訊息:
 
-    "foo" => "Your input was invalid!",
+    "foo" => "你的輸入是無效的！",
 
-    "accepted" => "The :attribute must be accepted.",
+    "accepted" => ":attribute 必須被接受。",
 
-    // The rest of the validation error messages...
+    // 其餘的驗證錯誤訊息...
 
 當你在建立自訂的驗證規則時，你可能需要定義保留欄位來取代錯誤訊息。你可以建立自訂的驗證器，像上面所描述的透過 `Validator` facade 來使用 `replacer` 的方法。你可以透過[服務提供者](/docs/{{version}}/providers)中的 `boot` 方法這麼做：
 
     /**
-     * Bootstrap any application services.
+     * 啟動所有應用程式服務。
      *
      * @return void
      */
