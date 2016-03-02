@@ -1,15 +1,15 @@
-# Helper Functions
+# 輔助方法
 
-- [Introduction](#introduction)
-- [Available Methods](#available-methods)
+- [簡介](#introduction)
+- [可用方法](#available-methods)
 
 <a name="introduction"></a>
-## Introduction
+## 簡介
 
-Laravel includes a variety of "helper" PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.
+Laravel 包含一群多樣化的 PHP 輔助方法函式。許多在 Laravel 自身框架中使用；如果覺得實用，也可以在你的應用當中使用。
 
 <a name="available-methods"></a>
-## Available Methods
+## 可用方法
 
 <style>
     .collection-method-list > p {
@@ -22,7 +22,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
     }
 </style>
 
-### Arrays
+### 陣列
 
 <div class="collection-method-list" markdown="1">
 [array_add](#method-array-add)
@@ -46,7 +46,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [last](#method-last)
 </div>
 
-### Paths
+### 路徑
 
 <div class="collection-method-list" markdown="1">
 [app_path](#method-app-path)
@@ -58,7 +58,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [storage_path](#method-storage-path)
 </div>
 
-### Strings
+### 字串
 
 <div class="collection-method-list" markdown="1">
 [camel_case](#method-camel-case)
@@ -80,7 +80,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [trans_choice](#method-trans-choice)
 </div>
 
-### URLs
+### 網址
 
 <div class="collection-method-list" markdown="1">
 [action](#method-action)
@@ -90,7 +90,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [url](#method-url)
 </div>
 
-### Miscellaneous
+### 其他
 
 <div class="collection-method-list" markdown="1">
 [auth](#method-auth)
@@ -117,7 +117,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 </div>
 
 <a name="method-listing"></a>
-## Method Listing
+## 方法列表
 
 <style>
     #collection-method code {
@@ -130,12 +130,12 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 </style>
 
 <a name="arrays"></a>
-## Arrays
+## 陣列
 
 <a name="method-array-add"></a>
 #### `array_add()` {#collection-method .first-collection-method}
 
-The `array_add` function adds a given key / value pair to the array if the given key doesn't already exist in the array:
+如果給定的鍵不存在於該陣列，`array_add` 函式將給定的鍵值對加到陣列中：
 
     $array = array_add(['name' => 'Desk'], 'price', 100);
 
@@ -144,7 +144,7 @@ The `array_add` function adds a given key / value pair to the array if the given
 <a name="method-array-collapse"></a>
 #### `array_collapse()` {#collection-method}
 
-The `array_collapse` function collapse an array of arrays into a single array:
+`array_collapse` 函式將陣列的每一個陣列折成單一陣列：
 
     $array = array_collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 
@@ -153,7 +153,7 @@ The `array_collapse` function collapse an array of arrays into a single array:
 <a name="method-array-divide"></a>
 #### `array_divide()` {#collection-method}
 
-The `array_divide` function returns two arrays, one containing the keys, and the other containing the values of the original array:
+`array_divide` 函式回傳兩個陣列，一個包含原本陣列的鍵，另一個包含原本陣列的值：
 
     list($keys, $values) = array_divide(['name' => 'Desk']);
 
@@ -164,7 +164,7 @@ The `array_divide` function returns two arrays, one containing the keys, and the
 <a name="method-array-dot"></a>
 #### `array_dot()` {#collection-method}
 
-The `array_dot` function flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
+`array_dot` 函式把多維陣列扁平化成一維陣列，並用「點」式語法表示深度：
 
     $array = array_dot(['foo' => ['bar' => 'baz']]);
 
@@ -173,7 +173,7 @@ The `array_dot` function flattens a multi-dimensional array into a single level 
 <a name="method-array-except"></a>
 #### `array_except()` {#collection-method}
 
-The `array_except` function removes the given key / value pairs from the array:
+`array_except` 函式從陣列移除給定的鍵值對：
 
     $array = ['name' => 'Desk', 'price' => 100];
 
@@ -184,7 +184,7 @@ The `array_except` function removes the given key / value pairs from the array:
 <a name="method-array-first"></a>
 #### `array_first()` {#collection-method}
 
-The `array_first` function returns the first element of an array passing a given truth test:
+`array_first` 函式回傳陣列中第一個通過為真測試的元素：
 
     $array = [100, 200, 300];
 
@@ -194,14 +194,14 @@ The `array_first` function returns the first element of an array passing a given
 
     // 200
 
-A default value may also be passed as the third parameter to the method. This value will be returned if no value passes the truth test:
+可傳遞第三個參數作為預設值。當沒有任何數值通過測試時將回傳該數值：
 
     $value = array_first($array, $callback, $default);
 
 <a name="method-array-flatten"></a>
 #### `array_flatten()` {#collection-method}
 
-The `array_flatten` function will flatten a multi-dimensional array into a single level.
+`array_flatten` 函式將多維陣列扁平化成一維。
 
     $array = ['name' => 'Joe', 'languages' => ['PHP', 'Ruby']];
 
@@ -212,7 +212,7 @@ The `array_flatten` function will flatten a multi-dimensional array into a singl
 <a name="method-array-forget"></a>
 #### `array_forget()` {#collection-method}
 
-The `array_forget` function removes a given key / value pair from a deeply nested array using "dot" notation:
+`array_forget` 函式以「點」式語法從深度巢狀陣列移除給定的鍵值對：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -223,7 +223,7 @@ The `array_forget` function removes a given key / value pair from a deeply neste
 <a name="method-array-get"></a>
 #### `array_get()` {#collection-method}
 
-The `array_get` function retrieves a value from a deeply nested array using "dot" notation:
+`array_get` 函式使用「點」式語法從深度巢狀陣列取回給定的值：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -231,14 +231,14 @@ The `array_get` function retrieves a value from a deeply nested array using "dot
 
     // ['price' => 100]
 
-The `array_get` function also accepts a default value, which will be returned if the specific key is not found:
+`array_get` 函式同樣接受預設值，當指定的鍵找不到時回傳：
 
     $value = array_get($array, 'names.john', 'default');
 
 <a name="method-array-has"></a>
 #### `array_has()` {#collection-method}
 
-The `array_has` function checks that a given item exists in an array using "dot" notation:
+`array_has` 函式使用「點」式語法檢查給定的項目是否存在於陣列中：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -249,7 +249,7 @@ The `array_has` function checks that a given item exists in an array using "dot"
 <a name="method-array-only"></a>
 #### `array_only()` {#collection-method}
 
-The `array_only` function will return only the specified key / value pairs from the given array:
+`array_only` 函式從陣列回傳給定的鍵值對：
 
     $array = ['name' => 'Desk', 'price' => 100, 'orders' => 10];
 
@@ -260,7 +260,7 @@ The `array_only` function will return only the specified key / value pairs from 
 <a name="method-array-pluck"></a>
 #### `array_pluck()` {#collection-method}
 
-The `array_pluck` function will pluck a list of the given key / value pairs from the array:
+`array_pluck` 函式從陣列拉出一列給定的鍵值對：
 
     $array = [
         ['developer' => ['id' => 1, 'name' => 'Taylor']],
@@ -271,7 +271,7 @@ The `array_pluck` function will pluck a list of the given key / value pairs from
 
     // ['Taylor', 'Abigail'];
 
-You may also specify how you wish the resulting list to be keyed:
+你也能指定處理結果的鍵值：
 
     $array = array_pluck($array, 'developer.name', 'developer.id');
 
@@ -280,7 +280,7 @@ You may also specify how you wish the resulting list to be keyed:
 <a name="method-array-pull"></a>
 #### `array_pull()` {#collection-method}
 
-The `array_pull` function returns and removes a key / value pair from the array:
+`array_pull` 函式從陣列移除並回傳給定的鍵值對：
 
     $array = ['name' => 'Desk', 'price' => 100];
 
@@ -293,7 +293,7 @@ The `array_pull` function returns and removes a key / value pair from the array:
 <a name="method-array-set"></a>
 #### `array_set()` {#collection-method}
 
-The `array_set` function sets a value within a deeply nested array using "dot" notation:
+`array_set` 函式使用「點」式語法在深度巢狀陣列中寫入值：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -304,7 +304,7 @@ The `array_set` function sets a value within a deeply nested array using "dot" n
 <a name="method-array-sort"></a>
 #### `array_sort()` {#collection-method}
 
-The `array_sort` function sorts the array by the results of the given Closure:
+`array_sort` 函式借由給定閉包結果排序陣列：
 
     $array = [
         ['name' => 'Desk'],
@@ -325,7 +325,7 @@ The `array_sort` function sorts the array by the results of the given Closure:
 <a name="method-array-sort-recursive"></a>
 #### `array_sort_recursive()` {#collection-method}
 
-The `array_sort_recursive` function recursively sorts the array using the `sort` function:
+`array_sort_recursive` 函式使用 `sort` 函式遞迴排序陣列：
 
     $array = [
         [
@@ -360,7 +360,7 @@ The `array_sort_recursive` function recursively sorts the array using the `sort`
 <a name="method-array-where"></a>
 #### `array_where()` {#collection-method}
 
-The `array_where` function filters the array using the given Closure:
+`array_where` 函式使用給定的閉包過濾陣列：
 
     $array = [100, '200', 300, '400', 500];
 
@@ -373,7 +373,7 @@ The `array_where` function filters the array using the given Closure:
 <a name="method-head"></a>
 #### `head()` {#collection-method}
 
-The `head` function simply returns the first element in the given array:
+`head` 函式回傳給定陣列的第一個元素：
 
     $array = [100, 200, 300];
 
@@ -384,7 +384,7 @@ The `head` function simply returns the first element in the given array:
 <a name="method-last"></a>
 #### `last()` {#collection-method}
 
-The `last` function returns the last element in the given array:
+`last` 函式回傳給定陣列的最後一個元素：
 
     $array = [100, 200, 300];
 
@@ -393,76 +393,76 @@ The `last` function returns the last element in the given array:
     // 300
 
 <a name="paths"></a>
-## Paths
+## 路徑
 
 <a name="method-app-path"></a>
 #### `app_path()` {#collection-method}
 
-The `app_path` function returns the fully qualified path to the `app` directory:
+`app_path` 函式取得 `app` 資料夾的完整路徑：
 
     $path = app_path();
 
-You may also use the `app_path` function to generate a fully qualified path to a given file relative to the application directory:
+你同樣可以使用 `app_path` 函式產生針對給定檔案相對於 app 目錄的完整路徑：
 
     $path = app_path('Http/Controllers/Controller.php');
 
 <a name="method-base-path"></a>
 #### `base_path()` {#collection-method}
 
-The `base_path` function returns the fully qualified path to the project root:
+`base_path` 函式取得專案根目錄的完整路徑：
 
     $path = base_path();
 
-You may also use the `base_path` function to generate a fully qualified path to a given file relative to the application directory:
+你同樣可以使用 `base_path` 函式產生針對給定檔案相對於專案根目錄的完整路徑：
 
     $path = base_path('vendor/bin');
 
 <a name="method-config-path"></a>
 #### `config_path()` {#collection-method}
 
-The `config_path` function returns the fully qualified path to the application configuration directory:
+`config_path` 函式取得應用設定目錄的完整路徑：
 
     $path = config_path();
 
 <a name="method-database-path"></a>
 #### `database_path()` {#collection-method}
 
-The `database_path` function returns the fully qualified path to the application's database directory:
+`database_path` 函式取得應用資料庫目錄的完整路徑：
 
     $path = database_path();
 
 <a name="method-elixir"></a>
 #### `elixir()` {#collection-method}
 
-The `elixir` function gets the path to the versioned [Elixir](/docs/{{version}}/elixir) file:
+`elixir` 函式取得加上版本號的 [Elixir](/docs/{{version}}/elixir) 檔案路徑：
 
     elixir($file);
 
 <a name="method-public-path"></a>
 #### `public_path()` {#collection-method}
 
-The `public_path` function returns the fully qualified path to the `public` directory:
+`public_path` 函式取得 `public` 目錄的完整路徑：
 
     $path = public_path();
 
 <a name="method-storage-path"></a>
 #### `storage_path()` {#collection-method}
 
-The `storage_path` function returns the fully qualified path to the `storage` directory:
+`storage_path` 函式取得 `storage` 目錄的完整路徑：
 
     $path = storage_path();
 
-You may also use the `storage_path` function to generate a fully qualified path to a given file relative to the storage directory:
+你同樣可以使用 `storage_path` 函式產生針對給定檔案相對於 storage 目錄的完整路徑：
 
     $path = storage_path('app/file.txt');
 
 <a name="strings"></a>
-## Strings
+## 字串
 
 <a name="method-camel-case"></a>
 #### `camel_case()` {#collection-method}
 
-The `camel_case` function converts the given string to `camelCase`:
+`camel_case` 函式會將給定的字串轉換成 `駝峰式命名`：
 
     $camel = camel_case('foo_bar');
 
@@ -471,7 +471,7 @@ The `camel_case` function converts the given string to `camelCase`:
 <a name="method-class-basename"></a>
 #### `class_basename()` {#collection-method}
 
-The `class_basename` returns the class name of the given class with the class' namespace removed:
+`class_basename` 回傳不包含命名空間的類別名稱：
 
     $class = class_basename('Foo\Bar\Baz');
 
@@ -480,7 +480,7 @@ The `class_basename` returns the class name of the given class with the class' n
 <a name="method-e"></a>
 #### `e()` {#collection-method}
 
-The `e` function runs `htmlentities` over the given string:
+`e` 函式對給定字串執行 `htmlentities`：
 
     echo e('<html>foo</html>');
 
@@ -489,7 +489,7 @@ The `e` function runs `htmlentities` over the given string:
 <a name="method-ends-with"></a>
 #### `ends_with()` {#collection-method}
 
-The `ends_with` function determines if the given string ends with the given value:
+`ends_with` 函式判斷給定字串結尾是否為指定內容：
 
     $value = ends_with('This is my name', 'name');
 
@@ -498,7 +498,7 @@ The `ends_with` function determines if the given string ends with the given valu
 <a name="method-snake-case"></a>
 #### `snake_case()` {#collection-method}
 
-The `snake_case` function converts the given string to `snake_case`:
+`snake_case` 函式會將給定的字串轉換成 `蛇形命名`：
 
     $snake = snake_case('fooBar');
 
@@ -507,7 +507,7 @@ The `snake_case` function converts the given string to `snake_case`:
 <a name="method-str-limit"></a>
 #### `str_limit()` {#collection-method}
 
-The `str_limit` function limits the number of characters in a string. The function accepts a string as its first argument and the maximum number of resulting characters as its second argument:
+`str_limit` 函式限制字串的字元數量。該函式接受一個字串作為第一個參數，以及最大字元數量作為第二參數：
 
     $value = str_limit('The PHP framework for web artisans.', 7);
 
@@ -516,7 +516,7 @@ The `str_limit` function limits the number of characters in a string. The functi
 <a name="method-starts-with"></a>
 #### `starts_with()` {#collection-method}
 
-The `starts_with` function determines if the given string begins with the given value:
+`starts_with` 函式判斷字串開頭是否為給定內容：
 
     $value = starts_with('This is my name', 'This');
 
@@ -525,7 +525,7 @@ The `starts_with` function determines if the given string begins with the given 
 <a name="method-str-contains"></a>
 #### `str_contains()` {#collection-method}
 
-The `str_contains` function determines if the given string contains the given value:
+`str_contains` 函式判斷給定字串是否包含指定內容：
 
     $value = str_contains('This is my name', 'my');
 
@@ -534,7 +534,7 @@ The `str_contains` function determines if the given string contains the given va
 <a name="method-str-finish"></a>
 #### `str_finish()` {#collection-method}
 
-The `str_finish` function adds a single instance of the given value to a string:
+`str_finish` 函式添加給定內容到字串結尾：
 
     $string = str_finish('this/string', '/');
 
@@ -543,7 +543,7 @@ The `str_finish` function adds a single instance of the given value to a string:
 <a name="method-str-is"></a>
 #### `str_is()` {#collection-method}
 
-The `str_is` function determines if a given string matches a given pattern. Asterisks may be used to indicate wildcards:
+`str_is` 函式判斷給定的字串與給定的格式是否符合。星號可作為萬用字元使用：
 
     $value = str_is('foo*', 'foobar');
 
@@ -556,7 +556,7 @@ The `str_is` function determines if a given string matches a given pattern. Aste
 <a name="method-str-plural"></a>
 #### `str_plural()` {#collection-method}
 
-The `str_plural` function converts a string to its plural form. This function currently only supports the English language:
+`str_plural` 函式轉換字串成複數形。該函式目前僅支援英文：
 
     $plural = str_plural('car');
 
@@ -566,7 +566,7 @@ The `str_plural` function converts a string to its plural form. This function cu
 
     // children
 
-You may provide an integer as a second argument to the function to retrieve the singular or plural form of the string:
+你能提供一個整數作為函數的第二個參數，取得單數或複數形式的字串：
 
     $plural = str_plural('child', 2);
 
@@ -579,14 +579,14 @@ You may provide an integer as a second argument to the function to retrieve the 
 <a name="method-str-random"></a>
 #### `str_random()` {#collection-method}
 
-The `str_random` function generates a random string of the specified length:
+`str_random` 函式產生給定長度的隨機字串：
 
     $string = str_random(40);
 
 <a name="method-str-singular"></a>
 #### `str_singular()` {#collection-method}
 
-The `str_singular` function converts a string to its singular form. This function currently only supports the English language:
+`str_singular` 函式轉換字串成單數形。該函式目前僅支援英文：
 
     $singular = str_singular('cars');
 
@@ -595,7 +595,7 @@ The `str_singular` function converts a string to its singular form. This functio
 <a name="method-str-slug"></a>
 #### `str_slug()` {#collection-method}
 
-The `str_slug` function generates a URL friendly "slug" from the given string:
+`str_slug` 函式從給定字串產生網址友善的「slug」：
 
     $title = str_slug("Laravel 5 Framework", "-");
 
@@ -604,7 +604,7 @@ The `str_slug` function generates a URL friendly "slug" from the given string:
 <a name="method-studly-case"></a>
 #### `studly_case()` {#collection-method}
 
-The `studly_case` function converts the given string to `StudlyCase`:
+`studly_case` 函式將給定字串轉換成 `首字大寫命名`：
 
     $value = studly_case('foo_bar');
 
@@ -613,127 +613,127 @@ The `studly_case` function converts the given string to `StudlyCase`:
 <a name="method-trans"></a>
 #### `trans()` {#collection-method}
 
-The `trans` function translates the given language line using your [localization files](/docs/{{version}}/localization):
+`trans` 函式根據你的[在地化檔案](/docs/{{version}}/localization)翻譯給定的語句：
 
     echo trans('validation.required'):
 
 <a name="method-trans-choice"></a>
 #### `trans_choice()` {#collection-method}
 
-The `trans_choice` function translates the given language line with inflection:
+`trans_choice` 函式根據字尾變化翻譯給定的語句：
 
     $value = trans_choice('foo.bar', $count);
 
 <a name="urls"></a>
-## URLs
+## 網址
 
 <a name="method-action"></a>
 #### `action()` {#collection-method}
 
-The `action` function generates a URL for the given controller action. You do not need to pass the full namespace to the controller. Instead, pass the controller class name relative to the `App\Http\Controllers` namespace:
+`action` 函式產生給定控制器行為網址。你不需要輸入該控制器的完整命名空間。作為替代，請輸入基於 `App\Http\Controllers` 命名空間的控制器類別名稱：
 
     $url = action('HomeController@getIndex');
 
-If the method accepts route parameters, you may pass them as the second argument to the method:
+如果該方法支援路由參數，你可以作為第二參數傳遞：
 
     $url = action('UserController@profile', ['id' => 1]);
 
 <a name="method-asset"></a>
 #### `asset()` {#collection-method}
 
-Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+根據目前請求的協定（HTTP 或 HTTPS）產生資源檔網址：
 
 	$url = asset('img/photo.jpg');
 
 <a name="method-secure-asset"></a>
 #### `secure_asset()` {#collection-method}
 
-Generate a URL for an asset using HTTPS:
+根據 HTTPS 產生資源檔網址：
 
 	echo secure_asset('foo/bar.zip', $title, $attributes = []);
 
 <a name="method-route"></a>
 #### `route()` {#collection-method}
 
-The `route` function generates a URL for the given named route:
+`route` 函式產生給定路由名稱網址：
 
     $url = route('routeName');
 
-If the route accepts parameters, you may pass them as the second argument to the method:
+如果該路由接受參數，你可以作為第二參數傳遞：
 
     $url = route('routeName', ['id' => 1]);
 
 <a name="method-url"></a>
 #### `url()` {#collection-method}
 
-The `url` function generates a fully qualified URL to the given path:
+`url` 函式產生給定路徑的完整網址：
 
     echo url('user/profile');
 
     echo url('user/profile', [1]);
 
 <a name="miscellaneous"></a>
-## Miscellaneous
+## 其他
 
 <a name="method-auth"></a>
 #### `auth()` {#collection-method}
 
-The `auth` function returns an authenticator instance. You may use it instead of the `Auth` facade for convenience:
+`auth` 函式回傳一個認證器實例。你可以使用它取代 `Auth` facade：
 
     $user = auth()->user();
 
 <a name="method-back"></a>
 #### `back()` {#collection-method}
 
-The `back()` function generates a redirect response to the user's previous location:
+`back()` 函式產生一個重導回應讓使用者回到之前的位置：
 
     return back();
 
 <a name="method-bcrypt"></a>
 #### `bcrypt()` {#collection-method}
 
-The `bcrypt` function hashes the given value using Bcrypt. You may use it as an alternative to the `Hash` facade:
+`bcrypt` 函式使用 Bcrypt 雜湊給定的數值。你可以使用它替代 `Hash` facade：
 
     $password = bcrypt('my-secret-password');
 
 <a name="method-collect"></a>
 #### `collect()` {#collection-method}
 
-The `collect` function creates a [collection](/docs/{{version}}/collections) instance from the supplied items:
+`collect` 函式從給定的項目產生[集合](/docs/{{version}}/collections)實例：
 
     $collection = collect(['taylor', 'abigail']);
 
 <a name="method-config"></a>
 #### `config()` {#collection-method}
 
-The `config` function gets the value of a configuration variable. The configuration values may be accessed using "dot" syntax, which includes the name of the file and the option you wish to access. A default value may be specified and is returned if the configuration option does not exist:
+`config` 取得設定選項的設定值。設定值可透過「點」式語法讀取，其中包含要存取的檔名以及選項名稱。可傳遞一預設值在找不到指定的設定選項時回傳該數值：
 
     $value = config('app.timezone');
 
     $value = config('app.timezone', $default);
 
-The `config` helper may also be used to set configuration variables at runtime by passing an array of key / value pairs:
+`config` 輔助方法也可以在執行期間，根據給定的鍵值對指定設定值：
 
     config(['app.debug' => true]);
 
 <a name="method-csrf-field"></a>
 #### `csrf_field()` {#collection-method}
 
-The `csrf_field` function generates an HTML `hidden` input field containing the value of the CSRF token. For example, using [Blade syntax](/docs/{{version}}/blade):
+`csrf_field` 函式產生包含 CSRF 標記內容的 HTML 表單隱藏欄位。例如，使用 [Blade 語法](/docs/{{version}}/blade)：
 
     {!! csrf_field() !!}
 
 <a name="method-csrf-token"></a>
 #### `csrf_token()` {#collection-method}
 
-The `csrf_token` function retrieves the value of the current CSRF token:
+`csrf_token` 函式取得當前 CSRF 標記的內容：
 
     $token = csrf_token();
 
 <a name="method-dd"></a>
 #### `dd()` {#collection-method}
 
-The `dd` function dumps the given variable and ends execution of the script:
+`dd` 函式印出給定變數並結束腳本執行：
 
     dd($value);
 
@@ -747,7 +747,7 @@ The `dispatch` function pushes a new job onto the Laravel [job queue](/docs/{{ve
 <a name="method-env"></a>
 #### `env()` {#collection-method}
 
-The `env` function gets the value of an environment variable or returns a default value:
+`env` 函式取得環境變數值或回傳預設值：
 
     $env = env('APP_ENV');
 
@@ -757,21 +757,21 @@ The `env` function gets the value of an environment variable or returns a defaul
 <a name="method-event"></a>
 #### `event()` {#collection-method}
 
-The `event` function dispatches the given [event](/docs/{{version}}/events) to its listeners:
+`event` 函式配送給定[事件](/docs/{{version}}/events)到所屬的監聽器：
 
     event(new UserRegistered($user));
 
 <a name="method-factory"></a>
 #### `factory()` {#collection-method}
 
-The `factory` function creates a model factory builder for a given class, name, and amount. It can be used while [testing](/docs/{{version}}/testing#model-factories) or [seeding](/docs/{{version}}/seeding#using-model-factories):
+`factory` 函式根據給定類別、名稱以及總數產生模型工廠建構器（model factory builder）。可用於[測試](/docs/{{version}}/testing#model-factories)或[資料填充](/docs/{{version}}/seeding#using-model-factories)：
 
     $user = factory(App\User::class)->make();
 
 <a name="method-method-field"></a>
 #### `method_field()` {#collection-method}
 
-The `method_field` function generates an HTML `hidden` input field containing the spoofed value of the form's HTTP verb. For example, using [Blade syntax](/docs/{{version}}/blade):
+`method_field` 函式產生擬造 HTTP 表單動作內容的 HTML 表單隱藏欄位。例如，使用 [Blade 語法](/docs/{{version}}/blade)：
 
     <form method="POST">
         {!! method_field('delete') !!}
@@ -780,21 +780,21 @@ The `method_field` function generates an HTML `hidden` input field containing th
 <a name="method-old"></a>
 #### `old()` {#collection-method}
 
-The `old` function [retrieves](/docs/{{version}}/requests#retrieving-input) an old input value flashed into the session:
+`old` 函式[取得](/docs/{{version}}/requests#retrieving-input)快閃到 session 的舊有輸入數值：
 
     $value = old('value');
 
 <a name="method-redirect"></a>
 #### `redirect()` {#collection-method}
 
-The `redirect` function returns an instance of the redirector to do [redirects](/docs/{{version}}/responses#redirects):
+`redirect` 函式回傳重導器實例以進行 [重導](/docs/{{version}}/responses#redirects)：
 
     return redirect('/home');
 
 <a name="method-request"></a>
 #### `request()` {#collection-method}
 
-The `request` function returns the current [request](/docs/{{version}}/requests) instance or obtains an input item:
+`request` 函式取得目前的[請求](/docs/{{version}}/requests)實例或輸入的項目：
 
     $request = request();
 
@@ -803,7 +803,7 @@ The `request` function returns the current [request](/docs/{{version}}/requests)
 <a name="method-response"></a>
 #### `response()` {#collection-method}
 
-The `response` function creates a [response](/docs/{{version}}/responses) instance or obtains an instance of the response factory:
+`response` 函式建立一個[回應](/docs/{{version}}/responses)實例或獲取一個回應工廠（response factory）實例：
 
     return response('Hello World', 200, $headers);
 
@@ -812,15 +812,15 @@ The `response` function creates a [response](/docs/{{version}}/responses) instan
 <a name="method-session"></a>
 #### `session()` {#collection-method}
 
-The `session` function may be used to get / set a session value:
+`session` 函式可被用於取得或設定單一 session 內容：
 
     $value = session('key');
 
-You may set values by passing an array of key / value pairs to the function:
+你可以透過傳遞鍵值對給該函式進行內容設定：
 
     session(['chairs' => 7, 'instruments' => 3]);
 
-The session store will be returned if no value is passed to the function:
+該函式在沒有內容傳遞時，將回傳所儲存的 seesion 內容：
 
     $value = session()->get('key');
 
@@ -829,20 +829,20 @@ The session store will be returned if no value is passed to the function:
 <a name="method-value"></a>
 #### `value()` {#collection-method}
 
-The `value` function's behavior will simply return the value it is given. However, if you pass a `Closure` to the function, the `Closure` will be executed then its result will be returned:
+`value` 函式回傳給定數值。而當你傳遞一個 `閉包` 給該函式，該 `閉包` 將被執行並回傳結果：
 
     $value = value(function() { return 'bar'; });
 
 <a name="method-view"></a>
 #### `view()` {#collection-method}
 
-The `view` function retrieves a [view](/docs/{{version}}/views) instance:
+`view` 函式取得[視圖](/docs/{{version}}/views) 實例：
 
     return view('auth.login');
 
 <a name="method-with"></a>
 #### `with()` {#collection-method}
 
-The `with` function returns the value it is given. This function is primarily useful for method chaining where it would otherwise be impossible:
+`with` 函式回傳給定的數值。該函式主要用於方法鏈結（method chaining），除此之外不太可能用到：
 
     $value = with(new Foo)->work();
