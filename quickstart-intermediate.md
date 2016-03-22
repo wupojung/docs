@@ -256,7 +256,7 @@
 
 因為我們已經知道會需要取得及儲存任務，所以讓我們使用 Artisan 指令列介面建立一個 `TaskController`，這個新的控制器會放置在 `app/Http/Controllers` 目錄下：
 
-	php artisan make:controller TaskController --plain
+	php artisan make:controller TaskController
 
 現在這個控制器已經被產生，讓我們繼續在 `app/Http/routes.php` 檔案中建置一些對應至此控制器的路由：
 
