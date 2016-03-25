@@ -213,7 +213,7 @@ Laravel 的 `Schema` [facade](/docs/{{version}}/facades) 提供了在資料庫�
 `$table->time('sunrise');`  |  相當於 TIME 型態。
 `$table->tinyInteger('numbers');`  |  相當於 TINYINT 型態。
 `$table->timestamp('added_on');`  |  相當於 TIMESTAMP 型態。
-`$table->timestamps();`  |  加入 `created_at` 和 `pdated_at` 欄位。
+`$table->timestamps();`  |  加入 `created_at` 和 `updated_at` 欄位。
 `$table->uuid('id');`  |  相當於 UUID 型態。
 
 #### 欄位修飾
