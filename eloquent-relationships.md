@@ -7,7 +7,7 @@
     - [多對多](#many-to-many)
     - [遠層一對多](#has-many-through)
     - [多型關聯](#polymorphic-relations)
-    - [多型多對多關聯](#many-to-many-polymorphic-relations) 
+    - [多型多對多關聯](#many-to-many-polymorphic-relations)
 - [關聯查詢](#querying-relations)
     - [預載入](#eager-loading)
     - [預載入條件限制](#constraining-eager-loads)
@@ -424,26 +424,24 @@ Eloquent 會假設對應的關聯的外鍵名稱是基於模型名稱。在這�
 
 `Photo` 模型的 `imageable` 關聯會回傳 `Staff` 或 `Product` 實例，這取決於照片所屬模型的類型。
 
-#### 自定義多態關聯的類型字段
+#### 自訂多型
 
-默認情況下，Laravel 會使用「包含命名空間的類名」作為多態表的類型區分，例如，`Post` 和 `Comment` 可以被 `Like`，`likable_type` 的值會是 `App\Post` 或 `App\Comment`。
-
-然而，你也可以選擇自定義自己的「多態對照表」：
-
+Laravel 會使用完全符合的類別名稱來儲存關聯模型的類型，例如：根據上面範例給定的 `Like` 可能屬於一個 `Post` 或一個 `Comment`，預設 `likable_type` 分別會是 `App\Post` 或 `App\Comment`。然而，你可能想要從你的應用程式內部的結構將資料庫解耦。在這種情況下，你可以定義一個關聯「變形對映」，指示 Eloquent 是使用每個模型的資料名稱關聯而不是類別名稱：
+    
     Relation::morphMap([
         App\Post::class,
         App\Comment::class,
     ]);
 
-或者定義對應字段：
+或者，你也可以指定自訂的字串來關聯每個模型：
 
     Relation::morphMap([
         'posts' => App\Post::class,
         'likes' => App\Like::class,
     ]);
 
+你可以在你的 `AppServiceProvider` 註冊 `morphMap`，或者如果你希望的話，可以單獨建立一個服務提供者。
 
-你可以在 `AppServiceProvider` 中註冊你的「多態對照表」，或者創建一個單獨的提供者文件。
 <a name="many-to-many-polymorphic-relations"></a>
 ### 多型多對多關聯
 
