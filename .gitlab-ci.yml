@@ -9,6 +9,7 @@ deploy:
     - '5.0'
     - '5.1'
     - '5.2'
+    - '5.3'
   script:
     - rm -f ${DEPLOY_DOC_PATH}/${CI_BUILD_REF_NAME}/*
     - cp *.md ${DEPLOY_DOC_PATH}/${CI_BUILD_REF_NAME}
